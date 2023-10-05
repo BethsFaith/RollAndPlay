@@ -17,6 +17,13 @@ conan_cmake_run(CONANFILE conanfile.txt
         BASIC_SETUP
         BUILD missing)
 
-add_executable(RollAndPlay src/main.cpp)
+add_executable(RollAndPlay
+        src/main.cpp
+        src/data/Skill.cpp
+        src/data/Action.cpp
+        src/data/CharacterClass.cpp
+        src/data/graphic/Model.cpp
+        src/data/Race.cpp
+        )
 
-target_link_libraries(2_shaders ${CONAN_LIBS})
+target_link_libraries(RollAndPlay ${CONAN_LIBS})
