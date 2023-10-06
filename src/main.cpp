@@ -1,5 +1,5 @@
 #include <iostream>
-#include "GLWindow.h"
+#include "GLWindow.hpp"
 
 int main() {
     GLWindow window("RollAndPlay - Game System");

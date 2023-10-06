@@ -2,7 +2,7 @@
 // Created by VerOchka on 05.10.2023.
 //
 
-#include "CharacterClass.h"
+#include "CharacterClass.hpp"
 
 namespace Data {
     CharacterClass::CharacterClass(const std::string &name, const std::string &iconPath) : _name(name),

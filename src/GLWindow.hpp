@@ -2,8 +2,8 @@
 // Created by VerOchka on 06.10.2023.
 //
 
-#ifndef ROLLANDPLAY_GLWINDOW_H
-#define ROLLANDPLAY_GLWINDOW_H
+#ifndef ROLLANDPLAY_GLWINDOW_HPP
+#define ROLLANDPLAY_GLWINDOW_HPP
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -22,6 +22,10 @@ public:
 
     void setClearColor(const glm::vec4 &clearColor);
 
+    [[nodiscard]] float getDeltaTime() const;
+
+    GLFWwindow *getWindow() const;
+
 protected:
     static void frameBufferSizeCallback(GLFWwindow* window, int width, int height);
 
@@ -39,4 +43,4 @@ private:
     float _last_frame = 0.0f;   // время последнего кадра
 };
 
-#endif //ROLLANDPLAY_GLWINDOW_H
+#endif //ROLLANDPLAY_GLWINDOW_HPP

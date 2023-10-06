@@ -2,14 +2,14 @@
 // Created by VerOchka on 05.10.2023.
 //
 
-#ifndef ROLLANDPLAY_CHARACTERCLASS_H
-#define ROLLANDPLAY_CHARACTERCLASS_H
+#ifndef ROLLANDPLAY_CHARACTERCLASS_HPP
+#define ROLLANDPLAY_CHARACTERCLASS_HPP
 
 #include <iostream>
 #include <vector>
 
-#include "Action.h"
-#include "SkillLevel.h"
+#include "Action.hpp"
+#include "SkillLevel.hpp"
 
 namespace Data {
     class CharacterClass {
@@ -29,4 +29,4 @@ namespace Data {
 }
 
 
-#endif //ROLLANDPLAY_CHARACTERCLASS_H
+#endif //ROLLANDPLAY_CHARACTERCLASS_HPP

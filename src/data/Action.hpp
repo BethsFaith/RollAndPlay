@@ -2,13 +2,13 @@
 // Created by VerOchka on 05.10.2023.
 //
 
-#ifndef ROLLANDPLAY_ACTION_H
-#define ROLLANDPLAY_ACTION_H
+#ifndef ROLLANDPLAY_ACTION_HPP
+#define ROLLANDPLAY_ACTION_HPP
 
 #include <iostream>
 #include <utility>
 
-#include "Skill.h"
+#include "Skill.hpp"
 
 namespace Data {
     class Action {
@@ -25,4 +25,4 @@ namespace Data {
     };
 }
 
-#endif //ROLLANDPLAY_ACTION_H
+#endif //ROLLANDPLAY_ACTION_HPP

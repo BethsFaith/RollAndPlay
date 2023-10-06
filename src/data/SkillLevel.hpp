@@ -2,10 +2,10 @@
 // Created by VerOchka on 05.10.2023.
 //
 
-#ifndef ROLLANDPLAY_SKILLLEVEL_H
-#define ROLLANDPLAY_SKILLLEVEL_H
+#ifndef ROLLANDPLAY_SKILLLEVEL_HPP
+#define ROLLANDPLAY_SKILLLEVEL_HPP
 
-#include "Skill.h"
+#include "Skill.hpp"
 
 namespace Data {
     struct SkillLevel {
@@ -14,4 +14,4 @@ namespace Data {
     };
 } // Data
 
-#endif //ROLLANDPLAY_SKILLLEVEL_H
+#endif //ROLLANDPLAY_SKILLLEVEL_HPP

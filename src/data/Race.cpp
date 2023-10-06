@@ -2,7 +2,7 @@
 // Created by VerOchka on 05.10.2023.
 //
 
-#include "Race.h"
+#include "Race.hpp"
 
 namespace Data {
     Race::Race(std::string name) : _name(std::move(name)) {}

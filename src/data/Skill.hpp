@@ -2,8 +2,8 @@
 // Created by VerOchka on 05.10.2023.
 //
 
-#ifndef ROLLANDPLAY_SKILL_H
-#define ROLLANDPLAY_SKILL_H
+#ifndef ROLLANDPLAY_SKILL_HPP
+#define ROLLANDPLAY_SKILL_HPP
 
 #include <iostream>
 #include <utility>
@@ -31,4 +31,4 @@ namespace Data {
     };
 }
 
-#endif //ROLLANDPLAY_SKILL_H
+#endif //ROLLANDPLAY_SKILL_HPP

@@ -2,15 +2,15 @@
 // Created by VerOchka on 05.10.2023.
 //
 
-#ifndef ROLLANDPLAY_RACE_H
-#define ROLLANDPLAY_RACE_H
+#ifndef ROLLANDPLAY_RACE_HPP
+#define ROLLANDPLAY_RACE_HPP
 
 #include <iostream>
 #include <vector>
 #include <utility>
 
-#include "SkillLevel.h"
-#include "graphic/Model.h"
+#include "SkillLevel.hpp"
+#include "graphic/Model.hpp"
 
 namespace Data {
     class Race {
@@ -30,4 +30,4 @@ namespace Data {
     };
 } // Data
 
-#endif //ROLLANDPLAY_RACE_H
+#endif //ROLLANDPLAY_RACE_HPP

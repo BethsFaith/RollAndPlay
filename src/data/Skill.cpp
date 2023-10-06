@@ -2,7 +2,7 @@
 // Created by VerOchka on 05.10.2023.
 //
 
-#include "Skill.h"
+#include "Skill.hpp"
 
 namespace Data {
     uint8_t Skill::Category::index = 0;

@@ -2,7 +2,7 @@
 // Created by VerOchka on 05.10.2023.
 //
 
-#include "Action.h"
+#include "Action.hpp"
 
 namespace Data {
     Action::Action(std::string name, uint8_t pointsNumber, uint8_t level, Data::Skill *skill)

@@ -2,7 +2,7 @@
 // Created by VerOchka on 06.10.2023.
 //
 
-#include "GLWindow.h"
+#include "GLWindow.hpp"
 
 GLWindow::GLWindow(const char *title) {
     RECT desktop;
@@ -46,6 +46,14 @@ void GLWindow::init(const int &width, const int &height, const char *title) {
 
 void GLWindow::frameBufferSizeCallback(GLFWwindow *window, int width, int height) {
     glViewport(0, 0, width, height);
+}
+
+float GLWindow::getDeltaTime() const {
+    return _delta_time;
+}
+
+GLFWwindow *GLWindow::getWindow() const {
+    return _window;
 }
 
 void GLWindow::setClearColor(const glm::vec4 &clearColor) {
