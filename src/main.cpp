@@ -1,12 +1,16 @@
 #include <iostream>
-#include "GLWindow.hpp"
+#include "MainWindow.hpp"
 
 int main() {
-    GLWindow window("RollAndPlay - Game System");
+    MainWindow::init("RollAndPlay - Game System");
 
-    window.setClearColor({0.0f, 0.0f, 0.0f, 0.0f});
+    auto window = MainWindow::getInstance();
 
-    window.run();
+    window->setClearColor({0.0f, 0.0f, 0.0f, 0.0f});
+
+    window->run();
+
+    MainWindow::free();
 
     return 0;
 }

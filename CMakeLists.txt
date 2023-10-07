@@ -24,6 +24,10 @@ add_executable(RollAndPlay
         src/data/CharacterClass.cpp
         src/data/graphic/Model.cpp
         src/data/Race.cpp
-        src/GLWindow.cpp)
+        src/MainWindow.cpp
+        src/MainController.cpp
+        src/forms/Button.cpp
+        src/controllers/PageController.cpp
+        )
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS})
