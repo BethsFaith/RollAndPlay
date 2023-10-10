@@ -4,8 +4,6 @@
 
 #include "Button.hpp"
 
-#include <utility>
-
 namespace Forms {
     Button::Button(float x, float y) : _x(x), _y(y) {
     }

@@ -15,6 +15,8 @@
 #include "forms/Page.hpp"
 #include "forms/Button.hpp"
 #include "MainController.hpp"
+#include "Gui.hpp"
+#include "graphic/Rectangle.hpp"
 
 class MainWindow {
 public:
@@ -55,7 +57,9 @@ private:
     GLFWwindow *_window = nullptr;
     Forms::Page *_view = nullptr;
     MainController _controller{};
-    std::vector<Forms::Button> _buttons;
+
+    std::vector<Forms::Button*> _buttons;
+    Gui* _gui;
 
     glm::vec4 _clearColor{};
 

@@ -30,9 +30,24 @@ MainWindow::MainWindow(const char *title) {
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
+
+    _gui = new Gui;
+
+    Graphic::AbstractPrimitive* rectangle =
+            new Graphic::Rectangle({.with_normals = false,
+                                                 .with_texture_coords = false,
+                                                 .with_tangent = false,
+                                                 .with_bitangent = false});
+    rectangle->bindData(GL_STATIC_DRAW);
+
+    Forms::Button button(-8.7f,9.0f);
+    _gui->addButton(button, rectangle);
+    _controller.addButton(&button);
 }
 
 MainWindow::~MainWindow() {
+    delete _gui;
+
     if (_window != nullptr) {
         glfwDestroyWindow(_window);
     }
@@ -72,6 +87,7 @@ void MainWindow::run() {
         updateDeltaTime();
 
         _controller.processKeyboardInput(_window);
+        _gui->draw();
 
         if (_view != nullptr) {
 //            _view->processKeyboardInput(_window);

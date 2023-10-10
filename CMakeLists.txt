@@ -37,5 +37,7 @@ add_executable(RollAndPlay
         src/graphic/buffers/Ebo.cpp
         src/graphic/Rectangle.cpp
         src/graphic/shaders/ShaderProgram.cpp
+        src/forms/Color.cpp
+        src/Gui.cpp
         )
 target_link_libraries(RollAndPlay ${CONAN_LIBS})

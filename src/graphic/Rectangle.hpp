@@ -18,7 +18,6 @@ namespace Graphic {
 
         void draw() override;
 
-    protected:
         void bindData(const unsigned int &bind_flag) override;
 
     private:

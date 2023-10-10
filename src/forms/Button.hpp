@@ -8,6 +8,8 @@
 #include <iostream>
 #include <functional>
 
+#include "Color.hpp"
+
 namespace Forms {
     class Button {
     public:
@@ -23,6 +25,7 @@ namespace Forms {
 
         [[nodiscard]] float getY() const;
 
+        Color color = Color::GREY;
     private:
         float _x;
         float _y;

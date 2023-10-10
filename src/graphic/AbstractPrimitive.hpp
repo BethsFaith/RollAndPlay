@@ -8,6 +8,8 @@
 namespace Graphic {
     class AbstractPrimitive {
     public:
+        using Ptr = std::shared_ptr<AbstractPrimitive>;
+
         explicit AbstractPrimitive() = default;
 
         virtual ~AbstractPrimitive() = default;
