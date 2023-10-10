@@ -4,6 +4,8 @@
 
 #include "MainWindow.hpp"
 
+MainWindow* MainWindow::instance = nullptr;
+
 MainWindow::MainWindow(const char *title) {
     RECT desktop;
 

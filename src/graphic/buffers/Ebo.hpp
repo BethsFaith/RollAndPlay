@@ -10,7 +10,7 @@
 
 #include "RaiiBuffer.hpp"
 
-namespace View::Buffers {
+namespace Graphic::Buffers {
     class EBO : public RaiiBuffer {
     public:
         explicit EBO(std::vector<unsigned int> indices);

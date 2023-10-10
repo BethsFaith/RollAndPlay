@@ -5,7 +5,7 @@
 #ifndef ROLLANDPLAY_ABSTRACTPRIMITIVE_HPP
 #define ROLLANDPLAY_ABSTRACTPRIMITIVE_HPP
 
-namespace View {
+namespace Graphic {
     class AbstractPrimitive {
     public:
         explicit AbstractPrimitive() = default;

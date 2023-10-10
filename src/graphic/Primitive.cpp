@@ -4,7 +4,7 @@
 
 #include "Primitive.hpp"
 
-namespace View {
+namespace Graphic {
     Primitive::Primitive(const int &vertex_number_) : Primitive(vertex_number_, {}){}
 
     Primitive::Primitive(const int& vertex_number_, const Settings &settings_)

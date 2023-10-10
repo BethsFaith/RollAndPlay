@@ -10,7 +10,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glad/glad.h>
 
-namespace View::Buffers {
+namespace Graphic::Buffers {
     struct Vertex {
         glm::vec3 position;
         glm::vec3 normal;

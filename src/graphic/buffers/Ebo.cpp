@@ -4,7 +4,7 @@
 
 #include "Ebo.hpp"
 
-namespace View::Buffers  {
+namespace Graphic::Buffers  {
     EBO::EBO(std::vector<unsigned int> indices) : RaiiBuffer(2), _indices(std::move(indices)) {
         glGenBuffers(1, &_ebo);
     }

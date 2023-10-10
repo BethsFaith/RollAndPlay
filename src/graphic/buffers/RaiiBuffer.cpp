@@ -3,7 +3,7 @@
 //
 #include "RaiiBuffer.hpp"
 
-namespace View::Buffers  {
+namespace Graphic::Buffers  {
     RaiiBuffer::RaiiBuffer(const int& priority) : _priority(priority) {}
 
     unsigned int RaiiBuffer::getPriority() const {

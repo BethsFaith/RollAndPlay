@@ -7,7 +7,7 @@
 
 #include "RaiiBuffer.hpp"
 
-namespace View::Buffers  {
+namespace Graphic::Buffers  {
     class VAO : public RaiiBuffer {
     public:
         VAO();

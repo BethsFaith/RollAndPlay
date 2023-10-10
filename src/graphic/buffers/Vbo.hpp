@@ -11,7 +11,7 @@
 #include "RaiiBuffer.hpp"
 #include "Vertex.hpp"
 
-namespace View::Buffers {
+namespace Graphic::Buffers {
     template <typename T>
     class VBO : public RaiiBuffer {
     public:

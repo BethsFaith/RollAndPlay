@@ -14,7 +14,7 @@
 #include "buffers/Vao.hpp"
 #include "buffers/Vertex.hpp"
 
-namespace View {
+namespace Graphic {
     class Primitive : public AbstractPrimitive{
     public:
         struct Settings {

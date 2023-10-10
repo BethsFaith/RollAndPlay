@@ -4,7 +4,7 @@
 
 #include "Vao.hpp"
 
-namespace View::Buffers  {
+namespace Graphic::Buffers  {
     VAO::VAO() : RaiiBuffer(0) {
         glGenVertexArrays(1, &_vao);
     }

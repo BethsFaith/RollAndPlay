@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-namespace View::Buffers  {
+namespace Graphic::Buffers  {
     template <typename T>
     VBO<T>::VBO(const std::vector<T>& data) : RaiiBuffer(1), _vertices(data) {
         glGenBuffers(1, &_vbo);

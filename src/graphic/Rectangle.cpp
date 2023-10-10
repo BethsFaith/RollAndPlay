@@ -4,7 +4,7 @@
 
 #include "Rectangle.hpp"
 
-namespace View {
+namespace Graphic {
     Rectangle::Rectangle(const Settings &settings) : Primitive(4, settings) {
         std::vector<glm::vec3> position = getPosition();
         std::vector<glm::vec2> texture_coordinates = settings.with_texture_coords ? getTextureCoordinates()

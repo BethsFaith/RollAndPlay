@@ -11,7 +11,7 @@
 #define GLFW
 #endif
 
-namespace View::Buffers  {
+namespace Graphic::Buffers  {
     class RaiiBuffer {
     public:
         explicit RaiiBuffer(const int& priority);

@@ -9,7 +9,7 @@
 #include "buffers/Vbo.hpp"
 #include "buffers/Ebo.hpp"
 
-namespace View {
+namespace Graphic {
     class Rectangle : public Primitive{
     public:
         explicit Rectangle(const Primitive::Settings &settings);
