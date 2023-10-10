@@ -5,8 +5,9 @@
 #include "Gui.hpp"
 
 Gui::Gui() {
-    _shader = new Graphic::Shaders::ShaderProgram({R"(D:\CPlusPlus\Projects\Pet\RollAndPlay\rsrc\shaders\gui.vert)",
-                                                   R"(D:\CPlusPlus\Projects\Pet\RollAndPlay\rsrc\shaders\gui.frag)"});
+    _shader = new Graphic::Shaders::ShaderProgram
+            ({R"(D:\CPlusPlus\Projects\Pet\RollAndPlay\rsrc\shaders\gui.vert)",
+              R"(D:\CPlusPlus\Projects\Pet\RollAndPlay\rsrc\shaders\gui.frag)"});
 }
 
 void Gui::draw() {
