@@ -5,13 +5,8 @@
 #ifndef INC_2_SHADERS_RAIIBUFFER_HPP
 #define INC_2_SHADERS_RAIIBUFFER_HPP
 
-#ifndef GLFW
-
-#include <glad/glad.h> // подключаем glad для активации всех заголовочных файлов OpenGL
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
-#define GLFW
-#endif
 
 namespace Graphic::Buffers {
     class RaiiBuffer {
