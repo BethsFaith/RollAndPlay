@@ -28,6 +28,12 @@ add_executable(RollAndPlay
         src/MainController.cpp
         src/forms/Button.cpp
         src/controllers/PageController.cpp
-        )
+        src/view/Primitive.cpp
+        src/view/buffers/Vertex.cpp
+        src/view/buffers/Vbo.cpp
+        src/view/buffers/VboT.cpp
+        src/view/buffers/Vao.cpp
+        src/view/buffers/RaiiBuffer.cpp
+        src/view/buffers/Ebo.cpp)
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS})
