@@ -15,7 +15,7 @@
 #include "buffers/Vertex.hpp"
 
 namespace Graphic {
-    class Primitive : public AbstractPrimitive{
+    class Primitive : public AbstractPrimitive {
     public:
         struct Settings {
             bool with_normals = true;
@@ -24,14 +24,17 @@ namespace Graphic {
             bool with_bitangent = true;
         };
 
-        explicit Primitive(const int& vertex_number);
-        explicit Primitive(const int& vertex_number, const Settings &settings_);
+        explicit Primitive(const int &vertex_number);
+
+        explicit Primitive(const int &vertex_number, const Settings &settings_);
+
         ~Primitive() override = default;
 
         void bind() override;
+
         void unbind() override;
 
-        void bindData(const unsigned int& bind_flag) override;
+        void bindData(const unsigned int &bind_flag) override;
 
         void draw() override;
 

@@ -22,7 +22,7 @@ namespace Graphic::Buffers {
         glm::vec3 bitangent;
     };
 
-    void setVertexAttribute(const int& index, const int& size, const int& stride, void* offset);
+    void setVertexAttribute(const int &index, const int &size, const int &stride, void *offset);
 }
 
 #endif    //INC_2_SHADERS_VERTEX_HPP

@@ -10,22 +10,24 @@
 #include "buffers/Ebo.hpp"
 
 namespace Graphic {
-    class Rectangle : public Primitive{
+    class Rectangle : public Primitive {
     public:
         explicit Rectangle(const Primitive::Settings &settings);
 
         ~Rectangle() override = default;
+
         void draw() override;
 
     protected:
-        void bindData(const unsigned int& bind_flag) override;
+        void bindData(const unsigned int &bind_flag) override;
 
     private:
         static std::vector<glm::vec3> getPosition();
+
         static std::vector<glm::vec3> getNormals();
+
         static std::vector<glm::vec2> getTextureCoordinates();
     };
 }
-
 
 #endif //ROLLANDPLAY_RECTANGLE_HPP

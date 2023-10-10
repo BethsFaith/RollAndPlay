@@ -4,7 +4,7 @@
 
 #include "Vao.hpp"
 
-namespace Graphic::Buffers  {
+namespace Graphic::Buffers {
     VAO::VAO() : RaiiBuffer(0) {
         glGenVertexArrays(1, &_vao);
     }
@@ -17,7 +17,7 @@ namespace Graphic::Buffers  {
         glBindVertexArray(_vao);
     }
 
-    void VAO::bindData(const unsigned int& bind_flag) {}
+    void VAO::bindData(const unsigned int &bind_flag) {}
 
     void VAO::unbind() {
         glBindVertexArray(0);

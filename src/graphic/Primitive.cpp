@@ -5,9 +5,9 @@
 #include "Primitive.hpp"
 
 namespace Graphic {
-    Primitive::Primitive(const int &vertex_number_) : Primitive(vertex_number_, {}){}
+    Primitive::Primitive(const int &vertex_number_) : Primitive(vertex_number_, {}) {}
 
-    Primitive::Primitive(const int& vertex_number_, const Settings &settings_)
+    Primitive::Primitive(const int &vertex_number_, const Settings &settings_)
             : vertex_number(vertex_number_), settings(settings_) {
 
         _vao = std::make_shared<Buffers::VAO>();
@@ -22,8 +22,8 @@ namespace Graphic {
         _vao->unbind();
     }
 
-    void Primitive::bindData(const unsigned int& bind_flag) {
-        for (auto& buffer : buffers) {
+    void Primitive::bindData(const unsigned int &bind_flag) {
+        for (auto &buffer: buffers) {
             buffer->bind();
             buffer->bindData(bind_flag);
         }
@@ -38,7 +38,8 @@ namespace Graphic {
 
         std::sort(buffers.begin(),
                   buffers.end(),
-                  [](const std::shared_ptr<Buffers::RaiiBuffer>& buf1, const std::shared_ptr<Buffers::RaiiBuffer>& buf2) {
+                  [](const std::shared_ptr<Buffers::RaiiBuffer> &buf1,
+                     const std::shared_ptr<Buffers::RaiiBuffer> &buf2) {
                       return buf1->getPriority() < buf2->getPriority();
                   });
     }

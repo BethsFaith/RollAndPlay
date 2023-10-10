@@ -14,15 +14,18 @@ namespace Graphic::Buffers {
     class EBO : public RaiiBuffer {
     public:
         explicit EBO(std::vector<unsigned int> indices);
+
         ~EBO() override;
 
         void bind() override;
+
         void unbind() override;
 
-        void bindData(const unsigned int& bind_flag) override;
+        void bindData(const unsigned int &bind_flag) override;
 
         [[nodiscard]] unsigned int get() const override;
-        [[nodiscard]] const std::vector<unsigned int>& getIndices() const;
+
+        [[nodiscard]] const std::vector<unsigned int> &getIndices() const;
 
     private:
         unsigned int _ebo{};

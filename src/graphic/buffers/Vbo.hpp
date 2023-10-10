@@ -12,19 +12,22 @@
 #include "Vertex.hpp"
 
 namespace Graphic::Buffers {
-    template <typename T>
+    template<typename T>
     class VBO : public RaiiBuffer {
     public:
-        explicit VBO(const std::vector<T>& data);
+        explicit VBO(const std::vector<T> &data);
+
         ~VBO() override;
 
         void bind() override;
+
         void unbind() override;
 
-        void bindData(const unsigned int& bind_flag) override;
+        void bindData(const unsigned int &bind_flag) override;
 
         [[nodiscard]] unsigned int get() const override;
-        [[nodiscard]] const std::vector<T>& getVertices() const;
+
+        [[nodiscard]] const std::vector<T> &getVertices() const;
 
     private:
         unsigned int _vbo{};

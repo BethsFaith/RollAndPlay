@@ -7,18 +7,21 @@
 
 #include "RaiiBuffer.hpp"
 
-namespace Graphic::Buffers  {
+namespace Graphic::Buffers {
     class VAO : public RaiiBuffer {
     public:
         VAO();
+
         ~VAO() override;
 
-        void bindData(const unsigned int& bind_flag) override;
+        void bindData(const unsigned int &bind_flag) override;
 
         void bind() override;
+
         void unbind() override;
 
         [[nodiscard]] unsigned int get() const override;
+
     private:
         unsigned int _vao{};
     };

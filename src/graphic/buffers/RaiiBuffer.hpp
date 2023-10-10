@@ -6,23 +6,28 @@
 #define INC_2_SHADERS_RAIIBUFFER_HPP
 
 #ifndef GLFW
+
 #include <glad/glad.h> // подключаем glad для активации всех заголовочных файлов OpenGL
 #include <GLFW/glfw3.h>
+
 #define GLFW
 #endif
 
-namespace Graphic::Buffers  {
+namespace Graphic::Buffers {
     class RaiiBuffer {
     public:
-        explicit RaiiBuffer(const int& priority);
+        explicit RaiiBuffer(const int &priority);
+
         virtual ~RaiiBuffer() = default;
 
         virtual void bind() = 0;
+
         virtual void unbind() = 0;
 
-        virtual void bindData(const unsigned int& bind_flag) = 0;
+        virtual void bindData(const unsigned int &bind_flag) = 0;
 
         [[nodiscard]] unsigned int getPriority() const;
+
         [[nodiscard]] virtual unsigned int get() const = 0;
 
     private:
