@@ -44,4 +44,5 @@ Gui::~Gui() {
     for (const auto& button : _buttons) {
         delete button.second;
     }
+    delete _shader;
 }

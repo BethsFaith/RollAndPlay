@@ -41,6 +41,7 @@ MainWindow::MainWindow(const char *title) {
     rectangle->bindData(GL_STATIC_DRAW);
 
     Forms::Button button(-8.7f,9.0f);
+    button.color = Forms::Color::VIOLET;
     _gui->addButton(button, rectangle);
     _controller.addButton(&button);
 }
@@ -96,6 +97,8 @@ void MainWindow::run() {
 
         glfwSwapBuffers(_window);
         glfwPollEvents();
+
+        Sleep(100);
     }
 }
 
@@ -117,18 +120,10 @@ bool MainWindow::shouldClose() {
 
 void MainWindow::mouseInputCallback(GLFWwindow *window, double xPos, double yPos) {
     instance->_controller.processMouseInput(xPos, yPos);
-
-//    for (auto& form : instance->_forms) {
-//        form.processMouseInput(xPos, yPos);
-//    }
 }
 
 void MainWindow::mouseScrollCallback(GLFWwindow *window, double xOffset, double yOffset) {
     instance->_controller.processMouseInput(xOffset, yOffset);
-
-//    for (auto& form : instance->_forms) {
-//        form.processMouseScroll(xOffset, yOffset);
-//    }
 }
 
 void MainWindow::frameBufferSizeCallback(GLFWwindow *window, int width, int height) {
