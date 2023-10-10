@@ -34,6 +34,7 @@ add_executable(RollAndPlay
         src/view/buffers/VboT.cpp
         src/view/buffers/Vao.cpp
         src/view/buffers/RaiiBuffer.cpp
-        src/view/buffers/Ebo.cpp)
-
+        src/view/buffers/Ebo.cpp
+        src/view/Rectangle.cpp
+        )
 target_link_libraries(RollAndPlay ${CONAN_LIBS})

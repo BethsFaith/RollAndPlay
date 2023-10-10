@@ -16,6 +16,7 @@
 
 namespace View {
     class Primitive : public AbstractPrimitive{
+    public:
         struct Settings {
             bool with_normals = true;
             bool with_texture_coords = true;
