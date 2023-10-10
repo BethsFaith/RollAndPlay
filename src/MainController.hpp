@@ -17,13 +17,13 @@ public:
 
     void processMouseScroll(double x_offset, double y_offset) override;
 
-    void addButton(Forms::Button* button);
+    void addButton(Forms::Button *button);
 
     void setViewController(Controllers::PageController *viewController);
 
 private:
-    std::vector<Forms::Button*> _buttons;
-    Controllers::PageController* _viewController;
+    std::vector<Forms::Button *> _buttons;
+    Controllers::PageController *_viewController;
 };
 
 #endif //ROLLANDPLAY_MAINCONTROLLER_HPP

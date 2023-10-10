@@ -11,7 +11,7 @@ void MainController::processKeyboardInput(GLFWwindow *window) {
 }
 
 void MainController::processMouseInput(double x_pos, double y_pos) {
-    for (auto& button : _buttons) {
+    for (auto &button: _buttons) {
         if (x_pos >= button->getX() && y_pos == button->getY()) {
             button->press();
         }

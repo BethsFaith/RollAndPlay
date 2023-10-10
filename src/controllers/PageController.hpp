@@ -8,7 +8,7 @@
 #include "../GLController.hpp"
 
 namespace Controllers {
-    class PageController : public GLController{
+    class PageController : public GLController {
     };
 }
 

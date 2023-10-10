@@ -14,9 +14,11 @@ namespace Data {
         struct Category {
         public:
             explicit Category(std::string name);
+
             ~Category() = default;
 
             void setIconPath(const std::string &imagePath);
+
         private:
             uint8_t _index;
             std::string _name;

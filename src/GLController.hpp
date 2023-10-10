@@ -10,10 +10,13 @@
 class GLController {
 public:
     GLController() = default;
+
     virtual ~GLController() = default;
 
-    virtual void processKeyboardInput(GLFWwindow* window) = 0;
+    virtual void processKeyboardInput(GLFWwindow *window) = 0;
+
     virtual void processMouseInput(double xPos, double yPos) = 0;
+
     virtual void processMouseScroll(double xOffset, double yOffset) = 0;
 };
 

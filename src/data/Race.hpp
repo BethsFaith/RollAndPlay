@@ -20,8 +20,11 @@ namespace Data {
         void addInitialSkillLevel(Skill *skill, int level);
 
         void setModel(Graphic::Model *model);
+
         void setName(const std::string &name);
+
         void setIconPath(const std::string &iconPath);
+
     private:
         std::string _name;
         std::string _iconPath;

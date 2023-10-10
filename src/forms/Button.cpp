@@ -14,7 +14,7 @@ namespace Forms {
         _pressCallback();
     }
 
-    void Button::setPressCallback(const std::function<void()>& function) {
+    void Button::setPressCallback(const std::function<void()> &function) {
         _pressCallback = function;
     }
 

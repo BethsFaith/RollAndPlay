@@ -9,7 +9,7 @@
 
 namespace Data {
     struct SkillLevel {
-        Skill* skill;
+        Skill *skill;
         int level;
     };
 } // Data

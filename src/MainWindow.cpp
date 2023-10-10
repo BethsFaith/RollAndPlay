@@ -5,7 +5,6 @@
 #include "MainWindow.hpp"
 
 MainWindow::MainWindow(const char *title) {
-
     RECT desktop;
 
     const auto hDesktop = GetDesktopWindow();

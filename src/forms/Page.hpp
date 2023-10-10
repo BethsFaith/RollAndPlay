@@ -6,7 +6,7 @@
 #define ROLLANDPLAY_PAGE_HPP
 
 namespace Forms {
-    class Page{
+    class Page {
     public:
         Page() = default;
 

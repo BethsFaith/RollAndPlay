@@ -12,14 +12,17 @@ namespace Forms {
     class Button {
     public:
         Button(float x, float y);
+
         virtual ~Button() = default;
 
         void press();
 
-        void setPressCallback(const std::function<void()>& function);
+        void setPressCallback(const std::function<void()> &function);
 
         [[nodiscard]] float getX() const;
+
         [[nodiscard]] float getY() const;
+
     private:
         float _x;
         float _y;
