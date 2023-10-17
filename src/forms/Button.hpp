@@ -13,6 +13,8 @@
 namespace Forms {
     class Button {
     public:
+        using Ptr = std::shared_ptr<Button>;
+
         Button(float x, float y);
 
         virtual ~Button() = default;

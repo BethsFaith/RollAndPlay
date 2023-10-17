@@ -17,6 +17,8 @@
 namespace Graphic {
     class Primitive : public AbstractPrimitive {
     public:
+        using Ptr = std::shared_ptr<Primitive>;
+
         struct Settings {
             bool with_normals = true;
             bool with_texture_coords = true;

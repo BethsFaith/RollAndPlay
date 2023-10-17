@@ -5,23 +5,23 @@
 #include "Gui.hpp"
 
 Gui::Gui() {
-    _shader = new Graphic::Shaders::ShaderProgram
-            ({R"(D:\CPlusPlus\Projects\Pet\RollAndPlay\rsrc\shaders\gui.vert)",
-              R"(D:\CPlusPlus\Projects\Pet\RollAndPlay\rsrc\shaders\gui.frag)"});
+    _shader = std::make_shared<Graphic::Shaders::ShaderProgram>
+        (R"(..\..\rsrc\shaders\gui.vert)",
+         R"(..\..\rsrc\shaders\gui.frag)");
 }
 
 void Gui::draw() {
     _shader->use();
 
     for (auto& button : _buttons) {
-        setTransform(button.first.getX(), button.first.getY());
-        setColor(Forms::getRGB(button.first.color));
+        setTransform(button.first->getX(), button.first->getY());
+        setColor(Forms::getRGB(button.first->color));
 
         button.second->draw();
     }
 }
 
-void Gui::addButton(const Forms::Button& button, Graphic::AbstractPrimitive *primitive) {
+void Gui::addButton(const Forms::Button::Ptr button, Graphic::AbstractPrimitive::Ptr primitive) {
     _buttons.emplace_back(button, primitive);
 }
 
@@ -39,11 +39,4 @@ void Gui::setColor(float r, float g, float b) {
 
 void Gui::setColor(glm::vec3 rgb) {
     _shader->set3FloatVector("Color", rgb);
-}
-
-Gui::~Gui() {
-    for (const auto& button : _buttons) {
-        delete button.second;
-    }
-    delete _shader;
 }

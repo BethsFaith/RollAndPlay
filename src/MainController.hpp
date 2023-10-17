@@ -13,16 +13,17 @@ class MainController : public GLController {
 public:
     void processKeyboardInput(GLFWwindow *window) override;
 
-    void processMouseInput(double x_pos, double y_pos) override;
+    void processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods) override;
+
+    void processMouseCursor(GLFWwindow* window, double x_pos, double y_pos) override;
 
     void processMouseScroll(double x_offset, double y_offset) override;
 
-    void addButton(Forms::Button *button);
+    void addButton(const Forms::Button::Ptr& button);
 
     void setViewController(Controllers::PageController *viewController);
-
 private:
-    std::vector<Forms::Button *> _buttons;
+    std::vector<Forms::Button::Ptr> _buttons;
     Controllers::PageController *_viewController;
 };
 

@@ -15,7 +15,9 @@ public:
 
     virtual void processKeyboardInput(GLFWwindow *window) = 0;
 
-    virtual void processMouseInput(double xPos, double yPos) = 0;
+    virtual void processMouseButton(GLFWwindow *window, int button, int action, int mods) = 0;
+
+    virtual void processMouseCursor(GLFWwindow* window, double xPos, double yPos) = 0;
 
     virtual void processMouseScroll(double xOffset, double yOffset) = 0;
 };

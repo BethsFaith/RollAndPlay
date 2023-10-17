@@ -37,6 +37,8 @@ public:
 protected:
     static void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
 
+    static void mouseButtonCallback(GLFWwindow* window, int mouseButton, int action, int mods);
+
     static void mouseInputCallback(GLFWwindow *window, double xPos, double yPos);
 
     static void mouseScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
@@ -58,8 +60,8 @@ private:
     Forms::Page *_view = nullptr;
     MainController _controller{};
 
-    std::vector<Forms::Button*> _buttons;
-    Gui* _gui;
+    std::vector<Forms::Button::Ptr> _buttons;
+    Gui::Ptr _gui;
 
     glm::vec4 _clearColor{};
 

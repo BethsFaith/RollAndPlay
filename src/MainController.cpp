@@ -10,14 +10,24 @@ void MainController::processKeyboardInput(GLFWwindow *window) {
     }
 }
 
-void MainController::processMouseInput(double x_pos, double y_pos) {
-    for (auto &button: _buttons) {
-        if (x_pos >= button->getX() && y_pos == button->getY()) {
-            button->press();
+void MainController::processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods) {
+    if (mouseButton == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+        double xPos, yPos;
+        glfwGetCursorPos(window, &xPos, &yPos);
+        for (auto &button: _buttons) {
+            if (xPos >= button->getX() && yPos == button->getY()) {
+                button->press();
+            }
         }
     }
     if (_viewController != nullptr) {
-        _viewController->processMouseInput(x_pos, y_pos);
+        _viewController->processMouseButton(window, mouseButton, action, mods);
+    }
+}
+
+void MainController::processMouseCursor(GLFWwindow* window, double x_pos, double y_pos) {
+    if (_viewController != nullptr) {
+        _viewController->processMouseCursor(window, x_pos, y_pos);
     }
 }
 
@@ -27,7 +37,7 @@ void MainController::processMouseScroll(double x_offset, double y_offset) {
     }
 }
 
-void MainController::addButton(Forms::Button *button) {
+void MainController::addButton(const Forms::Button::Ptr& button) {
     _buttons.push_back(button);
 }
 

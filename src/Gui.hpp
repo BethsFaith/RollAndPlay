@@ -11,20 +11,22 @@
 
 class Gui {
 public:
+    using Ptr = std::shared_ptr<Gui>;
+
     Gui();
-    ~Gui();
+    ~Gui() = default;
 
     void draw();
 
-    void addButton(const Forms::Button& button, Graphic::AbstractPrimitive* primitive);
+    void addButton(const Forms::Button::Ptr button, Graphic::AbstractPrimitive::Ptr primitive);
 private:
     void setTransform(float x, float y);
     void setColor(float r, float g, float b);
     void setColor(glm::vec3 rgb);
 
-    Graphic::Shaders::ShaderProgram* _shader;
+    Graphic::Shaders::ShaderProgram::Ptr _shader;
 
-    std::vector<std::pair<Forms::Button, Graphic::AbstractPrimitive*>> _buttons;
+    std::vector<std::pair<Forms::Button::Ptr, Graphic::AbstractPrimitive::Ptr>> _buttons;
 };
 
 

@@ -12,6 +12,8 @@
 namespace Graphic {
     class Rectangle : public Primitive {
     public:
+        using Ptr = std::shared_ptr<Rectangle>;
+
         explicit Rectangle(const Primitive::Settings &settings);
 
         ~Rectangle() override = default;

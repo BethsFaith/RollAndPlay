@@ -31,24 +31,37 @@ MainWindow::MainWindow(const char *title) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
-    _gui = new Gui;
+    _gui = std::make_shared<Gui>();
 
-    Graphic::AbstractPrimitive* rectangle =
-            new Graphic::Rectangle({.with_normals = false,
+     Graphic::AbstractPrimitive::Ptr rectangle =
+            std::make_shared<Graphic::Rectangle>(
+            Graphic::Primitive::Settings{.with_normals = false,
                                                  .with_texture_coords = false,
                                                  .with_tangent = false,
                                                  .with_bitangent = false});
     rectangle->bindData(GL_STATIC_DRAW);
 
-    Forms::Button button(-8.7f,9.0f);
-    button.color = Forms::Color::VIOLET;
+    auto button = std::make_shared<Forms::Button>(-8.7f,9.0f);
+    auto button2 = std::make_shared<Forms::Button>(-7.0f, 9.0f);
+
+    button->color = Forms::Color::VIOLET;
+    button2->color = Forms::Color::GREY;
+
+    button->setPressCallback([](){
+              std::cout << "VIOLET PRESS";
+          });
+    button2->setPressCallback([](){
+        std::cout << "GREY PRESS";
+    });
+
     _gui->addButton(button, rectangle);
-    _controller.addButton(&button);
+    _gui->addButton(button2, rectangle);
+
+    _controller.addButton(button);
+    _controller.addButton(button2);
 }
 
 MainWindow::~MainWindow() {
-    delete _gui;
-
     if (_window != nullptr) {
         glfwDestroyWindow(_window);
     }
@@ -58,6 +71,7 @@ MainWindow::~MainWindow() {
 void MainWindow::init(const char *title) {
     instance = new MainWindow(title);
 
+    glfwSetMouseButtonCallback(instance->_window, mouseButtonCallback);
     glfwSetCursorPosCallback(instance->_window, mouseInputCallback);
     glfwSetScrollCallback(instance->_window, mouseScrollCallback);
 }
@@ -90,10 +104,10 @@ void MainWindow::run() {
         _controller.processKeyboardInput(_window);
         _gui->draw();
 
-        if (_view != nullptr) {
+//        if (_view != nullptr) {
 //            _view->processKeyboardInput(_window);
-            _view->draw();
-        }
+//            _view->draw();
+//        }
 
         glfwSwapBuffers(_window);
         glfwPollEvents();
@@ -118,12 +132,16 @@ bool MainWindow::shouldClose() {
     return glfwWindowShouldClose(_window);
 }
 
+void MainWindow::mouseButtonCallback(GLFWwindow* window, int mouseButton, int action, int mods) {
+    instance->_controller.processMouseButton(window, mouseButton, action, mods);
+}
+
 void MainWindow::mouseInputCallback(GLFWwindow *window, double xPos, double yPos) {
-    instance->_controller.processMouseInput(xPos, yPos);
+    instance->_controller.processMouseCursor(window, xPos, yPos);
 }
 
 void MainWindow::mouseScrollCallback(GLFWwindow *window, double xOffset, double yOffset) {
-    instance->_controller.processMouseInput(xOffset, yOffset);
+    instance->_controller.processMouseCursor(window, xOffset, yOffset);
 }
 
 void MainWindow::frameBufferSizeCallback(GLFWwindow *window, int width, int height) {
