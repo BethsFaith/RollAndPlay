@@ -5,7 +5,7 @@
 #include "Button.hpp"
 
 namespace Forms {
-    Button::Button(float x, float y) : _x(x), _y(y) {
+    Button::Button(float xOffset, float yOffset) : _xOffset(xOffset), _yOffset(yOffset) {
     }
 
     void Button::press() {
@@ -16,11 +16,11 @@ namespace Forms {
         _pressCallback = function;
     }
 
-    float Button::getX() const {
-        return _x;
+    float Button::getXOffset() const {
+        return _xOffset;
     }
 
-    float Button::getY() const {
-        return _y;
+    float Button::getYOffset() const {
+        return _yOffset;
     }
 }

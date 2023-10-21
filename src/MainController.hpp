@@ -5,11 +5,11 @@
 #ifndef ROLLANDPLAY_MAINCONTROLLER_HPP
 #define ROLLANDPLAY_MAINCONTROLLER_HPP
 
-#include "GLController.hpp"
+#include "controllers/GLController.hpp"
 #include "forms/Button.hpp"
 #include "controllers/PageController.hpp"
 
-class MainController : public GLController {
+class MainController : public Controllers::GLController {
 public:
     void processKeyboardInput(GLFWwindow *window) override;
 

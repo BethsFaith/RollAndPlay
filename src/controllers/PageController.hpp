@@ -5,7 +5,7 @@
 #ifndef ROLLANDPLAY_PAGECONTROLLER_HPP
 #define ROLLANDPLAY_PAGECONTROLLER_HPP
 
-#include "../GLController.hpp"
+#include "GLController.hpp"
 
 namespace Controllers {
     class PageController : public GLController {

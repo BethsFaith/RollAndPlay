@@ -14,7 +14,7 @@ void Gui::draw() {
     _shader->use();
 
     for (auto& button : _buttons) {
-        setTransform(button.first->getX(), button.first->getY());
+        setTransform(button.first->getXOffset(), button.first->getYOffset());
         setColor(Forms::getRGB(button.first->color));
 
         button.second->draw();

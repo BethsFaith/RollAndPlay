@@ -4,6 +4,4 @@
 
 #include "PageController.hpp"
 
-namespace Controllers {
-
-}
+namespace Controllers {}

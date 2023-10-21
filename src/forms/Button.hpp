@@ -15,7 +15,7 @@ namespace Forms {
     public:
         using Ptr = std::shared_ptr<Button>;
 
-        Button(float x, float y);
+        Button(float xOffset, float yOffset);
 
         virtual ~Button() = default;
 
@@ -23,14 +23,14 @@ namespace Forms {
 
         void setPressCallback(const std::function<void()> &function);
 
-        [[nodiscard]] float getX() const;
+        [[nodiscard]] float getXOffset() const;
 
-        [[nodiscard]] float getY() const;
+        [[nodiscard]] float getYOffset() const;
 
         Color color = Color::GREY;
     private:
-        float _x;
-        float _y;
+        float _xOffset;
+        float _yOffset;
 
         std::function<void()> _pressCallback{[]() {}};
     };
