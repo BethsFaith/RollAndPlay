@@ -39,5 +39,9 @@ add_executable(RollAndPlay
         src/graphic/shaders/ShaderProgram.cpp
         src/forms/Color.cpp
         src/Gui.cpp
-        )
+        src/graphic/buffers/Fbo.cpp
+        libs/stb_image.cpp
+        src/graphic/textures/Loader.cpp
+        src/graphic/textures/Texture.cpp
+        src/EntryPoint.hpp)
 target_link_libraries(RollAndPlay ${CONAN_LIBS})

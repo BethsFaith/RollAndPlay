@@ -10,7 +10,7 @@ namespace Graphic::Buffers {
     }
 
     VAO::~VAO() {
-//        glDeleteBuffers(1, &_vao);
+        glDeleteVertexArrays(1, &_vao);
     }
 
     void VAO::bind() {

@@ -5,8 +5,7 @@
 #ifndef ROLLANDPLAY_MAINWINDOW_HPP
 #define ROLLANDPLAY_MAINWINDOW_HPP
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "EntryPoint.hpp"
 #include <wtypes.h>
 #include <stdexcept>
 #include <glm/glm.hpp>

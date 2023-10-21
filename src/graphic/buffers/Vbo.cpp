@@ -14,7 +14,7 @@ namespace Graphic::Buffers {
 
     template<typename T>
     VBO<T>::~VBO() {
-//        glDeleteBuffers(1, &_vbo);
+        glDeleteBuffers(1, &_vbo);
     }
 
     template<typename T>

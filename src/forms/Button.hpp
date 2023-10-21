@@ -9,10 +9,17 @@
 #include <functional>
 
 #include "Color.hpp"
+#include "../EntryPoint.hpp"
 
 namespace Forms {
     class Button {
     public:
+        struct ID
+        {
+            GLuint64 value = 0; // Идентификатор
+            GLuint etc = 0; // Дополнительная информация
+        };
+
         using Ptr = std::shared_ptr<Button>;
 
         Button(float xOffset, float yOffset);

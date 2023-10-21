@@ -15,33 +15,7 @@ void MainController::processMouseButton(GLFWwindow* window, int mouseButton, int
         double xPos, yPos;
         glfwGetCursorPos(window, &xPos, &yPos);
         for (auto &button: _buttons) {
-            auto x = 3440 / 2 + (0.5 - button->getXOffset() * 0.1);
-            auto y = 1440/2 + (0.5 - button->getXOffset() * 0.1);
 
-
-//            glm::mat4 trans = glm::mat4(1.0f);
-//            trans = glm::scale(trans, glm::vec3(0.1, 0.1, 0.0f));
-//            trans = glm::translate(trans, glm::vec3(button->getX(), button->getY(), 0.0f));
-//
-//            auto min = trans[0];
-//            auto max = trans[1];
-//
-//            auto SCREEN_X = 3440;
-//            auto SCREEN_Y = 1440;
-//
-//            min.x *= SCREEN_X;
-//            min.y += SCREEN_Y;
-//            max.x *= SCREEN_X;
-//            max.y *= SCREEN_Y;
-
-
-
-            auto xComp = (xPos >= x);
-            auto yComp = (yPos >=y);
-
-            if (xComp && yComp) {
-                button->press();
-            }
         }
     }
     if (_viewController != nullptr) {

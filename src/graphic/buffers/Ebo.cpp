@@ -10,7 +10,7 @@ namespace Graphic::Buffers {
     }
 
     EBO::~EBO() {
-//        glDeleteBuffers(1, &_ebo);
+        glDeleteBuffers(1, &_ebo);
     }
 
     void EBO::bind() {

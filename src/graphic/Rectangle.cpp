@@ -84,6 +84,6 @@ namespace Graphic {
                                         (void *) offsetof(Buffers::Vertex, bitangent));
         }
 
-        unbind();
+//        unbind();
     }
 }

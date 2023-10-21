@@ -5,8 +5,7 @@
 #include "Button.hpp"
 
 namespace Forms {
-    Button::Button(float xOffset, float yOffset) : _xOffset(xOffset), _yOffset(yOffset) {
-    }
+    Button::Button(float xOffset, float yOffset) : _xOffset(xOffset), _yOffset(yOffset) {}
 
     void Button::press() {
         _pressCallback();
