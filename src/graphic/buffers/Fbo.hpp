@@ -5,26 +5,36 @@
 #ifndef ROLLANDPLAY_FBO_HPP
 #define ROLLANDPLAY_FBO_HPP
 
+#include <iostream>
+
 #include "RaiiBuffer.hpp"
 
 namespace Graphic::Buffers {
     class FBO : RaiiBuffer {
     public:
-        FBO(GLuint colorAttachment, unsigned int texture);
+        using Ptr = std::shared_ptr<FBO>;
+
+        FBO(GLuint mode, unsigned int texture);
+
+        void setMode(unsigned int mode);
+
         ~FBO() override;
 
-    private:
         void bind() override;
 
         void unbind() override;
 
-        void bindData(const unsigned int &bind_flag) override;
+        void bindData(const unsigned int &attachment) override;
+
+        void startRead() const;
+        static void stopRead();
 
         [[nodiscard]] unsigned int get() const override;
 
     private:
         unsigned int _fbo{};
-        unsigned int _texture;
+        unsigned int _mode{};
+        unsigned int _texture{};
         unsigned int _attachment{};
     };
 }

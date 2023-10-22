@@ -24,7 +24,7 @@ namespace Graphic::Textures {
             }
 
             texture.bind();
-            texture.setImage(format, width, height, data);
+            texture.setImage(format, 0, width, height, 0, data);
 
             glGenerateMipmap(GL_TEXTURE_2D);
 
@@ -68,9 +68,9 @@ namespace Graphic::Textures {
                 }
 
                 texture.setImage(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
-                                 format,
+                                 format, 0,
                                  width,
-                                 height,
+                                 height, 0,
                                  data);
 
                 res = true;

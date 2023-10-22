@@ -51,12 +51,12 @@ namespace Graphic::Shaders {
         // Если есть ошибки компиляции, то выводим информацию о них
         glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
         if (!success) {
-            glDeleteShader(vertex);
-
             glGetShaderInfoLog(vertex, 512, NULL, infoLog);
 
             char errorInfo[] = "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n";
             strcat_s(errorInfo, infoLog);
+
+            glDeleteShader(vertex);
 
             throw std::runtime_error(errorInfo);
         }
@@ -68,13 +68,13 @@ namespace Graphic::Shaders {
 
         glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
         if (!success) {
-            glDeleteShader(vertex);
-            glDeleteShader(fragment);
-
             glGetShaderInfoLog(fragment, 512, nullptr, infoLog);
 
             char errorInfo[] = "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n";
             strcat_s(errorInfo, infoLog);
+
+            glDeleteShader(vertex);
+            glDeleteShader(fragment);
 
             throw std::runtime_error(errorInfo);
         }
@@ -88,13 +88,13 @@ namespace Graphic::Shaders {
         // Если есть ошибки связывания, то выводим информацию о них
         glGetProgramiv(ID, GL_LINK_STATUS, &success);
         if (!success) {
-            glDeleteShader(vertex);
-            glDeleteShader(fragment);
-
             glGetProgramInfoLog(ID, 512, NULL, infoLog);
 
             char errorInfo[] = "ERROR::SHADER::PROGRAM::LINKING_FAILED\n";
             strcat_s(errorInfo, infoLog);
+
+            glDeleteShader(vertex);
+            glDeleteShader(fragment);
 
             throw std::runtime_error(errorInfo);
         }
@@ -120,6 +120,18 @@ namespace Graphic::Shaders {
         glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
     }
 
+    void ShaderProgram::set3FloatVector(const std::string& name, float c1, float c2, float c3) const {
+        glUniform3f(glGetUniformLocation(ID, name.c_str()), c1, c2, c3);
+    }
+
+    void ShaderProgram::set3FloatVector(const std::string &name, const glm::vec3 &vector) const {
+        glUniform3f(glGetUniformLocation(ID, name.c_str()), vector.x, vector.y, vector.z);
+    }
+
+    void ShaderProgram::set3UnsignedIntVector(const std::string &name, void *uiv) const {
+        glUniform3uiv(glGetUniformLocation(ID, name.c_str()), 1, (GLuint*) &uiv);
+    }
+
     void ShaderProgram::set4FloatVector(const std::string& name, float c1, float c2, float c3, float c4) const {
         glUniform4f(glGetUniformLocation(ID, name.c_str()), c1, c2, c3, c4);
     }
@@ -130,14 +142,6 @@ namespace Graphic::Shaders {
 
     void ShaderProgram::set4FloatMat(const std::string& name, const GLfloat* value) const {
         glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
-    }
-
-    void ShaderProgram::set3FloatVector(const std::string& name, float c1, float c2, float c3) const {
-        glUniform3f(glGetUniformLocation(ID, name.c_str()), c1, c2, c3);
-    }
-
-    void ShaderProgram::set3FloatVector(const std::string &name, const glm::vec3 &vector) const {
-        glUniform3f(glGetUniformLocation(ID, name.c_str()), vector.x, vector.y, vector.z);
     }
 
     unsigned int ShaderProgram::getId() const {

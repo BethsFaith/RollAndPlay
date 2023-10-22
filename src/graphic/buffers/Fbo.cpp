@@ -5,8 +5,11 @@
 #include "Fbo.hpp"
 
 namespace Graphic::Buffers {
-    FBO::FBO(GLuint colorAttachment, unsigned int texture) : RaiiBuffer(3), _texture(texture),
-    _attachment(colorAttachment) {
+    FBO::FBO(GLuint mode, unsigned int texture)
+            : RaiiBuffer(3),
+              _texture(texture),
+              _mode(mode),
+              {
         glGenFramebuffers(1, &_fbo);
     }
 
@@ -15,22 +18,36 @@ namespace Graphic::Buffers {
     }
 
     void FBO::bind() {
-        glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
+        glBindFramebuffer(_mode, _fbo);
     }
 
     void FBO::unbind() {
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glBindFramebuffer(_mode, 0);
     }
 
-    void FBO::bindData(const unsigned int &bind_flag) {
-        glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, _attachment, GL_TEXTURE_2D, _texture, 0);
-        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE) {
-            // Выполняем победный танец
+    void FBO::bindData(const unsigned int &attachment) {
+        bind();
+        glFramebufferTexture2D(_mode, attachment, GL_TEXTURE_2D, _texture, 0);
+        auto status = glCheckFramebufferStatus(GL_READ_FRAMEBUFFER);
+        if (glCheckFramebufferStatus(GL_READ_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+            std::cout << "FB error, status: 0x%x\n" << status << std::endl;
         }
+        _attachment = attachment;
     }
 
     unsigned int FBO::get() const {
         return _fbo;
+    }
+
+    void FBO::setMode(unsigned int mode) {
+        _mode = mode;
+    }
+
+    void FBO::startRead() const {
+        glReadBuffer(_attachment);
+    }
+
+    void FBO::stopRead() {
+        glReadBuffer(GL_NONE);
     }
 }

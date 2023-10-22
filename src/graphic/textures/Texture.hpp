@@ -26,8 +26,11 @@ namespace Graphic::Textures {
         void bind() const;
         void unbind() const;
 
-        void setImage(unsigned int format, int width, int height, unsigned char *data);
-        void setImage(unsigned int type, unsigned int format, int width, int height, unsigned char *data);
+        void setImage(int internalFormat, unsigned int format, int width, int height, int dataType,
+                      unsigned char *data) const;
+        static void setImage(unsigned int type, int internalFormat, unsigned int format, int width, int height,
+                             int dataType,
+                             unsigned char *data);
 
 
         [[nodiscard]] unsigned int getId() const;

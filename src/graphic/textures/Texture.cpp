@@ -49,11 +49,14 @@ namespace Graphic::Textures {
         return _type;
     }
 
-    void Texture::setImage(unsigned int format, int width, int height, unsigned char *data) {
-        setImage(_type, format, width, height, data);
+    void Texture::setImage(int internalFormat, unsigned int format, int width, int height, int dataType,
+                           unsigned char *data) const {
+        setImage(_type, internalFormat, format, width, height, dataType, data);
     }
 
-    void Texture::setImage(unsigned int type, unsigned int format, int width, int height, unsigned char *data) {
-        glTexImage2D(type, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+    void Texture::setImage(unsigned int type, int internalFormat, unsigned int format, int width, int height,
+                           int dataType,
+                           unsigned char *data) {
+        glTexImage2D(type, 0, internalFormat, width, height, 0, format, dataType, data);
     }
 }

@@ -32,10 +32,11 @@ namespace Graphic::Shaders {
         void setBool(const std::string& name, bool value) const;
         void setInt(const std::string& name, int value) const;
         void setFloat(const std::string& name, float value) const;
-        void set4FloatVector(const std::string& name, float c1, float c2, float c3, float c4) const;
-        void set4FloatVector(const std::string& name, const glm::vec4& vector) const;
+        void set3UnsignedIntVector(const std::string& name, void* uiv) const;
         void set3FloatVector(const std::string& name, float c1, float c2, float c3) const;
         void set3FloatVector(const std::string& name, const glm::vec3& vector) const;
+        void set4FloatVector(const std::string& name, float c1, float c2, float c3, float c4) const;
+        void set4FloatVector(const std::string& name, const glm::vec4& vector) const;
         void set4FloatMat(const std::string& name, const GLfloat* value) const;
 
         [[nodiscard]] unsigned int getId() const;
