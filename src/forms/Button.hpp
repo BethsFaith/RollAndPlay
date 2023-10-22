@@ -9,22 +9,16 @@
 #include <functional>
 
 #include "Color.hpp"
+#include "Selectable.hpp"
 #include "../EntryPoint.hpp"
 
 namespace Forms {
-    class Button {
+    class Button : public Selectable {
     public:
-        struct ID
-        {
-            GLuint64 value = 0; // Идентификатор
-            GLuint etc = 0; // Дополнительная информация
-        };
-
         using Ptr = std::shared_ptr<Button>;
 
         Button(float xOffset, float yOffset);
-
-        virtual ~Button() = default;
+        ~Button() override = default;
 
         void press();
 
