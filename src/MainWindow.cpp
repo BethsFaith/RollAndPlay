@@ -79,34 +79,32 @@ void MainWindow::run() {
                             .with_bitangent = false});
     rectangle->bindData(GL_STATIC_DRAW);
 
-    auto button = std::make_shared<Forms::Button>(-8.7f,9.0f);
-    auto button2 = std::make_shared<Forms::Button>(-7.4f, 9.0f);
-    auto button3 = std::make_shared<Forms::Button>(-6.1f, 9.0f);
-    _buttons.push_back(button);
-    _buttons.push_back(button2);
-    _buttons.push_back(button3);
+    float startOffset = -8.7f;
+    for (int i{}; i < 5; ++i) {
+        auto button = std::make_shared<Forms::Button>(startOffset,9.0f);
+        button->color = Forms::Color::GREY;
 
-    button->color = Forms::Color::VIOLET;
-    button2->color = Forms::Color::GREY;
-    button3->color = Forms::Color::GREY;
+        _gui->addButton(button, rectangle);
+        _controller.addButton(button);
+        _buttons.push_back(button);
 
-    button->setPressCallback([](){
-        std::cout << "VIOLET PRESS" << std::endl;
+        startOffset += 1.3;
+    }
+    _buttons[0]->setPressCallback([&](){
+        std::cout << "1PRESS" << std::endl;
     });
-    button2->setPressCallback([](){
-        std::cout << "GREY1 PRESS" << std::endl;
+    _buttons[1]->setPressCallback([&](){
+        std::cout << "2PRESS" << std::endl;
     });
-    button3->setPressCallback([](){
-        std::cout << "GREY2 PRESS" << std::endl;
+    _buttons[2]->setPressCallback([&](){
+        std::cout << "3PRESS" << std::endl;
     });
-
-    _gui->addButton(button, rectangle);
-    _gui->addButton(button2, rectangle);
-    _gui->addButton(button3, rectangle);
-
-    _controller.addButton(button);
-    _controller.addButton(button2);
-    _controller.addButton(button3);
+    _buttons[3]->setPressCallback([&](){
+        std::cout << "4PRESS" << std::endl;
+    });
+    _buttons[4]->setPressCallback([&](){
+        std::cout << "5PRESS" << std::endl;
+    });
 
     auto shader = std::make_shared<Graphic::Shaders::ShaderProgram>
             (R"(..\..\rsrc\shaders\gui.vert)",
