@@ -4,8 +4,6 @@
 
 #include "Gui.hpp"
 
-GLuint Gui::attachments[] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT3, GL_COLOR_ATTACHMENT4 };
-
 Gui::Gui() {
     _shader = std::make_shared<Graphic::Shaders::ShaderProgram>
         (R"(..\..\rsrc\shaders\gui.vert)",
@@ -25,16 +23,6 @@ void Gui::draw() {
 
 void Gui::addButton(const Forms::Button::Ptr button, Graphic::AbstractPrimitive::Ptr primitive) {
     _buttons.emplace_back(button, primitive);
-
-    auto texture = std::make_shared<Graphic::Textures::Texture>("", "");
-    texture->setImage(GL_RGB, 3440, 1440, nullptr);
-
-    glTexParameteri(GL_TEXTURE_2D,  GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,  GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    _fbos.emplace_back(Graphic::Buffers::FBO (attachments[attachmentPointer++],
-                                             texture->getId()),
-                       texture);
 }
 
 void Gui::setTransform(float x, float y) {

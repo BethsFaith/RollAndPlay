@@ -29,6 +29,8 @@ namespace Graphic::Buffers {
         void startRead() const;
         static void stopRead();
 
+        void draw() const;
+
         [[nodiscard]] unsigned int get() const override;
 
     private:

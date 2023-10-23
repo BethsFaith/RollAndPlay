@@ -14,8 +14,15 @@ void MainController::processMouseButton(GLFWwindow* window, int mouseButton, int
     if (mouseButton == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
         double xPos, yPos;
         glfwGetCursorPos(window, &xPos, &yPos);
-        for (auto &button: _buttons) {
 
+        int width, height;
+        glfwGetWindowSize(window, &width, &height);
+
+        auto pixel = _picking.readPixel((int)xPos,int(height - yPos - 1));
+        for (auto &button: _buttons) {
+            if ((int)pixel.ObjectID == (int)button->getId()) {
+                button->press();
+            }
         }
     }
     if (_viewController != nullptr) {
@@ -41,4 +48,12 @@ void MainController::addButton(const Forms::Button::Ptr& button) {
 
 void MainController::setViewController(Controllers::PageController *viewController) {
     _viewController = viewController;
+}
+
+bool MainController::init(unsigned int windowWidth, unsigned int windowHeight) {
+    return _picking.init(windowWidth, windowHeight);
+}
+
+const Picking &MainController::getPicking() const {
+    return _picking;
 }

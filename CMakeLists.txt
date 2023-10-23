@@ -44,6 +44,6 @@ add_executable(RollAndPlay
         src/graphic/textures/Loader.cpp
         src/graphic/textures/Texture.cpp
         src/EntryPoint.hpp
-        src/forms/Selectable.cpp
+        src/Picking.cpp
         )
 target_link_libraries(RollAndPlay ${CONAN_LIBS})

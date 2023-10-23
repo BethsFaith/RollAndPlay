@@ -8,8 +8,7 @@ namespace Graphic::Buffers {
     FBO::FBO(GLuint mode, unsigned int texture)
             : RaiiBuffer(3),
               _texture(texture),
-              _mode(mode),
-              {
+              _mode(mode){
         glGenFramebuffers(1, &_fbo);
     }
 
@@ -49,5 +48,9 @@ namespace Graphic::Buffers {
 
     void FBO::stopRead() {
         glReadBuffer(GL_NONE);
+    }
+
+    void FBO::draw() const {
+        glDrawBuffer(_attachment);
     }
 }

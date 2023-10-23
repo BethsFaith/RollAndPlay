@@ -32,33 +32,7 @@ MainWindow::MainWindow(const char *title) {
     }
 
     _gui = std::make_shared<Gui>();
-
-     Graphic::AbstractPrimitive::Ptr rectangle =
-            std::make_shared<Graphic::Rectangle>(
-            Graphic::Primitive::Settings{.with_normals = false,
-                                                 .with_texture_coords = false,
-                                                 .with_tangent = false,
-                                                 .with_bitangent = false});
-    rectangle->bindData(GL_STATIC_DRAW);
-
-    auto button = std::make_shared<Forms::Button>(-8.7f,9.0f);
-    auto button2 = std::make_shared<Forms::Button>(-7.0f, 9.0f);
-
-    button->color = Forms::Color::VIOLET;
-    button2->color = Forms::Color::GREY;
-
-    button->setPressCallback([](){
-              std::cout << "VIOLET PRESS";
-          });
-    button2->setPressCallback([](){
-        std::cout << "GREY PRESS";
-    });
-
-    _gui->addButton(button, rectangle);
-    _gui->addButton(button2, rectangle);
-
-    _controller.addButton(button);
-    _controller.addButton(button2);
+    _controller.init(desktop.right, desktop.bottom);
 }
 
 MainWindow::~MainWindow() {
@@ -97,12 +71,68 @@ void MainWindow::setClearColor(const glm::vec4 &clearColor) {
 }
 
 void MainWindow::run() {
+    Graphic::AbstractPrimitive::Ptr rectangle =
+            std::make_shared<Graphic::Rectangle>(
+                    Graphic::Primitive::Settings{.with_normals = false,
+                            .with_texture_coords = false,
+                            .with_tangent = false,
+                            .with_bitangent = false});
+    rectangle->bindData(GL_STATIC_DRAW);
+
+    auto button = std::make_shared<Forms::Button>(-8.7f,9.0f);
+    auto button2 = std::make_shared<Forms::Button>(-7.4f, 9.0f);
+    auto button3 = std::make_shared<Forms::Button>(-6.1f, 9.0f);
+    _buttons.push_back(button);
+    _buttons.push_back(button2);
+    _buttons.push_back(button3);
+
+    button->color = Forms::Color::VIOLET;
+    button2->color = Forms::Color::GREY;
+    button3->color = Forms::Color::GREY;
+
+    button->setPressCallback([](){
+        std::cout << "VIOLET PRESS" << std::endl;
+    });
+    button2->setPressCallback([](){
+        std::cout << "GREY1 PRESS" << std::endl;
+    });
+    button3->setPressCallback([](){
+        std::cout << "GREY2 PRESS" << std::endl;
+    });
+
+    _gui->addButton(button, rectangle);
+    _gui->addButton(button2, rectangle);
+    _gui->addButton(button3, rectangle);
+
+    _controller.addButton(button);
+    _controller.addButton(button2);
+    _controller.addButton(button3);
+
+    auto shader = std::make_shared<Graphic::Shaders::ShaderProgram>
+            (R"(..\..\rsrc\shaders\gui.vert)",
+             R"(..\..\rsrc\shaders\select.frag)");
+
     while (!shouldClose()) {
         clearColor();
         updateDeltaTime();
 
         _controller.processKeyboardInput(_window);
         _gui->draw();
+
+        shader->use();
+        _controller.getPicking().enableWriting();
+        for (auto& button : _buttons) {
+            glm::mat4 trans = glm::mat4(1.0f);
+            trans = glm::scale(trans, glm::vec3(0.1, 0.1, 0.0f));
+            trans = glm::translate(trans, glm::vec3(button->getXOffset(),button->getYOffset(), 0.0f));
+
+            shader->set4FloatMat("Transform", glm::value_ptr(trans));
+            shader->setFloat("gDrawIndex", button->getId());
+            shader->setFloat("gObjectIndex", button->getId());
+
+            rectangle->draw();
+        }
+        _controller.getPicking().disableWriting();
 
 //        if (_view != nullptr) {
 //            _view->processKeyboardInput(_window);

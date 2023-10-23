@@ -9,16 +9,15 @@
 #include <functional>
 
 #include "Color.hpp"
-#include "Selectable.hpp"
 #include "../EntryPoint.hpp"
 
 namespace Forms {
-    class Button : public Selectable {
+    class Button {
     public:
         using Ptr = std::shared_ptr<Button>;
 
         Button(float xOffset, float yOffset);
-        ~Button() override = default;
+        ~Button() = default;
 
         void press();
 
@@ -28,10 +27,16 @@ namespace Forms {
 
         [[nodiscard]] float getYOffset() const;
 
+        float getId() const;
+
         Color color = Color::GREY;
+
     private:
         float _xOffset;
         float _yOffset;
+
+        int _id;
+        static int id;
 
         std::function<void()> _pressCallback{[]() {}};
     };

@@ -8,8 +8,6 @@
 #include "forms/Button.hpp"
 #include "graphic/AbstractPrimitive.hpp"
 #include "graphic/shaders/ShaderProgram.hpp"
-#include "graphic/buffers/Fbo.hpp"
-#include "graphic/textures/Texture.hpp"
 
 class Gui {
 public:
@@ -24,16 +22,12 @@ public:
 private:
     void setTransform(float x, float y);
     void setColor(float r, float g, float b);
+    void setId(float index);
     void setColor(glm::vec3 rgb);
 
     Graphic::Shaders::ShaderProgram::Ptr _shader;
 
     std::vector<std::pair<Forms::Button::Ptr, Graphic::AbstractPrimitive::Ptr>> _buttons;
-
-    // Создадим G-буфер с данными о используемых привязках
-    static GLuint attachments[];
-    int attachmentPointer{0};
-    std::vector<std::pair<Graphic::Buffers::FBO, Graphic::Textures::Texture::Ptr>> _fbos;
 };
 
 
