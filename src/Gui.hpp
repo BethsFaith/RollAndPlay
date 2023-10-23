@@ -22,7 +22,6 @@ public:
 private:
     void setTransform(float x, float y);
     void setColor(float r, float g, float b);
-    void setId(float index);
     void setColor(glm::vec3 rgb);
 
     Graphic::Shaders::ShaderProgram::Ptr _shader;
