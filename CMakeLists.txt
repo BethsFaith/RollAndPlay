@@ -11,6 +11,7 @@ if (NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
 endif ()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
+add_subdirectory(libs/graphicLib)
 
 conan_cmake_run(CONANFILE conanfile.txt
         INSTALL_FOLDER ${CMAKE_BINARY_DIR}
@@ -26,24 +27,15 @@ add_executable(RollAndPlay
         src/data/Race.cpp
         src/MainWindow.cpp
         src/MainController.cpp
-        src/forms/Button.cpp
         src/controllers/PageController.cpp
-        src/graphic/Primitive.cpp
-        src/graphic/buffers/Vertex.cpp
-        src/graphic/buffers/Vbo.cpp
-        src/graphic/buffers/VboT.cpp
-        src/graphic/buffers/Vao.cpp
-        src/graphic/buffers/RaiiBuffer.cpp
-        src/graphic/buffers/Ebo.cpp
-        src/graphic/Rectangle.cpp
-        src/graphic/shaders/ShaderProgram.cpp
         src/forms/Color.cpp
+        src/forms/Button.cpp
         src/Gui.cpp
-        src/graphic/buffers/Fbo.cpp
-        libs/stb_image.cpp
-        src/graphic/textures/Loader.cpp
-        src/graphic/textures/Texture.cpp
-        src/EntryPoint.hpp
-        src/Picking.cpp
-        )
-target_link_libraries(RollAndPlay ${CONAN_LIBS})
+        src/graphic/techniques/Technique.cpp
+        libs/graphicLib/src/PickableTexture.cpp
+        src/graphic/techniques/PickTechnique.cpp
+        src/graphic/techniques/TransformTechnique.cpp
+        src/graphic/techniques/ColorTechnique.cpp
+        src/graphic/Object.cpp
+        src/forms/SelectableForm.hpp src/forms/SelectableForm.cpp)
+target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

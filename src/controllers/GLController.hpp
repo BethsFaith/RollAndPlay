@@ -5,7 +5,7 @@
 #ifndef ROLLANDPLAY_GLCONTROLLER_HPP
 #define ROLLANDPLAY_GLCONTROLLER_HPP
 
-#include "../EntryPoint.hpp"
+#include "EntryPoint.hpp"
 
 namespace Controllers {
     class GLController {

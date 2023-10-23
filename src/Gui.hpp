@@ -5,28 +5,31 @@
 #ifndef ROLLANDPLAY_GUI_HPP
 #define ROLLANDPLAY_GUI_HPP
 
+#include <primitives/AbstractPrimitive.hpp>
+#include <shaders/ShaderProgram.hpp>
+
 #include "forms/Button.hpp"
-#include "graphic/AbstractPrimitive.hpp"
-#include "graphic/shaders/ShaderProgram.hpp"
+#include "graphic/Object.hpp"
+#include "graphic/techniques/ColorTechnique.hpp"
+#include "graphic/techniques/PickTechnique.hpp"
+#include "graphic/techniques/TransformTechnique.hpp"
 
 class Gui {
 public:
     using Ptr = std::shared_ptr<Gui>;
 
-    Gui();
+    Gui(unsigned int windowWidth, unsigned int windowHeight);
     ~Gui() = default;
 
     void draw();
 
-    void addButton(const Forms::Button::Ptr button, Graphic::AbstractPrimitive::Ptr primitive);
+    void addButton(const Forms::Button::Ptr button, GraphicLib::Primitives::AbstractPrimitive::Ptr primitive);
 private:
-    void setTransform(float x, float y);
-    void setColor(float r, float g, float b);
-    void setColor(glm::vec3 rgb);
+    GraphicLib::Shaders::ShaderProgram::Ptr _shader;
+    GraphicLib::Shaders::ShaderProgram::Ptr _selectableShader;
 
-    Graphic::Shaders::ShaderProgram::Ptr _shader;
-
-    std::vector<std::pair<Forms::Button::Ptr, Graphic::AbstractPrimitive::Ptr>> _buttons;
+    std::vector<Graphic::Object::Ptr> _buttons;
+    GraphicLib::PickableTexture::Ptr _canvas;
 };
 
 

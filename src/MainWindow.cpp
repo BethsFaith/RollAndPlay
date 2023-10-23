@@ -31,11 +31,15 @@ MainWindow::MainWindow(const char *title) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
-    _gui = std::make_shared<Gui>();
-    _controller.init(desktop.right, desktop.bottom);
+    _gui = std::make_shared<Gui>(desktop.right, desktop.bottom);
 }
 
 MainWindow::~MainWindow() {
+    _controller.free();
+
+    _buttons.clear();
+    _gui.reset();
+
     if (_window != nullptr) {
         glfwDestroyWindow(_window);
     }
@@ -71,9 +75,11 @@ void MainWindow::setClearColor(const glm::vec4 &clearColor) {
 }
 
 void MainWindow::run() {
-    Graphic::AbstractPrimitive::Ptr rectangle =
-            std::make_shared<Graphic::Rectangle>(
-                    Graphic::Primitive::Settings{.with_normals = false,
+    using namespace GraphicLib;
+
+    Primitives::AbstractPrimitive::Ptr rectangle =
+            std::make_shared<Primitives::Rectangle>(
+                    Primitives::Primitive::Settings{.with_normals = false,
                             .with_texture_coords = false,
                             .with_tangent = false,
                             .with_bitangent = false});
@@ -82,6 +88,7 @@ void MainWindow::run() {
     float startOffset = -8.7f;
     for (int i{}; i < 5; ++i) {
         auto button = std::make_shared<Forms::Button>(startOffset,9.0f);
+
         button->color = Forms::Color::GREY;
 
         _gui->addButton(button, rectangle);
@@ -106,31 +113,12 @@ void MainWindow::run() {
         std::cout << "5PRESS" << std::endl;
     });
 
-    auto shader = std::make_shared<Graphic::Shaders::ShaderProgram>
-            (R"(..\..\rsrc\shaders\gui.vert)",
-             R"(..\..\rsrc\shaders\select.frag)");
-
     while (!shouldClose()) {
         clearColor();
         updateDeltaTime();
 
         _controller.processKeyboardInput(_window);
         _gui->draw();
-
-        shader->use();
-        _controller.getPicking().enableWriting();
-        for (auto& button : _buttons) {
-            glm::mat4 trans = glm::mat4(1.0f);
-            trans = glm::scale(trans, glm::vec3(0.1, 0.1, 0.0f));
-            trans = glm::translate(trans, glm::vec3(button->getXOffset(),button->getYOffset(), 0.0f));
-
-            shader->set4FloatMat("Transform", glm::value_ptr(trans));
-            shader->setFloat("gDrawIndex", button->getId());
-            shader->setFloat("gObjectIndex", button->getId());
-
-            rectangle->draw();
-        }
-        _controller.getPicking().disableWriting();
 
 //        if (_view != nullptr) {
 //            _view->processKeyboardInput(_window);

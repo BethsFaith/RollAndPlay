@@ -30,4 +30,14 @@ namespace Forms {
     float Button::getId() const {
         return _id;
     }
+
+    bool Button::checkSelecting(unsigned int x, unsigned int y) {
+        if (canvas == nullptr) {
+            return false;
+        }
+
+        auto info = canvas->readPixel(x, y);
+
+        return _id == (int)info.ObjectID;
+    }
 }

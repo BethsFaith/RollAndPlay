@@ -18,10 +18,10 @@ void MainController::processMouseButton(GLFWwindow* window, int mouseButton, int
         int width, height;
         glfwGetWindowSize(window, &width, &height);
 
-        auto pixel = _picking.readPixel((int)xPos,int(height - yPos - 1));
         for (auto &button: _buttons) {
-            if ((int)pixel.ObjectID == (int)button->getId()) {
+            if (button->checkSelecting((int)xPos,int(height - yPos - 1))) {
                 button->press();
+                break;
             }
         }
     }
@@ -50,10 +50,6 @@ void MainController::setViewController(Controllers::PageController *viewControll
     _viewController = viewController;
 }
 
-bool MainController::init(unsigned int windowWidth, unsigned int windowHeight) {
-    return _picking.init(windowWidth, windowHeight);
-}
-
-const Picking &MainController::getPicking() const {
-    return _picking;
+void MainController::free() {
+    _buttons.clear();
 }

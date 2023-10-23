@@ -8,7 +8,7 @@
 #include "controllers/GLController.hpp"
 #include "forms/Button.hpp"
 #include "controllers/PageController.hpp"
-#include "Picking.hpp"
+#include "PickableTexture.hpp"
 
 class MainController : public Controllers::GLController {
 public:
@@ -24,15 +24,10 @@ public:
 
     void setViewController(Controllers::PageController *viewController);
 
-    bool init(unsigned int windowWidth, unsigned int windowHeight);
-
-    [[nodiscard]] const Picking &getPicking() const;
-
+    void free();
 private:
     std::vector<Forms::Button::Ptr> _buttons;
     Controllers::PageController *_viewController;
-
-    Picking _picking;
 };
 
 #endif //ROLLANDPLAY_MAINCONTROLLER_HPP

@@ -8,11 +8,13 @@
 #include <iostream>
 #include <functional>
 
+#include <EntryPoint.hpp>
+
+#include "SelectableForm.hpp"
 #include "Color.hpp"
-#include "../EntryPoint.hpp"
 
 namespace Forms {
-    class Button {
+    class Button : public SelectableForm {
     public:
         using Ptr = std::shared_ptr<Button>;
 
@@ -24,10 +26,10 @@ namespace Forms {
         void setPressCallback(const std::function<void()> &function);
 
         [[nodiscard]] float getXOffset() const;
-
         [[nodiscard]] float getYOffset() const;
+        [[nodiscard]] float getId() const;
 
-        float getId() const;
+        bool checkSelecting(unsigned int x, unsigned int y) override;
 
         Color color = Color::GREY;
 

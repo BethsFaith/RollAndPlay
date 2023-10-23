@@ -4,39 +4,53 @@
 
 #include "Gui.hpp"
 
-Gui::Gui() {
-    _shader = std::make_shared<Graphic::Shaders::ShaderProgram>
+Gui::Gui(unsigned int windowWidth, unsigned int windowHeight) {
+    _shader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
         (R"(..\..\rsrc\shaders\gui.vert)",
          R"(..\..\rsrc\shaders\gui.frag)");
+    _selectableShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
+            (R"(..\..\rsrc\shaders\gui.vert)",
+             R"(..\..\rsrc\shaders\select.frag)");
+
+    _canvas = std::make_shared<GraphicLib::PickableTexture>();
+    _canvas->init(windowWidth, windowHeight);
 }
 
 void Gui::draw() {
-    _shader->use();
-
     for (auto& button : _buttons) {
-        setTransform(button.first->getXOffset(), button.first->getYOffset());
-        setColor(Forms::getRGB(button.first->color));
+        button->disableTechnique(Graphic::Techniques::PICK);
+        button->enableTechnique(Graphic::Techniques::COLOR);
+        button->enableTechnique(Graphic::Techniques::TRANSFORM);
+        button->render(_shader);
 
-        button.second->draw();
+        _canvas->enableWriting();
+        button->disableTechnique(Graphic::Techniques::COLOR);
+        button->enableTechnique(Graphic::Techniques::PICK);
+        button->render(_selectableShader);
+        _canvas->disableWriting();
     }
 }
 
-void Gui::addButton(const Forms::Button::Ptr button, Graphic::AbstractPrimitive::Ptr primitive) {
-    _buttons.emplace_back(button, primitive);
-}
+void Gui::addButton(const Forms::Button::Ptr button, GraphicLib::Primitives::AbstractPrimitive::Ptr primitive) {
+    auto object = std::make_shared<Graphic::Object>();
 
-void Gui::setTransform(float x, float y) {
-    glm::mat4 trans = glm::mat4(1.0f);
-    trans = glm::scale(trans, glm::vec3(0.1, 0.1, 0.0f));
-    trans = glm::translate(trans, glm::vec3(x, y, 0.0f));
+    object->setPrimitive(primitive);
 
-    _shader->set4FloatMat("Transform", glm::value_ptr(trans));
-}
+    auto colorTechnique = std::make_shared<Graphic::Techniques::ColorTechnique>();
+    colorTechnique->setColor(Forms::getRGB(button->color));
+    object->addTechnique(Graphic::Techniques::COLOR, colorTechnique);
 
-void Gui::setColor(float r, float g, float b) {
-    _shader->set3FloatVector("Color", r, g, b);
-}
+    auto transformTechnique = std::make_shared<Graphic::Techniques::TransformTechnique>();
+    transformTechnique->enableScale(glm::vec3(0.1, 0.1, 0.0f));
+    transformTechnique->enableTransform(glm::vec3(button->getXOffset(), button->getYOffset(), 0.0f));
+    transformTechnique->disableRotateValue();
+    object->addTechnique(Graphic::Techniques::TRANSFORM, transformTechnique);
 
-void Gui::setColor(glm::vec3 rgb) {
-    _shader->set3FloatVector("Color", rgb);
+    auto picking = std::make_shared<Graphic::Techniques::PickTechnique>();
+    picking->setObjectId(button->getId());
+
+    object->addTechnique(Graphic::Techniques::PICK, picking);
+    button->setCanvas(_canvas);
+
+    _buttons.push_back(object);
 }

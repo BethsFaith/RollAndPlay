@@ -6,6 +6,9 @@
 #define ROLLANDPLAY_MAINWINDOW_HPP
 
 #include "EntryPoint.hpp"
+#include <primitives/Rectangle.hpp>
+#include <shaders/ShaderProgram.hpp>
+
 #include <wtypes.h>
 #include <stdexcept>
 #include <glm/glm.hpp>
@@ -15,7 +18,6 @@
 #include "forms/Button.hpp"
 #include "MainController.hpp"
 #include "Gui.hpp"
-#include "graphic/Rectangle.hpp"
 
 class MainWindow {
 public:
