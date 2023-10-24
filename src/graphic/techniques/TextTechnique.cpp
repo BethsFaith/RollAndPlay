@@ -11,9 +11,6 @@ namespace Graphic::Techniques {
     unsigned int TextTechnique::ScreenHeight = 1440;
 
     void TextTechnique::initTextRendering(unsigned int width, unsigned int height, std::string font, int size) {
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
         TextRenderer = std::make_shared<GraphicLib::Text>(width, height);
         TextRenderer->load(font, size);
 
@@ -24,12 +21,18 @@ namespace Graphic::Techniques {
     }
 
     void TextTechnique::execute() {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
         shader->set4FloatMat("Projection", glm::value_ptr(Projection));
 
         shader->setInt("Text", 0);
         shader->set3FloatVector("TextColor", _color);
 
         TextRenderer->render(_text, _width, _height, _scale, _color);
+
+        glBlendFunc(GL_ONE, GL_ZERO);
+        glDisable(GL_BLEND);
     }
 
     void TextTechnique::setText(const std::string &text) {
