@@ -13,14 +13,14 @@ namespace GraphicLib::Primitives {
         std::vector<Buffers::Vertex> vertices;
 
         if (settings.with_texture_coords) {
-            for (int i{}; i < vertex_number; ++i) {
+            for (int i{}; i < vertexNumber; ++i) {
                 vertices.push_back({
                                            .position = position.at(i),
                                            .tex_coords = texture_coordinates.at(i)
                                    });
             }
         } else {
-            for (int i{}; i < vertex_number; ++i) {
+            for (int i{}; i < vertexNumber; ++i) {
                 vertices.push_back({
                                            .position = position.at(i)
                                    });
@@ -60,8 +60,8 @@ namespace GraphicLib::Primitives {
         return {};
     }
 
-    void Rectangle::bindData(const unsigned int &bind_flag) {
-        Primitive::bindData(bind_flag);
+    void Rectangle::bindData(const unsigned int &bindFlag) {
+        Primitive::bindData(bindFlag);
 
         int index = 0;
 

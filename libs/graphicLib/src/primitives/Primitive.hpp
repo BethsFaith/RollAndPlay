@@ -26,9 +26,9 @@ namespace GraphicLib::Primitives {
             bool with_bitangent = true;
         };
 
-        explicit Primitive(const int &vertex_number);
+        explicit Primitive(const int &vertexNumber);
 
-        explicit Primitive(const int &vertex_number, const Settings &settings_);
+        explicit Primitive(const int &vertexNumber, const Settings &settings_);
 
         ~Primitive() override = default;
 
@@ -36,23 +36,23 @@ namespace GraphicLib::Primitives {
 
         void unbind() override;
 
-        void bindData(const unsigned int &bind_flag) override;
+        void bindData(const unsigned int &bindFlag) override;
 
         void draw() override;
 
         [[nodiscard]] unsigned int getUid() const override;
 
     protected:
-        void add(std::shared_ptr<Buffers::RaiiBuffer> raii_buffer);
+        void add(Buffers::RaiiBuffer::Ptr raiiBuffer);
 
-        std::vector<std::shared_ptr<Buffers::RaiiBuffer>> buffers{};
+        std::vector<Buffers::RaiiBuffer::Ptr> buffers{};
 
-        const int vertex_number;
+        const int vertexNumber;
 
         Settings settings;
 
     private:
-        std::shared_ptr<Buffers::VAO> _vao;
+        Buffers::VAO::Ptr _vao;
     };
 }
 

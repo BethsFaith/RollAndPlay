@@ -10,11 +10,13 @@
 namespace GraphicLib::Buffers {
     class VAO : public RaiiBuffer {
     public:
+        using Ptr = std::shared_ptr<VAO>;
+
         VAO();
 
         ~VAO() override;
 
-        void bindData(const unsigned int &bind_flag) override;
+        void bindData(const unsigned int &bindFlag) override;
 
         void bind() override;
 

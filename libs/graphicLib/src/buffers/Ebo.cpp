@@ -21,8 +21,8 @@ namespace GraphicLib::Buffers {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 
-    void EBO::bindData(const unsigned int &bind_flag) {
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof(float), &_indices[0], bind_flag);
+    void EBO::bindData(const unsigned int &bindFlag) {
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof(float), &_indices[0], bindFlag);
     }
 
     unsigned int EBO::get() const {

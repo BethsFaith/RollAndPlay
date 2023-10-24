@@ -10,6 +10,7 @@ namespace Graphic::Techniques {
         TRANSFORM,
         COLOR,
         PICK,
+        TEXT
     };
 }
 

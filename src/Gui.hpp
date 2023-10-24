@@ -13,13 +13,14 @@
 #include "graphic/techniques/ColorTechnique.hpp"
 #include "graphic/techniques/PickTechnique.hpp"
 #include "graphic/techniques/TransformTechnique.hpp"
+#include "graphic/techniques/TextTechnique.hpp"
 
 class Gui {
 public:
     using Ptr = std::shared_ptr<Gui>;
 
     Gui(unsigned int windowWidth, unsigned int windowHeight);
-    ~Gui() = default;
+    ~Gui();
 
     void draw();
 
@@ -27,6 +28,7 @@ public:
 private:
     GraphicLib::Shaders::ShaderProgram::Ptr _shader;
     GraphicLib::Shaders::ShaderProgram::Ptr _selectableShader;
+    GraphicLib::Shaders::ShaderProgram::Ptr _textShader;
 
     std::vector<Graphic::Object::Ptr> _buttons;
     GraphicLib::PickableTexture::Ptr _canvas;

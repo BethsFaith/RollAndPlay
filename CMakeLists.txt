@@ -37,5 +37,8 @@ add_executable(RollAndPlay
         src/graphic/techniques/TransformTechnique.cpp
         src/graphic/techniques/ColorTechnique.cpp
         src/graphic/Object.cpp
-        src/forms/SelectableForm.hpp src/forms/SelectableForm.cpp)
+        src/forms/SelectableForm.cpp
+        src/graphic/techniques/TextTechnique.cpp
+        )
+
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

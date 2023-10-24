@@ -32,6 +32,7 @@ add_library(GraphicLib
         src/textures/Loader.cpp
         src/textures/Texture.cpp
         src/EntryPoint.hpp
+        src/Text.cpp
         )
 
 target_link_libraries(GraphicLib ${CONAN_LIBS})

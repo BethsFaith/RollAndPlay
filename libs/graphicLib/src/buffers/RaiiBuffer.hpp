@@ -5,12 +5,15 @@
 #ifndef INC_2_SHADERS_RAIIBUFFER_HPP
 #define INC_2_SHADERS_RAIIBUFFER_HPP
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <iostream>
+
+#include "EntryPoint.hpp"
 
 namespace GraphicLib::Buffers {
     class RaiiBuffer {
     public:
+        using Ptr = std::shared_ptr<RaiiBuffer>;
+
         explicit RaiiBuffer(const int &priority);
 
         virtual ~RaiiBuffer() = default;
@@ -19,7 +22,7 @@ namespace GraphicLib::Buffers {
 
         virtual void unbind() = 0;
 
-        virtual void bindData(const unsigned int &bind_flag) = 0;
+        virtual void bindData(const unsigned int &bindFlag) = 0;
 
         [[nodiscard]] unsigned int getPriority() const;
 

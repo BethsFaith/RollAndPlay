@@ -23,9 +23,14 @@ namespace GraphicLib::Buffers {
     }
 
     template<typename T>
-    void VBO<T>::bindData(const unsigned int &bind_flag) {
+    void VBO<T>::bindData(const unsigned int &bindFlag) {
         glBufferData(GL_ARRAY_BUFFER, int(_vertices.size() * sizeof(T)),
-                     &_vertices[0], bind_flag); //_data.data(), bind_flag);
+                     &_vertices[0], bindFlag); //_data.data(), bind_flag);
+    }
+
+    template<typename T>
+    void VBO<T>::bindSubData(std::vector<T> vertices, int startIndex) {
+        glBufferSubData(GL_ARRAY_BUFFER, startIndex, int(vertices.size() * sizeof(T)), &vertices[0]);
     }
 
     template<typename T>

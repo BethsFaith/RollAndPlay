@@ -15,6 +15,8 @@ namespace GraphicLib::Buffers {
     template<typename T>
     class VBO : public RaiiBuffer {
     public:
+        using Ptr = std::shared_ptr<VBO<T>>;
+
         explicit VBO(const std::vector<T> &data);
 
         ~VBO() override;
@@ -23,7 +25,9 @@ namespace GraphicLib::Buffers {
 
         void unbind() override;
 
-        void bindData(const unsigned int &bind_flag) override;
+        void bindData(const unsigned int &bindFlag) override;
+
+        void bindSubData(std::vector<T> vertices, int startIndex);
 
         [[nodiscard]] unsigned int get() const override;
 

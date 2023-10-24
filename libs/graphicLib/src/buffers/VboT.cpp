@@ -12,4 +12,5 @@ class GraphicLib::Buffers::VBO<GraphicLib::Buffers::Vertex>;
 template
 class GraphicLib::Buffers::VBO<glm::vec3>;
 
-
+template
+class GraphicLib::Buffers::VBO<glm::vec4>;

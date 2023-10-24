@@ -13,6 +13,8 @@
 namespace GraphicLib::Buffers {
     class EBO : public RaiiBuffer {
     public:
+        using Ptr = std::shared_ptr<EBO>;
+
         explicit EBO(std::vector<unsigned int> indices);
 
         ~EBO() override;
@@ -21,7 +23,7 @@ namespace GraphicLib::Buffers {
 
         void unbind() override;
 
-        void bindData(const unsigned int &bind_flag) override;
+        void bindData(const unsigned int &bindFlag) override;
 
         [[nodiscard]] unsigned int get() const override;
 

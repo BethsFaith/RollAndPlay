@@ -20,7 +20,7 @@ namespace GraphicLib::Primitives {
 
         void draw() override;
 
-        void bindData(const unsigned int &bind_flag) override;
+        void bindData(const unsigned int &bindFlag) override;
 
     private:
         static std::vector<glm::vec3> getPosition();

@@ -5,10 +5,10 @@
 #include "Primitive.hpp"
 
 namespace GraphicLib::Primitives {
-    Primitive::Primitive(const int &vertex_number_) : Primitive(vertex_number_, {}) {}
+    Primitive::Primitive(const int &vertexNumber) : Primitive(vertexNumber, {}) {}
 
-    Primitive::Primitive(const int &vertex_number_, const Settings &settings_)
-            : vertex_number(vertex_number_), settings(settings_) {
+    Primitive::Primitive(const int &vertexNumber, const Settings &settings_)
+            : vertexNumber(vertexNumber), settings(settings_) {
 
         _vao = std::make_shared<Buffers::VAO>();
         add(_vao);
@@ -22,10 +22,10 @@ namespace GraphicLib::Primitives {
         _vao->unbind();
     }
 
-    void Primitive::bindData(const unsigned int &bind_flag) {
+    void Primitive::bindData(const unsigned int &bindFlag) {
         for (auto &buffer: buffers) {
             buffer->bind();
-            buffer->bindData(bind_flag);
+            buffer->bindData(bindFlag);
         }
     }
 
@@ -33,8 +33,8 @@ namespace GraphicLib::Primitives {
         bind();
     }
 
-    void Primitive::add(std::shared_ptr<Buffers::RaiiBuffer> raii_buffer) {
-        buffers.push_back(std::move(raii_buffer));
+    void Primitive::add(Buffers::RaiiBuffer::Ptr raiiBuffer) {
+        buffers.push_back(std::move(raiiBuffer));
 
         std::sort(buffers.begin(),
                   buffers.end(),
