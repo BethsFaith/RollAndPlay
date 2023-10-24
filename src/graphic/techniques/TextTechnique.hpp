@@ -35,6 +35,9 @@ namespace Graphic::Techniques {
     protected:
         static GraphicLib::Text::Ptr TextRenderer;
         static glm::mat4 Projection;
+
+        static unsigned int ScreenWidth;
+        static unsigned int ScreenHeight;
     private:
         std::string _text;
         glm::vec3 _color = glm::vec3{1.0f};

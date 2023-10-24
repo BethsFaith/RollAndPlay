@@ -91,29 +91,25 @@ void MainWindow::run() {
 
         button->color = Forms::Color::GREY;
 
+        button->text = "Button" + std::to_string(i);
         _gui->addButton(button, rectangle);
         _controller.addButton(button);
         _buttons.push_back(button);
 
         startOffset += 1.3;
     }
-    _buttons[0]->text = "jhggjdfkj";
     _buttons[0]->setPressCallback([&](){
         std::cout << "1PRESS" << std::endl;
     });
-    _buttons[1]->text = "рваппварп";
     _buttons[1]->setPressCallback([&](){
         std::cout << "2PRESS" << std::endl;
     });
-    _buttons[2]->text = "арпвапр";
     _buttons[2]->setPressCallback([&](){
         std::cout << "3PRESS" << std::endl;
     });
-    _buttons[2]->text = "врпр";
     _buttons[3]->setPressCallback([&](){
         std::cout << "4PRESS" << std::endl;
     });
-    _buttons[3]->text = "врапрва";
     _buttons[4]->setPressCallback([&](){
         std::cout << "5PRESS" << std::endl;
     });

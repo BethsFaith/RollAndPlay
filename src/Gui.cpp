@@ -34,18 +34,19 @@ void Gui::draw() {
         button->disableTechnique(Graphic::Techniques::TEXT);
         button->render(_shader);
 
-        _canvas->enableWriting();
-        button->disableTechnique(Graphic::Techniques::COLOR);
-        button->enableTechnique(Graphic::Techniques::PICK);
-        button->disableTechnique(Graphic::Techniques::TEXT);
-        button->render(_selectableShader);
-        _canvas->disableWriting();
-
         button->disableTechnique(Graphic::Techniques::PICK);
         button->disableTechnique(Graphic::Techniques::COLOR);
         button->disableTechnique(Graphic::Techniques::TRANSFORM);
         button->enableTechnique(Graphic::Techniques::TEXT);
         button->render(_textShader);
+
+        _canvas->enableWriting();
+        button->disableTechnique(Graphic::Techniques::COLOR);
+        button->enableTechnique(Graphic::Techniques::PICK);
+        button->enableTechnique(Graphic::Techniques::TRANSFORM);
+        button->disableTechnique(Graphic::Techniques::TEXT);
+        button->render(_selectableShader);
+        _canvas->disableWriting();
     }
 }
 
@@ -60,7 +61,8 @@ void Gui::addButton(const Forms::Button::Ptr button, GraphicLib::Primitives::Abs
 
     auto transformTechnique = std::make_shared<Graphic::Techniques::TransformTechnique>();
     transformTechnique->enableScale(glm::vec3(0.1, 0.1, 0.0f));
-    transformTechnique->enableTransform(glm::vec3(button->getXOffset(), button->getYOffset(), 0.0f));
+    transformTechnique->enableTransform(glm::vec3(button->getXOffset(),
+                                                  button->getYOffset(), 0.0f));
     transformTechnique->disableRotateValue();
     object->addTechnique(Graphic::Techniques::TRANSFORM, transformTechnique);
 
@@ -71,8 +73,8 @@ void Gui::addButton(const Forms::Button::Ptr button, GraphicLib::Primitives::Abs
 
     auto textTechnique = std::make_shared<Graphic::Techniques::TextTechnique>();
     textTechnique->setText(button->text);
-    textTechnique->setWidth(button->getYOffset());
-    textTechnique->setWidth(button->getYOffset());
+    textTechnique->setWidth(0.05 + 0.065*(_buttons.size()));
+    textTechnique->setHeight(0.05);
     textTechnique->setColor(glm::vec3{1.0f});
     object->addTechnique(Graphic::Techniques::TEXT, textTechnique);
 

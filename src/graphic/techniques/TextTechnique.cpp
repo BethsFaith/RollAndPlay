@@ -7,6 +7,8 @@
 namespace Graphic::Techniques {
     GraphicLib::Text::Ptr TextTechnique::TextRenderer = nullptr;
     glm::mat4 TextTechnique::Projection = {};
+    unsigned int TextTechnique::ScreenWidth = 3440;
+    unsigned int TextTechnique::ScreenHeight = 1440;
 
     void TextTechnique::initTextRendering(unsigned int width, unsigned int height, std::string font, int size) {
         glEnable(GL_BLEND);
@@ -17,10 +19,13 @@ namespace Graphic::Techniques {
 
         Projection = glm::ortho(0.0f, static_cast<float>(width),
                                                static_cast<float>(height), 0.0f);
+        ScreenWidth = width;
+        ScreenHeight = height;
     }
 
     void TextTechnique::execute() {
         shader->set4FloatMat("Projection", glm::value_ptr(Projection));
+
         shader->setInt("Text", 0);
         shader->set3FloatVector("TextColor", _color);
 
@@ -36,11 +41,11 @@ namespace Graphic::Techniques {
     }
 
     void TextTechnique::setWidth(float width) {
-        _width = width;
+        _width = ScreenWidth*width;
     }
 
     void TextTechnique::setHeight(float height) {
-        _height = height;
+        _height = ScreenHeight * height;
     }
 
     void TextTechnique::setScale(float scale) {
