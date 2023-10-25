@@ -39,6 +39,6 @@ add_executable(RollAndPlay
         src/graphic/Object.cpp
         src/forms/SelectableForm.cpp
         src/graphic/techniques/TextTechnique.cpp
-        )
+        src/ViewWindow.cpp src/ViewWindow.hpp)
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

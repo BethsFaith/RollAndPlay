@@ -17,12 +17,20 @@ namespace Forms {
                 return {255, 255, 0};
             case WHITE:
                 return {255, 255, 255};
+            case DARK_GREY:
+                return glm::vec3{0.1f};;
             case GREY:
-                return {0.48f, 0.48f, 0.48f};
+                return glm::vec3{0.4f};
+            case LIGHT_GREY:
+                return glm::vec3{0.7f};
             case ORANGE:
                 return {255, 128, 0};
             case VIOLET:
                 return {0.62f, 0.45f, 0.92f};
+            case BLACK:
+                return glm::vec3{0.0f};
+            case LIGHT_BLUE:
+                return {0.47f, 0.65f, 0.75f};
         };
     }
 }

@@ -14,10 +14,10 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-#include "forms/Page.hpp"
 #include "forms/Button.hpp"
 #include "MainController.hpp"
 #include "Gui.hpp"
+#include "ViewWindow.hpp"
 
 class MainWindow {
 public:
@@ -58,11 +58,10 @@ private:
     void clearColor() const;
 
     GLFWwindow *_window = nullptr;
-    Forms::Page *_view = nullptr;
     MainController _controller{};
 
-    std::vector<Forms::Button::Ptr> _buttons;
     Gui::Ptr _gui;
+    ViewWindow::Ptr _view;
 
     glm::vec4 _clearColor{};
 

@@ -32,13 +32,14 @@ MainWindow::MainWindow(const char *title) {
     }
 
     _gui = std::make_shared<Gui>(desktop.right, desktop.bottom);
+    _view = std::make_shared<ViewWindow>(0, 0, Forms::Color::DARK_GREY);
 }
 
 MainWindow::~MainWindow() {
     _controller.free();
 
-    _buttons.clear();
     _gui.reset();
+    _view.reset();
 
     if (_window != nullptr) {
         glfwDestroyWindow(_window);
@@ -86,31 +87,35 @@ void MainWindow::run() {
     rectangle->bindData(GL_STATIC_DRAW);
 
     float startOffset = -8.7f;
+    std::vector<Forms::Button::Ptr> buttons;
+    std::vector<std::string> names = {
+            "Общее", "Навыки", "Классы", "Расы", "Импорт"
+    };
     for (int i{}; i < 5; ++i) {
         auto button = std::make_shared<Forms::Button>(startOffset,9.0f);
 
-        button->color = Forms::Color::GREY;
+        button->color = Forms::Color::LIGHT_BLUE;
 
-        button->text = "Кнопка" + std::to_string(i);
+        button->text = names.at(i);
         _gui->addButton(button, rectangle);
         _controller.addButton(button);
-        _buttons.push_back(button);
+        buttons.push_back(button);
 
         startOffset += 1.3;
     }
-    _buttons[0]->setPressCallback([&](){
+    buttons[0]->setPressCallback([&](){
         std::cout << "1PRESS" << std::endl;
     });
-    _buttons[1]->setPressCallback([&](){
+    buttons[1]->setPressCallback([&](){
         std::cout << "2PRESS" << std::endl;
     });
-    _buttons[2]->setPressCallback([&](){
+    buttons[2]->setPressCallback([&](){
         std::cout << "3PRESS" << std::endl;
     });
-    _buttons[3]->setPressCallback([&](){
+    buttons[3]->setPressCallback([&](){
         std::cout << "4PRESS" << std::endl;
     });
-    _buttons[4]->setPressCallback([&](){
+    buttons[4]->setPressCallback([&](){
         std::cout << "5PRESS" << std::endl;
     });
 
@@ -121,10 +126,10 @@ void MainWindow::run() {
         _controller.processKeyboardInput(_window);
         _gui->draw();
 
-//        if (_view != nullptr) {
+        if (_view != nullptr) {
 //            _view->processKeyboardInput(_window);
-//            _view->draw();
-//        }
+            _view->display();
+        }
 
         glfwSwapBuffers(_window);
         glfwPollEvents();

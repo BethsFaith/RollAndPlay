@@ -16,9 +16,13 @@ namespace Forms {
         BLUE,
         YELLOW,
         WHITE,
+        DARK_GREY,
         GREY,
+        LIGHT_GREY,
         ORANGE,
-        VIOLET
+        VIOLET,
+        BLACK,
+        LIGHT_BLUE
     };
 
     [[maybe_unused]] glm::vec3 getRGB(Color color);

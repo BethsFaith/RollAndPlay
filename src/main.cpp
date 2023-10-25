@@ -6,7 +6,7 @@ int main() {
 
     auto window = MainWindow::getInstance();
 
-    window->setClearColor({0.0f, 0.0f, 0.0f, 0.0f});
+    window->setClearColor(glm::vec4{0.2f});
 
     window->run();
 
