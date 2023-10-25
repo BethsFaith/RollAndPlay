@@ -19,12 +19,15 @@ class Gui {
 public:
     using Ptr = std::shared_ptr<Gui>;
 
-    Gui(unsigned int windowWidth, unsigned int windowHeight);
-    ~Gui();
+    Gui(const GraphicLib::PickableTexture::Ptr canvas);
+    ~Gui() = default;
 
     void draw();
 
     void addButton(const Forms::Button::Ptr button, GraphicLib::Primitives::AbstractPrimitive::Ptr primitive);
+
+    void setTextSize(float textW, float textH);
+
 private:
     GraphicLib::Shaders::ShaderProgram::Ptr _shader;
     GraphicLib::Shaders::ShaderProgram::Ptr _selectableShader;
@@ -32,6 +35,9 @@ private:
 
     std::vector<Graphic::Object::Ptr> _buttons;
     GraphicLib::PickableTexture::Ptr _canvas;
+
+    float _textW;
+    float _textH;
 };
 
 

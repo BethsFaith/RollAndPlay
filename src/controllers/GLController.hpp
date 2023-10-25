@@ -5,18 +5,22 @@
 #ifndef ROLLANDPLAY_GLCONTROLLER_HPP
 #define ROLLANDPLAY_GLCONTROLLER_HPP
 
+#include <iostream>
+
 #include "EntryPoint.hpp"
 
 namespace Controllers {
     class GLController {
     public:
+        using Ptr = std::shared_ptr<GLController>;
+
         GLController() = default;
 
         virtual ~GLController() = default;
 
         virtual void processKeyboardInput(GLFWwindow *window) = 0;
 
-        virtual void processMouseButton(GLFWwindow *window, int button, int action, int mods) = 0;
+        virtual void processMouseButton(GLFWwindow *window, int mouseButton, int action, int mods) = 0;
 
         virtual void processMouseCursor(GLFWwindow *window, double xPos, double yPos) = 0;
 

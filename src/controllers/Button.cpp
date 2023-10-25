@@ -2,7 +2,7 @@
 // Created by VerOchka on 06.10.2023.
 //
 
-#include "Button.hpp"
+#include "../forms/Button.hpp"
 
 namespace Forms {
     int Button::id = 0;

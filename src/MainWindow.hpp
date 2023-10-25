@@ -15,9 +15,10 @@
 #include <vector>
 
 #include "forms/Button.hpp"
-#include "MainController.hpp"
+#include "controllers/GuiController.hpp"
 #include "Gui.hpp"
 #include "ViewWindow.hpp"
+#include "pages/SystemStartPage.hpp"
 
 class MainWindow {
 public:
@@ -58,9 +59,7 @@ private:
     void clearColor() const;
 
     GLFWwindow *_window = nullptr;
-    MainController _controller{};
 
-    Gui::Ptr _gui;
     ViewWindow::Ptr _view;
 
     glm::vec4 _clearColor{};

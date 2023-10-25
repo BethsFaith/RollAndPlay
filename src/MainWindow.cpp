@@ -31,15 +31,22 @@ MainWindow::MainWindow(const char *title) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
-    _gui = std::make_shared<Gui>(desktop.right, desktop.bottom);
-    _view = std::make_shared<ViewWindow>(0, 0, Forms::Color::DARK_GREY);
+    Graphic::Techniques::TextTechnique::initTextRendering(desktop.right, desktop.bottom,
+                                                          R"(..\..\rsrc\fonts\a_AlternaSw.TTF)", 24);
+
+    auto canvas = std::make_shared<GraphicLib::PickableTexture>();
+    canvas->init(desktop.right, desktop.right);
+
+    _view = std::make_shared<ViewWindow>(0, 0, Forms::Color::DARK_GRAY, canvas);
+
+    auto page = std::make_shared<Pages::SystemStartPage>(canvas);
+    _view->addPage(ViewWindow::PageTag::SYSTEM_START, page);
 }
 
 MainWindow::~MainWindow() {
-    _controller.free();
-
-    _gui.reset();
     _view.reset();
+
+    Graphic::Techniques::TextTechnique::freeTextRendering();
 
     if (_window != nullptr) {
         glfwDestroyWindow(_window);
@@ -78,56 +85,12 @@ void MainWindow::setClearColor(const glm::vec4 &clearColor) {
 void MainWindow::run() {
     using namespace GraphicLib;
 
-    Primitives::AbstractPrimitive::Ptr rectangle =
-            std::make_shared<Primitives::Rectangle>(
-                    Primitives::Primitive::Settings{.with_normals = false,
-                            .with_texture_coords = false,
-                            .with_tangent = false,
-                            .with_bitangent = false});
-    rectangle->bindData(GL_STATIC_DRAW);
-
-    float startOffset = -8.7f;
-    std::vector<Forms::Button::Ptr> buttons;
-    std::vector<std::string> names = {
-            "Общее", "Навыки", "Классы", "Расы", "Импорт"
-    };
-    for (int i{}; i < 5; ++i) {
-        auto button = std::make_shared<Forms::Button>(startOffset,9.0f);
-
-        button->color = Forms::Color::LIGHT_BLUE;
-
-        button->text = names.at(i);
-        _gui->addButton(button, rectangle);
-        _controller.addButton(button);
-        buttons.push_back(button);
-
-        startOffset += 1.3;
-    }
-    buttons[0]->setPressCallback([&](){
-        std::cout << "1PRESS" << std::endl;
-    });
-    buttons[1]->setPressCallback([&](){
-        std::cout << "2PRESS" << std::endl;
-    });
-    buttons[2]->setPressCallback([&](){
-        std::cout << "3PRESS" << std::endl;
-    });
-    buttons[3]->setPressCallback([&](){
-        std::cout << "4PRESS" << std::endl;
-    });
-    buttons[4]->setPressCallback([&](){
-        std::cout << "5PRESS" << std::endl;
-    });
-
     while (!shouldClose()) {
         clearColor();
         updateDeltaTime();
 
-        _controller.processKeyboardInput(_window);
-        _gui->draw();
-
         if (_view != nullptr) {
-//            _view->processKeyboardInput(_window);
+            _view->processKeyboardInput(_window);
             _view->display();
         }
 
@@ -155,15 +118,15 @@ bool MainWindow::shouldClose() {
 }
 
 void MainWindow::mouseButtonCallback(GLFWwindow* window, int mouseButton, int action, int mods) {
-    instance->_controller.processMouseButton(window, mouseButton, action, mods);
+    instance->_view->processMouseButton(window, mouseButton, action, mods);
 }
 
 void MainWindow::mouseInputCallback(GLFWwindow *window, double xPos, double yPos) {
-    instance->_controller.processMouseCursor(window, xPos, yPos);
+    instance->_view->processMouseCursor(window, xPos, yPos);
 }
 
 void MainWindow::mouseScrollCallback(GLFWwindow *window, double xOffset, double yOffset) {
-    instance->_controller.processMouseCursor(window, xOffset, yOffset);
+    instance->_view->processMouseCursor(window, xOffset, yOffset);
 }
 
 void MainWindow::frameBufferSizeCallback(GLFWwindow *window, int width, int height) {

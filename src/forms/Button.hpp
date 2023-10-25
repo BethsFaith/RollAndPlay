@@ -31,7 +31,7 @@ namespace Forms {
 
         bool checkSelecting(unsigned int x, unsigned int y) override;
 
-        Color color = Color::GREY;
+        Color color = Color::GRAY;
         std::string text;
     private:
         float _xOffset;

@@ -4,10 +4,7 @@
 
 #include "Gui.hpp"
 
-Gui::Gui(unsigned int windowWidth, unsigned int windowHeight) {
-    Graphic::Techniques::TextTechnique::initTextRendering(windowWidth, windowHeight,
-                                                          R"(..\..\rsrc\fonts\a_AlternaSw.TTF)", 24);
-
+Gui::Gui(const GraphicLib::PickableTexture::Ptr canvas) : _canvas(canvas){
     _shader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
         (R"(..\..\rsrc\shaders\gui.vert)",
          R"(..\..\rsrc\shaders\gui.frag)");
@@ -17,13 +14,6 @@ Gui::Gui(unsigned int windowWidth, unsigned int windowHeight) {
     _textShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
             (R"(..\..\rsrc\shaders\text2d.vert)",
              R"(..\..\rsrc\shaders\text2d.frag)");
-
-    _canvas = std::make_shared<GraphicLib::PickableTexture>();
-    _canvas->init(windowWidth, windowHeight);
-}
-
-Gui::~Gui() {
-    Graphic::Techniques::TextTechnique::freeTextRendering();
 }
 
 void Gui::draw() {
@@ -73,10 +63,15 @@ void Gui::addButton(const Forms::Button::Ptr button, GraphicLib::Primitives::Abs
 
     auto textTechnique = std::make_shared<Graphic::Techniques::TextTechnique>();
     textTechnique->setText(button->text);
-    textTechnique->setWidth(0.05 + 0.065*(_buttons.size()));
-    textTechnique->setHeight(0.05);
+    textTechnique->setWidth(_textW + 0.065*(_buttons.size()));
+    textTechnique->setHeight(_textH);
     textTechnique->setColor(glm::vec3{1.0f});
     object->addTechnique(Graphic::Techniques::TEXT, textTechnique);
 
     _buttons.push_back(object);
+}
+
+void Gui::setTextSize(float textW, float textH) {
+    _textW = textW;
+    _textH = textH;
 }
