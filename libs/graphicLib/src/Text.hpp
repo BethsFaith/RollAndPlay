@@ -24,7 +24,7 @@ namespace GraphicLib {
         using Ptr = std::shared_ptr<Text>;
 
         struct Character {
-            Textures::Texture::Ptr texture; // ID текстуры глифа
+            Textures::Texture::Ptr texture; // IdCounter текстуры глифа
             glm::ivec2 size;                // размер глифа
             glm::ivec2 bearing;             // смещение от линии шрифта до верхнего левого угла глифа
             unsigned int advance;           // горизонтальное смещение для перехода к следующему глифу

@@ -25,6 +25,10 @@ namespace Controllers {
         virtual void processMouseCursor(GLFWwindow *window, double xPos, double yPos) = 0;
 
         virtual void processMouseScroll(double xOffset, double yOffset) = 0;
+
+        virtual void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) = 0;
+
+        virtual void clear() = 0;
     };
 }
 #endif //ROLLANDPLAY_GLCONTROLLER_HPP

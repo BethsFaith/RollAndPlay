@@ -42,7 +42,7 @@ namespace GraphicLib::Shaders {
         [[nodiscard]] unsigned int getId() const;
 
     private:
-        // ID - идентификатор программы
+        // IdCounter - идентификатор программы
         unsigned int ID;
     };
 }

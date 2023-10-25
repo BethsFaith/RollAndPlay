@@ -29,7 +29,7 @@ add_executable(RollAndPlay
         src/controllers/GuiController.cpp
         src/controllers/PageController.cpp
         src/forms/Color.cpp
-        src/controllers/Button.cpp
+        src/forms/Button.cpp
         src/Gui.cpp
         src/graphic/techniques/Technique.cpp
         libs/graphicLib/src/PickableTexture.cpp
@@ -41,6 +41,9 @@ add_executable(RollAndPlay
         src/graphic/techniques/TextTechnique.cpp
         src/ViewWindow.cpp
         src/pages/SystemStartPage.cpp
-        src/pages/SystemViewPage.cpp src/pages/SystemViewPage.hpp)
+        src/pages/SystemViewPage.cpp
+        src/forms/InputField.cpp
+        src/controllers/InputFieldContoller.cpp
+        )
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

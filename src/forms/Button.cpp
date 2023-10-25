@@ -2,13 +2,13 @@
 // Created by VerOchka on 06.10.2023.
 //
 
-#include "../forms/Button.hpp"
+#include "Button.hpp"
 
 namespace Forms {
-    int Button::id = 0;
+    int Button::IdCounter = 0;
 
     Button::Button(float xOffset, float yOffset) : _xOffset(xOffset), _yOffset(yOffset) {
-        _id = ++id;
+        id = ++IdCounter;
     }
 
     void Button::press() {
@@ -28,7 +28,7 @@ namespace Forms {
     }
 
     float Button::getId() const {
-        return _id;
+        return id;
     }
 
     bool Button::checkSelecting(unsigned int x, unsigned int y) {
@@ -38,6 +38,6 @@ namespace Forms {
 
         auto info = canvas->readPixel(x, y);
 
-        return _id == (int)info.ObjectID;
+        return id == (int)info.ObjectID;
     }
 }

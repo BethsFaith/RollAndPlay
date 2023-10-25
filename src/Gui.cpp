@@ -52,7 +52,7 @@ void Gui::addButton(const Forms::Button::Ptr button, GraphicLib::Primitives::Abs
     auto transformTechnique = std::make_shared<Graphic::Techniques::TransformTechnique>();
     transformTechnique->enableScale(glm::vec3(0.1, 0.1, 0.0f));
     transformTechnique->enableTransform(glm::vec3(button->getXOffset(),
-                                                  button->getYOffset(), 0.0f));
+                                                  button->getYOffset(), -0.1f));
     transformTechnique->disableRotateValue();
     object->addTechnique(Graphic::Techniques::TRANSFORM, transformTechnique);
 
@@ -62,7 +62,7 @@ void Gui::addButton(const Forms::Button::Ptr button, GraphicLib::Primitives::Abs
     button->setCanvas(_canvas);
 
     auto textTechnique = std::make_shared<Graphic::Techniques::TextTechnique>();
-    textTechnique->setText(button->text);
+    textTechnique->setText(button->title);
     textTechnique->setWidth(_textW + 0.065*(_buttons.size()));
     textTechnique->setHeight(_textH);
     textTechnique->setColor(glm::vec3{1.0f});
@@ -74,4 +74,8 @@ void Gui::addButton(const Forms::Button::Ptr button, GraphicLib::Primitives::Abs
 void Gui::setTextSize(float textW, float textH) {
     _textW = textW;
     _textH = textH;
+}
+
+void Gui::clear() {
+    _buttons.clear();
 }

@@ -35,6 +35,8 @@ public:
 
     void processMouseScroll(GLFWwindow *window, double x_offset, double y_offset);
 
+    void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods);
+
     void addPage(PageTag tag, Pages::Page::Ptr page);
 private:
     Graphic::Object _view;

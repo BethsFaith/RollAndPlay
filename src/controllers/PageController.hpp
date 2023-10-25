@@ -29,10 +29,13 @@ namespace Controllers {
 
         void clear();
 
+        void addController(Controllers::GLController::Ptr controller);
+        virtual void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) override;
+
     private:
         std::vector<Forms::Button::Ptr> _buttons;
+        std::vector<Controllers::GLController::Ptr> _controllers;
     };
-
 }
 
 #endif //ROLLANDPLAY_PAGECONTROLLER_HPP

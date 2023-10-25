@@ -19,7 +19,7 @@ namespace Forms {
         using Ptr = std::shared_ptr<Button>;
 
         Button(float xOffset, float yOffset);
-        ~Button() = default;
+        virtual ~Button() = default;
 
         void press();
 
@@ -32,13 +32,13 @@ namespace Forms {
         bool checkSelecting(unsigned int x, unsigned int y) override;
 
         Color color = Color::GRAY;
-        std::string text;
-    private:
+        std::string title;
+    protected:
         float _xOffset;
         float _yOffset;
 
-        int _id;
-        static int id;
+        int id;
+        static int IdCounter;
 
         std::function<void()> _pressCallback{[]() {}};
     };

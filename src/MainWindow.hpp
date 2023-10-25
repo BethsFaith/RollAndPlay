@@ -45,6 +45,8 @@ protected:
 
     static void mouseScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
 
+    static void charModsCallback(GLFWwindow* window, unsigned int codepoint, int mods);
+
 private:
     static MainWindow *instance;
 

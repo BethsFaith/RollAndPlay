@@ -28,6 +28,8 @@ public:
 
     void setTextSize(float textW, float textH);
 
+    void clear();
+
 private:
     GraphicLib::Shaders::ShaderProgram::Ptr _shader;
     GraphicLib::Shaders::ShaderProgram::Ptr _selectableShader;

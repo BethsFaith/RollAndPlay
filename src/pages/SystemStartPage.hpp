@@ -11,10 +11,16 @@
 #include "Page.hpp"
 #include "../Gui.hpp"
 #include "../controllers/PageController.hpp"
+#include "../forms/InputField.hpp"
 
 namespace Pages {
     class SystemStartPage : public Page{
     public:
+        enum StateTag {
+            START,
+            VIEW
+        };
+
         using Ptr = std::shared_ptr<SystemStartPage>;
 
         explicit SystemStartPage(GraphicLib::PickableTexture::Ptr canvas);
@@ -25,6 +31,11 @@ namespace Pages {
         Controllers::GLController::Ptr getController() override;
 
     private:
+        void update();
+        void toStart();
+        void toView();
+
+        StateTag _currentTag = START;
         Gui _gui;
         Controllers::PageController::Ptr _controller;
     };

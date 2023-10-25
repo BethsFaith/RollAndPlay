@@ -27,7 +27,10 @@ namespace Controllers {
 
         void setViewController(Controllers::GLController::Ptr viewController);
 
-        void clear();
+        void clear() override;
+        virtual ~GuiController() override = default;
+        virtual void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) override;
+
     private:
         std::vector<Forms::Button::Ptr> _buttons;
         Controllers::GLController::Ptr _viewController;

@@ -6,6 +6,9 @@
 
 namespace Controllers {
     void PageController::processKeyboardInput(GLFWwindow *window) {
+        for (const auto& controller : _controllers) {
+            controller->processKeyboardInput(window);
+        }
     }
 
     void PageController::processMouseButton(GLFWwindow *window, int mouseButton, int action, int mods) {
@@ -23,21 +26,39 @@ namespace Controllers {
                 }
             }
         }
+
+        for (const auto& controller : _controllers) {
+            controller->processMouseButton(window, mouseButton, action, mods);
+        }
     }
 
     void PageController::processMouseCursor(GLFWwindow *window, double xPos, double yPos) {
-
+        for (const auto& controller : _controllers) {
+            controller->processKeyboardInput(window);
+        }
     }
 
     void PageController::processMouseScroll(double xOffset, double yOffset) {
+        for (const auto& controller : _controllers) {
+            controller->processMouseScroll(xOffset, yOffset);
+        }
+    }
 
+    void PageController::clear() {
+        _buttons.clear();
+        _controllers.clear();
     }
 
     void PageController::addButton(const Forms::Button::Ptr &button) {
         _buttons.push_back(button);
     }
+    void PageController::addController(Controllers::GLController::Ptr controller) {
+        _controllers.push_back(controller);
+    }
 
-    void PageController::clear() {
-        _buttons.clear();
+    void PageController::processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) {
+        for (const auto& controller : _controllers) {
+            controller->processCharMods(window, codepoint, mods);
+        }
     }
 }

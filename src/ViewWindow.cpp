@@ -31,7 +31,7 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
 
         button->color = Forms::Color::LIGHT_BLUE;
 
-        button->text = names.at(i);
+        button->title = names.at(i);
         _gui.addButton(button, rectangle);
         _controller.addButton(button);
         buttons.push_back(button);
@@ -64,14 +64,17 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
     auto transformTechnique = std::make_shared<Graphic::Techniques::TransformTechnique>();
     transformTechnique->enableScale(glm::vec3(1.85, 1.65, 0.0f));
     transformTechnique->enableTransform(glm::vec3(x,
-                                                  y, 0.0f));
+                                                  y, 0.1f));
     _view.addTechnique(Graphic::Techniques::TRANSFORM, transformTechnique);
 }
 
-void ViewWindow::display() {
-    _gui.draw();
+ViewWindow::~ViewWindow() {
+    _controller.clear();
+}
 
+void ViewWindow::display() {
     _view.render(_shader);
+    _gui.draw();
     _pages[_currentPageTag]->draw();
 }
 
@@ -91,8 +94,8 @@ void ViewWindow::processMouseScroll(GLFWwindow *window, double x_offset, double 
     _controller.processMouseCursor(window, x_offset, y_offset);
 }
 
-ViewWindow::~ViewWindow() {
-    _controller.clear();
+void ViewWindow::processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) {
+    _controller.processCharMods(window, codepoint, mods);
 }
 
 void ViewWindow::addPage(ViewWindow::PageTag tag, Pages::Page::Ptr page) {
