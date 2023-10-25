@@ -46,7 +46,7 @@ namespace GraphicLib {
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
         // Предварительно загружаем/компилируем символы шрифта и сохраняем их
-        for (GLubyte c = 0; c < 255; c++)
+        for (unsigned int c = 0; c < 256; c++)
         {
             // Загрузка символа глифа
             if (FT_Load_Char(face, c, FT_LOAD_RENDER))

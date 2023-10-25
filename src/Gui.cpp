@@ -6,7 +6,7 @@
 
 Gui::Gui(unsigned int windowWidth, unsigned int windowHeight) {
     Graphic::Techniques::TextTechnique::initTextRendering(windowWidth, windowHeight,
-                                                          R"(..\..\rsrc\fonts\ocraext.TTF)", 24);
+                                                          R"(..\..\rsrc\fonts\a_AlternaSw.TTF)", 24);
 
     _shader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
         (R"(..\..\rsrc\shaders\gui.vert)",

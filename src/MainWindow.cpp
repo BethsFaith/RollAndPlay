@@ -91,7 +91,7 @@ void MainWindow::run() {
 
         button->color = Forms::Color::GREY;
 
-        button->text = "Button" + std::to_string(i);
+        button->text = "Êíîïêà" + std::to_string(i);
         _gui->addButton(button, rectangle);
         _controller.addButton(button);
         _buttons.push_back(button);
