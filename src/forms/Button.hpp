@@ -33,6 +33,7 @@ namespace Forms {
         virtual void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader);
         virtual void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader);
         virtual void renderPick(GraphicLib::Shaders::ShaderProgram::Ptr shader);
+        virtual void renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader);
 
         void press();
 
@@ -42,12 +43,18 @@ namespace Forms {
 
         bool checkSelecting(unsigned int x, unsigned int y) override;
         void setSelected(bool isSelected);
+
+        void setTraceColor(Color traceColor);
+
     protected:
         explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, FormType type);
 
         int id;
         static int IdCounter;
         bool _isSelected = false;
+
+        Color _color;
+        Color _traceColor = Color::WHITE;
 
         std::function<void()> _pressCallback{[]() {}};
 

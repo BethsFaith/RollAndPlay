@@ -58,4 +58,16 @@ namespace GraphicLib::Techniques {
 
         shader->set4FloatMat("Transform", glm::value_ptr(trans));
     }
+
+    const glm::vec3 &TransformTechnique::getTransformValue() const {
+        return _transformValue;
+    }
+
+    const glm::vec3 &TransformTechnique::getScaleValue() const {
+        return _scaleValue;
+    }
+
+    const TransformTechnique::Rotate &TransformTechnique::getRotateValue() const {
+        return _rotateValue;
+    }
 } // Techniques

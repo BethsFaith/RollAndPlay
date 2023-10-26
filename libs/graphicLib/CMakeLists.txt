@@ -31,7 +31,13 @@ add_library(GraphicLib
         src/buffers/Fbo.cpp
         src/textures/Loader.cpp
         src/textures/Texture.cpp
-        src/Text.cpp
+        src/TextRender.cpp
+        src/techniques/TracingTechnique.cpp
+        src/techniques/TextTechnique.cpp
+        src/techniques/TransformTechnique.cpp
+        src/techniques/PickTechnique.cpp
+        src/techniques/ColorTechnique.cpp
+        src/Object.cpp
         )
 
 target_link_libraries(GraphicLib ${CONAN_LIBS})

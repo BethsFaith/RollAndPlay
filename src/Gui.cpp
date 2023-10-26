@@ -20,14 +20,40 @@ Gui::Gui(GraphicLib::PickableTexture::Ptr canvas) : _canvas(std::move(canvas)) {
 
 void Gui::draw() {
     for (auto &button: _buttons) {
-        button->renderForm(_shader);
-
-        button->renderText(_textShader);
-
-        button->renderPick(_selectableShader);
-
         if (button->isSelected()) {
-            // нарисовать обводку;
+            glEnable(GL_STENCIL_TEST);
+            glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+            glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
+            glStencilFunc(GL_ALWAYS, 1, 0xFF); // все фрагменты должны пройти тест трафарета
+            glStencilMask(0xFF); // включаем запись в буфер трафарета
+
+            button->renderForm(_shader);
+
+            glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+            glStencilMask(0x00);
+            glDisable(GL_STENCIL_TEST);
+
+            button->renderText(_textShader);
+
+            button->renderPick(_selectableShader);
+
+            glDisable(GL_DEPTH_TEST);
+            glEnable(GL_STENCIL_TEST);
+
+            button->renderTracing(_shader);
+
+            glStencilMask(0xFF);
+            glStencilFunc(GL_ALWAYS, 1, 0xFF);
+            glEnable(GL_DEPTH_TEST);
+            glDisable(GL_STENCIL_TEST);
+        } else {
+
+            button->renderForm(_shader);
+
+            button->renderText(_textShader);
+
+            button->renderPick(_selectableShader);
         }
     }
 }

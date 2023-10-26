@@ -32,6 +32,12 @@ namespace GraphicLib::Techniques {
         void enableRotateValue();
         void disableRotateValue();
 
+        const glm::vec3 &getTransformValue() const;
+
+        const glm::vec3 &getScaleValue() const;
+
+        const Rotate &getRotateValue() const;
+
     private:
         bool _needRotate = false;
         bool _needScale = false;

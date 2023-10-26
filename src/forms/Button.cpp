@@ -75,6 +75,27 @@ namespace Forms {
         _object.render(std::move(shader));
     }
 
+    void Button::renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
+        // нарисовать обводку;
+        auto techn = _object.getTechnique(GraphicLib::Techniques::COLOR);
+        auto trace = std::dynamic_pointer_cast<GraphicLib::Techniques::ColorTechnique>(techn);
+        auto baseColor = trace->getRgb();
+        trace->setColor(getRGB(_traceColor));
+
+        techn = _object.getTechnique(GraphicLib::Techniques::TRANSFORM);
+        auto trans = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(techn);
+        auto scale = trans->getScaleValue();
+        auto offset = trans->getTransformValue();
+        trans->enableScale({scale.x*1.1, scale.y*1.1, scale.z});
+        trans->enableTransform({offset.x*0.909, offset.y*0.909, offset.z});
+
+        renderForm(shader);
+
+        trace->setColor(baseColor);
+        trans->enableScale(scale);
+        trans->enableTransform(offset);
+    }
+
     void Button::press() {
         _pressCallback();
     }
@@ -99,5 +120,9 @@ namespace Forms {
 
     void Button::setPressCallback(const std::function<void()> &function) {
         _pressCallback = function;
+    }
+
+    void Button::setTraceColor(Color traceColor) {
+        _traceColor = traceColor;
     }
 }

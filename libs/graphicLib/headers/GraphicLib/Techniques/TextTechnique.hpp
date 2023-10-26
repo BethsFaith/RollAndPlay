@@ -32,6 +32,16 @@ namespace GraphicLib::Techniques {
 
         void setScale(float scale);
 
+        const std::string &getText() const;
+
+        const glm::vec3 &getColor() const;
+
+        float getScale() const;
+
+        float getWidth() const;
+
+        float getHeight() const;
+
     protected:
         static GraphicLib::TextRender::Ptr TextRenderer;
         static glm::mat4 Projection;

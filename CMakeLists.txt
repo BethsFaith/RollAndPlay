@@ -42,6 +42,9 @@ add_executable(RollAndPlay
         src/pages/SystemStartPage.cpp
         src/forms/InputField.cpp
         src/controllers/InputFieldContoller.cpp
-        src/forms/Text.hpp src/controllers/CommonController.cpp src/controllers/CommonController.hpp src/controllers/FormController.hpp src/controllers/ButtonController.cpp src/controllers/ButtonController.hpp src/controllers/FormControllerFactory.cpp src/controllers/FormControllerFactory.hpp src/forms/FormType.hpp)
+        src/forms/Text.hpp src/controllers/CommonController.cpp
+        src/controllers/ButtonController.cpp
+        src/controllers/FormControllerFactory.cpp
+        )
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

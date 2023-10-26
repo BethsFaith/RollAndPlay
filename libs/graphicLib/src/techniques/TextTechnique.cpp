@@ -60,4 +60,24 @@ namespace GraphicLib::Techniques {
     void TextTechnique::freeTextRendering() {
         TextRenderer.reset();
     }
+
+    const std::string &TextTechnique::getText() const {
+        return _text;
+    }
+
+    const glm::vec3 &TextTechnique::getColor() const {
+        return _color;
+    }
+
+    float TextTechnique::getScale() const {
+        return _scale;
+    }
+
+    float TextTechnique::getWidth() const {
+        return ScreenWidth/_width;
+    }
+
+    float TextTechnique::getHeight() const {
+        return ScreenHeight/_height;
+    }
 }

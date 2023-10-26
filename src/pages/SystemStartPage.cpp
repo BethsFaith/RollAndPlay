@@ -84,7 +84,11 @@ namespace Pages {
 
         _gui.addButton(button);
 
-        auto inputButton = std::make_shared<Forms::InputField>(rectangle);
+        auto inputButton = std::make_shared<Forms::InputField>(rectangle, Forms::Text{
+                .x = 0.055,
+                .y = 0.30,
+                .color = Forms::Color::BLACK
+        });
         inputButton->init({0.7f, 0.1f, 0.0f}, { -0.79, 4.0}, {
             .content = "Название",
             .x = 0.055,

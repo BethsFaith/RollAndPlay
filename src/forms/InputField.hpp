@@ -15,7 +15,7 @@ namespace Forms {
     public:
         using Ptr = std::shared_ptr<InputField>;
 
-        explicit InputField(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
+        explicit InputField(const GraphicLib::Primitives::AbstractPrimitive::Ptr &graphicPrimitive, Text inputParams);
 
         ~InputField() override = default;
 
@@ -26,8 +26,11 @@ namespace Forms {
         void clear();
 
         [[nodiscard]] const std::string &getBuf() const;
+
+        void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
+
     private:
-        std::string _buf;
+        Text _buf;
     };
 }
 #endif    //ROLLANDPLAY_INPUTFIELD_HPP
