@@ -21,6 +21,8 @@ namespace Forms {
 
         void putToBuffer(char character);
 
+        void putToBuffer(const std::string& string);
+
         void popFromBuffer();
 
         void clear();

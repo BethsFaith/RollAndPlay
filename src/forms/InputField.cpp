@@ -16,6 +16,10 @@ namespace Forms {
         _buf.content += character;
     }
 
+    void InputField::putToBuffer(const std::string& string) {
+        _buf.content += string;
+    }
+
     void InputField::popFromBuffer() {
         if (!_buf.content.empty()) {
             _buf.content.erase(_buf.content.size()-1);
@@ -39,6 +43,7 @@ namespace Forms {
         newTextTechn->setWidth(_buf.x);
         newTextTechn->setHeight(_buf.y);
         newTextTechn->setColor(getRGB(_buf.color));
+        newTextTechn->setScale(1.4);
 
         _object.addTechnique(GraphicLib::Techniques::TEXT, newTextTechn);
 

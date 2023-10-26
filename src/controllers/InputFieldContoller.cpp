@@ -10,11 +10,21 @@ namespace Controllers {
             if (glfwGetKey(window, GLFW_KEY_BACKSPACE) == GLFW_PRESS) {
                 _target->popFromBuffer();
             }
-            if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS
+            else if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS
                 || glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 
                 _target->setSelected(false);
                 _target = nullptr;
+            }
+            else if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS
+            && glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) {
+                auto string = glfwGetClipboardString(window);
+                _target->putToBuffer(string);
+            }
+            else if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS
+                     && glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) {
+
+                glfwSetClipboardString(window, _target->getBuf().c_str());
             }
         }
     }
