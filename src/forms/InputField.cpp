@@ -34,25 +34,19 @@ namespace Forms {
         auto techn = _object.getTechnique(GraphicLib::Techniques::TEXT);
         auto textTechn = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(techn);
 
-        // сохраняем прошлые (параметры тайтла)
-        Text text = {textTechn->getText(), textTechn->getWidth(), textTechn->getHeight()};
-        auto color = textTechn->getColor();
+        auto newTextTechn = std::make_shared<GraphicLib::Techniques::TextTechnique>();
+        newTextTechn->setText(_buf.content);
+        newTextTechn->setWidth(_buf.x);
+        newTextTechn->setHeight(_buf.y);
+        newTextTechn->setColor(getRGB(_buf.color));
 
-        // ставим новые (параметры буффера)
-        textTechn->setColor(getRGB(_buf.color));
-        textTechn->setWidth(_buf.x);
-        textTechn->setHeight(_buf.y);
-        textTechn->setText(_buf.content);
+        _object.addTechnique(GraphicLib::Techniques::TEXT, newTextTechn);
 
         // рисуем буффер
-        _object.render(std::move(shader));
-//        Button::renderText(shader);
+        _object.render(shader);
 
         // возвращаем прошлые
-        textTechn->setColor(color);
-        textTechn->setWidth(text.x);
-        textTechn->setHeight(text.y);
-        textTechn->setText(text.content);
+        _object.addTechnique(GraphicLib::Techniques::TEXT,textTechn);
     }
 
     void InputField::renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
