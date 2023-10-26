@@ -31,17 +31,16 @@ add_executable(RollAndPlay
         src/forms/Color.cpp
         src/forms/Button.cpp
         src/Gui.cpp
-        src/graphic/techniques/Technique.cpp
+        libs/graphicLib/src/techniques/Technique.cpp
         libs/graphicLib/src/PickableTexture.cpp
-        src/graphic/techniques/PickTechnique.cpp
-        src/graphic/techniques/TransformTechnique.cpp
-        src/graphic/techniques/ColorTechnique.cpp
-        src/graphic/Object.cpp
+        libs/graphicLib/src/techniques/PickTechnique.cpp
+        libs/graphicLib/src/techniques/TransformTechnique.cpp
+        libs/graphicLib/src/techniques/ColorTechnique.cpp
+        libs/graphicLib/src/Object.cpp
         src/forms/SelectableForm.cpp
-        src/graphic/techniques/TextTechnique.cpp
+        libs/graphicLib/src/techniques/TextTechnique.cpp
         src/ViewWindow.cpp
         src/pages/SystemStartPage.cpp
-        src/pages/SystemViewPage.cpp
         src/forms/InputField.cpp
         src/controllers/InputFieldContoller.cpp
         )

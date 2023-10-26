@@ -32,8 +32,8 @@ MainWindow::MainWindow(const char *title) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
-    Graphic::Techniques::TextTechnique::initTextRendering(desktop.right, desktop.bottom,
-                                                          R"(..\..\rsrc\fonts\a_AlternaSw.TTF)", 20);
+    GraphicLib::Techniques::TextTechnique::initTextRendering(desktop.right, desktop.bottom,
+                                                             R"(..\..\rsrc\fonts\a_AlternaSw.TTF)", 20);
 
     auto canvas = std::make_shared<GraphicLib::PickableTexture>();
     canvas->init(desktop.right, desktop.right);
@@ -47,7 +47,7 @@ MainWindow::MainWindow(const char *title) {
 MainWindow::~MainWindow() {
     _view.reset();
 
-    Graphic::Techniques::TextTechnique::freeTextRendering();
+    GraphicLib::Techniques::TextTechnique::freeTextRendering();
 
     if (_window != nullptr) {
         glfwDestroyWindow(_window);
@@ -131,7 +131,7 @@ void MainWindow::mouseScrollCallback(GLFWwindow *window, double xOffset, double 
 }
 
 void MainWindow::charModsCallback(GLFWwindow* window, unsigned int codepoint, int mods) {
-x    instance->_view->processCharMods(window, codepoint, mods);
+    instance->_view->processCharMods(window, codepoint, mods);
 }
 
 void MainWindow::frameBufferSizeCallback(GLFWwindow *window, int width, int height) {

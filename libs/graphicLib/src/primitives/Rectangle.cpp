@@ -2,7 +2,7 @@
 // Created by VerOchka on 10.10.2023.
 //
 
-#include "Rectangle.hpp"
+#include "../../headers/GraphicLib/Primitives/Rectangle.hpp"
 
 namespace GraphicLib::Primitives {
     Rectangle::Rectangle(const Settings &settings) : Primitive(4, settings) {

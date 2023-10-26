@@ -7,7 +7,7 @@
 
 #include "Technique.hpp"
 
-namespace Graphic::Techniques {
+namespace GraphicLib::Techniques {
     class TransformTechnique : public Technique {
     public:
         struct Rotate {

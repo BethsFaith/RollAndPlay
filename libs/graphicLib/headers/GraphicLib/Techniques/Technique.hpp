@@ -6,9 +6,9 @@
 #define ROLLANDPLAY_TECHNIQUE_HPP
 
 #include <utility>
-#include <shaders/ShaderProgram.hpp>
+#include "../Shaders/ShaderProgram.hpp"
 
-namespace Graphic::Techniques {
+namespace GraphicLib::Techniques {
     class Technique {
     public:
         using Ptr = std::shared_ptr<Technique>;

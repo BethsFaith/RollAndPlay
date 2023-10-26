@@ -2,9 +2,9 @@
 // Created by VerOchka on 23.10.2023.
 //
 
-#include "ColorTechnique.hpp"
+#include "../../headers/GraphicLib/Techniques/ColorTechnique.hpp"
 
-namespace Graphic::Techniques {
+namespace GraphicLib::Techniques {
     void ColorTechnique::execute() {
         shader->set3FloatVector("Color", _rgb);
     }

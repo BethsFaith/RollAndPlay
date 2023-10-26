@@ -40,4 +40,12 @@ namespace Forms {
 
         return id == (int)info.ObjectID;
     }
+
+    void Button::setSelected(bool isSelected) {
+        _isSelected = isSelected;
+    }
+
+    bool Button::isSelected() const {
+        return _isSelected;
+    }
 }

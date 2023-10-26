@@ -18,55 +18,55 @@ Gui::Gui(const GraphicLib::PickableTexture::Ptr canvas) : _canvas(canvas){
 
 void Gui::draw() {
     for (auto& button : _buttons) {
-        button->disableTechnique(Graphic::Techniques::PICK);
-        button->enableTechnique(Graphic::Techniques::COLOR);
-        button->enableTechnique(Graphic::Techniques::TRANSFORM);
-        button->disableTechnique(Graphic::Techniques::TEXT);
+        button->disableTechnique(GraphicLib::Techniques::PICK);
+        button->enableTechnique(GraphicLib::Techniques::COLOR);
+        button->enableTechnique(GraphicLib::Techniques::TRANSFORM);
+        button->disableTechnique(GraphicLib::Techniques::TEXT);
         button->render(_shader);
 
-        button->disableTechnique(Graphic::Techniques::PICK);
-        button->disableTechnique(Graphic::Techniques::COLOR);
-        button->disableTechnique(Graphic::Techniques::TRANSFORM);
-        button->enableTechnique(Graphic::Techniques::TEXT);
+        button->disableTechnique(GraphicLib::Techniques::PICK);
+        button->disableTechnique(GraphicLib::Techniques::COLOR);
+        button->disableTechnique(GraphicLib::Techniques::TRANSFORM);
+        button->enableTechnique(GraphicLib::Techniques::TEXT);
         button->render(_textShader);
 
         _canvas->enableWriting();
-        button->disableTechnique(Graphic::Techniques::COLOR);
-        button->enableTechnique(Graphic::Techniques::PICK);
-        button->enableTechnique(Graphic::Techniques::TRANSFORM);
-        button->disableTechnique(Graphic::Techniques::TEXT);
+        button->disableTechnique(GraphicLib::Techniques::COLOR);
+        button->enableTechnique(GraphicLib::Techniques::PICK);
+        button->enableTechnique(GraphicLib::Techniques::TRANSFORM);
+        button->disableTechnique(GraphicLib::Techniques::TEXT);
         button->render(_selectableShader);
         _canvas->disableWriting();
     }
 }
 
 void Gui::addButton(const Forms::Button::Ptr button, GraphicLib::Primitives::AbstractPrimitive::Ptr primitive) {
-    auto object = std::make_shared<Graphic::Object>();
+    auto object = std::make_shared<GraphicLib::Object>();
 
     object->setPrimitive(primitive);
 
-    auto colorTechnique = std::make_shared<Graphic::Techniques::ColorTechnique>();
+    auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
     colorTechnique->setColor(Forms::getRGB(button->color));
-    object->addTechnique(Graphic::Techniques::COLOR, colorTechnique);
+    object->addTechnique(GraphicLib::Techniques::COLOR, colorTechnique);
 
-    auto transformTechnique = std::make_shared<Graphic::Techniques::TransformTechnique>();
-    transformTechnique->enableScale(glm::vec3(0.1, 0.1, 0.0f));
+    auto transformTechnique = std::make_shared<GraphicLib::Techniques::TransformTechnique>();
+    transformTechnique->enableScale(button->scale);
     transformTechnique->enableTransform(glm::vec3(button->getXOffset(),
                                                   button->getYOffset(), -0.1f));
     transformTechnique->disableRotateValue();
-    object->addTechnique(Graphic::Techniques::TRANSFORM, transformTechnique);
+    object->addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
 
-    auto picking = std::make_shared<Graphic::Techniques::PickTechnique>();
+    auto picking = std::make_shared<GraphicLib::Techniques::PickTechnique>();
     picking->setObjectId(button->getId());
-    object->addTechnique(Graphic::Techniques::PICK, picking);
+    object->addTechnique(GraphicLib::Techniques::PICK, picking);
     button->setCanvas(_canvas);
 
-    auto textTechnique = std::make_shared<Graphic::Techniques::TextTechnique>();
+    auto textTechnique = std::make_shared<GraphicLib::Techniques::TextTechnique>();
     textTechnique->setText(button->title);
-    textTechnique->setWidth(_textW + 0.065*(_buttons.size()));
+    textTechnique->setWidth(_textW);
     textTechnique->setHeight(_textH);
     textTechnique->setColor(glm::vec3{1.0f});
-    object->addTechnique(Graphic::Techniques::TEXT, textTechnique);
+    object->addTechnique(GraphicLib::Techniques::TEXT, textTechnique);
 
     _buttons.push_back(object);
 }

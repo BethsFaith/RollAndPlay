@@ -2,7 +2,7 @@
 // Created by VerOchka on 19.08.2023.
 //
 
-#include "Ebo.hpp"
+#include "../../headers/GraphicLib/Buffers/Ebo.hpp"
 
 namespace GraphicLib::Buffers {
     EBO::EBO(std::vector<unsigned int> indices) : RaiiBuffer(2), _indices(std::move(indices)) {

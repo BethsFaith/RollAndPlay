@@ -7,7 +7,7 @@
 
 #include "Technique.hpp"
 
-namespace Graphic::Techniques {
+namespace GraphicLib::Techniques {
     class ColorTechnique : public Technique {
     public:
         ColorTechnique() = default;
@@ -19,7 +19,7 @@ namespace Graphic::Techniques {
         void setColor(glm::vec3 rgb);
 
     private:
-        glm::vec3 _rgb;
+        glm::vec3 _rgb{};
     };
 } // Techniques
 

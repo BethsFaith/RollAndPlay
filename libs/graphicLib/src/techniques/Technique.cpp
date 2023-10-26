@@ -2,9 +2,9 @@
 // Created by VerOchka on 23.10.2023.
 //
 
-#include "Technique.hpp"
+#include "../../headers/GraphicLib/Techniques/Technique.hpp"
 
-namespace Graphic::Techniques {
+namespace GraphicLib::Techniques {
     void Technique::setShader(GraphicLib::Shaders::ShaderProgram::Ptr shaderProgram) {
         shader = std::move(shaderProgram);
     }

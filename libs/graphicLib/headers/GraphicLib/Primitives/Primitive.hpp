@@ -11,8 +11,8 @@
 #include <vector>
 
 #include "AbstractPrimitive.hpp"
-#include "buffers/Vao.hpp"
-#include "buffers/Vertex.hpp"
+#include "../Buffers/Vao.hpp"
+#include "../Buffers/Vertex.hpp"
 
 namespace GraphicLib::Primitives {
     class Primitive : public AbstractPrimitive {

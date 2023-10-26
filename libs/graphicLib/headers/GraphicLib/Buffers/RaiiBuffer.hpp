@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include "EntryPoint.hpp"
+#include "../GlagGlfw.hpp"
 
 namespace GraphicLib::Buffers {
     class RaiiBuffer {

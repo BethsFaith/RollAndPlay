@@ -5,7 +5,7 @@
 #include "Color.hpp"
 
 namespace Forms {
-    [[maybe_unused]] glm::vec3 Forms::getRGB(Color color) {
+    glm::vec3 Forms::getRGB(Color color) {
         switch (color) {
             case RED:
                 return {1.0f, 0, 0};
@@ -31,6 +31,8 @@ namespace Forms {
                 return glm::vec3{0.0f};
             case LIGHT_BLUE:
                 return {0.47f, 0.65f, 0.75f};
+            default:
+                return glm::vec3{0.0f};;
         }
     }
 }

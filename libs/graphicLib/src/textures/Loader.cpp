@@ -2,7 +2,7 @@
 // Created by VerOchka on 19.08.2023.
 //
 
-#include "Loader.hpp"
+#include "../../headers/GraphicLib/Textures/Loader.hpp"
 
 #include <utility>
 

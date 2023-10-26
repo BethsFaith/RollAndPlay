@@ -5,9 +5,9 @@
 #ifndef ROLLANDPLAY_MAINWINDOW_HPP
 #define ROLLANDPLAY_MAINWINDOW_HPP
 
-#include "EntryPoint.hpp"
-#include <primitives/Rectangle.hpp>
-#include <shaders/ShaderProgram.hpp>
+#include <GraphicLib/GlagGlfw.hpp>
+#include <GraphicLib/Primitives/Rectangle.hpp>
+#include <GraphicLib/Shaders/ShaderProgram.hpp>
 
 #include <wtypes.h>
 #include <stdexcept>

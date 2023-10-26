@@ -5,10 +5,11 @@
 #ifndef ROLLANDPLAY_GUICONTROLLER_HPP
 #define ROLLANDPLAY_GUICONTROLLER_HPP
 
+#include <GraphicLib/PickableTexture.hpp>
+
 #include "GLController.hpp"
 #include "../forms/Button.hpp"
 #include "PageController.hpp"
-#include "PickableTexture.hpp"
 
 namespace Controllers {
     class GuiController : public Controllers::GLController {

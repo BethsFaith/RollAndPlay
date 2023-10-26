@@ -2,7 +2,7 @@
 // Created by VerOchka on 19.08.2023.
 //
 
-#include "Vbo.hpp"
+#include "../../headers/GraphicLib/Buffers/Vbo.hpp"
 
 #include <iostream>
 

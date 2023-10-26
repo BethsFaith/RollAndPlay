@@ -2,7 +2,7 @@
 // Created by VerOchka on 22.09.2023.
 //
 
-#include "Texture.hpp"
+#include "../../headers/GraphicLib/Textures/Texture.hpp"
 
 #include <utility>
 

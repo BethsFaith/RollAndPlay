@@ -12,9 +12,9 @@ namespace Pages {
     }
 
     void SystemStartPage::draw() {
-        glDisable(GL_DEPTH_TEST);
-        _gui.draw();
         glEnable(GL_DEPTH_TEST);
+        _gui.draw();
+        glDisable(GL_DEPTH_TEST);
     }
 
     Controllers::GLController::Ptr SystemStartPage::getController() {
@@ -44,16 +44,17 @@ namespace Pages {
                                                             .with_bitangent = false});
         rectangle->bindData(GL_STATIC_DRAW);
 
-        _gui.setTextSize(0.06, 0.15);
 
         //кнопочки
         auto button = std::make_shared<Forms::Button>(-8.5, 7.0);
         button->color = Forms::Color::GRAY;
         button->title = "Создать";
+        button->scale = glm::vec3(0.1, 0.1f, 0.0f);
         button->setPressCallback([&](){
             this->_currentTag = StateTag::VIEW;
             this->update();
         });
+        _gui.setTextSize(0.06, 0.15);
         _gui.addButton(button, rectangle);
         _controller->addButton(button);
     }
@@ -68,11 +69,11 @@ namespace Pages {
         rectangle->bindData(GL_STATIC_DRAW);
 
         _gui.setTextSize(0.055, 0.15);
-
         //кнопочки
         auto button = std::make_shared<Forms::Button>(-8.5, 7.0);
-        button->color = Forms::Color::LIGHT_BLUE;
+        button->color = Forms::Color::GRAY;
         button->title = "Сохранить";
+        button->scale = glm::vec3(0.1, 0.1f, 0.0f);
         button->setPressCallback([&](){
             this->_currentTag = StateTag::START;
             this->update();
@@ -80,14 +81,15 @@ namespace Pages {
         _gui.addButton(button, rectangle);
         _controller->addButton(button);
 
-        button = std::make_shared<Forms::InputField>(-8.5, 4.0, "Название");
-        button->color = Forms::Color::GRAY;
-        button->title = "Название";
-        button->setPressCallback([&](){
+        auto fieldController = std::make_shared<Controllers::InputFieldController>();
+        _controller->addController(fieldController);
 
-        });
-        _gui.addButton(button, rectangle);
-        _controller->addButton(button);
+        auto inputButton = std::make_shared<Forms::InputField>(-0.79, 4.0, "Название");
+        inputButton->color = Forms::Color::LIGHT_GRAY;
+        inputButton->scale = glm::vec3(0.7f, 0.1f, 0.0f);
 
+        fieldController->addButton(inputButton);
+        _gui.setTextSize(0.055, 0.25);
+        _gui.addButton(inputButton, rectangle);
     }
 }

@@ -2,9 +2,9 @@
 // Created by VerOchka on 23.10.2023.
 //
 
-#include "Object.hpp"
+#include "../headers/GraphicLib/Object.hpp"
 
-namespace Graphic {
+namespace GraphicLib {
     void Object::render(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
         shader->use();
 

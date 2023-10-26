@@ -2,7 +2,7 @@
 // Created by VerOchka on 22.09.2023.
 //
 
-#include "Vertex.hpp"
+#include "../../headers/GraphicLib/Buffers/Vertex.hpp"
 
 namespace GraphicLib::Buffers {
     void setVertexAttribute(const int &index, const int &size, const int &stride, void *offset) {

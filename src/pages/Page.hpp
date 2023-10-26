@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include <PickableTexture.hpp>
+#include "../../libs/graphicLib/headers/GraphicLib/PickableTexture.hpp"
 
 #include "../controllers/GLController.hpp"
 

@@ -2,7 +2,7 @@
 // Created by VerOchka on 22.10.2023.
 //
 
-#include "PickableTexture.hpp"
+#include "../headers/GraphicLib/PickableTexture.hpp"
 
 namespace GraphicLib {
     bool PickableTexture::init(unsigned int windowWidth, unsigned int windowHeight) {

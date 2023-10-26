@@ -8,13 +8,13 @@
 #include <map>
 #include <utility>
 
-#include <primitives/AbstractPrimitive.hpp>
-#include <shaders/ShaderProgram.hpp>
+#include "Primitives/AbstractPrimitive.hpp"
+#include "Shaders/ShaderProgram.hpp"
 
-#include "techniques/Technique.hpp"
-#include "techniques/TechniqueName.hpp"
+#include "Techniques/Technique.hpp"
+#include "Techniques/TechniqueName.hpp"
 
-namespace Graphic {
+namespace GraphicLib {
     class Object {
     public:
         using Ptr = std::shared_ptr<Object>;

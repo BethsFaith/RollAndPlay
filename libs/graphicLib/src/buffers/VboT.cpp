@@ -2,9 +2,9 @@
 // Created by VerOchka on 22.09.2023.
 //
 
-#include "Vbo.hpp"
+#include "../../headers/GraphicLib/Buffers/Vbo.hpp"
 #include "Vbo.cpp"
-#include "Vertex.hpp"
+#include "../../headers/GraphicLib/Buffers/Vertex.hpp"
 
 template
 class GraphicLib::Buffers::VBO<GraphicLib::Buffers::Vertex>;

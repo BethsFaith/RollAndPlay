@@ -5,15 +5,16 @@
 #ifndef ROLLANDPLAY_GUI_HPP
 #define ROLLANDPLAY_GUI_HPP
 
-#include <primitives/AbstractPrimitive.hpp>
-#include <shaders/ShaderProgram.hpp>
+#include <GraphicLib/GlagGlfw.hpp>
+#include <GraphicLib/Primitives/AbstractPrimitive.hpp>
+#include <GraphicLib/Shaders/ShaderProgram.hpp>
+#include <GraphicLib/Object.hpp>
+#include <GraphicLib/Techniques/ColorTechnique.hpp>
+#include <GraphicLib/Techniques/PickTechnique.hpp>
+#include <GraphicLib/Techniques/TransformTechnique.hpp>
+#include <GraphicLib/Techniques/TextTechnique.hpp>
 
 #include "forms/Button.hpp"
-#include "graphic/Object.hpp"
-#include "graphic/techniques/ColorTechnique.hpp"
-#include "graphic/techniques/PickTechnique.hpp"
-#include "graphic/techniques/TransformTechnique.hpp"
-#include "graphic/techniques/TextTechnique.hpp"
 
 class Gui {
 public:
@@ -35,7 +36,7 @@ private:
     GraphicLib::Shaders::ShaderProgram::Ptr _selectableShader;
     GraphicLib::Shaders::ShaderProgram::Ptr _textShader;
 
-    std::vector<Graphic::Object::Ptr> _buttons;
+    std::vector<GraphicLib::Object::Ptr> _buttons;
     GraphicLib::PickableTexture::Ptr _canvas;
 
     float _textW;

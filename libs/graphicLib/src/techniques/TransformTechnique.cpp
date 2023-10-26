@@ -2,9 +2,9 @@
 // Created by VerOchka on 23.10.2023.
 //
 
-#include "TransformTechnique.hpp"
+#include "../../headers/GraphicLib/Techniques/TransformTechnique.hpp"
 
-namespace Graphic::Techniques {
+namespace GraphicLib::Techniques {
     void TransformTechnique::enableTransform(const glm::vec3 &transformValue) {
         _transformValue = transformValue;
         _needTransform = true;

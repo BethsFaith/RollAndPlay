@@ -5,7 +5,7 @@
 #ifndef ROLLANDPLAY_TECHNIQUENAME_HPP
 #define ROLLANDPLAY_TECHNIQUENAME_HPP
 
-namespace Graphic::Techniques {
+namespace GraphicLib::Techniques {
     enum TechniqueName {
         TRANSFORM,
         COLOR,

@@ -2,7 +2,7 @@
 // Created by VerOchka on 10.10.2023.
 //
 
-#include "Primitive.hpp"
+#include "../../headers/GraphicLib/Primitives/Primitive.hpp"
 
 namespace GraphicLib::Primitives {
     Primitive::Primitive(const int &vertexNumber) : Primitive(vertexNumber, {}) {}

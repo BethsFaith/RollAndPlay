@@ -5,12 +5,13 @@
 #ifndef ROLLANDPLAY_SYSTEMSTARTPAGE_HPP
 #define ROLLANDPLAY_SYSTEMSTARTPAGE_HPP
 
-#include <primitives/Rectangle.hpp>
+#include <GraphicLib/Primitives/Rectangle.hpp>
 #include <utility>
 
 #include "Page.hpp"
 #include "../Gui.hpp"
 #include "../controllers/PageController.hpp"
+#include "../controllers/InputFieldController.hpp"
 #include "../forms/InputField.hpp"
 
 namespace Pages {

@@ -2,7 +2,7 @@
 // Created by VerOchka on 10.10.2023.
 //
 
-#include "ShaderProgram.hpp"
+#include "../../headers/GraphicLib/Shaders/ShaderProgram.hpp"
 
 namespace GraphicLib::Shaders {
     ShaderProgram::ShaderProgram(const std::string& vertexPath, const std::string& fragmentPath) {

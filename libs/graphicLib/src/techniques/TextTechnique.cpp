@@ -2,9 +2,9 @@
 // Created by VerOchka on 24.10.2023.
 //
 
-#include "TextTechnique.hpp"
+#include "../../headers/GraphicLib/Techniques/TextTechnique.hpp"
 
-namespace Graphic::Techniques {
+namespace GraphicLib::Techniques {
     GraphicLib::Text::Ptr TextTechnique::TextRenderer = nullptr;
     glm::mat4 TextTechnique::Projection = {};
     unsigned int TextTechnique::ScreenWidth = 3440;

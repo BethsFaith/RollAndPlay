@@ -5,11 +5,11 @@
 #ifndef ROLLANDPLAY_TEXTTECHNIQUE_HPP
 #define ROLLANDPLAY_TEXTTECHNIQUE_HPP
 
-#include <Text.hpp>
+#include "../Text.hpp"
 
 #include "Technique.hpp"
 
-namespace Graphic::Techniques {
+namespace GraphicLib::Techniques {
     class TextTechnique : public Technique {
     public:
         using Ptr = std::shared_ptr<TextTechnique>;

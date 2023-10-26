@@ -2,9 +2,9 @@
 // Created by VerOchka on 23.10.2023.
 //
 
-#include "PickTechnique.hpp"
+#include "../../headers/GraphicLib/Techniques/PickTechnique.hpp"
 
-namespace Graphic::Techniques {
+namespace GraphicLib::Techniques {
     void PickTechnique::setId(const std::string &name, float id) {
         shader->setFloat(name, id);
     }

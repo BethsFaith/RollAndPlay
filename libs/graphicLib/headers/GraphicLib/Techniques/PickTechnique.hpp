@@ -7,7 +7,7 @@
 
 #include "Technique.hpp"
 
-namespace Graphic::Techniques  {
+namespace GraphicLib::Techniques  {
     class PickTechnique : public Technique {
     public:
         using Ptr = std::shared_ptr<PickTechnique>;

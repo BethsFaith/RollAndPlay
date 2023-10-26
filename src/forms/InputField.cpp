@@ -7,7 +7,7 @@
 namespace Forms {
     InputField::InputField(float xOffset, float yOffset, std::string title) :
           Button(xOffset, yOffset) {
-        title = std::move(title);
+        this->title = std::move(title);
     }
 
     const std::string& InputField::getBuf() const {

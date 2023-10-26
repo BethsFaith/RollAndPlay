@@ -8,7 +8,7 @@
 #include <iostream>
 #include <functional>
 
-#include <EntryPoint.hpp>
+#include <GraphicLib/GlagGlfw.hpp>
 
 #include "SelectableForm.hpp"
 #include "Color.hpp"
@@ -28,17 +28,23 @@ namespace Forms {
         [[nodiscard]] float getXOffset() const;
         [[nodiscard]] float getYOffset() const;
         [[nodiscard]] float getId() const;
+        [[nodiscard]] bool isSelected() const;
 
         bool checkSelecting(unsigned int x, unsigned int y) override;
+        void setSelected(bool isSelected);
 
         Color color = Color::GRAY;
         std::string title;
+        glm::vec3 scale;
+
     protected:
         float _xOffset;
         float _yOffset;
 
         int id;
         static int IdCounter;
+
+        bool _isSelected;
 
         std::function<void()> _pressCallback{[]() {}};
     };

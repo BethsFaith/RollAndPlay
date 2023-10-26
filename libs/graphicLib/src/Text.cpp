@@ -2,7 +2,7 @@
 // Created by VerOchka on 24.10.2023.
 //
 
-#include "Text.hpp"
+#include "../headers/GraphicLib/Text.hpp"
 
 namespace GraphicLib {
     Text::Text(unsigned int width, unsigned int height) {

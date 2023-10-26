@@ -2,7 +2,7 @@
 // Created by VerOchka on 17.08.2023.
 //
 
-#include "Vao.hpp"
+#include "../../headers/GraphicLib/Buffers/Vao.hpp"
 
 namespace GraphicLib::Buffers {
     VAO::VAO() : RaiiBuffer(0) {

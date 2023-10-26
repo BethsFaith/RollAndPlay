@@ -2,7 +2,7 @@
 // Created by VerOchka on 21.10.2023.
 //
 
-#include "Fbo.hpp"
+#include "../../headers/GraphicLib/Buffers/Fbo.hpp"
 
 namespace GraphicLib::Buffers {
     FBO::FBO(GLuint mode, unsigned int texture)

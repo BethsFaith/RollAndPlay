@@ -6,8 +6,8 @@
 #define ROLLANDPLAY_RECTANGLE_HPP
 
 #include "Primitive.hpp"
-#include "buffers/Vbo.hpp"
-#include "buffers/Ebo.hpp"
+#include "../Buffers/Vbo.hpp"
+#include "../Buffers/Ebo.hpp"
 
 namespace GraphicLib::Primitives {
     class Rectangle : public Primitive {

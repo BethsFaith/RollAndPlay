@@ -5,8 +5,8 @@
 #ifndef ROLLANDPLAY_PICKABLETEXTURE_HPP
 #define ROLLANDPLAY_PICKABLETEXTURE_HPP
 
-#include "buffers/Fbo.hpp"
-#include "textures/Texture.hpp"
+#include "Buffers/Fbo.hpp"
+#include "Textures/Texture.hpp"
 
 namespace GraphicLib {
     class PickableTexture {

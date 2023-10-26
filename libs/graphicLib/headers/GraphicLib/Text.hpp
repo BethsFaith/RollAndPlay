@@ -8,15 +8,15 @@
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
 #include <ft2build.h>
-#include FT_FREETYPE_H
+#include FT_FREETYPE_H "freetype2/freetype/freetype.h"
 #include <map>
 #include <glm/glm.hpp>
 
-#include "EntryPoint.hpp"
-#include "textures/Texture.hpp"
-#include "shaders/ShaderProgram.hpp"
-#include "buffers/Vao.hpp"
-#include "buffers/Vbo.hpp"
+#include "GlagGlfw.hpp"
+#include "Textures/Texture.hpp"
+#include "Shaders/ShaderProgram.hpp"
+#include "Buffers/Vao.hpp"
+#include "Buffers/Vbo.hpp"
 
 namespace GraphicLib {
     class Text {

@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include "EntryPoint.hpp"
+#include <GraphicLib/GlagGlfw.hpp>
 
 namespace Controllers {
     class GLController {

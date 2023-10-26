@@ -25,14 +25,16 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
             "Система", "Навыки", "Классы", "Расы", "Экспорт"
     };
 
-    _gui.setTextSize(0.05, 0.05);
     for (int i{}; i < 5; ++i) {
         auto button = std::make_shared<Forms::Button>(startOffset,9.0f);
 
         button->color = Forms::Color::LIGHT_BLUE;
-
+        button->scale = glm::vec3(0.1f, 0.1f, 0.0f);
         button->title = names.at(i);
+
+        _gui.setTextSize(0.05 + 0.065*(buttons.size()), 0.05);
         _gui.addButton(button, rectangle);
+
         _controller.addButton(button);
         buttons.push_back(button);
 
@@ -57,15 +59,15 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
 
     _view.setPrimitive(rectangle);
 
-    auto colorTechnique = std::make_shared<Graphic::Techniques::ColorTechnique>();
+    auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
     colorTechnique->setColor(Forms::getRGB(viewColor));
-    _view.addTechnique(Graphic::Techniques::COLOR, colorTechnique);
+    _view.addTechnique(GraphicLib::Techniques::COLOR, colorTechnique);
 
-    auto transformTechnique = std::make_shared<Graphic::Techniques::TransformTechnique>();
+    auto transformTechnique = std::make_shared<GraphicLib::Techniques::TransformTechnique>();
     transformTechnique->enableScale(glm::vec3(1.85, 1.65, 0.0f));
     transformTechnique->enableTransform(glm::vec3(x,
-                                                  y, 0.1f));
-    _view.addTechnique(Graphic::Techniques::TRANSFORM, transformTechnique);
+                                                  y, 0.0f));
+    _view.addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
 }
 
 ViewWindow::~ViewWindow() {

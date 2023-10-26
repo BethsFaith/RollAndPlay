@@ -7,8 +7,8 @@
 
 #include <utility>
 
-#include <primitives/Rectangle.hpp>
-#include <shaders/ShaderProgram.hpp>
+#include <GraphicLib/Primitives/Rectangle.hpp>
+#include <GraphicLib/Shaders/ShaderProgram.hpp>
 
 #include "controllers/GuiController.hpp"
 #include "pages/Page.hpp"
@@ -39,7 +39,7 @@ public:
 
     void addPage(PageTag tag, Pages::Page::Ptr page);
 private:
-    Graphic::Object _view;
+    GraphicLib::Object _view;
 
     GraphicLib::Shaders::ShaderProgram::Ptr _shader;
 

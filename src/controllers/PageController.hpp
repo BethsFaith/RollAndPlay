@@ -5,7 +5,7 @@
 #ifndef ROLLANDPLAY_PAGECONTROLLER_HPP
 #define ROLLANDPLAY_PAGECONTROLLER_HPP
 
-#include <EntryPoint.hpp>
+#include <GraphicLib/GlagGlfw.hpp>
 
 #include "../forms/Button.hpp"
 #include "GLController.hpp"
