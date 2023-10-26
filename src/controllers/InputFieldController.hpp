@@ -5,11 +5,11 @@
 #ifndef ROLLANDPLAY_INPUTFIELDCONTROLLER_HPP
 #define ROLLANDPLAY_INPUTFIELDCONTROLLER_HPP
 
-#include "GLController.hpp"
+#include "FormController.hpp"
 #include "../forms/InputField.hpp"
 
 namespace Controllers {
-    class InputFieldController : public GLController {
+    class InputFieldController : public FormController {
     public:
         ~InputFieldController() override = default;
 
@@ -21,11 +21,11 @@ namespace Controllers {
 
         void processMouseScroll(double xOffset, double yOffset) override;
 
-        void addButton(const Forms::InputField::Ptr &button);
-
         void clear() override;
 
         virtual void processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) override;
+
+        void addForm(Forms::Form::Ptr form) override;
 
     private:
         Forms::InputField::Ptr _target = nullptr;

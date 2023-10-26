@@ -6,7 +6,11 @@
 
 namespace Controllers {
     void InputFieldController::processKeyboardInput(GLFWwindow *window) {
-
+        if (_target != nullptr) {
+            if (glfwGetKey(window, GLFW_KEY_BACKSPACE) == GLFW_PRESS) {
+                _target->popFromBuffer();
+            }
+        }
     }
 
     void InputFieldController::processMouseButton(GLFWwindow *window, int mouseButton, int action, int mods) {
@@ -21,7 +25,11 @@ namespace Controllers {
                 if (button->checkSelecting((int) xPos, int(height - yPos - 1))) {
                     button->press();
 
+                    if (_target != nullptr) {
+                        _target->setSelected(false);
+                    }
                     _target = button;
+                    _target->setSelected(true);
 
                     break;
                 }
@@ -36,18 +44,19 @@ namespace Controllers {
     }
 
     void InputFieldController::processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) {
-        char x = (char) codepoint;
         std::cout << codepoint << std::endl;
         if (_target != nullptr) {
             std::cout << codepoint << std::endl;
+            _target->putToBuffer((char) codepoint);
         }
-    }
-
-    void InputFieldController::addButton(const Forms::InputField::Ptr &button) {
-        _buttons.push_back(button);
     }
 
     void InputFieldController::clear() {
         _buttons.clear();
+        _target.reset();
+    }
+
+    void InputFieldController::addForm(Forms::Form::Ptr form) {
+        _buttons.push_back(std::dynamic_pointer_cast<Forms::InputField>(form));
     }
 }

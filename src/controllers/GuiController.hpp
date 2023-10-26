@@ -5,38 +5,37 @@
 #ifndef ROLLANDPLAY_GUICONTROLLER_HPP
 #define ROLLANDPLAY_GUICONTROLLER_HPP
 
+#include <vector>
+
 #include <GraphicLib/PickableTexture.hpp>
 
 #include "GLController.hpp"
-#include "../forms/Button.hpp"
-#include "PageController.hpp"
+#include "FormController.hpp"
+#include "FormControllerFactory.hpp"
 
 namespace Controllers {
     class GuiController : public Controllers::GLController {
     public:
         using Ptr = std::shared_ptr<GuiController>;
 
+        GuiController() = default;
+        ~GuiController() override = default;
+
         void processKeyboardInput(GLFWwindow *window) override;
 
         void processMouseButton(GLFWwindow *window, int mouseButton, int action, int mods) override;
 
-        void processMouseCursor(GLFWwindow *window, double x_pos, double y_pos) override;
+        void processMouseCursor(GLFWwindow *window, double xPos, double yPos) override;
 
-        void processMouseScroll(double x_offset, double y_offset) override;
-
-        void addButton(const Forms::Button::Ptr &button);
-
-        void setViewController(Controllers::GLController::Ptr viewController);
+        void processMouseScroll(double xOffset, double yOffset) override;
 
         void clear() override;
 
-        virtual ~GuiController() override = default;
+        void processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) override;
 
-        virtual void processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) override;
-
+        void addForm(const Forms::Form::Ptr& form);
     private:
-        std::vector<Forms::Button::Ptr> _buttons;
-        Controllers::GLController::Ptr _viewController;
+        std::map<Forms::FormType, FormController::Ptr> _formControllers;
     };
 }
 

@@ -19,6 +19,7 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
                             .with_bitangent = false});
     rectangle->bindData(GL_STATIC_DRAW);
 
+    // кнопки
     float startOffset = -8.7f;
     std::vector<Forms::Button::Ptr> buttons;
     std::vector<std::string> names = {
@@ -26,16 +27,18 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
     };
 
     for (int i{}; i < 5; ++i) {
-        auto button = std::make_shared<Forms::Button>(startOffset, 9.0f);
+        auto button = std::make_shared<Forms::Button>(rectangle);
 
-        button->color = Forms::Color::LIGHT_BLUE;
-        button->scale = glm::vec3(0.1f, 0.1f, 0.0f);
-        button->title = names.at(i);
+        float textX = 0.05f + 0.065f * (float)buttons.size();
 
-        _gui.setTextSize(0.05 + 0.065 * (buttons.size()), 0.05);
-        _gui.addButton(button, rectangle);
+        button->init({0.1f, 0.1f, 0.0f}, {startOffset, 9.0f},
+                     {.content = names.at(i),
+                             .x = textX,
+                             .y = 0.05
+                     }, Forms::Color::LIGHT_BLUE);
 
-        _controller.addButton(button);
+        _gui.addButton(button);
+
         buttons.push_back(button);
 
         startOffset += 1.3;
@@ -43,6 +46,7 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
     buttons[0]->setPressCallback([&]() {
         std::cout << "1PRESS" << std::endl;
         _currentPageTag = PageTag::SYSTEM_START;
+        updateControllers();
     });
     buttons[1]->setPressCallback([&]() {
         std::cout << "2PRESS" << std::endl;
@@ -57,6 +61,7 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
         std::cout << "5PRESS" << std::endl;
     });
 
+    // маленькое окно для вида
     _view.setPrimitive(rectangle);
 
     auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
@@ -68,6 +73,8 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
     transformTechnique->enableTransform(glm::vec3(x,
                                                   y, 0.0f));
     _view.addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
+
+    updateControllers();
 }
 
 ViewWindow::~ViewWindow() {
@@ -77,7 +84,18 @@ ViewWindow::~ViewWindow() {
 void ViewWindow::display() {
     _view.render(_shader);
     _gui.draw();
-    _pages[_currentPageTag]->draw();
+
+    if (_pages.contains(_currentPageTag)) {
+        _pages[_currentPageTag]->draw();
+    }
+}
+
+void ViewWindow::updateControllers() {
+    _controller.clear();
+    if (_pages.contains(_currentPageTag)) {
+        _controller.addSubController(_pages[_currentPageTag]->getController());
+    }
+    _controller.addSubController(_gui.getController());
 }
 
 void ViewWindow::processKeyboardInput(GLFWwindow *window) {
@@ -102,5 +120,4 @@ void ViewWindow::processCharMods(GLFWwindow *window, unsigned int codepoint, int
 
 void ViewWindow::addPage(ViewWindow::PageTag tag, Pages::Page::Ptr page) {
     _pages[tag] = std::move(page);
-    _controller.setViewController(_pages[tag]->getController()); // убрать
 }

@@ -7,46 +7,51 @@
 
 #include <iostream>
 #include <functional>
+#include <utility>
 
 #include <GraphicLib/GlagGlfw.hpp>
+#include <GraphicLib/Object.hpp>
+#include <GraphicLib/Techniques/ColorTechnique.hpp>
+#include <GraphicLib/Techniques/PickTechnique.hpp>
+#include <GraphicLib/Techniques/TransformTechnique.hpp>
+#include <GraphicLib/Techniques/TextTechnique.hpp>
 
-#include "SelectableForm.hpp"
+#include "Form.hpp"
 #include "Color.hpp"
+#include "Text.hpp"
 
 namespace Forms {
-    class Button : public SelectableForm {
+    class Button : public Form {
     public:
         using Ptr = std::shared_ptr<Button>;
 
-        Button(float xOffset, float yOffset);
-        virtual ~Button() = default;
+        explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
+        ~Button() override = default;
+
+        void init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color = Color::GRAY);
+
+        virtual void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader);
+        virtual void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader);
+        virtual void renderPick(GraphicLib::Shaders::ShaderProgram::Ptr shader);
 
         void press();
 
         void setPressCallback(const std::function<void()> &function);
 
-        [[nodiscard]] float getXOffset() const;
-        [[nodiscard]] float getYOffset() const;
-        [[nodiscard]] float getId() const;
         [[nodiscard]] bool isSelected() const;
 
         bool checkSelecting(unsigned int x, unsigned int y) override;
         void setSelected(bool isSelected);
-
-        Color color = Color::GRAY;
-        std::string title;
-        glm::vec3 scale;
-
     protected:
-        float _xOffset;
-        float _yOffset;
+        explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, FormType type);
 
         int id;
         static int IdCounter;
-
-        bool _isSelected;
+        bool _isSelected = false;
 
         std::function<void()> _pressCallback{[]() {}};
+
+        GraphicLib::Object _object{};
     };
 }
 

@@ -5,7 +5,7 @@
 #ifndef ROLLANDPLAY_TEXTTECHNIQUE_HPP
 #define ROLLANDPLAY_TEXTTECHNIQUE_HPP
 
-#include "../Text.hpp"
+#include "../TextRender.hpp"
 
 #include "Technique.hpp"
 
@@ -33,7 +33,7 @@ namespace GraphicLib::Techniques {
         void setScale(float scale);
 
     protected:
-        static GraphicLib::Text::Ptr TextRenderer;
+        static GraphicLib::TextRender::Ptr TextRenderer;
         static glm::mat4 Projection;
 
         static unsigned int ScreenWidth;

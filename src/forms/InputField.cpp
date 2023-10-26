@@ -5,17 +5,11 @@
 #include "InputField.hpp"
 
 namespace Forms {
-    InputField::InputField(float xOffset, float yOffset, std::string title) :
-            Button(xOffset, yOffset, GraphicLib::Primitives::AbstractPrimitive::Ptr()) {
-        this->title = std::move(title);
-    }
+    InputField::InputField(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
+    : Button(graphicPrimitive, FormType::INPUT_FIELD) {}
 
     const std::string &InputField::getBuf() const {
         return _buf;
-    }
-
-    const std::string &InputField::getTitle() const {
-        return title;
     }
 
     void InputField::putToBuffer(char character) {

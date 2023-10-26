@@ -2,10 +2,10 @@
 // Created by VerOchka on 24.10.2023.
 //
 
-#include "../headers/GraphicLib/Text.hpp"
+#include "../headers/GraphicLib/TextRender.hpp"
 
 namespace GraphicLib {
-    Text::Text(unsigned int width, unsigned int height) {
+    TextRender::TextRender(unsigned int width, unsigned int height) {
         // Загрузка VAO/VBO для текстурных прямоугольников
         _vao = std::make_shared<Buffers::VAO>();
         _vao->bind();
@@ -25,7 +25,7 @@ namespace GraphicLib {
         _vao->unbind();
     }
 
-    void Text::load(const std::string& font, unsigned int fontSize) {
+    void TextRender::load(const std::string& font, unsigned int fontSize) {
         // Сначала очищаем ранее загруженные символы
         this->characters.clear();
 
@@ -83,7 +83,7 @@ namespace GraphicLib {
         FT_Done_FreeType(ft);
     }
 
-    void Text::render(std::string text, float x, float y, float scale, glm::vec3 color) {
+    void TextRender::render(std::string text, float x, float y, float scale, glm::vec3 color) {
         // активировать соответствующий шейдер перед этим
 
         glActiveTexture(GL_TEXTURE0);

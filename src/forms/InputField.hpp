@@ -15,7 +15,7 @@ namespace Forms {
     public:
         using Ptr = std::shared_ptr<InputField>;
 
-        explicit InputField(float xOffset, float yOffset, std::string title);
+        explicit InputField(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
 
         ~InputField() override = default;
 
@@ -26,9 +26,6 @@ namespace Forms {
         void clear();
 
         [[nodiscard]] const std::string &getBuf() const;
-
-        [[nodiscard]] const std::string &getTitle() const;
-
     private:
         std::string _buf;
     };

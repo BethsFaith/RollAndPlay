@@ -5,13 +5,13 @@
 #include "../../headers/GraphicLib/Techniques/TextTechnique.hpp"
 
 namespace GraphicLib::Techniques {
-    GraphicLib::Text::Ptr TextTechnique::TextRenderer = nullptr;
+    GraphicLib::TextRender::Ptr TextTechnique::TextRenderer = nullptr;
     glm::mat4 TextTechnique::Projection = {};
     unsigned int TextTechnique::ScreenWidth = 3440;
     unsigned int TextTechnique::ScreenHeight = 1440;
 
     void TextTechnique::initTextRendering(unsigned int width, unsigned int height, std::string font, int size) {
-        TextRenderer = std::make_shared<GraphicLib::Text>(width, height);
+        TextRenderer = std::make_shared<GraphicLib::TextRender>(width, height);
         TextRenderer->load(font, size);
 
         Projection = glm::ortho(0.0f, static_cast<float>(width),

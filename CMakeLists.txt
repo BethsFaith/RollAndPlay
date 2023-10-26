@@ -27,7 +27,6 @@ add_executable(RollAndPlay
         src/data/Race.cpp
         src/MainWindow.cpp
         src/controllers/GuiController.cpp
-        src/controllers/PageController.cpp
         src/forms/Color.cpp
         src/forms/Button.cpp
         src/Gui.cpp
@@ -37,12 +36,12 @@ add_executable(RollAndPlay
         libs/graphicLib/src/techniques/TransformTechnique.cpp
         libs/graphicLib/src/techniques/ColorTechnique.cpp
         libs/graphicLib/src/Object.cpp
-        src/forms/SelectableForm.cpp
+        src/forms/Form.cpp
         libs/graphicLib/src/techniques/TextTechnique.cpp
         src/ViewWindow.cpp
         src/pages/SystemStartPage.cpp
         src/forms/InputField.cpp
         src/controllers/InputFieldContoller.cpp
-        )
+        src/forms/Text.hpp src/controllers/CommonController.cpp src/controllers/CommonController.hpp src/controllers/FormController.hpp src/controllers/ButtonController.cpp src/controllers/ButtonController.hpp src/controllers/FormControllerFactory.cpp src/controllers/FormControllerFactory.hpp src/forms/FormType.hpp)
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

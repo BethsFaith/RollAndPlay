@@ -2,8 +2,8 @@
 // Created by VerOchka on 24.10.2023.
 //
 
-#ifndef ROLLANDPLAY_TEXT_HPP
-#define ROLLANDPLAY_TEXT_HPP
+#ifndef ROLLANDPLAY_TEXTRENDER_HPP
+#define ROLLANDPLAY_TEXTRENDER_HPP
 
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
@@ -19,9 +19,9 @@
 #include "Buffers/Vbo.hpp"
 
 namespace GraphicLib {
-    class Text {
+    class TextRender {
     public:
-        using Ptr = std::shared_ptr<Text>;
+        using Ptr = std::shared_ptr<TextRender>;
 
         struct Character {
             Textures::Texture::Ptr texture; // IdCounter текстуры глифа
@@ -30,7 +30,7 @@ namespace GraphicLib {
             unsigned int advance;           // горизонтальное смещение для перехода к следующему глифу
         };
 
-        Text(unsigned int width, unsigned int height);
+        TextRender(unsigned int width, unsigned int height);
 
         void load(const std::string& font, unsigned int fontSize);
 
@@ -46,4 +46,4 @@ namespace GraphicLib {
     };
 }
 
-#endif //ROLLANDPLAY_TEXT_HPP
+#endif //ROLLANDPLAY_TEXTRENDER_HPP

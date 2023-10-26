@@ -10,13 +10,14 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 
-#include "controllers/GuiController.hpp"
+#include "controllers/CommonController.hpp"
 #include "pages/Page.hpp"
 #include "Gui.hpp"
 
 class ViewWindow {
 public:
     enum PageTag {
+        NULL_PAGE,
         SYSTEM_START
     };
 
@@ -41,15 +42,16 @@ public:
     void addPage(PageTag tag, Pages::Page::Ptr page);
 
 private:
-    GraphicLib::Object _view;
+    void updateControllers();
 
+    GraphicLib::Object _view;
     GraphicLib::Shaders::ShaderProgram::Ptr _shader;
 
     Gui _gui;
-    Controllers::GuiController _controller;
+    Controllers::CommonController _controller;
 
     std::map<PageTag, Pages::Page::Ptr> _pages;
-    PageTag _currentPageTag = PageTag::SYSTEM_START;
+    PageTag _currentPageTag = PageTag::NULL_PAGE;
 };
 
 #endif //ROLLANDPLAY_VIEWWINDOW_HPP

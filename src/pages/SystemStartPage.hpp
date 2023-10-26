@@ -10,7 +10,7 @@
 
 #include "Page.hpp"
 #include "../Gui.hpp"
-#include "../controllers/PageController.hpp"
+#include "../controllers/CommonController.hpp"
 #include "../controllers/InputFieldController.hpp"
 #include "../forms/InputField.hpp"
 
@@ -39,9 +39,9 @@ namespace Pages {
 
         void toView();
 
+        Controllers::CommonController::Ptr _controller;
         StateTag _currentTag = START;
         Gui _gui;
-        Controllers::PageController::Ptr _controller;
     };
 }
 

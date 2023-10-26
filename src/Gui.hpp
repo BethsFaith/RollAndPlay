@@ -6,42 +6,36 @@
 #define ROLLANDPLAY_GUI_HPP
 
 #include <GraphicLib/GlagGlfw.hpp>
-#include <GraphicLib/Primitives/AbstractPrimitive.hpp>
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
-#include <GraphicLib/Object.hpp>
-#include <GraphicLib/Techniques/ColorTechnique.hpp>
-#include <GraphicLib/Techniques/PickTechnique.hpp>
-#include <GraphicLib/Techniques/TransformTechnique.hpp>
-#include <GraphicLib/Techniques/TextTechnique.hpp>
 
 #include "forms/Button.hpp"
+#include "controllers/GuiController.hpp"
 
 class Gui {
 public:
     using Ptr = std::shared_ptr<Gui>;
 
-    Gui(const GraphicLib::PickableTexture::Ptr canvas);
+    explicit Gui(GraphicLib::PickableTexture::Ptr  canvas);
 
     ~Gui() = default;
 
     void draw();
 
-    void addButton(const Forms::Button::Ptr button, GraphicLib::Primitives::AbstractPrimitive::Ptr primitive);
-
-    void setTextSize(float textW, float textH);
+    void addButton(const Forms::Button::Ptr& button);
 
     void clear();
+
+    [[nodiscard]] const Controllers::GuiController::Ptr &getController() const;
 
 private:
     GraphicLib::Shaders::ShaderProgram::Ptr _shader;
     GraphicLib::Shaders::ShaderProgram::Ptr _selectableShader;
     GraphicLib::Shaders::ShaderProgram::Ptr _textShader;
 
-    std::vector<GraphicLib::Object::Ptr> _buttons;
+    std::vector<Forms::Button::Ptr> _buttons;
     GraphicLib::PickableTexture::Ptr _canvas;
 
-    float _textW;
-    float _textH;
+    Controllers::GuiController::Ptr _controller;
 };
 
 

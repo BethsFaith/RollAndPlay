@@ -6,7 +6,7 @@
 
 namespace Pages {
     SystemStartPage::SystemStartPage(GraphicLib::PickableTexture::Ptr canvas) : _gui(std::move(canvas)) {
-        _controller = std::make_shared<Controllers::PageController>();
+        _controller = std::make_shared<Controllers::CommonController>();
 
         update();
     }
@@ -24,6 +24,7 @@ namespace Pages {
     void SystemStartPage::update() {
         _controller->clear();
         _gui.clear();
+        _controller->addSubController(_gui.getController());
 
         switch (_currentTag) {
             case START:
@@ -46,17 +47,18 @@ namespace Pages {
 
 
         //кнопочки
-        auto button = std::make_shared<Forms::Button>(-8.5, 7.0);
-        button->color = Forms::Color::GRAY;
-        button->title = "Создать";
-        button->scale = glm::vec3(0.1, 0.1f, 0.0f);
+        auto button = std::make_shared<Forms::Button>(rectangle);
+        button->init({0.1, 0.1f, 0.0f}, {-8.5, 7.0}, {
+            .content =  "Создать",
+            .x = 0.06,
+            .y = 0.15
+        });
         button->setPressCallback([&]() {
             this->_currentTag = StateTag::VIEW;
             this->update();
         });
-        _gui.setTextSize(0.06, 0.15);
-        _gui.addButton(button, rectangle);
-        _controller->addButton(button);
+
+        _gui.addButton(button);
     }
 
     void SystemStartPage::toView() {
@@ -68,28 +70,27 @@ namespace Pages {
                                 .with_bitangent = false});
         rectangle->bindData(GL_STATIC_DRAW);
 
-        _gui.setTextSize(0.055, 0.15);
         //кнопочки
-        auto button = std::make_shared<Forms::Button>(-8.5, 7.0);
-        button->color = Forms::Color::GRAY;
-        button->title = "Сохранить";
-        button->scale = glm::vec3(0.1, 0.1f, 0.0f);
+        auto button = std::make_shared<Forms::Button>(rectangle);
+        button->init({0.1, 0.1f, 0.0f}, {-8.5, 7.0}, {
+                .content =  "Сохранить",
+                .x = 0.055,
+                .y = 0.15
+        });
         button->setPressCallback([&]() {
             this->_currentTag = StateTag::START;
             this->update();
         });
-        _gui.addButton(button, rectangle);
-        _controller->addButton(button);
 
-        auto fieldController = std::make_shared<Controllers::InputFieldController>();
-        _controller->addController(fieldController);
+        _gui.addButton(button);
 
-        auto inputButton = std::make_shared<Forms::InputField>(-0.79, 4.0, "Название");
-        inputButton->color = Forms::Color::LIGHT_GRAY;
-        inputButton->scale = glm::vec3(0.7f, 0.1f, 0.0f);
+        auto inputButton = std::make_shared<Forms::InputField>(rectangle);
+        inputButton->init({0.7f, 0.1f, 0.0f}, { -0.79, 4.0}, {
+            .content = "Название",
+            .x = 0.055,
+            .y = 0.25
+        }, Forms::Color::LIGHT_GRAY);
 
-        fieldController->addButton(inputButton);
-        _gui.setTextSize(0.055, 0.25);
-        _gui.addButton(inputButton, rectangle);
+        _gui.addButton(inputButton);
     }
 }
