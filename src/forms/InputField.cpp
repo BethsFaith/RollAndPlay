@@ -18,7 +18,7 @@ namespace Forms {
 
     void InputField::popFromBuffer() {
         if (!_buf.content.empty()) {
-//            _buf.content.erase(_buf.content.back());
+            _buf.content.erase(_buf.content.size()-1);
         }
     }
 
@@ -45,12 +45,34 @@ namespace Forms {
         textTechn->setText(_buf.content);
 
         // рисуем буффер
-        Button::renderText(shader);
+        _object.render(std::move(shader));
+//        Button::renderText(shader);
 
         // возвращаем прошлые
         textTechn->setColor(color);
         textTechn->setWidth(text.x);
         textTechn->setHeight(text.y);
         textTechn->setText(text.content);
+    }
+
+    void InputField::renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
+        // нарисовать обводку;
+        auto techn = _object.getTechnique(GraphicLib::Techniques::COLOR);
+        auto trace = std::dynamic_pointer_cast<GraphicLib::Techniques::ColorTechnique>(techn);
+        auto baseColor = trace->getRgb();
+        trace->setColor(getRGB(_traceColor));
+
+        techn = _object.getTechnique(GraphicLib::Techniques::TRANSFORM);
+        auto trans = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(techn);
+        auto scale = trans->getScaleValue();
+        auto offset = trans->getTransformValue();
+        trans->enableScale({scale.x*1.02, scale.y*1.1, scale.z});
+        trans->enableTransform({offset.x*0.98, offset.y*0.909, offset.z});
+
+        renderForm(shader);
+
+        trace->setColor(baseColor);
+        trans->enableScale(scale);
+        trans->enableTransform(offset);
     }
 }

@@ -10,6 +10,12 @@ namespace Controllers {
             if (glfwGetKey(window, GLFW_KEY_BACKSPACE) == GLFW_PRESS) {
                 _target->popFromBuffer();
             }
+            if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS
+                || glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+
+                _target->setSelected(false);
+                _target = nullptr;
+            }
         }
     }
 

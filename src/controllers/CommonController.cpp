@@ -6,10 +6,6 @@
 
 namespace Controllers {
     void CommonController::processKeyboardInput(GLFWwindow *window) {
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-            glfwSetWindowShouldClose(window, true);
-        }
-
         for (const auto& controller : _subControllers) {
             controller->processKeyboardInput(window);
         }

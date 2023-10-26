@@ -29,6 +29,8 @@ namespace Forms {
 
         void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
 
+        void renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
+
     private:
         Text _buf;
     };
