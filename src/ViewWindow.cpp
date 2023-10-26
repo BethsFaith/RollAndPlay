@@ -11,6 +11,18 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
     _shader = std::make_shared<Shaders::ShaderProgram>(R"(..\..\rsrc\shaders\gui.vert)",
                                                        R"(..\..\rsrc\shaders\gui.frag)");
 
+    initView(x, y, viewColor);
+
+    updateControllers();
+}
+
+ViewWindow::~ViewWindow() {
+    _controller.clear();
+}
+
+void ViewWindow::initView(int x, int y, Forms::Color viewColor) {
+    using namespace GraphicLib;
+
     Primitives::AbstractPrimitive::Ptr rectangle =
             std::make_shared<Primitives::Rectangle>(
                     Primitives::Primitive::Settings{.with_normals = false,
@@ -21,15 +33,33 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
 
     // кнопки
     float startOffset = -8.7f;
-    std::vector<Forms::Button::Ptr> buttons;
     std::vector<std::string> names = {
             "Система", "Навыки", "Классы", "Расы", "Экспорт"
+    };
+    std::vector<std::function<void()>> funcs = {
+            [&]() {
+                std::cout << "1PRESS" << std::endl;
+                _currentPageTag = PageTag::SYSTEM_START;
+                updateControllers();
+            },
+            [&]() {
+                std::cout << "2PRESS" << std::endl;
+            },
+            [&]() {
+                std::cout << "3PRESS" << std::endl;
+            },
+            [&]() {
+                std::cout << "4PRESS" << std::endl;
+            },
+            [&]() {
+                std::cout << "5PRESS" << std::endl;
+            }
     };
 
     for (int i{}; i < 5; ++i) {
         auto button = std::make_shared<Forms::Button>(rectangle);
 
-        float textX = 0.05f + 0.065f * (float)buttons.size();
+        float textX = 0.05f + 0.065f * (float)i;
 
         button->init({0.1f, 0.1f, 0.0f}, {startOffset, 9.0f},
                      {.content = names.at(i),
@@ -37,31 +67,14 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
                              .y = 0.05
                      }, Forms::Color::LIGHT_BLUE);
 
-        _gui.addButton(button);
+        button->setPressCallback(funcs[i]);
 
-        buttons.push_back(button);
+        _gui.addButton(button);
 
         startOffset += 1.3;
     }
-    buttons[0]->setPressCallback([&]() {
-        std::cout << "1PRESS" << std::endl;
-        _currentPageTag = PageTag::SYSTEM_START;
-        updateControllers();
-    });
-    buttons[1]->setPressCallback([&]() {
-        std::cout << "2PRESS" << std::endl;
-    });
-    buttons[2]->setPressCallback([&]() {
-        std::cout << "3PRESS" << std::endl;
-    });
-    buttons[3]->setPressCallback([&]() {
-        std::cout << "4PRESS" << std::endl;
-    });
-    buttons[4]->setPressCallback([&]() {
-        std::cout << "5PRESS" << std::endl;
-    });
 
-    // маленькое окно для вида
+    // окно для вида
     _view.setPrimitive(rectangle);
 
     auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
@@ -73,12 +86,6 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
     transformTechnique->enableTransform(glm::vec3(x,
                                                   y, 0.0f));
     _view.addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
-
-    updateControllers();
-}
-
-ViewWindow::~ViewWindow() {
-    _controller.clear();
 }
 
 void ViewWindow::display() {

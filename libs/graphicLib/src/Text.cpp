@@ -32,7 +32,7 @@ namespace GraphicLib {
         // Затем инициализируем и загружаем библиотеку FreeType
         FT_Library ft;
         if (FT_Init_FreeType(&ft)) // все функции в случае ошибки возвращают значение, отличное от 0
-            std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+            std::cout << "ERROR::FREETYPE: Could not initView FreeType Library" << std::endl;
 
         // Загрузка шрифта в качестве face
         FT_Face face;

@@ -42,6 +42,7 @@ public:
     void addPage(PageTag tag, Pages::Page::Ptr page);
 
 private:
+    void initView(int x, int y, Forms::Color viewColor);
     void updateControllers();
 
     GraphicLib::Object _view;
