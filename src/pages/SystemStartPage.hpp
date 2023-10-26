@@ -13,6 +13,7 @@
 #include "../controllers/CommonController.hpp"
 #include "../controllers/InputFieldController.hpp"
 #include "../forms/InputField.hpp"
+#include "../forms/ImageButton.hpp"
 
 namespace Pages {
     class SystemStartPage : public Page {

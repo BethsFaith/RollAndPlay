@@ -38,6 +38,8 @@ namespace GraphicLib::Textures {
         [[nodiscard]] const std::string& getPath() const;
         [[nodiscard]] GLenum getType() const;
 
+        void setPath(const std::string &path);
+
     private:
         unsigned int _id{};
         std::string _name;

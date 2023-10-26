@@ -59,4 +59,8 @@ namespace GraphicLib::Textures {
                            unsigned char *data) {
         glTexImage2D(type, 0, internalFormat, width, height, 0, format, dataType, data);
     }
+
+    void Texture::setPath(const std::string &path) {
+        _path = path;
+    }
 }

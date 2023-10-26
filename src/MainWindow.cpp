@@ -27,6 +27,7 @@ MainWindow::MainWindow(const char *title) {
     glfwMakeContextCurrent(_window);
     glfwSetFramebufferSizeCallback(_window, frameBufferSizeCallback);
     glfwSetCharModsCallback(_window, charModsCallback);
+    stbi_set_flip_vertically_on_load(true);
 
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         throw std::runtime_error("Failed to initialize GLAD");

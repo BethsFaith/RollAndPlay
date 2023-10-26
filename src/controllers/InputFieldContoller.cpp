@@ -13,6 +13,8 @@ namespace Controllers {
             else if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS
                 || glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 
+                _target->press();
+
                 _target->setSelected(false);
                 _target = nullptr;
             }
@@ -39,8 +41,6 @@ namespace Controllers {
 
             for (auto &button: _buttons) {
                 if (button->checkSelecting((int) xPos, int(height - yPos - 1))) {
-                    button->press();
-
                     if (_target != nullptr) {
                         _target->setSelected(false);
                     }

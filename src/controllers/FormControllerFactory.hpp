@@ -7,6 +7,7 @@
 
 #include "ButtonController.hpp"
 #include "InputFieldController.hpp"
+#include "ImageButtonController.hpp"
 #include "../forms/FormType.hpp"
 
 namespace Controllers {

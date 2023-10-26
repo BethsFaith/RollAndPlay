@@ -7,8 +7,9 @@
 
 namespace Forms {
     enum FormType {
-        BUTTON,
-        INPUT_FIELD
+        COLOR_BUTTON,
+        INPUT_FIELD,
+        TEXTURE_BUTTON
     };
 }
 

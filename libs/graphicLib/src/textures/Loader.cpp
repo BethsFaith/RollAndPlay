@@ -24,7 +24,7 @@ namespace GraphicLib::Textures {
             }
 
             texture.bind();
-            texture.setImage(format, 0, width, height, 0, data);
+            texture.setImage(format, format, width, height,  GL_UNSIGNED_BYTE, data);
 
             glGenerateMipmap(GL_TEXTURE_2D);
 

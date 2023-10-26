@@ -28,7 +28,7 @@ namespace Forms {
         explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
         ~Button() override = default;
 
-        void init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color = Color::GRAY);
+        virtual void init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color);
 
         virtual void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader);
         virtual void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader);
@@ -53,7 +53,6 @@ namespace Forms {
         static int IdCounter;
         bool _isSelected = false;
 
-        Color _color;
         Color _traceColor = Color::WHITE;
 
         std::function<void()> _pressCallback{[]() {}};

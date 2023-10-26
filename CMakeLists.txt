@@ -30,21 +30,15 @@ add_executable(RollAndPlay
         src/forms/Color.cpp
         src/forms/Button.cpp
         src/Gui.cpp
-        libs/graphicLib/src/techniques/Technique.cpp
-        libs/graphicLib/src/PickableTexture.cpp
-        libs/graphicLib/src/techniques/PickTechnique.cpp
-        libs/graphicLib/src/techniques/TransformTechnique.cpp
-        libs/graphicLib/src/techniques/ColorTechnique.cpp
-        libs/graphicLib/src/Object.cpp
         src/forms/Form.cpp
-        libs/graphicLib/src/techniques/TextTechnique.cpp
         src/ViewWindow.cpp
         src/pages/SystemStartPage.cpp
         src/forms/InputField.cpp
         src/controllers/InputFieldContoller.cpp
-        src/forms/Text.hpp src/controllers/CommonController.cpp
+        src/controllers/CommonController.cpp
         src/controllers/ButtonController.cpp
         src/controllers/FormControllerFactory.cpp
-        )
+        src/forms/ImageButton.cpp
+        src/controllers/ImageButtonController.cpp src/controllers/ImageButtonController.hpp)
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

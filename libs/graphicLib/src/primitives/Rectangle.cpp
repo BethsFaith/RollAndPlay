@@ -50,6 +50,7 @@ namespace GraphicLib::Primitives {
 
     std::vector<glm::vec2> Rectangle::getTextureCoordinates() {
         return {
+                {1.0f, 1.0f},
                 {1.0f, 0.0f},
                 {0.0f, 0.0f},
                 {0.0f, 1.0f}

@@ -9,7 +9,7 @@ namespace Forms {
     int Button::IdCounter = 0;
 
     Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
-    : Button(graphicPrimitive, FormType::BUTTON){}
+    : Button(graphicPrimitive, FormType::COLOR_BUTTON){}
 
     Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr &graphicPrimitive, FormType type)
     : Form(type) {

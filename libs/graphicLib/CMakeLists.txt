@@ -20,24 +20,26 @@ conan_cmake_run(CONANFILE conanfile.txt
 add_library(GraphicLib
         libs/stb_image.cpp
         src/primitives/Primitive.cpp
+        src/primitives/Rectangle.cpp
+        src/shaders/ShaderProgram.cpp
         src/buffers/Vertex.cpp
         src/buffers/Vbo.cpp
         src/buffers/VboT.cpp
         src/buffers/Vao.cpp
         src/buffers/RaiiBuffer.cpp
         src/buffers/Ebo.cpp
-        src/primitives/Rectangle.cpp
-        src/shaders/ShaderProgram.cpp
         src/buffers/Fbo.cpp
         src/textures/Loader.cpp
         src/textures/Texture.cpp
-        src/TextRender.cpp
-        src/techniques/TracingTechnique.cpp
+        src/techniques/Technique.cpp
         src/techniques/TextTechnique.cpp
         src/techniques/TransformTechnique.cpp
         src/techniques/PickTechnique.cpp
         src/techniques/ColorTechnique.cpp
+        src/techniques/TextureTechnique.cpp
         src/Object.cpp
+        src/TextRender.cpp
+        src/PickableTexture.cpp
         )
 
 target_link_libraries(GraphicLib ${CONAN_LIBS})

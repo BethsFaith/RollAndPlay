@@ -52,7 +52,7 @@ namespace Pages {
             .content =  "Создать",
             .x = 0.06,
             .y = 0.15
-        });
+        }, Forms::GRAY);
         button->setPressCallback([&]() {
             this->_currentTag = StateTag::VIEW;
             this->update();
@@ -76,7 +76,7 @@ namespace Pages {
                 .content =  "Сохранить",
                 .x = 0.055,
                 .y = 0.15
-        });
+        },Forms::GRAY);
         button->setPressCallback([&]() {
             this->_currentTag = StateTag::START;
             this->update();
@@ -84,17 +84,52 @@ namespace Pages {
 
         _gui.addButton(button);
 
-        auto inputButton = std::make_shared<Forms::InputField>(rectangle, Forms::Text{
+        auto nameButton = std::make_shared<Forms::InputField>(rectangle,
+                                                              Forms::Text{
                 .x = 0.055,
                 .y = 0.30,
                 .color = Forms::Color::BLACK
         });
-        inputButton->init({0.7f, 0.1f, 0.0f}, { -0.79, 4.0}, {
+        nameButton->init({0.7f, 0.1f, 0.0f}, {-0.79, 4.0}, {
             .content = "Название",
             .x = 0.055,
             .y = 0.25
         }, Forms::Color::LIGHT_GRAY);
 
-        _gui.addButton(inputButton);
+        _gui.addButton(nameButton);
+
+        auto rectangle2 =
+                std::make_shared<GraphicLib::Primitives::Rectangle>(
+                        GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
+                                .with_texture_coords = true,
+                                .with_tangent = false,
+                                .with_bitangent = false});
+        rectangle2->bindData(GL_STATIC_DRAW);
+
+        auto coverButton = std::make_shared<Forms::ImageButton>(rectangle2);
+        coverButton->init({0.2f, 0.3f, 0.0f}, {-4, 0.0}, {
+                .content = "Обложка",
+                .x = 0.055,
+                .y = 0.40
+        }, R"(..\..\rsrc\textures\no-img.jpg)", 0);
+
+        auto attachCoverButton = std::make_shared<Forms::InputField>(rectangle,
+                                                                     Forms::Text{
+                                                                             .x = 0.055,
+                                                                             .y = 0.65,
+                                                                             .color = Forms::Color::BLACK
+                                                                     });
+        attachCoverButton->init({0.7f, 0.1f, 0.0f}, {-0.79, -3.0}, {
+                .content = "Путь к изображению : ",
+                .x = 0.055,
+                .y = 0.6
+        }, Forms::Color::LIGHT_GRAY);
+        attachCoverButton->setPressCallback([attachCoverButton, coverButton](){
+            auto string = attachCoverButton->getBuf();
+            coverButton->setImage(string);
+        });
+
+        _gui.addButton(coverButton);
+        _gui.addButton(attachCoverButton);
     }
 }

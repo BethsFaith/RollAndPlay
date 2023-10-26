@@ -28,7 +28,8 @@ public:
     [[nodiscard]] const Controllers::GuiController::Ptr &getController() const;
 
 private:
-    GraphicLib::Shaders::ShaderProgram::Ptr _shader;
+    GraphicLib::Shaders::ShaderProgram::Ptr _colorShader;
+    GraphicLib::Shaders::ShaderProgram::Ptr _textureShader;
     GraphicLib::Shaders::ShaderProgram::Ptr _selectableShader;
     GraphicLib::Shaders::ShaderProgram::Ptr _textShader;
 
