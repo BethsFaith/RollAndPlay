@@ -22,22 +22,24 @@ public:
 
     using Ptr = std::shared_ptr<ViewWindow>;
 
-    ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::PickableTexture::Ptr& canvas);
+    ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::PickableTexture::Ptr &canvas);
+
     ~ViewWindow();
 
     void display();
 
     void processKeyboardInput(GLFWwindow *window);
 
-    void processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods);
+    void processMouseButton(GLFWwindow *window, int mouseButton, int action, int mods);
 
-    void processMouseCursor(GLFWwindow* window, double x_pos, double y_pos);
+    void processMouseCursor(GLFWwindow *window, double x_pos, double y_pos);
 
     void processMouseScroll(GLFWwindow *window, double x_offset, double y_offset);
 
-    void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods);
+    void processCharMods(GLFWwindow *window, unsigned int codepoint, int mods);
 
     void addPage(PageTag tag, Pages::Page::Ptr page);
+
 private:
     GraphicLib::Object _view;
 

@@ -16,14 +16,19 @@ namespace Forms {
         using Ptr = std::shared_ptr<InputField>;
 
         explicit InputField(float xOffset, float yOffset, std::string title);
+
         ~InputField() override = default;
 
         void putToBuffer(char character);
+
         void popFromBuffer();
+
         void clear();
 
-        [[nodiscard]] const std::string& getBuf() const;
-        [[nodiscard]] const std::string& getTitle() const;
+        [[nodiscard]] const std::string &getBuf() const;
+
+        [[nodiscard]] const std::string &getTitle() const;
+
     private:
         std::string _buf;
     };

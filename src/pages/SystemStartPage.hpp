@@ -15,7 +15,7 @@
 #include "../forms/InputField.hpp"
 
 namespace Pages {
-    class SystemStartPage : public Page{
+    class SystemStartPage : public Page {
     public:
         enum StateTag {
             START,
@@ -25,6 +25,7 @@ namespace Pages {
         using Ptr = std::shared_ptr<SystemStartPage>;
 
         explicit SystemStartPage(GraphicLib::PickableTexture::Ptr canvas);
+
         ~SystemStartPage() override = default;
 
         void draw() override;
@@ -33,7 +34,9 @@ namespace Pages {
 
     private:
         void update();
+
         void toStart();
+
         void toView();
 
         StateTag _currentTag = START;

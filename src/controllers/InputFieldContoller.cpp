@@ -35,8 +35,8 @@ namespace Controllers {
     void InputFieldController::processMouseScroll(double x_offset, double y_offset) {
     }
 
-    void InputFieldController::processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) {
-        char x = (char)codepoint;
+    void InputFieldController::processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) {
+        char x = (char) codepoint;
         std::cout << codepoint << std::endl;
         if (_target != nullptr) {
             std::cout << codepoint << std::endl;

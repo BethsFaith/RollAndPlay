@@ -6,15 +6,15 @@
 
 namespace Forms {
     InputField::InputField(float xOffset, float yOffset, std::string title) :
-          Button(xOffset, yOffset) {
+            Button(xOffset, yOffset, GraphicLib::Primitives::AbstractPrimitive::Ptr()) {
         this->title = std::move(title);
     }
 
-    const std::string& InputField::getBuf() const {
+    const std::string &InputField::getBuf() const {
         return _buf;
     }
 
-    const std::string& InputField::getTitle() const {
+    const std::string &InputField::getTitle() const {
         return title;
     }
 

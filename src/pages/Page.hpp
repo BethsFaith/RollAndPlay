@@ -17,6 +17,7 @@ namespace Pages {
         using Ptr = std::shared_ptr<Page>;
 
         Page() = default;
+
         virtual ~Page() = default;
 
         virtual void draw() = 0;

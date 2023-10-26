@@ -11,11 +11,13 @@ namespace Forms {
     class SelectableForm {
     public:
         SelectableForm() = default;
+
         ~SelectableForm() = default;
 
         virtual bool checkSelecting(unsigned int x, unsigned int y) = 0;
 
         void setCanvas(const GraphicLib::PickableTexture::Ptr &canvas);
+
     protected:
         GraphicLib::PickableTexture::Ptr canvas;
     };

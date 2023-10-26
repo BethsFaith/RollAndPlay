@@ -4,10 +4,10 @@
 
 #include "Gui.hpp"
 
-Gui::Gui(const GraphicLib::PickableTexture::Ptr canvas) : _canvas(canvas){
+Gui::Gui(const GraphicLib::PickableTexture::Ptr canvas) : _canvas(canvas) {
     _shader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
-        (R"(..\..\rsrc\shaders\gui.vert)",
-         R"(..\..\rsrc\shaders\gui.frag)");
+            (R"(..\..\rsrc\shaders\gui.vert)",
+             R"(..\..\rsrc\shaders\gui.frag)");
     _selectableShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
             (R"(..\..\rsrc\shaders\gui.vert)",
              R"(..\..\rsrc\shaders\select.frag)");
@@ -17,7 +17,7 @@ Gui::Gui(const GraphicLib::PickableTexture::Ptr canvas) : _canvas(canvas){
 }
 
 void Gui::draw() {
-    for (auto& button : _buttons) {
+    for (auto &button: _buttons) {
         button->disableTechnique(GraphicLib::Techniques::PICK);
         button->enableTechnique(GraphicLib::Techniques::COLOR);
         button->enableTechnique(GraphicLib::Techniques::TRANSFORM);

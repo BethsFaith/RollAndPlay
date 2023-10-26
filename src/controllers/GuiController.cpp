@@ -55,7 +55,7 @@ namespace Controllers {
         _viewController = viewController;
     }
 
-    void GuiController::processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) {
+    void GuiController::processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) {
         if (_viewController != nullptr) {
             _viewController->processCharMods(window, codepoint, mods);
         }

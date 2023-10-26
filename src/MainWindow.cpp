@@ -118,7 +118,7 @@ bool MainWindow::shouldClose() {
     return glfwWindowShouldClose(_window);
 }
 
-void MainWindow::mouseButtonCallback(GLFWwindow* window, int mouseButton, int action, int mods) {
+void MainWindow::mouseButtonCallback(GLFWwindow *window, int mouseButton, int action, int mods) {
     instance->_view->processMouseButton(window, mouseButton, action, mods);
 }
 
@@ -130,7 +130,7 @@ void MainWindow::mouseScrollCallback(GLFWwindow *window, double xOffset, double 
     instance->_view->processMouseCursor(window, xOffset, yOffset);
 }
 
-void MainWindow::charModsCallback(GLFWwindow* window, unsigned int codepoint, int mods) {
+void MainWindow::charModsCallback(GLFWwindow *window, unsigned int codepoint, int mods) {
     instance->_view->processCharMods(window, codepoint, mods);
 }
 

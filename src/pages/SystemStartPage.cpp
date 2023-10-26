@@ -37,11 +37,11 @@ namespace Pages {
 
     void SystemStartPage::toStart() {
         GraphicLib::Primitives::AbstractPrimitive::Ptr rectangle =
-            std::make_shared<GraphicLib::Primitives::Rectangle>(
-                GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
-                                                            .with_texture_coords = false,
-                                                            .with_tangent = false,
-                                                            .with_bitangent = false});
+                std::make_shared<GraphicLib::Primitives::Rectangle>(
+                        GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
+                                .with_texture_coords = false,
+                                .with_tangent = false,
+                                .with_bitangent = false});
         rectangle->bindData(GL_STATIC_DRAW);
 
 
@@ -50,7 +50,7 @@ namespace Pages {
         button->color = Forms::Color::GRAY;
         button->title = "Создать";
         button->scale = glm::vec3(0.1, 0.1f, 0.0f);
-        button->setPressCallback([&](){
+        button->setPressCallback([&]() {
             this->_currentTag = StateTag::VIEW;
             this->update();
         });
@@ -61,11 +61,11 @@ namespace Pages {
 
     void SystemStartPage::toView() {
         GraphicLib::Primitives::AbstractPrimitive::Ptr rectangle =
-            std::make_shared<GraphicLib::Primitives::Rectangle>(
-                GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
-                                                            .with_texture_coords = false,
-                                                            .with_tangent = false,
-                                                            .with_bitangent = false});
+                std::make_shared<GraphicLib::Primitives::Rectangle>(
+                        GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
+                                .with_texture_coords = false,
+                                .with_tangent = false,
+                                .with_bitangent = false});
         rectangle->bindData(GL_STATIC_DRAW);
 
         _gui.setTextSize(0.055, 0.15);
@@ -74,7 +74,7 @@ namespace Pages {
         button->color = Forms::Color::GRAY;
         button->title = "Сохранить";
         button->scale = glm::vec3(0.1, 0.1f, 0.0f);
-        button->setPressCallback([&](){
+        button->setPressCallback([&]() {
             this->_currentTag = StateTag::START;
             this->update();
         });

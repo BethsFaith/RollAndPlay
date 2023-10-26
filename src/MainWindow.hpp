@@ -39,13 +39,13 @@ public:
 protected:
     static void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
 
-    static void mouseButtonCallback(GLFWwindow* window, int mouseButton, int action, int mods);
+    static void mouseButtonCallback(GLFWwindow *window, int mouseButton, int action, int mods);
 
     static void mouseInputCallback(GLFWwindow *window, double xPos, double yPos);
 
     static void mouseScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
 
-    static void charModsCallback(GLFWwindow* window, unsigned int codepoint, int mods);
+    static void charModsCallback(GLFWwindow *window, unsigned int codepoint, int mods);
 
 private:
     static MainWindow *instance;

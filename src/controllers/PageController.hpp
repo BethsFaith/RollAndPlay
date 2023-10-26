@@ -25,12 +25,13 @@ namespace Controllers {
 
         void processMouseScroll(double xOffset, double yOffset) override;
 
-        void addButton(const Forms::Button::Ptr& button);
+        void addButton(const Forms::Button::Ptr &button);
 
         void clear();
 
         void addController(Controllers::GLController::Ptr controller);
-        virtual void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) override;
+
+        virtual void processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) override;
 
     private:
         std::vector<Forms::Button::Ptr> _buttons;

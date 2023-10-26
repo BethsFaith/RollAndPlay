@@ -26,7 +26,7 @@ namespace Controllers {
 
         virtual void processMouseScroll(double xOffset, double yOffset) = 0;
 
-        virtual void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) = 0;
+        virtual void processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) = 0;
 
         virtual void clear() = 0;
     };

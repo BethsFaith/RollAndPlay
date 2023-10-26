@@ -4,8 +4,8 @@
 
 #include "ViewWindow.hpp"
 
-ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::PickableTexture::Ptr& canvas)
-: _gui(canvas) {
+ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::PickableTexture::Ptr &canvas)
+        : _gui(canvas) {
     using namespace GraphicLib;
 
     _shader = std::make_shared<Shaders::ShaderProgram>(R"(..\..\rsrc\shaders\gui.vert)",
@@ -26,13 +26,13 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
     };
 
     for (int i{}; i < 5; ++i) {
-        auto button = std::make_shared<Forms::Button>(startOffset,9.0f);
+        auto button = std::make_shared<Forms::Button>(startOffset, 9.0f);
 
         button->color = Forms::Color::LIGHT_BLUE;
         button->scale = glm::vec3(0.1f, 0.1f, 0.0f);
         button->title = names.at(i);
 
-        _gui.setTextSize(0.05 + 0.065*(buttons.size()), 0.05);
+        _gui.setTextSize(0.05 + 0.065 * (buttons.size()), 0.05);
         _gui.addButton(button, rectangle);
 
         _controller.addButton(button);
@@ -40,20 +40,20 @@ ViewWindow::ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::P
 
         startOffset += 1.3;
     }
-    buttons[0]->setPressCallback([&](){
+    buttons[0]->setPressCallback([&]() {
         std::cout << "1PRESS" << std::endl;
         _currentPageTag = PageTag::SYSTEM_START;
     });
-    buttons[1]->setPressCallback([&](){
+    buttons[1]->setPressCallback([&]() {
         std::cout << "2PRESS" << std::endl;
     });
-    buttons[2]->setPressCallback([&](){
+    buttons[2]->setPressCallback([&]() {
         std::cout << "3PRESS" << std::endl;
     });
-    buttons[3]->setPressCallback([&](){
+    buttons[3]->setPressCallback([&]() {
         std::cout << "4PRESS" << std::endl;
     });
-    buttons[4]->setPressCallback([&](){
+    buttons[4]->setPressCallback([&]() {
         std::cout << "5PRESS" << std::endl;
     });
 
@@ -96,7 +96,7 @@ void ViewWindow::processMouseScroll(GLFWwindow *window, double x_offset, double 
     _controller.processMouseCursor(window, x_offset, y_offset);
 }
 
-void ViewWindow::processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) {
+void ViewWindow::processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) {
     _controller.processCharMods(window, codepoint, mods);
 }
 

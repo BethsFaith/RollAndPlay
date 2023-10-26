@@ -21,6 +21,7 @@ public:
     using Ptr = std::shared_ptr<Gui>;
 
     Gui(const GraphicLib::PickableTexture::Ptr canvas);
+
     ~Gui() = default;
 
     void draw();
