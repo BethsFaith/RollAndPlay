@@ -22,7 +22,7 @@ namespace GraphicLib::Techniques {
 
         void execute() override;
 
-        void setText(const std::string &text);
+        void setText(const std::u16string &text);
 
         void setColor(const glm::vec3 &color);
 
@@ -32,15 +32,11 @@ namespace GraphicLib::Techniques {
 
         void setScale(float scale);
 
-        const std::string &getText() const;
-
-        const glm::vec3 &getColor() const;
-
-        float getScale() const;
-
-        float getWidth() const;
-
-        float getHeight() const;
+        [[nodiscard]] const std::u16string &getText() const;
+        [[nodiscard]] const glm::vec3 &getColor() const;
+        [[nodiscard]] float getScale() const;
+        [[nodiscard]] float getWidth() const;
+        [[nodiscard]] float getHeight() const;
 
     protected:
         static GraphicLib::TextRender::Ptr TextRenderer;
@@ -49,7 +45,7 @@ namespace GraphicLib::Techniques {
         static unsigned int ScreenWidth;
         static unsigned int ScreenHeight;
     private:
-        std::string _text;
+        std::u16string _text;
         glm::vec3 _color = glm::vec3{1.0f};
         float _scale = 1.0f;
         float _width = 5.0f;

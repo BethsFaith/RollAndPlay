@@ -37,7 +37,7 @@ namespace GraphicLib::Techniques {
         glEnable(GL_DEPTH_TEST);
     }
 
-    void TextTechnique::setText(const std::string &text) {
+    void TextTechnique::setText(const std::u16string &text) {
         _text = text;
     }
 
@@ -61,7 +61,7 @@ namespace GraphicLib::Techniques {
         TextRenderer.reset();
     }
 
-    const std::string &TextTechnique::getText() const {
+    const std::u16string &TextTechnique::getText() const {
         return _text;
     }
 

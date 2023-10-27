@@ -7,6 +7,17 @@
 
 #include <iostream>
 #include <utility>
+//#ifdef _WIN32
+//#include <windows.h>
+//#else
+//#include <clocale>
+//#endif
+#ifdef   WIN32
+#include <codecvt>
+#else
+#include <uchar.h>
+#endif
+
 
 #include "Button.hpp"
 
@@ -19,15 +30,15 @@ namespace Forms {
 
         ~InputField() override = default;
 
-        void putToBuffer(char character);
+        void putToBuffer(char16_t character);
 
-        void putToBuffer(const std::string& string);
+        void putToBuffer(const std::string &string);
 
         void popFromBuffer();
 
         void clear();
 
-        [[nodiscard]] const std::string &getBuf() const;
+        [[nodiscard]] std::string getBuf() const;
 
         void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
 

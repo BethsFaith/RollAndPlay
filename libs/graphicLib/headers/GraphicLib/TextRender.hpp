@@ -36,9 +36,11 @@ namespace GraphicLib {
 
         void render(std::string text, float x, float y, float scale, glm::vec3 color);
 
+        void render(std::u16string text, float x, float y, float scale, glm::vec3 color);
+
     private:
         // Список предварительно скомпилированных символов
-        std::map<char, Character> characters;
+        std::map<char16_t, Character> characters;
 
         // Состояние рендеринга
         Buffers::VAO::Ptr _vao;

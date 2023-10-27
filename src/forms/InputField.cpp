@@ -6,18 +6,20 @@
 
 namespace Forms {
     InputField::InputField(const GraphicLib::Primitives::AbstractPrimitive::Ptr &graphicPrimitive, Text inputParams)
-    : Button(graphicPrimitive, FormType::INPUT_FIELD), _buf(std::move(inputParams)) {}
+            : Button(graphicPrimitive, FormType::INPUT_FIELD), _buf(std::move(inputParams)) {}
 
-    const std::string &InputField::getBuf() const {
-        return _buf.content;
+    std::string InputField::getBuf() const {
+        std::string str8(_buf.content.begin(), _buf.content.end());
+        return str8;
     }
 
-    void InputField::putToBuffer(char character) {
-        _buf.content += character;
+    void InputField::putToBuffer(char16_t character) {
+        _buf.content.push_back(character);
     }
 
-    void InputField::putToBuffer(const std::string& string) {
-        _buf.content += string;
+    void InputField::putToBuffer(const std::string &string) {
+        std::u16string str(string.begin(), string.end());
+        _buf.content.append(str);
     }
 
     void InputField::popFromBuffer() {
@@ -51,7 +53,7 @@ namespace Forms {
         _object.render(shader);
 
         // возвращаем прошлые
-        _object.addTechnique(GraphicLib::Techniques::TEXT,textTechn);
+        _object.addTechnique(GraphicLib::Techniques::TEXT, textTechn);
     }
 
     void InputField::renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
@@ -65,8 +67,8 @@ namespace Forms {
         auto trans = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(techn);
         auto scale = trans->getScaleValue();
         auto offset = trans->getTransformValue();
-        trans->enableScale({scale.x*1.02, scale.y*1.1, scale.z});
-        trans->enableTransform({offset.x*0.98, offset.y*0.909, offset.z});
+        trans->enableScale({scale.x * 1.02, scale.y * 1.1, scale.z});
+        trans->enableTransform({offset.x * 0.98, offset.y * 0.909, offset.z});
 
         renderForm(shader);
 

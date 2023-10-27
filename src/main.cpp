@@ -1,4 +1,7 @@
 #include <iostream>
+#include <io.h>
+#include <fcntl.h>
+
 #include "MainWindow.hpp"
 
 int main() {

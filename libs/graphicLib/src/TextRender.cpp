@@ -46,7 +46,7 @@ namespace GraphicLib {
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
         // Предварительно загружаем/компилируем символы шрифта и сохраняем их
-        for (unsigned int c = 0; c < 256; c++)
+        for (unsigned int c = 0; c < 2048; c++)
         {
             // Загрузка символа глифа
             if (FT_Load_Char(face, c, FT_LOAD_RENDER))
@@ -74,13 +74,72 @@ namespace GraphicLib {
                     .bearing = glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
                     .advance = static_cast<unsigned int>(face->glyph->advance.x)
             };
-            characters.insert(std::pair<char, Character>(c, character));
+            characters.insert(std::pair<char16_t, Character>(c, character));
         }
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
         // Когда закончили, освобождаем ресурсы FreeType
         FT_Done_Face(face);
         FT_Done_FreeType(ft);
+    }
+
+    void TextRender::render(std::u16string text, float x, float y, float scale, glm::vec3 color) {
+        // активировать соответствующий шейдер перед этим
+
+        glActiveTexture(GL_TEXTURE0);
+        _vao->bind();
+
+        std::u16string::const_iterator c;
+        for (c = text.begin(); c != text.end(); c++)
+        {
+            Character ch = characters[*c];
+
+            float xpos = x + ch.bearing.x * scale;
+            float ypos = y + (this->characters['H'].bearing.y - ch.bearing.y) * scale;
+
+            float w = ch.size.x * scale;
+            float h = ch.size.y * scale;
+
+            // Обновляем VBO для каждого символа
+//            std::vector<glm::vec4> vertices = {
+//                    { xpos,     ypos + h,   0.0f, 1.0f },
+//                    { xpos + w, ypos,       1.0f, 0.0f },
+//                    { xpos,     ypos,       0.0f, 0.0f },
+//
+//                    { xpos,     ypos + h,   0.0f, 1.0f },
+//                    { xpos + w, ypos + h,   1.0f, 1.0f },
+//                    { xpos + w, ypos,       1.0f, 0.0f }
+//            };
+
+            // Обновляем VBO для каждого символа
+            float vertices[6][4] = {
+                    { xpos,     ypos + h,   0.0f, 1.0f },
+                    { xpos + w, ypos,       1.0f, 0.0f },
+                    { xpos,     ypos,       0.0f, 0.0f },
+
+                    { xpos,     ypos + h,   0.0f, 1.0f },
+                    { xpos + w, ypos + h,   1.0f, 1.0f },
+                    { xpos + w, ypos,       1.0f, 0.0f }
+            };
+
+
+            // Рендерим на прямоугольник текстуру глифа
+            ch.texture->bind();
+
+            // Обновляем содержимое памяти VBO
+            _vbo->bind();
+            glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+//            _vbo->bindSubData(vertices, 0);
+            _vbo->unbind();
+
+            // Рендерим прямоугольник
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+
+            // Теперь смещаем курсор к следующему глифу
+            x += (ch.advance >> 6) * scale; // битовый сдвиг на 6, чтобы получить значение в пикселях (2^6 = 64)
+        }
+        _vao->unbind();
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 
     void TextRender::render(std::string text, float x, float y, float scale, glm::vec3 color) {
