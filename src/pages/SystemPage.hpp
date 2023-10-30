@@ -9,9 +9,6 @@
 #include <utility>
 
 #include "BasePage.hpp"
-#include "../controllers/InputFieldController.hpp"
-#include "../forms/InputField.hpp"
-#include "../forms/ImageButton.hpp"
 #include "../data/System.hpp"
 
 namespace Pages {
