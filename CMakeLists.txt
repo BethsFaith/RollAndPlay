@@ -43,7 +43,7 @@ add_executable(RollAndPlay
         src/controllers/CommonController.cpp
         src/controllers/ButtonController.cpp
         src/controllers/FormControllerFactory.cpp
-        src/controllers/ImageButtonController.cpp)
+        src/controllers/ImageButtonController.cpp src/pages/RacePage.cpp src/data/storage/StreamWriter.cpp src/data/storage/StreamReader.cpp)
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

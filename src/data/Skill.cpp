@@ -5,11 +5,11 @@
 #include "Skill.hpp"
 
 namespace Data {
-    size_t Skill::serialize(std::ostream &os) const {
+    size_t Skill::serialize(Storage::StreamWriter &writer) const {
         return 0;
     }
 
-    size_t Skill::deserialize(std::istream &is) {
+    size_t Skill::deserialize(Storage::StreamReader &reader) {
         return 0;
     }
 

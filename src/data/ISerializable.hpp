@@ -6,12 +6,14 @@
 #define ROLLANDPLAY_SERIALIZABLE_HPP
 
 #include <iostream>
+#include "storage/StreamWriter.hpp"
+#include "storage/StreamReader.hpp"
 
 namespace Data {
     class ISerializable {
     public:
-        virtual std::size_t serialize(std::ostream& os) const = 0;
-        virtual std::size_t deserialize(std::istream& is) = 0;
+        [[nodiscard]] virtual std::size_t serialize(Storage::StreamWriter &writer) const = 0;
+        virtual std::size_t deserialize(Storage::StreamReader &reader) = 0;
 
         [[nodiscard]] virtual std::size_t serialized_size() const noexcept = 0;
 

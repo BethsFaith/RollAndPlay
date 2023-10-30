@@ -5,11 +5,11 @@
 #include "Action.hpp"
 
 namespace Data {
-    size_t Action::serialize(std::ostream &os) const {
+    size_t Action::serialize(Storage::StreamWriter& writer) const {
         return 0;
     }
 
-    size_t Action::deserialize(std::istream &is) {
+    size_t Action::deserialize(Storage::StreamReader &reader) {
         return 0;
     }
 

@@ -19,7 +19,11 @@ public:
     enum PageTag {
         NULL_PAGE,
         SYSTEM,
-        SKILL
+        SKILL,
+        ACTION,
+        RACE,
+        CLASS,
+        EXPORT
     };
 
     using Ptr = std::shared_ptr<ViewWindow>;

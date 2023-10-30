@@ -2,31 +2,36 @@
 // Created by VerOchka on 30.10.2023.
 //
 
-#ifndef ROLLANDPLAY_SKILLPAGE_HPP
-#define ROLLANDPLAY_SKILLPAGE_HPP
+#ifndef ROLLANDPLAY_RACEPAGE_HPP
+#define ROLLANDPLAY_RACEPAGE_HPP
 
 #include "BasePage.hpp"
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
 namespace Pages {
-    class SkillPage : public BasePage {
+    class RacePage : public BasePage {
     public:
         enum StateTag {
             START,
             VIEW
         };
 
-        explicit SkillPage(GraphicLib::PickableTexture::Ptr canvas);
-        ~SkillPage() override = default;
+        using Ptr = std::shared_ptr<RacePage>;
+
+        explicit RacePage(GraphicLib::PickableTexture::Ptr
+        canvas);
+        ~RacePage() override = default;
 
     private:
         void update() override;
 
         void toStart();
+
         void toView();
 
         StateTag _currentTag = START;
     };
 }
 
-#endif //ROLLANDPLAY_SKILLPAGE_HPP
+
+#endif //ROLLANDPLAY_RACEPAGE_HPP

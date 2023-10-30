@@ -20,6 +20,7 @@
 #include "ViewWindow.hpp"
 #include "pages/SystemPage.hpp"
 #include "pages/SkillPage.hpp"
+#include "pages/RacePage.hpp"
 
 class MainWindow {
 public:

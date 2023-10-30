@@ -19,9 +19,9 @@ namespace Data {
         Action() = default;
         ~Action() override = default;
 
-        size_t serialize(std::ostream &os) const override;
+        size_t serialize(Storage::StreamWriter &writer) const override;
 
-        size_t deserialize(std::istream &is) override;
+        size_t deserialize(Storage::StreamReader &reader) override;
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 

@@ -11,11 +11,11 @@ namespace Data {
         _index = index++;
     }
 
-    size_t SkillCategory::serialize(std::ostream &os) const {
+    size_t SkillCategory::serialize(Storage::StreamWriter &writer) const {
         return 0;
     }
 
-    size_t SkillCategory::deserialize(std::istream &is) {
+    size_t SkillCategory::deserialize(Storage::StreamReader &reader) {
         return 0;
     }
 
