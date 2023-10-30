@@ -5,10 +5,47 @@
 #include "Action.hpp"
 
 namespace Data {
-    Action::Action(std::string name, uint8_t pointsNumber, uint8_t level, Data::Skill *skill)
-            : _name(std::move(name)),
-              _pointsNumber(pointsNumber),
-              _level(level),
-              _skill(skill) {}
+    size_t Action::serialize(std::ostream &os) const {
+        return 0;
+    }
 
+    size_t Action::deserialize(std::istream &is) {
+        return 0;
+    }
+
+    size_t Action::serialized_size() const noexcept {
+        return 0;
+    }
+
+    void Action::setName(const std::string &name) {
+        _name = name;
+    }
+
+    void Action::setPointsNumber(uint8_t pointsNumber) {
+        _pointsNumber = pointsNumber;
+    }
+
+    void Action::setLevel(uint8_t level) {
+        _level = level;
+    }
+
+    void Action::setSkill(Skill::Ptr skill) {
+        _skill = skill;
+    }
+
+    const std::string &Action::getName() const {
+        return _name;
+    }
+
+    uint8_t Action::getPointsNumber() const {
+        return _pointsNumber;
+    }
+
+    uint8_t Action::getLevel() const {
+        return _level;
+    }
+
+    Skill::Ptr Action::getSkill() const {
+        return _skill;
+    }
 }

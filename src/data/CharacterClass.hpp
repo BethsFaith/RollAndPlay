@@ -16,16 +16,16 @@ namespace Data {
     public:
         CharacterClass(const std::string &name, const std::string &iconPath);
 
-        void addAction(Action *action);
+        void addAction(Action::Ptr action);
 
-        void removeAction(Action *action);
+        void removeAction(Action::Ptr action);
 
-        void addInitialSkillLevel(Skill *skill, int level);
+        void addInitialSkillLevel(Skill::Ptr skill, int level);
 
     private:
         std::string _name;
         std::string _iconPath;
-        std::vector<Action *> _actions;
+        std::vector<Action::Ptr> _actions;
         std::vector<SkillLevel> _skillParameters;
     };
 }

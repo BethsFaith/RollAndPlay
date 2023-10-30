@@ -8,20 +8,38 @@
 #include <iostream>
 #include <utility>
 
+#include "ISerializable.hpp"
 #include "Skill.hpp"
 
 namespace Data {
-    class Action {
+    class Action : public ISerializable {
     public:
-        Action(std::string name, uint8_t pointsNumber, uint8_t level, Skill *skill);
+        using Ptr = std::shared_ptr<Action>;
 
-        ~Action() = default;
+        Action() = default;
+        ~Action() override = default;
+
+        size_t serialize(std::ostream &os) const override;
+
+        size_t deserialize(std::istream &is) override;
+
+        [[nodiscard]] size_t serialized_size() const noexcept override;
+
+        void setName(const std::string &name);
+        void setPointsNumber(uint8_t pointsNumber);
+        void setLevel(uint8_t level);
+        void setSkill(Skill::Ptr skill);
+
+        [[nodiscard]] const std::string &getName() const;
+        [[nodiscard]] uint8_t getPointsNumber() const;
+        [[nodiscard]] uint8_t getLevel() const;
+        [[nodiscard]] Skill::Ptr getSkill() const;
 
     private:
         std::string _name;
-        uint8_t _pointsNumber;
-        uint8_t _level;
-        Skill *_skill;
+        uint8_t _pointsNumber{};
+        uint8_t _level{};
+        Skill::Ptr _skill{};
     };
 }
 

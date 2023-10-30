@@ -5,9 +5,11 @@
 #ifndef ROLLANDPLAY_MODEL_HPP
 #define ROLLANDPLAY_MODEL_HPP
 
+#include <iostream>
+
 namespace Data::Graphic {
     class Model {
-
+        using Ptr = std::shared_ptr<Model>;
     };
 }
 

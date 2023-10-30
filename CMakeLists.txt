@@ -25,6 +25,8 @@ add_executable(RollAndPlay
         src/data/CharacterClass.cpp
         src/data/graphic/Model.cpp
         src/data/Race.cpp
+        src/data/System.cpp
+        src/data/SkillCategory.cpp
         src/MainWindow.cpp
         src/controllers/GuiController.cpp
         src/forms/Color.cpp

@@ -9,8 +9,8 @@
 
 namespace Data {
     struct SkillLevel {
-        Skill *skill;
-        int level;
+        Skill::Ptr skill;
+        unsigned int level;
     };
 } // Data
 

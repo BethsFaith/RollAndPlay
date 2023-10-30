@@ -8,28 +8,24 @@
 #include <iostream>
 #include <utility>
 
+#include "ISerializable.hpp"
+
 namespace Data {
-    class Skill {
+    class Skill : ISerializable {
     public:
-        struct Category {
-        public:
-            explicit Category(std::string name);
+        using Ptr = std::shared_ptr<Skill>;
 
-            ~Category() = default;
+        ~Skill() override = default;
 
-            void setIconPath(const std::string &imagePath);
+        size_t serialize(std::ostream &os) const override;
+        size_t deserialize(std::istream &is) override;
 
-        private:
-            uint8_t _index;
-            std::string _name;
-            std::string _iconPath;
-
-            static uint8_t index;
-        };
+        [[nodiscard]] size_t serialized_size() const noexcept override;
 
     private:
         std::string _name;
-        Category *category;
+        std::string _iconPath;
+        uint8_t _categoryIndex;
     };
 }
 

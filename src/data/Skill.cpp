@@ -5,12 +5,15 @@
 #include "Skill.hpp"
 
 namespace Data {
-    uint8_t Skill::Category::index = 0;
-
-    Skill::Category::Category(std::string name) : _index(index++), _name(std::move(name)) {
+    size_t Skill::serialize(std::ostream &os) const {
+        return 0;
     }
 
-    void Skill::Category::setIconPath(const std::string &imagePath) {
-        _iconPath = imagePath;
+    size_t Skill::deserialize(std::istream &is) {
+        return 0;
+    }
+
+    size_t Skill::serialized_size() const noexcept {
+        return 0;
     }
 }

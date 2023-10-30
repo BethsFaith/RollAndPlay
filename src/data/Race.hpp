@@ -28,7 +28,7 @@ namespace Data {
     private:
         std::string _name;
         std::string _iconPath;
-        Graphic::Model *_model{};
+        Graphic::Model::Ptr _model{};
         std::vector<SkillLevel> _skillParameters;
     };
 } // Data
