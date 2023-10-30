@@ -93,6 +93,9 @@ namespace GraphicLib {
         for (c = text.begin(); c != text.end(); c++)
         {
             Character ch = characters[*c];
+            if (ch.texture == nullptr) {
+                return; // код ошибки
+            }
 
             float xpos = x + ch.bearing.x * scale;
             float ypos = y + (this->characters['H'].bearing.y - ch.bearing.y) * scale;
