@@ -14,13 +14,13 @@
 namespace Data {
     class CharacterClass {
     public:
-        CharacterClass(const std::string &name, const std::string &iconPath);
+        CharacterClass(std::string name, std::string iconPath);
 
-        void addAction(Action::Ptr action);
+        void addAction(const Action::Ptr& action);
 
-        void removeAction(Action::Ptr action);
+        void removeAction(const Action::Ptr& action);
 
-        void addInitialSkillLevel(Skill::Ptr skill, int level);
+        void addInitialSkillLevel(Skill::Ptr skill, unsigned int level);
 
     private:
         std::string _name;

@@ -8,7 +8,11 @@ namespace Forms {
     InputField::InputField(const GraphicLib::Primitives::AbstractPrimitive::Ptr &graphicPrimitive, Text inputParams)
             : Button(graphicPrimitive, FormType::INPUT_FIELD), _buf(std::move(inputParams)) {}
 
-    std::string InputField::getBuf() const {
+    const std::u16string & InputField::getBuf() const {
+        return _buf.content;
+    }
+
+    std::string InputField::getU8Buf() const {
         std::string str8(_buf.content.begin(), _buf.content.end());
         return str8;
     }
@@ -20,6 +24,10 @@ namespace Forms {
     void InputField::putToBuffer(const std::string &string) {
         std::u16string str(string.begin(), string.end());
         _buf.content.append(str);
+    }
+
+    void InputField::putToBuffer(const std::u16string &string) {
+        _buf.content.append(string);
     }
 
     void InputField::popFromBuffer() {

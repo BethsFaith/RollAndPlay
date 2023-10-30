@@ -11,14 +11,15 @@
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 
 #include "controllers/CommonController.hpp"
-#include "pages/Page.hpp"
+#include "pages/APage.hpp"
 #include "Gui.hpp"
 
 class ViewWindow {
 public:
     enum PageTag {
         NULL_PAGE,
-        SYSTEM_START
+        SYSTEM,
+        SKILL
     };
 
     using Ptr = std::shared_ptr<ViewWindow>;
@@ -39,7 +40,7 @@ public:
 
     void processCharMods(GLFWwindow *window, unsigned int codepoint, int mods);
 
-    void addPage(PageTag tag, Pages::Page::Ptr page);
+    void addPage(PageTag tag, Pages::APage::Ptr page);
 
 private:
     void initView(int x, int y, Forms::Color viewColor);
@@ -51,7 +52,7 @@ private:
     Gui _gui;
     Controllers::CommonController _controller;
 
-    std::map<PageTag, Pages::Page::Ptr> _pages;
+    std::map<PageTag, Pages::APage::Ptr> _pages;
     PageTag _currentPageTag = PageTag::NULL_PAGE;
 };
 

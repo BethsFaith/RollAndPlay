@@ -5,21 +5,21 @@
 #include "CharacterClass.hpp"
 
 namespace Data {
-    CharacterClass::CharacterClass(const std::string &name, const std::string &iconPath) : _name(name),
-                                                                                           _iconPath(iconPath) {}
+    CharacterClass::CharacterClass(std::string name, std::string iconPath) : _name(std::move(name)),
+                                                                                           _iconPath(std::move(iconPath)) {}
 
-    void CharacterClass::addAction(Action::Ptr action) {
+    void CharacterClass::addAction(const Action::Ptr& action) {
         _actions.push_back(action);
     }
 
-    void CharacterClass::removeAction(Action::Ptr action) {
+    void CharacterClass::removeAction(const Action::Ptr& action) {
         auto num = std::erase(_actions, action);
         if (num < 1) {
             //
         }
     }
 
-    void CharacterClass::addInitialSkillLevel(Skill::Ptr skill, int level) {
-        _skillParameters.push_back(SkillLevel{.skill = skill, .level = level});
+    void CharacterClass::addInitialSkillLevel(Skill::Ptr skill, unsigned int level) {
+        _skillParameters.push_back(SkillLevel{.skill = std::move(skill), .level = level});
     }
 }

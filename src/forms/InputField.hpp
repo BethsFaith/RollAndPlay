@@ -34,11 +34,14 @@ namespace Forms {
 
         void putToBuffer(const std::string &string);
 
+        void putToBuffer(const std::u16string &string);
+
         void popFromBuffer();
 
         void clear();
 
-        [[nodiscard]] std::string getBuf() const;
+        [[nodiscard]] const std::u16string &getBuf() const;
+        [[nodiscard]] std::string getU8Buf() const;
 
         void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
 

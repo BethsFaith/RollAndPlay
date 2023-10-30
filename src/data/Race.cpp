@@ -7,12 +7,12 @@
 namespace Data {
     Race::Race(std::string name) : _name(std::move(name)) {}
 
-    void Race::addInitialSkillLevel(Skill *skill, int level) {
-        _skillParameters.push_back(SkillLevel{.skill = skill, .level = level});
+    void Race::addInitialSkillLevel(Skill::Ptr skill, unsigned int level) {
+        _skillParameters.push_back(SkillLevel{.skill = std::move(skill), .level = level});
     }
 
-    void Race::setModel(Graphic::Model *model) {
-        _model = model;
+    void Race::setModel(Graphic::Model::Ptr model) {
+        _model = std::move(model);
     }
 
     void Race::setIconPath(const std::string &iconPath) {

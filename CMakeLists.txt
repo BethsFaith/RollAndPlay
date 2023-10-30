@@ -28,19 +28,22 @@ add_executable(RollAndPlay
         src/data/System.cpp
         src/data/SkillCategory.cpp
         src/MainWindow.cpp
-        src/controllers/GuiController.cpp
+        src/ViewWindow.cpp
         src/forms/Color.cpp
         src/forms/Button.cpp
         src/Gui.cpp
         src/forms/Form.cpp
-        src/ViewWindow.cpp
-        src/pages/SystemStartPage.cpp
         src/forms/InputField.cpp
+        src/forms/ImageButton.cpp
+        src/pages/BasePage.cpp
+        src/pages/SystemPage.cpp
+        src/pages/SkillPage.cpp
+        src/controllers/GuiController.cpp
         src/controllers/InputFieldContoller.cpp
         src/controllers/CommonController.cpp
         src/controllers/ButtonController.cpp
         src/controllers/FormControllerFactory.cpp
-        src/forms/ImageButton.cpp
-        src/controllers/ImageButtonController.cpp src/controllers/ImageButtonController.hpp)
+        src/controllers/ImageButtonController.cpp)
+
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

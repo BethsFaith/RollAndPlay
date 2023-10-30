@@ -41,8 +41,11 @@ MainWindow::MainWindow(const char *title) {
 
     _view = std::make_shared<ViewWindow>(0, 0, Forms::Color::DARK_GRAY, canvas);
 
-    auto page = std::make_shared<Pages::SystemStartPage>(canvas);
-    _view->addPage(ViewWindow::PageTag::SYSTEM_START, page);
+    auto systemPage = std::make_shared<Pages::SystemPage>(canvas);
+    auto skillPage = std::make_shared<Pages::SkillPage>(canvas);
+
+    _view->addPage(ViewWindow::PageTag::SYSTEM, systemPage);
+    _view->addPage(ViewWindow::PageTag::SKILL, skillPage);
 }
 
 MainWindow::~MainWindow() {

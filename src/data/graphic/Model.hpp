@@ -9,6 +9,7 @@
 
 namespace Data::Graphic {
     class Model {
+    public:
         using Ptr = std::shared_ptr<Model>;
     };
 }

@@ -17,9 +17,9 @@ namespace Data {
     public:
         explicit Race(std::string name);
 
-        void addInitialSkillLevel(Skill *skill, int level);
+        void addInitialSkillLevel(Skill::Ptr skill, unsigned int level);
 
-        void setModel(Graphic::Model *model);
+        void setModel(Graphic::Model::Ptr model);
 
         void setName(const std::string &name);
 

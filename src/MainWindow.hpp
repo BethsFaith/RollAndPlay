@@ -18,7 +18,8 @@
 #include "controllers/GuiController.hpp"
 #include "Gui.hpp"
 #include "ViewWindow.hpp"
-#include "pages/SystemStartPage.hpp"
+#include "pages/SystemPage.hpp"
+#include "pages/SkillPage.hpp"
 
 class MainWindow {
 public:
