@@ -33,7 +33,7 @@ namespace Pages {
 
         StateTag _currentTag = START;
 
-        Data::System _system;
+        Data::System::Ptr _system;
 
         std::u16string_view _name;
         std::u16string_view _image;

@@ -15,6 +15,8 @@
 namespace Data {
     class System : public ISerializable {
     public:
+        using Ptr = std::shared_ptr<System>;
+
         System() = default;
         ~System() override = default;
 
@@ -32,6 +34,10 @@ namespace Data {
         void addClass(Skill &skill);
 
         unsigned int getIndex() override;
+
+        const std::u16string &getName() const;
+
+        const std::u16string &getImage() const;
 
     private:
         std::u16string _name;

@@ -21,6 +21,7 @@ namespace Data {
     class DataStorage {
     public:
         static size_t save(std::vector<ISerializable::Ptr> data, Type type);
+        static size_t save(ISerializable::Ptr data, Type type);
         static size_t load(std::vector<ISerializable::Ptr> &container, Type type);
 
     private:
