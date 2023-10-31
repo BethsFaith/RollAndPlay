@@ -31,6 +31,8 @@ namespace Data {
         void addClass(CharacterClass &characterClass);
         void addClass(Skill &skill);
 
+        unsigned int getIndex() override;
+
     private:
         std::u16string _name;
         std::u16string _image;

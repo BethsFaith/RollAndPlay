@@ -16,6 +16,9 @@ namespace Data::Storage {
         ~StreamReader() = default;
 
         size_t read(std::u16string &container);
+        size_t read(uint32_t &container);
+
+        void setFileName(const std::string &fileName);
 
     private:
         std::string _fileName;

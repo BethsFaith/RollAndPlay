@@ -12,14 +12,17 @@
 namespace Data {
     class ISerializable {
     public:
+        using Ptr = std::shared_ptr<ISerializable>;
+
+        ISerializable() = default;
+        virtual ~ISerializable() = default;
+
         [[nodiscard]] virtual std::size_t serialize(Storage::StreamWriter &writer) const = 0;
         virtual std::size_t deserialize(Storage::StreamReader &reader) = 0;
 
         [[nodiscard]] virtual std::size_t serialized_size() const noexcept = 0;
 
-    protected:
-        ISerializable() = default;
-        virtual ~ISerializable() = default;
+        virtual unsigned int getIndex() = 0;
     };
 }
 

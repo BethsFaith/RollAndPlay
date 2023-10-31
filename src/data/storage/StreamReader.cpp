@@ -27,4 +27,21 @@ namespace Data::Storage {
 
         return size;
     }
+
+    size_t StreamReader::read(uint32_t &container) {
+        std::ifstream ifstream;
+
+        ifstream.open(_fileName, std::ios::binary);
+
+        const auto pos = ifstream.tellg();
+        auto size = static_cast<std::size_t>(ifstream.tellg() - pos);
+
+        ifstream.read((char*)(&container), sizeof(container));
+
+        return size;
+    }
+
+    void StreamReader::setFileName(const std::string &fileName) {
+        _fileName = fileName;
+    }
 }

@@ -10,6 +10,7 @@
 
 #include "BasePage.hpp"
 #include "../data/System.hpp"
+#include "../data/DataStorage.hpp"
 
 namespace Pages {
     class SystemPage : public BasePage {

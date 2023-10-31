@@ -15,7 +15,11 @@ namespace Data::Storage {
         explicit StreamWriter(std::string fileName);
         ~StreamWriter() = default;
 
+        size_t write(std::uint32_t data);
+        size_t write(int data);
         size_t write(std::u16string data);
+
+        void setFileName(const std::string &fileName);
 
     private:
         std::string _fileName;
