@@ -46,14 +46,14 @@ namespace GraphicLib::Techniques {
 
     void TransformTechnique::execute() {
         glm::mat4 trans = glm::mat4(1.0f);
+        if (_needTransform) {
+            trans = glm::translate(trans, _transformValue);
+        }
         if (_needRotate) {
             trans = glm::rotate(trans, glm::radians(_rotateValue.angle), _rotateValue.coordinates);
         }
         if (_needScale) {
             trans = glm::scale(trans, _scaleValue);
-        }
-        if (_needTransform) {
-            trans = glm::translate(trans, _transformValue);
         }
 
         shader->set4FloatMat("Transform", glm::value_ptr(trans));

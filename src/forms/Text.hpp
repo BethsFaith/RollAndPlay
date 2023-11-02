@@ -12,8 +12,6 @@
 namespace Forms {
     struct Text {
         std::u16string content;
-        float x;
-        float y;
         Color color = Color::WHITE;
     };
 }

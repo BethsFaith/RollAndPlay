@@ -27,8 +27,6 @@ namespace Forms {
 //        const Button::Ptr &getAttachButton() const;
 
     private:
-        void init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color) override;
-
         GraphicLib::Textures::Texture::Ptr _texture;
 //        Button::Ptr _attachButton;
     };

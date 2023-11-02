@@ -5,7 +5,8 @@
 #include "BasePage.hpp"
 
 namespace Pages {
-    BasePage::BasePage(GraphicLib::PickableTexture::Ptr canvas) : _gui(std::move(canvas)) {
+    BasePage::BasePage(GraphicLib::PickableTexture::Ptr canvas)
+    : _gui(std::move(canvas)){
         _controller = std::make_shared<Controllers::CommonController>();
     }
 
@@ -27,5 +28,9 @@ namespace Pages {
         glEnable(GL_DEPTH_TEST);
         _gui.draw();
         glDisable(GL_DEPTH_TEST);
+    }
+
+    void BasePage::setScreenOffset(const glm::vec2 &screenOffset) {
+        ScreenOffset = screenOffset;
     }
 }

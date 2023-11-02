@@ -6,9 +6,7 @@
 
 namespace Forms {
     ImageButton::ImageButton(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
-    : Button(graphicPrimitive, FormType::TEXTURE_BUTTON) {
-//        _attachButton = std::make_shared<Button>(graphicPrimitive);
-    }
+    : Button(graphicPrimitive, FormType::TEXTURE_BUTTON) {}
 
     void ImageButton::init(glm::vec3 scale, glm::vec2 position, const Text &text, const std::string& texturePath,
                            int textureIndex) {
@@ -39,8 +37,8 @@ namespace Forms {
 
         auto textTechnique = std::make_shared<GraphicLib::Techniques::TextTechnique>();
         textTechnique->setText(text.content);
-        textTechnique->setWidth(text.x);
-        textTechnique->setHeight(text.y);
+        textTechnique->setHeight(position.y + scale.y/1.45);
+        textTechnique->setWidth(position.x - scale.x / 2 + 0.01f);
         textTechnique->setColor(getRGB(text.color));
 
         _object.addTechnique(GraphicLib::Techniques::TEXT, textTechnique);
@@ -69,6 +67,5 @@ namespace Forms {
 //        return _attachButton;
 //    }
 
-    void ImageButton::init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color) {}
     void ImageButton::renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) {}
 }

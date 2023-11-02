@@ -104,17 +104,6 @@ namespace GraphicLib {
             float h = ch.size.y * scale;
 
             // Обновляем VBO для каждого символа
-//            std::vector<glm::vec4> vertices = {
-//                    { xpos,     ypos + h,   0.0f, 1.0f },
-//                    { xpos + w, ypos,       1.0f, 0.0f },
-//                    { xpos,     ypos,       0.0f, 0.0f },
-//
-//                    { xpos,     ypos + h,   0.0f, 1.0f },
-//                    { xpos + w, ypos + h,   1.0f, 1.0f },
-//                    { xpos + w, ypos,       1.0f, 0.0f }
-//            };
-
-            // Обновляем VBO для каждого символа
             float vertices[6][4] = {
                     { xpos,     ypos + h,   0.0f, 1.0f },
                     { xpos + w, ypos,       1.0f, 0.0f },
@@ -125,14 +114,12 @@ namespace GraphicLib {
                     { xpos + w, ypos,       1.0f, 0.0f }
             };
 
-
             // Рендерим на прямоугольник текстуру глифа
             ch.texture->bind();
 
             // Обновляем содержимое памяти VBO
             _vbo->bind();
             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-//            _vbo->bindSubData(vertices, 0);
             _vbo->unbind();
 
             // Рендерим прямоугольник
@@ -183,7 +170,6 @@ namespace GraphicLib {
                     { xpos + w, ypos + h,   1.0f, 1.0f },
                     { xpos + w, ypos,       1.0f, 0.0f }
             };
-
 
             // Рендерим на прямоугольник текстуру глифа
             ch.texture->bind();

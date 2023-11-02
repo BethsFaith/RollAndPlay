@@ -7,8 +7,8 @@
 namespace GraphicLib::Techniques {
     GraphicLib::TextRender::Ptr TextTechnique::TextRenderer = nullptr;
     glm::mat4 TextTechnique::Projection = {};
-    unsigned int TextTechnique::ScreenWidth = 3440;
-    unsigned int TextTechnique::ScreenHeight = 1440;
+    unsigned int TextTechnique::ScreenWidth = 1440;
+    unsigned int TextTechnique::ScreenHeight = 720;
 
     void TextTechnique::initTextRendering(unsigned int width, unsigned int height, std::string font, int size) {
         TextRenderer = std::make_shared<GraphicLib::TextRender>(width, height);
@@ -46,11 +46,13 @@ namespace GraphicLib::Techniques {
     }
 
     void TextTechnique::setWidth(float width) {
-        _width = ScreenWidth*width;
+        auto screen = ScreenWidth/2;
+        _width = screen + width * screen;
     }
 
     void TextTechnique::setHeight(float height) {
-        _height = ScreenHeight * height;
+        auto screen = ScreenHeight/2;
+        _height = screen - height * screen;
     }
 
     void TextTechnique::setScale(float scale) {
@@ -74,10 +76,10 @@ namespace GraphicLib::Techniques {
     }
 
     float TextTechnique::getWidth() const {
-        return ScreenWidth/_width;
+        return (_width - ScreenWidth/2);
     }
 
     float TextTechnique::getHeight() const {
-        return ScreenHeight/_height;
+        return (_height + ScreenHeight/2);
     }
 }

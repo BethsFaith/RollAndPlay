@@ -37,8 +37,8 @@ namespace Forms {
 
         auto textTechnique = std::make_shared<GraphicLib::Techniques::TextTechnique>();
         textTechnique->setText(text.content);
-        textTechnique->setWidth(text.x);
-        textTechnique->setHeight(text.y);
+        textTechnique->setWidth(position.x - scale.x / 2 + 0.01f);
+        textTechnique->setHeight(position.y);
         textTechnique->setColor(getRGB(text.color));
 
         _object.addTechnique(GraphicLib::Techniques::TEXT, textTechnique);
@@ -87,7 +87,7 @@ namespace Forms {
         auto scale = trans->getScaleValue();
         auto offset = trans->getTransformValue();
         trans->enableScale({scale.x*1.1, scale.y*1.1, scale.z});
-        trans->enableTransform({offset.x*0.909, offset.y*0.909, offset.z});
+        trans->enableTransform({offset.x, offset.y, offset.z});
 
         renderForm(shader);
 

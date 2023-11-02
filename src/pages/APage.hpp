@@ -8,6 +8,9 @@
 #include <iostream>
 
 #include <GraphicLib/PickableTexture.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "../controllers/GLController.hpp"
 
@@ -22,7 +25,11 @@ namespace Pages {
 
         virtual void draw() = 0;
 
+        virtual void update() = 0;
+
         virtual Controllers::GLController::Ptr getController() = 0;
+
+        virtual void setScreenOffset(const glm::vec2 &screenOffset) = 0;
     };
 }
 

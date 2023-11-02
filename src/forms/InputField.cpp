@@ -12,6 +12,35 @@ namespace Forms {
         return _buf.content;
     }
 
+    void InputField::init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color) {
+        _position = position;
+        _scale = scale;
+
+        auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
+        colorTechnique->setColor(getRGB(color));
+
+        _object.addTechnique(GraphicLib::Techniques::COLOR, colorTechnique);
+
+        auto transformTechnique = std::make_shared<GraphicLib::Techniques::TransformTechnique>();
+        transformTechnique->enableScale(scale);
+        transformTechnique->enableTransform({position, -0.1f});
+
+        _object.addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
+
+        auto picking = std::make_shared<GraphicLib::Techniques::PickTechnique>();
+        picking->setObjectId(id);
+
+        _object.addTechnique(GraphicLib::Techniques::PICK, picking);
+
+        auto textTechnique = std::make_shared<GraphicLib::Techniques::TextTechnique>();
+        textTechnique->setText(text.content);
+        textTechnique->setHeight(position.y + scale.y);
+        textTechnique->setWidth(position.x - scale.x/2 + 0.01f);
+        textTechnique->setColor(getRGB(text.color));
+
+        _object.addTechnique(GraphicLib::Techniques::TEXT, textTechnique);
+    }
+
     std::string InputField::getU8Buf() const {
         std::string str8(_buf.content.begin(), _buf.content.end());
         return str8;
@@ -50,8 +79,8 @@ namespace Forms {
 
         auto newTextTechn = std::make_shared<GraphicLib::Techniques::TextTechnique>();
         newTextTechn->setText(_buf.content);
-        newTextTechn->setWidth(_buf.x);
-        newTextTechn->setHeight(_buf.y);
+        newTextTechn->setWidth(_position.x - _scale.x/2 + 0.01f);
+        newTextTechn->setHeight(_position.y);
         newTextTechn->setColor(getRGB(_buf.color));
         newTextTechn->setScale(1.4);
 
@@ -76,7 +105,7 @@ namespace Forms {
         auto scale = trans->getScaleValue();
         auto offset = trans->getTransformValue();
         trans->enableScale({scale.x * 1.02, scale.y * 1.1, scale.z});
-        trans->enableTransform({offset.x * 0.98, offset.y * 0.909, offset.z});
+        trans->enableTransform(offset);
 
         renderForm(shader);
 

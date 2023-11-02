@@ -21,10 +21,14 @@ namespace Pages {
 
         void draw() override;
 
+        void update() override;
+
+        void setScreenOffset(const glm::vec2 &screenOffset) override;
+
     protected:
-        virtual void update();
         void addButton(const Forms::Button::Ptr& button);
 
+        glm::vec2 ScreenOffset;
     private:
         Controllers::CommonController::Ptr _controller;
         Gui _gui;

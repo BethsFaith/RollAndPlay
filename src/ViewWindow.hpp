@@ -7,12 +7,11 @@
 
 #include <utility>
 
-#include <GraphicLib/Primitives/Rectangle.hpp>
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 
 #include "controllers/CommonController.hpp"
 #include "pages/APage.hpp"
-#include "Gui.hpp"
+#include "Toolbar.hpp"
 
 class ViewWindow {
 public:
@@ -23,7 +22,16 @@ public:
         ACTION,
         RACE,
         CLASS,
-        EXPORT
+        EXPORT,
+        AUTHORIZATION,
+        REGISTRATION
+    };
+    enum ViewTag {
+        NULL_VIEW,
+        LOGIN,
+        SYSTEMS,
+        GAME,
+        LOBBY
     };
 
     using Ptr = std::shared_ptr<ViewWindow>;
@@ -49,15 +57,21 @@ public:
 private:
     void initView(int x, int y, Forms::Color viewColor);
     void updateControllers();
+    void updateGui();
 
     GraphicLib::Object _view;
     GraphicLib::Shaders::ShaderProgram::Ptr _shader;
 
-    Gui _gui;
+    const GraphicLib::PickableTexture::Ptr _canvas;
     Controllers::CommonController _controller;
 
     std::map<PageTag, Pages::APage::Ptr> _pages;
+
     PageTag _currentPageTag = PageTag::NULL_PAGE;
+    ViewTag _currentViewTag = ViewTag::NULL_VIEW;
+
+    Toolbar::Ptr _horizonToolbar;
+    Toolbar::Ptr _verticalToolbar;
 };
 
 #endif //ROLLANDPLAY_VIEWWINDOW_HPP

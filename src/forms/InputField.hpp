@@ -47,7 +47,11 @@ namespace Forms {
 
         void renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
 
+        void init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color) override;
+
     private:
+        glm::vec2 _position;
+        glm::vec2 _scale;
         Text _buf;
     };
 }
