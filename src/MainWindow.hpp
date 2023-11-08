@@ -9,7 +9,6 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 
-#include <wtypes.h>
 #include <stdexcept>
 #include <glm/glm.hpp>
 #include <vector>
@@ -21,6 +20,8 @@
 #include "pages/SystemPage.hpp"
 #include "pages/SkillPage.hpp"
 #include "pages/RacePage.hpp"
+
+#include "config/Config.hpp"
 
 class MainWindow {
 public:
