@@ -1,6 +1,19 @@
 #include <iostream>
+#include <io.h>
+#include <fcntl.h>
+
+#include "MainWindow.hpp"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    MainWindow::init("RollAndPlay - Game System");
+
+    auto window = MainWindow::getInstance();
+
+    window->setClearColor(glm::vec4{0.2f});
+
+    window->run();
+
+    MainWindow::free();
+
     return 0;
 }
