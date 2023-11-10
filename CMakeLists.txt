@@ -48,7 +48,8 @@ add_executable(RollAndPlay
         src/data/storage/StreamWriter.cpp
         src/data/storage/StreamReader.cpp
         src/data/DataStorage.cpp
-        src/Toolbar.cpp src/config/Config.hpp)
+        src/Toolbar.cpp
+        src/config/Config.cpp)
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

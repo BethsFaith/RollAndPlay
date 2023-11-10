@@ -13,6 +13,20 @@
 #include <wtypes.h>
 
 namespace Config {
+    enum Resource {
+        SHADERS,
+        TEXTURES,
+        TEXT,
+    };
+
+    std::string getPath(Resource resource, const std::string& name);
+
+    std::string getDirectory(Resource resDirectory);
+
+    std::string getResourceDirectory();
+
+    std::string splitToPath(std::vector<std::string> strings);
+
     template<typename T>
     static T getValue(const std::string& name) {
         std::ifstream ifstream("../../config.json", std::ifstream::binary);
@@ -68,7 +82,7 @@ namespace Config {
 
     static std::string projectPath = getValue<std::string>("path");
 
-    static char separator = '/';
+    static char separator = '\\';
 };
 
 #endif    //ROLLANDPLAY_CONFIG_HPP
