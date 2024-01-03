@@ -32,9 +32,9 @@ namespace Controllers {
 
         for (auto &button: _buttons) {
             if (button->checkSelecting((int) xPos, int(height - yPos - 1))) {
-                button->setSelected(true);
+                button->setUnderCursor(true);
             } else {
-                button->setSelected(false);
+                button->setUnderCursor(false);
             }
         }
     }

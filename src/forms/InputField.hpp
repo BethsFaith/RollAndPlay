@@ -38,6 +38,14 @@ namespace Forms {
 
         void popFromBuffer();
 
+        void putToBuffer(char16_t character, unsigned int position);
+
+        void putToBuffer(const std::string &string, unsigned int position);
+
+        void putToBuffer(const std::u16string &string, unsigned int position);
+
+        void popFromBuffer(unsigned int position);
+
         void clear();
 
         [[nodiscard]] const std::u16string &getBuf() const;
@@ -48,6 +56,10 @@ namespace Forms {
         void renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
 
         void init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color) override;
+
+        void press() override;
+
+        void release() override;
 
     private:
         glm::vec2 _position;

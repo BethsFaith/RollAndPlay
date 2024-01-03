@@ -86,7 +86,7 @@ namespace Forms {
         auto trans = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(techn);
         auto scale = trans->getScaleValue();
         auto offset = trans->getTransformValue();
-        trans->enableScale({scale.x*1.1, scale.y*1.1, scale.z});
+        trans->enableScale({scale.x*1.05, scale.y*1.1, scale.z});
         trans->enableTransform({offset.x, offset.y, offset.z});
 
         renderForm(shader);
@@ -100,8 +100,12 @@ namespace Forms {
         _pressCallback();
     }
 
-    bool Button::isSelected() const {
-        return _isSelected;
+    void Button::release() {
+        _releaseCallback();
+    }
+
+    bool Button::isUnderCursor() const {
+        return _isUnderCursor;
     }
 
     bool Button::checkSelecting(unsigned int x, unsigned int y) {
@@ -114,12 +118,16 @@ namespace Forms {
         return id == (int) info.ObjectID;
     }
 
-    void Button::setSelected(bool isSelected) {
-        _isSelected = isSelected;
+    void Button::setUnderCursor(bool isUnderCursor) {
+        _isUnderCursor = isUnderCursor;
     }
 
     void Button::setPressCallback(const std::function<void()> &function) {
         _pressCallback = function;
+    }
+
+    void Button::setReleaseCallback(const std::function<void()> &function) {
+        _releaseCallback = function;
     }
 
     void Button::setTraceColor(Color traceColor) {

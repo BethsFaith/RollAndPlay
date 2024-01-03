@@ -35,14 +35,16 @@ namespace Forms {
         virtual void renderPick(GraphicLib::Shaders::ShaderProgram::Ptr shader);
         virtual void renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader);
 
-        void press();
+        virtual void press();
+        virtual void release();
 
         void setPressCallback(const std::function<void()> &function);
+        void setReleaseCallback(const std::function<void()> &function);
 
-        [[nodiscard]] bool isSelected() const;
+        [[nodiscard]] bool isUnderCursor() const;
 
         bool checkSelecting(unsigned int x, unsigned int y) override;
-        void setSelected(bool isSelected);
+        void setUnderCursor(bool isUnderCursor);
 
         void setTraceColor(Color traceColor);
 
@@ -51,11 +53,12 @@ namespace Forms {
 
         int id;
         static int IdCounter;
-        bool _isSelected = false;
-
+        bool _isUnderCursor = false;
+        
         Color _traceColor = Color::WHITE;
 
         std::function<void()> _pressCallback{[]() {}};
+        std::function<void()> _releaseCallback{[]() {}};
 
         GraphicLib::Object _object{};
     };
