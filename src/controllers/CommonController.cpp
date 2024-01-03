@@ -8,7 +8,6 @@ namespace Controllers {
     void CommonController::processKeyboardInput(GLFWwindow *window) {
         for (const auto& controller : _subControllers) {
             controller->processKeyboardInput(window);
-            _sleep(10);
         }
     }
 
