@@ -11,7 +11,7 @@ if (NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
 endif ()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
-add_subdirectory(libs/graphicLib)
+add_subdirectory(libs/GraphicLib)
 
 conan_cmake_run(CONANFILE conanfile.txt
         INSTALL_FOLDER ${CMAKE_BINARY_DIR}

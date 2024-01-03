@@ -36,7 +36,7 @@ public:
 
     using Ptr = std::shared_ptr<ViewWindow>;
 
-    ViewWindow(int x, int y, Forms::Color viewColor, const GraphicLib::PickableTexture::Ptr &canvas);
+    ViewWindow(int x, int y, Forms::Color viewColor, GraphicLib::PickableTexture::Ptr canvas);
 
     ~ViewWindow();
 
@@ -69,6 +69,7 @@ private:
 
     PageTag _currentPageTag = PageTag::NULL_PAGE;
     ViewTag _currentViewTag = ViewTag::NULL_VIEW;
+    bool _switched = true;
 
     Toolbar::Ptr _horizonToolbar;
     Toolbar::Ptr _verticalToolbar;
