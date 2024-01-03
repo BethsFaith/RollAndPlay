@@ -5,6 +5,8 @@
 #ifndef ROLLANDPLAY_INPUTFIELDCONTROLLER_HPP
 #define ROLLANDPLAY_INPUTFIELDCONTROLLER_HPP
 
+#include <synchapi.h>
+
 #include "FormController.hpp"
 #include "../forms/InputField.hpp"
 
@@ -23,7 +25,7 @@ namespace Controllers {
 
         void clear() override;
 
-        virtual void processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) override;
+        void processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) override;
 
         void addForm(Forms::Form::Ptr form) override;
 

@@ -28,7 +28,7 @@ namespace Pages {
     protected:
         void addButton(const Forms::Button::Ptr& button);
 
-        glm::vec2 ScreenOffset;
+        glm::vec2 ScreenOffset{};
     private:
         Controllers::CommonController::Ptr _controller;
         Gui _gui;

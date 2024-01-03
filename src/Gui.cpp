@@ -23,7 +23,7 @@ Gui::Gui(GraphicLib::PickableTexture::Ptr canvas) : _canvas(std::move(canvas)) {
 
 void Gui::draw() {
     for (auto &button: _buttons) {
-        if (button->isSelected()) {
+        if (button->isUnderCursor()) {
             glEnable(GL_STENCIL_TEST);
             glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
             glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);

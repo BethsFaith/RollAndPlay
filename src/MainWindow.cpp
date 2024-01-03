@@ -7,18 +7,15 @@
 MainWindow *MainWindow::instance = nullptr;
 
 MainWindow::MainWindow(const char *title) {
-    RECT desktop;
-
-    const auto hDesktop = GetDesktopWindow();
-
-    GetWindowRect(hDesktop, &desktop);
+    int height, width;
+    Config::pullDesktopResolution(width, height);
 
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    _window = glfwCreateWindow(desktop.right, desktop.bottom, title, nullptr, nullptr);
+    _window = glfwCreateWindow(width, height, title, nullptr, nullptr);
 
     if (_window == nullptr) {
         throw std::runtime_error("Failed to initialize window");
@@ -33,11 +30,12 @@ MainWindow::MainWindow(const char *title) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
-    GraphicLib::Techniques::TextTechnique::initTextRendering(desktop.right, desktop.bottom,
-                                                             R"(..\..\rsrc\fonts\a_AlternaSw.TTF)", 20);
+    auto font = Config::getPath(Config::Resource::TEXT, "gui");
+    GraphicLib::Techniques::TextTechnique::initTextRendering(width, height,
+                                                           font, 20);
 
     auto canvas = std::make_shared<GraphicLib::PickableTexture>();
-    canvas->init(desktop.right, desktop.right);
+    canvas->init(width, height);
 
     _view = std::make_shared<ViewWindow>(0, 0, Forms::Color::DARK_GRAY, canvas);
 

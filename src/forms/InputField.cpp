@@ -50,18 +50,43 @@ namespace Forms {
         _buf.content.push_back(character);
     }
 
+    void InputField::putToBuffer(char16_t character, unsigned int position) {
+        if (position < _buf.content.size()) {
+            _buf.content.insert(position, 1, character);
+        }
+    }
+
     void InputField::putToBuffer(const std::string &string) {
         std::u16string str(string.begin(), string.end());
         _buf.content.append(str);
+    }
+
+    void InputField::putToBuffer(const std::string &string, unsigned int position) {
+        if (position < _buf.content.size()) {
+            std::u16string str(string.begin(), string.end());
+            _buf.content.insert(position, str);
+        }
     }
 
     void InputField::putToBuffer(const std::u16string &string) {
         _buf.content.append(string);
     }
 
+    void InputField::putToBuffer(const std::u16string &string, unsigned int position) {
+        if (position < _buf.content.size()) {
+            _buf.content.insert(position, string);
+        }
+    }
+
     void InputField::popFromBuffer() {
         if (!_buf.content.empty()) {
             _buf.content.erase(_buf.content.size()-1);
+        }
+    }
+
+    void InputField::popFromBuffer(unsigned int position) {
+        if (position < _buf.content.size()) {
+            _buf.content.erase(position);
         }
     }
 
@@ -112,5 +137,15 @@ namespace Forms {
         trace->setColor(baseColor);
         trans->enableScale(scale);
         trans->enableTransform(offset);
+    }
+
+    void InputField::press() {
+        setUnderCursor(true);
+        Button::press();
+    }
+
+    void InputField::release() {
+        setUnderCursor(false);
+        Button::release();
     }
 }

@@ -23,12 +23,8 @@ namespace Forms {
         void renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
 
         void setImage(const std::string& texturePath);
-
-//        const Button::Ptr &getAttachButton() const;
-
     private:
         GraphicLib::Textures::Texture::Ptr _texture;
-//        Button::Ptr _attachButton;
     };
 }
 

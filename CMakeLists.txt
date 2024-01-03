@@ -11,7 +11,7 @@ if (NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
 endif ()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
-add_subdirectory(libs/graphicLib)
+add_subdirectory(libs/GraphicLib)
 
 conan_cmake_run(CONANFILE conanfile.txt
         INSTALL_FOLDER ${CMAKE_BINARY_DIR}
@@ -38,12 +38,18 @@ add_executable(RollAndPlay
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
         src/pages/SkillPage.cpp
+        src/pages/RacePage.cpp
         src/controllers/GuiController.cpp
         src/controllers/InputFieldContoller.cpp
         src/controllers/CommonController.cpp
         src/controllers/ButtonController.cpp
         src/controllers/FormControllerFactory.cpp
-        src/controllers/ImageButtonController.cpp src/pages/RacePage.cpp src/data/storage/StreamWriter.cpp src/data/storage/StreamReader.cpp src/data/DataStorage.cpp src/Toolbar.hpp src/Toolbar.cpp)
+        src/controllers/ImageButtonController.cpp
+        src/data/storage/StreamWriter.cpp
+        src/data/storage/StreamReader.cpp
+        src/data/DataStorage.cpp
+        src/Toolbar.cpp
+        src/config/Config.cpp)
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

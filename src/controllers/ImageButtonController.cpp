@@ -27,14 +27,15 @@ namespace Controllers {
 
             for (auto &button: _buttons) {
                 if (button->checkSelecting((int) xPos, int(height - yPos - 1))) {
-                    button->press();
+                    if (_target != button) {
+                        button->press();
 
-                    if (_target != nullptr) {
-                        _target->setSelected(false);
+                        if (_target != nullptr) {
+                            _target->setUnderCursor(false);
+                        }
+                        _target = button;
+                        _target->setUnderCursor(true);
                     }
-                    _target = button;
-                    _target->setSelected(true);
-
                     break;
                 }
             }
