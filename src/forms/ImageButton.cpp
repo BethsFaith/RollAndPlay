@@ -42,15 +42,6 @@ namespace Forms {
         textTechnique->setColor(getRGB(text.color));
 
         _object.addTechnique(GraphicLib::Techniques::TEXT, textTechnique);
-
-//        _attachButton->init({scale.x*0.5, scale.y*0.2, 0.0f}, {position.x, position.y-2}, {
-//                .content = "Прикрепить изображение",
-//                .x = text.x,
-//                .y = text.y - scale.y*10,
-//        }, Color::GRAY);
-//        _attachButton->setPressCallback([]{
-//            std::cout << "attach" << std::endl;
-//        });
     }
 
     void ImageButton::setImage(const std::string &texturePath) {
@@ -62,10 +53,6 @@ namespace Forms {
                 {.name = GL_TEXTURE_WRAP_T, .value = GL_CLAMP_TO_EDGE},
                 {.name = GL_TEXTURE_WRAP_R, .value = GL_CLAMP_TO_EDGE}});
     }
-
-//    const Button::Ptr &ImageButton::getAttachButton() const {
-//        return _attachButton;
-//    }
 
     void ImageButton::renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) {}
 }

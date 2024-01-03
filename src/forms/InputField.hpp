@@ -30,6 +30,15 @@ namespace Forms {
 
         ~InputField() override = default;
 
+        void init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color) override;
+
+        void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
+
+        void renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
+
+        void press() override;
+        void release() override;
+
         void putToBuffer(char16_t character);
 
         void putToBuffer(const std::string &string);
@@ -49,17 +58,8 @@ namespace Forms {
         void clear();
 
         [[nodiscard]] const std::u16string &getBuf() const;
+
         [[nodiscard]] std::string getU8Buf() const;
-
-        void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
-
-        void renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
-
-        void init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color) override;
-
-        void press() override;
-
-        void release() override;
 
     private:
         glm::vec2 _position;
