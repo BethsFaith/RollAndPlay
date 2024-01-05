@@ -35,6 +35,7 @@ add_executable(RollAndPlay
         src/forms/Form.cpp
         src/forms/InputField.cpp
         src/forms/ImageButton.cpp
+        src/forms/Carriage.cpp
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
         src/pages/SkillPage.cpp

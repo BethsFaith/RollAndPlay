@@ -16,6 +16,7 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
 #include "Button.hpp"
+#include "Carriage.hpp"
 
 namespace Forms {
     class InputField : public Button {
@@ -56,16 +57,12 @@ namespace Forms {
         void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
 
     private:
-        void renderCarriage(GraphicLib::Shaders::ShaderProgram::Ptr shader);
-        void moveCarriage(float xOffset);
-        void enableCarriage();
-        void disableCarriage();
-
         glm::vec2 _position;
         glm::vec2 _scale;
         Text _buf;
         float _inputTextSize = 1.4f;
-        GraphicLib::Object::Ptr _carriage;
+
+        Carriage _carriage{};
     };
 }
 #endif    //ROLLANDPLAY_INPUTFIELD_HPP

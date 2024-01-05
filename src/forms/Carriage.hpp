@@ -1,0 +1,41 @@
+//
+// Created by VerOchka on 05.01.2024.
+//
+
+#ifndef ROLLANDPLAY_CARRIAGE_HPP
+#define ROLLANDPLAY_CARRIAGE_HPP
+
+#include <GraphicLib/Object.hpp>
+#include <GraphicLib/Techniques/ColorTechnique.hpp>
+#include <GraphicLib/Techniques/TransformTechnique.hpp>
+#include <GraphicLib/Primitives/Rectangle.hpp>
+
+#include "Color.hpp"
+
+namespace Forms {
+    class Carriage {
+    public:
+        Carriage();
+
+        void init(Color color, const glm::vec3 &scale, const glm::vec3 &position, float textSize);
+
+        void render(const GraphicLib::Shaders::ShaderProgram::Ptr& shader);
+
+        void display();
+        void hide();
+
+        void move(uint8_t index);
+
+        void addCharacterAdvance(unsigned int advance);
+        void eraseCharacterAdvance(unsigned int index);
+        void eraseBackCharacterAdvance();
+        void clearCharactersAdvance();
+    private:
+        GraphicLib::Object::Ptr _object;
+        uint8_t _position = 0;
+        std::vector<unsigned int> _characterAdvances{};
+        float _textSize = 1.0f;
+    };
+}
+
+#endif //ROLLANDPLAY_CARRIAGE_HPP
