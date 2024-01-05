@@ -11,29 +11,36 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
 #include "Color.hpp"
+#include "../config/Config.hpp"
+#include "GraphicLib/TextRender.hpp"
 
 namespace Forms {
     class Carriage {
     public:
+        struct CharacterOffset {
+            glm::ivec2 bearing;
+            unsigned int advance;
+        };
+
         Carriage();
 
         void init(Color color, const glm::vec3 &scale, const glm::vec3 &position, float textSize);
 
         void render(const GraphicLib::Shaders::ShaderProgram::Ptr& shader);
 
-        void display();
+        void show();
         void hide();
 
-        void move(uint8_t index);
+        void move(int indexOffset);
 
-        void addCharacterAdvance(unsigned int advance);
-        void eraseCharacterAdvance(unsigned int index);
-        void eraseBackCharacterAdvance();
-        void clearCharactersAdvance();
+        void addCharacterData(const CharacterOffset& character);
+        void releaseCharacterData(unsigned int index);
+        void releaseBackCharacterData();
+        void clearAllCharacterData();
     private:
         GraphicLib::Object::Ptr _object;
         uint8_t _position = 0;
-        std::vector<unsigned int> _characterAdvances{};
+        std::vector<CharacterOffset> _characterOffsets{};
         float _textSize = 1.0f;
     };
 }

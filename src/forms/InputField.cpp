@@ -57,8 +57,11 @@ namespace Forms {
     void InputField::putToBuffer(char16_t character) {
         _buf.content.push_back(character);
 
-        _carriage.addCharacterAdvance(GraphicLib::Techniques::TextTechnique::getCharacter(character).advance);
-
+        auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
+        if (textRender != nullptr) {
+            auto ch = textRender->getCharacter(character);
+            _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
+        }
         _carriage.move(1);
     }
 
@@ -66,9 +69,12 @@ namespace Forms {
         if (position < _buf.content.size()) {
             _buf.content.insert(position, 1, character);
 
-            _carriage.addCharacterAdvance(GraphicLib::Techniques::TextTechnique::getCharacter(character).advance);
+            auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
+            if (textRender != nullptr) {
+                auto ch = textRender->getCharacter(character);
+                _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
+            }
         }
-
         _carriage.move(1);
     }
 
@@ -76,11 +82,13 @@ namespace Forms {
         std::u16string str(string.begin(), string.end());
         _buf.content.append(str);
 
-        for (const auto& character : string) {
-            _carriage.addCharacterAdvance(
-                    GraphicLib::Techniques::TextTechnique::getCharacter(character).advance);
+        auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
+        if (textRender != nullptr) {
+            for (const auto& code : string) {
+                auto ch = textRender->getCharacter(code);
+                _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
+            }
         }
-
         _carriage.move(1);
     }
 
@@ -89,9 +97,13 @@ namespace Forms {
             std::u16string str(string.begin(), string.end());
 
             _buf.content.insert(position, str);
-            for (const auto& character : string) {
-                _carriage.addCharacterAdvance(
-                        GraphicLib::Techniques::TextTechnique::getCharacter(character).advance);
+
+            auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
+            if (textRender != nullptr) {
+                for (const auto& code : string) {
+                    auto ch = textRender->getCharacter(code);
+                    _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
+                }
             }
         }
         _carriage.move(1);
@@ -100,11 +112,13 @@ namespace Forms {
     void InputField::putToBuffer(const std::u16string &string) {
         _buf.content.append(string);
 
-        for (const auto& character : string) {
-            _carriage.addCharacterAdvance(
-                    GraphicLib::Techniques::TextTechnique::getCharacter(character).advance);
+        auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
+        if (textRender != nullptr) {
+            for (const auto& code : string) {
+                auto ch = textRender->getCharacter(code);
+                _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
+            }
         }
-
         _carriage.move((int)string.size()-1);
     }
 
@@ -112,9 +126,12 @@ namespace Forms {
         if (position < _buf.content.size()) {
             _buf.content.insert(position, string);
 
-            for (const auto& character : string) {
-                _carriage.addCharacterAdvance(
-                        GraphicLib::Techniques::TextTechnique::getCharacter(character).advance);
+            auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
+            if (textRender != nullptr) {
+                for (const auto& code : string) {
+                    auto ch = textRender->getCharacter(code);
+                    _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
+                }
             }
         }
         _carriage.move((int)string.size()-1);
@@ -124,9 +141,9 @@ namespace Forms {
         if (!_buf.content.empty()) {
             _buf.content.erase(_buf.content.size()-1);
 
-            _carriage.eraseBackCharacterAdvance();
-
             _carriage.move(-1);
+
+            _carriage.releaseBackCharacterData();
         }
     }
 
@@ -134,16 +151,16 @@ namespace Forms {
         if (position < _buf.content.size()) {
             _buf.content.erase(position);
 
-            _carriage.eraseBackCharacterAdvance();
-
             _carriage.move(-1);
+
+            _carriage.releaseBackCharacterData();
         }
     }
 
     void InputField::clear() {
         _carriage.move(-(int)_buf.content.size()+1);
 
-        _carriage.clearCharactersAdvance();
+        _carriage.clearAllCharacterData();
 
         _buf.content.clear();
     }
@@ -201,7 +218,7 @@ namespace Forms {
     void InputField::press() {
         setUnderCursor(true);
 
-        _carriage.display();
+        _carriage.show();
 
         Button::press();
     }

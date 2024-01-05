@@ -25,8 +25,10 @@ namespace Forms {
         _object->addTechnique(GraphicLib::Techniques::COLOR, colorTechnique);
 
         auto transformTechnique = std::make_shared<GraphicLib::Techniques::TransformTechnique>();
-        transformTechnique->enableScale(scale); // scale.x * 0.005f, scale.y * 0.5f, 0}
-        transformTechnique->enableTransform(position);
+        transformTechnique->enableScale(scale);
+        transformTechnique->enableTransform({position.x,
+                                             position.y, position.z});
+
         _object->addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
 
         _textSize = textSize;
@@ -36,7 +38,7 @@ namespace Forms {
         _object->render(shader);
     }
 
-    void Carriage::display() {
+    void Carriage::show() {
         _object->enableTechnique(GraphicLib::Techniques::TRANSFORM);
         _object->enableTechnique(GraphicLib::Techniques::COLOR);
     }
@@ -46,51 +48,54 @@ namespace Forms {
         _object->disableTechnique(GraphicLib::Techniques::COLOR);
     }
 
-    void Carriage::move(uint8_t offset) {
+    void Carriage::move(int indexOffset) {
         auto technique = _object->getTechnique(GraphicLib::Techniques::TRANSFORM);
         auto transformTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(technique);
         auto transform = transformTechnique->getTransformValue();
 
-        auto projection = glm::ortho(0.0f, static_cast<float>(3440), static_cast<float>(1440), 0.0f);
-        float x = 0;
-        if (offset > 0) {
-            for (int i = 0; i < offset; ++i) {
+        int screenWidth, screenHeight;
+        Config::pullDesktopResolution(screenWidth, screenHeight);
+        float w = static_cast<float>(screenWidth) / 2;
+        float x = w + transform.x * w;
+        float xPos;
+        if (indexOffset > 0) {
+            for (int i = 0; i < indexOffset; ++i) {
                 int pos = i+_position;
-                if (_characterAdvances.size() > pos) {
-                    x += std::abs(static_cast<float>(_characterAdvances[pos] >> 6) * _textSize);
-                } else {
+                if (_characterOffsets.size() <= pos) {
                     break;
                 }
+                x += static_cast<float>(_characterOffsets[pos].advance >> 6) * _textSize;
             }
+            xPos = x + static_cast<float>(_characterOffsets[indexOffset - 1 + _position].bearing.x) * _textSize;
         } else {
-            for (int i = -offset; i >= 0; --i) {
-                int pos = i+_position;
-                if (_characterAdvances.size() > pos) {
-                    x -= std::abs((float)((_characterAdvances[pos] >> 6) - 1700)/1700);
-                } else {
+            for (int i = 0; i < -indexOffset; ++i) {
+                int pos = _position-i-1;
+                if (_characterOffsets.size() <= pos) {
                     break;
                 }
+                x -= static_cast<float>(_characterOffsets[pos].advance >> 6) * _textSize;
             }
+            xPos = x - static_cast<float>(_characterOffsets[indexOffset + _position].bearing.x) * _textSize;
         }
-        auto t = projection * glm::vec4(x, 0, 0, 1.0);
-        transformTechnique->setTransformValue({t.x, t.y, t.z});
+        xPos = (xPos - w) / w;
+        transformTechnique->setTransformValue({xPos, transform.y, transform.z});
 
-        _position += offset;
+        _position += indexOffset;
     }
 
-    void Carriage::addCharacterAdvance(unsigned int advance) {
-        _characterAdvances.push_back(advance);
+    void Carriage::addCharacterData(const CharacterOffset& character) {
+        _characterOffsets.push_back(character);
     }
 
-    void Carriage::eraseCharacterAdvance(unsigned int index) {
-        _characterAdvances.erase(_characterAdvances.cbegin() + index);
+    void Carriage::releaseCharacterData(unsigned int index) {
+        _characterOffsets.erase(_characterOffsets.cbegin() + index);
     }
 
-    void Carriage::eraseBackCharacterAdvance() {
-        _characterAdvances.pop_back();
+    void Carriage::releaseBackCharacterData() {
+        _characterOffsets.pop_back();
     }
 
-    void Carriage::clearCharactersAdvance() {
-        _characterAdvances.clear();
+    void Carriage::clearAllCharacterData() {
+        _characterOffsets.clear();
     }
 }
