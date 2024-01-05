@@ -57,8 +57,8 @@ namespace Forms {
         void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
 
     private:
-        glm::vec2 _position;
-        glm::vec2 _scale;
+        glm::vec2 _position{};
+        glm::vec2 _scale{};
         Text _buf;
         float _inputTextSize = 1.4f;
 
