@@ -37,6 +37,8 @@ namespace Forms {
         void releaseCharacterData(unsigned int index);
         void releaseBackCharacterData();
         void clearAllCharacterData();
+
+        uint8_t getPosition() const;
     private:
         GraphicLib::Object::Ptr _object;
         uint8_t _position = 0;

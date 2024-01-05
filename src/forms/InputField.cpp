@@ -55,18 +55,11 @@ namespace Forms {
     }
 
     void InputField::putToBuffer(char16_t character) {
-        _buf.content.push_back(character);
-
-        auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
-        if (textRender != nullptr) {
-            auto ch = textRender->getCharacter(character);
-            _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
-        }
-        _carriage.move(1);
+        putToBuffer(character, _carriage.getPosition());
     }
 
     void InputField::putToBuffer(char16_t character, unsigned int position) {
-        if (position < _buf.content.size()) {
+        if (position <= _buf.content.size()) {
             _buf.content.insert(position, 1, character);
 
             auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
@@ -74,26 +67,16 @@ namespace Forms {
                 auto ch = textRender->getCharacter(character);
                 _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
             }
+            _carriage.move(1);
         }
-        _carriage.move(1);
     }
 
     void InputField::putToBuffer(const std::string &string) {
-        std::u16string str(string.begin(), string.end());
-        _buf.content.append(str);
-
-        auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
-        if (textRender != nullptr) {
-            for (const auto& code : string) {
-                auto ch = textRender->getCharacter(code);
-                _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
-            }
-        }
-        _carriage.move(1);
+        putToBuffer(string, _carriage.getPosition());
     }
 
     void InputField::putToBuffer(const std::string &string, unsigned int position) {
-        if (position < _buf.content.size()) {
+        if (position <= _buf.content.size()) {
             std::u16string str(string.begin(), string.end());
 
             _buf.content.insert(position, str);
@@ -105,25 +88,16 @@ namespace Forms {
                     _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
                 }
             }
+            _carriage.move(1);
         }
-        _carriage.move(1);
     }
 
     void InputField::putToBuffer(const std::u16string &string) {
-        _buf.content.append(string);
-
-        auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
-        if (textRender != nullptr) {
-            for (const auto& code : string) {
-                auto ch = textRender->getCharacter(code);
-                _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
-            }
-        }
-        _carriage.move((int)string.size()-1);
+        putToBuffer(string, _carriage.getPosition());
     }
 
     void InputField::putToBuffer(const std::u16string &string, unsigned int position) {
-        if (position < _buf.content.size()) {
+        if (position <= _buf.content.size()) {
             _buf.content.insert(position, string);
 
             auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
@@ -132,19 +106,13 @@ namespace Forms {
                     auto ch = textRender->getCharacter(code);
                     _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
                 }
+                _carriage.move((int)string.size()-1);
             }
         }
-        _carriage.move((int)string.size()-1);
     }
 
     void InputField::popFromBuffer() {
-        if (!_buf.content.empty()) {
-            _buf.content.erase(_buf.content.size()-1);
-
-            _carriage.move(-1);
-
-            _carriage.releaseBackCharacterData();
-        }
+        popFromBuffer(_carriage.getPosition()-1);
     }
 
     void InputField::popFromBuffer(unsigned int position) {
@@ -229,5 +197,12 @@ namespace Forms {
         _carriage.hide();
 
         Button::release();
+    }
+
+    void InputField::moveCarriage(int offset) {
+        auto curPos = _carriage.getPosition();
+        if (curPos + offset <= _buf.content.size()) {
+            _carriage.move(offset);
+        }
     }
 }

@@ -56,6 +56,7 @@ namespace Forms {
 
         void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
 
+        void moveCarriage(int offset);
     private:
         glm::vec2 _position{};
         glm::vec2 _scale{};

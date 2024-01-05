@@ -98,4 +98,8 @@ namespace Forms {
     void Carriage::clearAllCharacterData() {
         _characterOffsets.clear();
     }
+
+    uint8_t Carriage::getPosition() const {
+        return _position;
+    }
 }
