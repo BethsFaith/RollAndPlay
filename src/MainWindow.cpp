@@ -42,10 +42,14 @@ MainWindow::MainWindow(const char *title) {
     auto systemPage = std::make_shared<Pages::SystemPage>(canvas);
     auto skillPage = std::make_shared<Pages::SkillPage>(canvas);
     auto racePage = std::make_shared<Pages::RacePage>(canvas);
+    auto loginPage = std::make_shared<Pages::LoginPage>(canvas);
+    auto registrationPage = std::make_shared<Pages::RegistrationPage>(canvas);
 
     _view->addPage(ViewWindow::PageTag::SYSTEM, systemPage);
     _view->addPage(ViewWindow::PageTag::SKILL, skillPage);
     _view->addPage(ViewWindow::PageTag::RACE, racePage);
+    _view->addPage(ViewWindow::PageTag::AUTHORIZATION, loginPage);
+    _view->addPage(ViewWindow::PageTag::REGISTRATION, registrationPage);
 }
 
 MainWindow::~MainWindow() {
