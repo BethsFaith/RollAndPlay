@@ -29,7 +29,7 @@ void Toolbar::init(glm::vec2 transform, glm::vec2 scale, bool horizontal) {
 
         button->setPressCallback(_funcs[i]);
 
-        _gui.addButton(button);
+        _gui.addForm(button);
 
         if (horizontal) {
             xOffset += (scale.x + 0.01f);

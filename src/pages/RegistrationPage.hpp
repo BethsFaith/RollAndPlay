@@ -8,6 +8,7 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
 #include "BasePage.hpp"
+#include "../forms/TextBox.hpp"
 
 namespace Pages {
     class RegistrationPage : public BasePage {
@@ -28,6 +29,8 @@ namespace Pages {
         void toView();
 
         StateTag _currentTag = CREATE;
+
+        std::u16string _outputMessage{};
     };
 }
 

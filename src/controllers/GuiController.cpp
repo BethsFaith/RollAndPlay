@@ -39,7 +39,11 @@ namespace Controllers {
         auto type = form->getType();
 
         if (!_formControllers.contains(type)) {
-            _formControllers[type] = FormControllerFactory::create(type);
+            auto controller = FormControllerFactory::create(type);
+            if (controller == nullptr) {
+                return;
+            }
+            _formControllers[type] = controller;
         }
         _formControllers[type]->addForm(form);
     }

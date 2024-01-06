@@ -6,6 +6,7 @@
 #define ROLLANDPLAY_TEXTBOX_HPP
 
 #include <GraphicLib/Object.hpp>
+#include <GraphicLib/Primitives/Rectangle.hpp>
 #include <GraphicLib/Techniques/ColorTechnique.hpp>
 #include <GraphicLib/Techniques/TransformTechnique.hpp>
 #include <GraphicLib/Techniques/TextTechnique.hpp>
@@ -18,12 +19,16 @@ namespace Forms {
     public:
         using Ptr = std::shared_ptr<TextBox>;
         TextBox();
+        ~TextBox() override = default;
 
         void init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color);
 
         void renderText(const GraphicLib::Shaders::ShaderProgram::Ptr& shader);
         void renderForm(const GraphicLib::Shaders::ShaderProgram::Ptr& shader);
 
+        bool checkSelecting(unsigned int x, unsigned int y) override;
+
+        void setText(const Text &text);
     private:
         GraphicLib::Object _object{};
 

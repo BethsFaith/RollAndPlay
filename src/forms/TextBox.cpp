@@ -5,7 +5,16 @@
 #include "TextBox.hpp"
 
 namespace Forms {
-    TextBox::TextBox() : Form(FormType::TEXT_BOX) {}
+    TextBox::TextBox() : Form(FormType::TEXT_BOX) {
+        GraphicLib::Primitives::AbstractPrimitive::Ptr rectangle =
+                std::make_shared<GraphicLib::Primitives::Rectangle>(
+                        GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
+                                .with_texture_coords = false,
+                                .with_tangent = false,
+                                .with_bitangent = false});
+        rectangle->bindData(GL_STATIC_DRAW);
+        _object.setPrimitive(rectangle);
+    }
 
     void TextBox::init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color) {
         auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
@@ -42,5 +51,17 @@ namespace Forms {
         _object.disableTechnique(GraphicLib::Techniques::TEXT);
 
         _object.render(shader);
+    }
+
+    bool TextBox::checkSelecting(unsigned int x, unsigned int y) {
+        return false;
+    }
+
+    void TextBox::setText(const Text &text) {
+        auto technique = _object.getTechnique(GraphicLib::Techniques::TEXT);
+        auto textTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(technique);
+
+        textTechnique->setText(text.content);
+        textTechnique->setColor(getRGB(text.color));
     }
 }

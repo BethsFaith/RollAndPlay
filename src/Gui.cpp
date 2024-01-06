@@ -22,61 +22,68 @@ Gui::Gui(GraphicLib::PickableTexture::Ptr canvas) : _canvas(std::move(canvas)) {
 }
 
 void Gui::draw() {
-    for (auto &button: _buttons) {
-        if (button->isUnderCursor()) {
-            glEnable(GL_STENCIL_TEST);
-            glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-            glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-
-            glStencilFunc(GL_ALWAYS, 1, 0xFF); // все фрагменты должны пройти тест трафарета
-            glStencilMask(0xFF); // включаем запись в буфер трафарета
-
-            if (button->getType() != Forms::FormType::TEXTURE_BUTTON) {
-                button->renderForm(_colorShader);
-            } else {
-                button->renderForm(_textureShader);
-            }
-            glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-            glStencilMask(0x00);
-            glDisable(GL_STENCIL_TEST);
-
-            button->renderText(_textShader);
-
-            button->renderPick(_selectableShader);
-
-            glDisable(GL_DEPTH_TEST);
-            glEnable(GL_STENCIL_TEST);
-
-            button->renderTracing(_colorShader);
-
-            glStencilMask(0xFF);
-            glStencilFunc(GL_ALWAYS, 1, 0xFF);
-            glEnable(GL_DEPTH_TEST);
-            glDisable(GL_STENCIL_TEST);
+    for (auto &form: _forms) {
+        if (form->getType() == Forms::TEXT_BOX) {
+            auto box = std::dynamic_pointer_cast<Forms::TextBox>(form);
+            box->renderForm(_colorShader);
+            box->renderText(_textShader);
         } else {
-            if (button->getType() != Forms::FormType::TEXTURE_BUTTON) {
-                button->renderForm(_colorShader);
+            auto button = std::dynamic_pointer_cast<Forms::Button>(form);
+            if (button->isUnderCursor()) {
+                glEnable(GL_STENCIL_TEST);
+                glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+                glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
+                glStencilFunc(GL_ALWAYS, 1, 0xFF); // все фрагменты должны пройти тест трафарета
+                glStencilMask(0xFF); // включаем запись в буфер трафарета
+
+                if (button->getType() != Forms::FormType::TEXTURE_BUTTON) {
+                    button->renderForm(_colorShader);
+                } else {
+                    button->renderForm(_textureShader);
+                }
+                glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+                glStencilMask(0x00);
+                glDisable(GL_STENCIL_TEST);
+
+                button->renderText(_textShader);
+
+                button->renderPick(_selectableShader);
+
+                glDisable(GL_DEPTH_TEST);
+                glEnable(GL_STENCIL_TEST);
+
+                button->renderTracing(_colorShader);
+
+                glStencilMask(0xFF);
+                glStencilFunc(GL_ALWAYS, 1, 0xFF);
+                glEnable(GL_DEPTH_TEST);
+                glDisable(GL_STENCIL_TEST);
             } else {
-                button->renderForm(_textureShader);
+                if (button->getType() != Forms::FormType::TEXTURE_BUTTON) {
+                    button->renderForm(_colorShader);
+                } else {
+                    button->renderForm(_textureShader);
+                }
+
+                button->renderText(_textShader);
+
+                button->renderPick(_selectableShader);
             }
-
-            button->renderText(_textShader);
-
-            button->renderPick(_selectableShader);
         }
     }
 }
 
-void Gui::addButton(const Forms::Button::Ptr& button) {
-    button->setCanvas(_canvas);
+void Gui::addForm(const Forms::Form::Ptr& form) {
+    form->setCanvas(_canvas);
 
-    _controller->addForm(button);
+    _controller->addForm(form);
 
-    _buttons.push_back(button);
+    _forms.push_back(form);
 }
 
 void Gui::clear() {
-    _buttons.clear();
+    _forms.clear();
 }
 
 const Controllers::GuiController::Ptr &Gui::getController() const {

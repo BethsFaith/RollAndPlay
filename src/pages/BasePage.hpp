@@ -26,7 +26,7 @@ namespace Pages {
         void setScreenOffset(const glm::vec2 &screenOffset) override;
 
     protected:
-        void addButton(const Forms::Button::Ptr& button);
+        void addForm(const Forms::Form::Ptr& form);
 
         glm::vec2 ScreenOffset{};
     private:

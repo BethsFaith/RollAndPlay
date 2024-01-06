@@ -20,8 +20,8 @@ namespace Pages {
         return _controller;
     }
 
-    void BasePage::addButton(const Forms::Button::Ptr& button) {
-        _gui.addButton(button);
+    void BasePage::addForm(const Forms::Form::Ptr& form) {
+        _gui.addForm(form);
     }
 
     void BasePage::draw() {

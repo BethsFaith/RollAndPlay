@@ -9,6 +9,7 @@
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 
 #include "forms/Button.hpp"
+#include "forms/TextBox.hpp"
 #include "controllers/GuiController.hpp"
 
 class Gui {
@@ -21,7 +22,7 @@ public:
 
     void draw();
 
-    void addButton(const Forms::Button::Ptr& button);
+    void addForm(const Forms::Form::Ptr& form);
 
     void clear();
 
@@ -33,7 +34,7 @@ private:
     GraphicLib::Shaders::ShaderProgram::Ptr _selectableShader;
     GraphicLib::Shaders::ShaderProgram::Ptr _textShader;
 
-    std::vector<Forms::Button::Ptr> _buttons;
+    std::vector<Forms::Form::Ptr> _forms;
     GraphicLib::PickableTexture::Ptr _canvas;
 
     Controllers::GuiController::Ptr _controller;
