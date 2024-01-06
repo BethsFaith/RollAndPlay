@@ -21,7 +21,7 @@ namespace Forms {
 
         void setCanvas(const GraphicLib::PickableTexture::Ptr &canvas);
 
-        FormType getType() const;
+        [[nodiscard]] FormType getType() const;
 
     protected:
         GraphicLib::PickableTexture::Ptr canvas;
