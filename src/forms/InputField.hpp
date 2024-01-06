@@ -7,19 +7,16 @@
 
 #include <iostream>
 #include <utility>
-//#ifdef _WIN32
-//#include <windows.h>
-//#else
-//#include <clocale>
-//#endif
 #ifdef   WIN32
 #include <codecvt>
 #else
 #include <uchar.h>
 #endif
 
+#include <GraphicLib/Primitives/Rectangle.hpp>
 
 #include "Button.hpp"
+#include "Carriage.hpp"
 
 namespace Forms {
     class InputField : public Button {
@@ -40,19 +37,15 @@ namespace Forms {
         void release() override;
 
         void putToBuffer(char16_t character);
-
-        void putToBuffer(const std::string &string);
-
-        void putToBuffer(const std::u16string &string);
-
-        void popFromBuffer();
-
         void putToBuffer(char16_t character, unsigned int position);
 
+        void putToBuffer(const std::string &string);
         void putToBuffer(const std::string &string, unsigned int position);
 
+        void putToBuffer(const std::u16string &string);
         void putToBuffer(const std::u16string &string, unsigned int position);
 
+        void popFromBuffer();
         void popFromBuffer(unsigned int position);
 
         void clear();
@@ -61,10 +54,17 @@ namespace Forms {
 
         [[nodiscard]] std::string getU8Buf() const;
 
+        void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
+
+        void moveCarriage(int offset);
+        void moveCarriageToScreenPosition(float xPos);
     private:
-        glm::vec2 _position;
-        glm::vec2 _scale;
+        glm::vec2 _position{};
+        glm::vec2 _scale{};
         Text _buf;
+        float _inputTextSize = 1.4f;
+
+        Carriage _carriage{};
     };
 }
 #endif    //ROLLANDPLAY_INPUTFIELD_HPP

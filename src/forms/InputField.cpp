@@ -4,6 +4,8 @@
 
 #include "InputField.hpp"
 
+#include <utility>
+
 namespace Forms {
     InputField::InputField(const GraphicLib::Primitives::AbstractPrimitive::Ptr &graphicPrimitive, Text inputParams)
             : Button(graphicPrimitive, FormType::INPUT_FIELD), _buf(std::move(inputParams)) {}
@@ -28,7 +30,7 @@ namespace Forms {
         _object.addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
 
         auto picking = std::make_shared<GraphicLib::Techniques::PickTechnique>();
-        picking->setObjectId(id);
+        picking->setObjectId((float)id);
 
         _object.addTechnique(GraphicLib::Techniques::PICK, picking);
 
@@ -39,6 +41,12 @@ namespace Forms {
         textTechnique->setColor(getRGB(text.color));
 
         _object.addTechnique(GraphicLib::Techniques::TEXT, textTechnique);
+
+        // каретка
+        _carriage.init(Color::BLACK, {scale.x * 0.005f, scale.y * 0.5f, 0},
+                       {position.x - scale.x/2 + 0.01f, position.y - scale.y/10, -0.2f},
+                       _inputTextSize);
+        _carriage.hide();
     }
 
     std::string InputField::getU8Buf() const {
@@ -47,58 +55,94 @@ namespace Forms {
     }
 
     void InputField::putToBuffer(char16_t character) {
-        _buf.content.push_back(character);
+        putToBuffer(character, _carriage.getPosition());
     }
 
     void InputField::putToBuffer(char16_t character, unsigned int position) {
-        if (position < _buf.content.size()) {
+        if (position <= _buf.content.size()) {
             _buf.content.insert(position, 1, character);
+
+            auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
+            if (textRender != nullptr) {
+                auto ch = textRender->getCharacter(character);
+                _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
+            }
+            _carriage.move(1);
         }
     }
 
     void InputField::putToBuffer(const std::string &string) {
-        std::u16string str(string.begin(), string.end());
-        _buf.content.append(str);
+        putToBuffer(string, _carriage.getPosition());
     }
 
     void InputField::putToBuffer(const std::string &string, unsigned int position) {
-        if (position < _buf.content.size()) {
+        if (position <= _buf.content.size()) {
             std::u16string str(string.begin(), string.end());
+
             _buf.content.insert(position, str);
+
+            auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
+            if (textRender != nullptr) {
+                for (const auto& code : string) {
+                    auto ch = textRender->getCharacter(code);
+                    _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
+                }
+            }
+            _carriage.move(1);
         }
     }
 
     void InputField::putToBuffer(const std::u16string &string) {
-        _buf.content.append(string);
+        putToBuffer(string, _carriage.getPosition());
     }
 
     void InputField::putToBuffer(const std::u16string &string, unsigned int position) {
-        if (position < _buf.content.size()) {
+        if (position <= _buf.content.size()) {
             _buf.content.insert(position, string);
+
+            auto textRender = GraphicLib::Techniques::TextTechnique::getTextRenderer();
+            if (textRender != nullptr) {
+                for (const auto& code : string) {
+                    auto ch = textRender->getCharacter(code);
+                    _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
+                }
+                _carriage.move((int)string.size()-1);
+            }
         }
     }
 
     void InputField::popFromBuffer() {
-        if (!_buf.content.empty()) {
-            _buf.content.erase(_buf.content.size()-1);
-        }
+        popFromBuffer(_carriage.getPosition()-1);
     }
 
     void InputField::popFromBuffer(unsigned int position) {
         if (position < _buf.content.size()) {
-            _buf.content.erase(position);
+            _buf.content.erase(position, 1);
+
+            _carriage.move(-1);
+
+            _carriage.releaseBackCharacterData();
         }
     }
 
     void InputField::clear() {
+        _carriage.move(-(int)_buf.content.size()+1);
+
+        _carriage.clearAllCharacterData();
+
         _buf.content.clear();
+    }
+
+    void InputField::renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
+        Button::renderForm(shader);
+        _carriage.render(shader);
     }
 
     void InputField::renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
         // рисуем (тайтл)
         Button::renderText(shader);
 
-        // меняем параметры
+        // меняем текст описания кнопки на текст инпута
         auto techn = _object.getTechnique(GraphicLib::Techniques::TEXT);
         auto textTechn = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(techn);
 
@@ -114,7 +158,7 @@ namespace Forms {
         // рисуем буффер
         _object.render(shader);
 
-        // возвращаем прошлые
+        // возвращаем прошлое
         _object.addTechnique(GraphicLib::Techniques::TEXT, textTechn);
     }
 
@@ -129,7 +173,7 @@ namespace Forms {
         auto trans = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(techn);
         auto scale = trans->getScaleValue();
         auto offset = trans->getTransformValue();
-        trans->enableScale({scale.x * 1.02, scale.y * 1.1, scale.z});
+        trans->enableScale({scale.x * 1.02f, scale.y * 1.1f, scale.z});
         trans->enableTransform(offset);
 
         renderForm(shader);
@@ -141,11 +185,28 @@ namespace Forms {
 
     void InputField::press() {
         setUnderCursor(true);
+
+        _carriage.show();
+
         Button::press();
     }
 
     void InputField::release() {
         setUnderCursor(false);
+
+        _carriage.hide();
+
         Button::release();
+    }
+
+    void InputField::moveCarriage(int offset) {
+        auto curPos = _carriage.getPosition();
+        if (curPos + offset <= _buf.content.size()) {
+            _carriage.move(offset);
+        }
+    }
+
+    void InputField::moveCarriageToScreenPosition(float xPos) {
+        _carriage.moveToScreenPosition(xPos);
     }
 }
