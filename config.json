@@ -18,6 +18,10 @@
         "texture_gui": {
           "vertex": "texture_gui.vert",
           "fragment": "texture_gui.frag"
+        },
+        "selectable":{
+          "vertex": "gui.vert",
+          "fragment": "select.frag"
         }
       }
     },

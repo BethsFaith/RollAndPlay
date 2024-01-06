@@ -19,7 +19,7 @@ namespace Config {
         TEXT,
     };
 
-    std::string getPath(Resource resource, const std::string& name);
+    std::string getPath(Resource resource, const std::vector<std::string>& name);
 
     std::string getDirectory(Resource resDirectory);
 

@@ -30,7 +30,7 @@ MainWindow::MainWindow(const char *title) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
-    auto font = Config::getPath(Config::Resource::TEXT, "gui");
+    auto font = Config::getPath(Config::Resource::TEXT, {"gui"});
     GraphicLib::Techniques::TextTechnique::initTextRendering(width, height,
                                                            font, 20);
 

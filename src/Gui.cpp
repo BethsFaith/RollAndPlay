@@ -8,17 +8,17 @@ Gui::Gui(GraphicLib::PickableTexture::Ptr canvas) : _canvas(std::move(canvas)) {
     _controller = std::make_shared<Controllers::GuiController>();
 
     _colorShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (R"(..\..\rsrc\shaders\gui.vert)",
-             R"(..\..\rsrc\shaders\gui.frag)");
+            (Config::getPath(Config::Resource::SHADERS, {"gui", "vertex"}),
+             Config::getPath(Config::Resource::SHADERS, {"gui", "fragment"}));
     _selectableShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (R"(..\..\rsrc\shaders\gui.vert)",
-             R"(..\..\rsrc\shaders\select.frag)");
+            (Config::getPath(Config::Resource::SHADERS, {"gui", "vertex"}),
+             Config::getPath(Config::Resource::SHADERS, {"selectable", "fragment"}));
     _textShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (R"(..\..\rsrc\shaders\text2d.vert)",
-             R"(..\..\rsrc\shaders\text2d.frag)");
+            (Config::getPath(Config::Resource::SHADERS, {"text", "vertex"}),
+             Config::getPath(Config::Resource::SHADERS, {"text", "fragment"}));
     _textureShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (R"(..\..\rsrc\shaders\texture_gui.vert)",
-             R"(..\..\rsrc\shaders\texture_gui.frag)");
+            (Config::getPath(Config::Resource::SHADERS, {"texture_gui", "vertex"}),
+             Config::getPath(Config::Resource::SHADERS, {"texture_gui", "fragment"}));
 }
 
 void Gui::draw() {

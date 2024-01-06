@@ -7,21 +7,27 @@
 #include <utility>
 
 namespace Config {
-    std::string getPath(Resource resource, const std::string& name) {
+    std::string getPath(Resource resource, const std::vector<std::string>& name) {
         std::string resourceKey;
 
         switch (resource) {
             case SHADERS:
                 resourceKey = "shaders";
+                break;
             case TEXTURES:
                 resourceKey = "textures";
+                break;
             case TEXT:
                 resourceKey = "fonts";
+                break;
         }
 
         auto directory = getValue<std::string>(std::vector<std::string>{"resources", resourceKey, "directory"});
-        auto file = getValue<std::string>(std::vector<std::string>{"resources", resourceKey, "files",
-                                                                   name});
+
+        std::vector<std::string> keys{"resources", resourceKey, "files"};
+        keys.insert(keys.end(), name.begin(), name.end());
+
+        auto file = getValue<std::string>(keys);
 
         return splitToPath({projectPath, getResourceDirectory(), directory, file});
     }
