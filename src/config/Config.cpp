@@ -32,6 +32,32 @@ namespace Config {
         return splitToPath({projectPath, getResourceDirectory(), directory, file});
     }
 
+    std::vector<std::string> getPaths(Resource resource, const std::string &parentKey,
+                                      const std::vector<std::string> &keys) {
+        std::string resourceKey;
+
+        switch (resource) {
+            case SHADERS:
+                resourceKey = "shaders";
+                break;
+            case TEXTURES:
+                resourceKey = "textures";
+                break;
+            case TEXT:
+                resourceKey = "fonts";
+                break;
+        }
+
+        auto directory = getValue<std::string>(std::vector<std::string>{"resources", resourceKey, "directory"});
+
+        auto files = getValues<std::string>({"resources", resourceKey, "files", parentKey}, keys);
+        for (auto & file : files) {
+            file = splitToPath({projectPath, getResourceDirectory(), directory, file});
+        }
+
+        return files;
+    }
+
     std::string getResourceDirectory() {
         return getValue<std::string>(std::vector<std::string>{"resources", "directory"});
     }

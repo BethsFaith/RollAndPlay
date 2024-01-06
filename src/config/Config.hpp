@@ -21,6 +21,9 @@ namespace Config {
 
     std::string getPath(Resource resource, const std::vector<std::string>& name);
 
+    std::vector<std::string> getPaths(Resource resource, const std::string &parentKey,
+                                      const std::vector<std::string>& keys);
+
     std::string getDirectory(Resource resDirectory);
 
     std::string getResourceDirectory();
@@ -66,6 +69,37 @@ namespace Config {
         }
 
         return obj[path.back()].as<T>();
+    }
+
+    template<typename T>
+    static std::vector<T> getValues(const std::vector<std::string>& path, const std::vector<std::string>& keys) {
+        std::ifstream ifstream("../../config.json", std::ifstream::binary);
+
+        if (!ifstream.is_open()) {
+            throw Json::Exception("File can't be open");
+        }
+
+        Json::Reader reader;
+        Json::Value obj;
+        reader.parse(ifstream, obj);
+
+        ifstream.close();
+
+        Json::ValueIterator it = obj.begin();
+        for (const auto& key : path) {
+            if (obj.isMember(key)) {
+                obj = obj[key];
+            }
+        }
+
+        std::vector<T> result{};
+        for (const auto& key : keys) {
+            if (obj.isMember(key)) {
+                result.push_back(obj[key].as<T>());
+            }
+        }
+
+        return result;
     }
 
     static void pullDesktopResolution(int& horizontal, int& vertical)
