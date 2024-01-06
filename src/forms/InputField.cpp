@@ -117,7 +117,7 @@ namespace Forms {
 
     void InputField::popFromBuffer(unsigned int position) {
         if (position < _buf.content.size()) {
-            _buf.content.erase(position);
+            _buf.content.erase(position, 1);
 
             _carriage.move(-1);
 
@@ -204,5 +204,9 @@ namespace Forms {
         if (curPos + offset <= _buf.content.size()) {
             _carriage.move(offset);
         }
+    }
+
+    void InputField::moveCarriageToScreenPosition(float xPos) {
+        _carriage.moveToScreenPosition(xPos);
     }
 }

@@ -32,6 +32,7 @@ namespace Forms {
         _object->addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
 
         _textSize = textSize;
+        _initXPosition = position.x;
     }
 
     void Carriage::render(const GraphicLib::Shaders::ShaderProgram::Ptr& shader) {
@@ -81,6 +82,30 @@ namespace Forms {
         transformTechnique->setTransformValue({xPos, transform.y, transform.z});
 
         _position += indexOffset;
+    }
+
+
+    void Carriage::moveToScreenPosition(float xPos) {
+        int screenWidth, screenHeight;
+        Config::pullDesktopResolution(screenWidth, screenHeight);
+
+        float w = static_cast<float>(screenWidth) / 2;
+        float x =  w + _initXPosition * w;
+        float iPos;
+        for (int i = 0; i < _characterOffsets.size(); ++i) {
+            iPos = x + static_cast<float>(_characterOffsets[i].bearing.x) * _textSize;
+            if (iPos >= xPos) {
+                _position = i;
+                auto technique = _object->getTechnique(GraphicLib::Techniques::TRANSFORM);
+                auto transformTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(technique);
+                auto transform = transformTechnique->getTransformValue();
+
+                x = (x - w) / w;
+                transformTechnique->setTransformValue({x, transform.y, transform.z});
+                return;
+            }
+            x += static_cast<float>(_characterOffsets[i].advance >> 6) * _textSize;
+        }
     }
 
     void Carriage::addCharacterData(const CharacterOffset& character) {

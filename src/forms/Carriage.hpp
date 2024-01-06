@@ -32,16 +32,18 @@ namespace Forms {
         void hide();
 
         void move(int indexOffset);
+        void moveToScreenPosition(float xPos);
 
         void addCharacterData(const CharacterOffset& character);
         void releaseCharacterData(unsigned int index);
         void releaseBackCharacterData();
         void clearAllCharacterData();
 
-        uint8_t getPosition() const;
+        [[nodiscard]] uint8_t getPosition() const;
     private:
         GraphicLib::Object::Ptr _object;
         uint8_t _position = 0;
+        float _initXPosition;
         std::vector<CharacterOffset> _characterOffsets{};
         float _textSize = 1.0f;
     };
