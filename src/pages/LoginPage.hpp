@@ -28,6 +28,8 @@ namespace Pages {
         void toView();
 
         StateTag _currentTag = START;
+
+        std::u16string _outputMessage{};
     };
 }
 
