@@ -63,6 +63,8 @@ MainWindow::~MainWindow() {
         glfwDestroyWindow(_window);
     }
     glfwTerminate();
+
+    Config::Config::free();
 }
 
 void MainWindow::init(const char *title, const std::string &configFilePath) {
