@@ -52,8 +52,8 @@ add_executable(RollAndPlay
         src/data/storage/StreamReader.cpp
         src/data/DataStorage.cpp
         src/Toolbar.cpp
-        src/config/Config.cpp
-        src/forms/TextBox.cpp)
+        src/config/File.cpp
+        src/forms/TextBox.cpp src/config/Config.cpp)
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

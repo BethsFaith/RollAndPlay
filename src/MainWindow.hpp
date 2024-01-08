@@ -28,7 +28,7 @@
 
 class MainWindow {
 public:
-    static void init(const char *title);
+    static void init(const char *title, const std::string &configFilePath);
 
     static void free();
 
@@ -56,7 +56,7 @@ protected:
 private:
     static MainWindow *instance;
 
-    explicit MainWindow(const char *title);
+    explicit MainWindow(const char *title, const std::string &configFilePath);
 
     ~MainWindow();
 

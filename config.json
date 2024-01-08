@@ -34,7 +34,7 @@
     "textures": {
       "directory" : "textures",
       "files" : {
-        "no-img": "no-img.jpg"
+        "default": "no-img.jpg"
       }
     }
   }

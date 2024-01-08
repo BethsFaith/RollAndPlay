@@ -1,86 +1,78 @@
 //
-// Created by VeraTag on 10.11.2023.
+// Created by VerOchka on 08.01.2024.
 //
 
 #include "Config.hpp"
 
-#include <utility>
-
 namespace Config {
-    std::string getPath(Resource resource, const std::vector<std::string>& name) {
-        std::string resourceKey;
+    void pullDesktopResolution(int &horizontal, int &vertical) {
+        RECT desktop;
 
-        switch (resource) {
-            case SHADERS:
-                resourceKey = "shaders";
-                break;
-            case TEXTURES:
-                resourceKey = "textures";
-                break;
-            case TEXT:
-                resourceKey = "fonts";
-                break;
-        }
+        HWND hDesktop = GetDesktopWindow();
 
-        auto directory = getValue<std::string>(std::vector<std::string>{"resources", resourceKey, "directory"});
+        GetWindowRect(hDesktop, &desktop);
 
-        std::vector<std::string> keys{"resources", resourceKey, "files"};
-        keys.insert(keys.end(), name.begin(), name.end());
-
-        auto file = getValue<std::string>(keys);
-
-        return splitToPath({projectPath, getResourceDirectory(), directory, file});
+        horizontal = desktop.right;
+        vertical = desktop.bottom;
     }
 
-    std::vector<std::string> getPaths(Resource resource, const std::string &parentKey,
-                                      const std::vector<std::string> &keys) {
-        std::string resourceKey;
+    Config *Config::_instance = nullptr;
 
-        switch (resource) {
-            case SHADERS:
-                resourceKey = "shaders";
-                break;
-            case TEXTURES:
-                resourceKey = "textures";
-                break;
-            case TEXT:
-                resourceKey = "fonts";
-                break;
-        }
+    Config::Config(const std::string &filePath) {
+        File file(filePath);
 
-        auto directory = getValue<std::string>(std::vector<std::string>{"resources", resourceKey, "directory"});
+        auto guiPaths = file.getPaths(File::Resource::SHADERS, "gui",
+                                         {"vertex", "fragment"});
+        auto selectablePaths = file.getPaths(File::Resource::SHADERS, "selectable",
+                                                {"vertex", "fragment"});
+        auto textPaths = file.getPaths(File::Resource::SHADERS, "text",
+                                          {"vertex", "fragment"});
+        auto texturePaths = file.getPaths(File::Resource::SHADERS, "texture_gui",
+                                             {"vertex", "fragment"});
 
-        auto files = getValues<std::string>({"resources", resourceKey, "files", parentKey}, keys);
-        for (auto & file : files) {
-            file = splitToPath({projectPath, getResourceDirectory(), directory, file});
-        }
+        _shadersPaths["gui"] = {.vertex = guiPaths.front(), .fragment = guiPaths.back()};
+        _shadersPaths["selectable"] = {.vertex = selectablePaths.front(), .fragment = selectablePaths.back()};
+        _shadersPaths["text"] = {.vertex = textPaths.front(), .fragment = textPaths.back()};
+        _shadersPaths["texture"] = {.vertex = texturePaths.front(), .fragment = texturePaths.back()};
 
-        return files;
+        _texturesPaths["default"] = file.getPath(File::Resource::TEXTURES, "default");
+
+        _fontPaths["gui"] = file.getPath(File::Resource::TEXT, "gui");
     }
 
-    std::string getResourceDirectory() {
-        return getValue<std::string>(std::vector<std::string>{"resources", "directory"});
+    Config* Config::get() {
+        return _instance;
     }
 
-    std::string getDirectory(Resource resDirectory) {
-        switch (resDirectory) {
-            case SHADERS:
-                return getValue<std::string>(std::vector<std::string>{"resources", "shaders", "directory"});
-            case TEXTURES:
-                return getValue<std::string>(std::vector<std::string>{"resources", "textures", "directory"});
-            case TEXT:
-                return getValue<std::string>(std::vector<std::string>{"resources", "fonts", "directory"});
+    void Config::init(const std::string& filePath) {
+        _instance = new Config(filePath);
+    }
+
+    void Config::free() {
+        delete _instance;
+    }
+
+    Config::ShaderPath Config::getShaderPath(const std::string &name) {
+        if (_shadersPaths.contains(name)) {
+            return _shadersPaths[name];
+        } else {
+            return {};
         }
     }
 
-    std::string splitToPath(std::vector<std::string> strings) {
-        if (strings.empty()) return "";
-
-        std::string path = strings.at(0);
-        for (int i{1}; i < strings.size(); ++i) {
-            path += separator + strings.at(i);
+    std::string Config::getFontPath(const std::string &name) {
+        if (_fontPaths.contains(name)) {
+            return _fontPaths[name];
+        } else {
+            return "";
         }
+    }
 
-        return path;
+    std::string Config::getTexturePath(const std::string &name) {
+        if (_texturesPaths.contains(name)) {
+            return _texturesPaths[name];
+        } else {
+            return "";
+        }
     }
 }

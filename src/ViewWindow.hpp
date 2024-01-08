@@ -11,6 +11,7 @@
 
 #include "controllers/CommonController.hpp"
 #include "pages/APage.hpp"
+#include "config/Config.hpp"
 #include "Toolbar.hpp"
 
 class ViewWindow {

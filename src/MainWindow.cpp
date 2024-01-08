@@ -6,7 +6,10 @@
 
 MainWindow *MainWindow::instance = nullptr;
 
-MainWindow::MainWindow(const char *title) {
+MainWindow::MainWindow(const char *title, const std::string &configFilePath) {
+    Config::Config::init(configFilePath);
+    auto config = Config::Config::get();
+
     int height, width;
     Config::pullDesktopResolution(width, height);
 
@@ -30,9 +33,8 @@ MainWindow::MainWindow(const char *title) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
-    auto font = Config::getPath(Config::Resource::TEXT, {"gui"});
     GraphicLib::Techniques::TextTechnique::initTextRendering(width, height,
-                                                           font, 20);
+                                                           config->getFontPath("gui"), 20);
 
     auto canvas = std::make_shared<GraphicLib::PickableTexture>();
     canvas->init(width, height);
@@ -63,8 +65,8 @@ MainWindow::~MainWindow() {
     glfwTerminate();
 }
 
-void MainWindow::init(const char *title) {
-    instance = new MainWindow(title);
+void MainWindow::init(const char *title, const std::string &configFilePath) {
+    instance = new MainWindow(title, configFilePath);
 
     glfwSetMouseButtonCallback(instance->_window, mouseButtonCallback);
     glfwSetCursorPosCallback(instance->_window, mouseInputCallback);

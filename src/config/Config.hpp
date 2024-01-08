@@ -1,122 +1,44 @@
 //
-// Created by VeraTag on 08.11.2023.
+// Created by VerOchka on 08.01.2024.
 //
 
 #ifndef ROLLANDPLAY_CONFIG_HPP
 #define ROLLANDPLAY_CONFIG_HPP
 
 #include <iostream>
-#include <fstream>
-
-#include <json/reader.h>
-#include <json/value.h>
+#include <map>
 #include <wtypes.h>
 
+#include "File.hpp"
+
 namespace Config {
-    enum Resource {
-        SHADERS,
-        TEXTURES,
-        TEXT,
+    class Config {
+    public:
+        struct ShaderPath {
+            std::string vertex;
+            std::string fragment;
+        };
+
+        static Config* get();
+
+        static void init(const std::string& filePath);
+        static void free();
+
+        ShaderPath getShaderPath(const std::string& name);
+        std::string getFontPath(const std::string& name);
+        std::string getTexturePath(const std::string& name);
+
+    private:
+        explicit Config(const std::string& filePath);
+
+        static Config* _instance;
+
+        std::map<std::string, ShaderPath> _shadersPaths;
+        std::map<std::string, std::string> _texturesPaths;
+        std::map<std::string, std::string> _fontPaths;
     };
 
-    std::string getPath(Resource resource, const std::vector<std::string>& name);
+    void pullDesktopResolution(int& horizontal, int& vertical);
+}
 
-    std::vector<std::string> getPaths(Resource resource, const std::string &parentKey,
-                                      const std::vector<std::string>& keys);
-
-    std::string getDirectory(Resource resDirectory);
-
-    std::string getResourceDirectory();
-
-    std::string splitToPath(std::vector<std::string> strings);
-
-    template<typename T>
-    static T getValue(const std::string& name) {
-        std::ifstream ifstream("../../config.json", std::ifstream::binary);
-
-        if (!ifstream.is_open()) {
-            throw Json::Exception("File can't be open");
-        }
-
-        Json::Reader reader;
-        Json::Value obj;
-        reader.parse(ifstream, obj); // reader can also read strings
-
-        ifstream.close();
-
-        return obj[name].as<T>();
-    }
-
-    template<typename T>
-    static T getValue(const std::vector<std::string>& path) {
-        std::ifstream ifstream("../../config.json", std::ifstream::binary);
-
-        if (!ifstream.is_open()) {
-            throw Json::Exception("File can't be open");
-        }
-
-        Json::Reader reader;
-        Json::Value obj;
-        reader.parse(ifstream, obj);
-
-        ifstream.close();
-
-        Json::ValueIterator it = obj.begin();
-        for (int i{0}; i < (int)path.size()-1; ++i) {
-            if (obj.isMember(path.at(i))) {
-                obj = obj[path.at(i)];
-            }
-        }
-
-        return obj[path.back()].as<T>();
-    }
-
-    template<typename T>
-    static std::vector<T> getValues(const std::vector<std::string>& path, const std::vector<std::string>& keys) {
-        std::ifstream ifstream("../../config.json", std::ifstream::binary);
-
-        if (!ifstream.is_open()) {
-            throw Json::Exception("File can't be open");
-        }
-
-        Json::Reader reader;
-        Json::Value obj;
-        reader.parse(ifstream, obj);
-
-        ifstream.close();
-
-        Json::ValueIterator it = obj.begin();
-        for (const auto& key : path) {
-            if (obj.isMember(key)) {
-                obj = obj[key];
-            }
-        }
-
-        std::vector<T> result{};
-        for (const auto& key : keys) {
-            if (obj.isMember(key)) {
-                result.push_back(obj[key].as<T>());
-            }
-        }
-
-        return result;
-    }
-
-    static void pullDesktopResolution(int& horizontal, int& vertical)
-    {
-        RECT desktop;
-
-        const HWND hDesktop = GetDesktopWindow();
-
-        GetWindowRect(hDesktop, &desktop);
-
-        horizontal = desktop.right;
-        vertical = desktop.bottom;
-    }
-
-    static std::string projectPath = getValue<std::string>("path");
-
-    static char separator = '\\';
-};
-
-#endif    //ROLLANDPLAY_CONFIG_HPP
+#endif //ROLLANDPLAY_CONFIG_HPP

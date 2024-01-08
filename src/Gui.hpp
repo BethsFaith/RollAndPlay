@@ -10,6 +10,7 @@
 
 #include "forms/Button.hpp"
 #include "forms/TextBox.hpp"
+#include "config/Config.hpp"
 #include "controllers/GuiController.hpp"
 
 class Gui {

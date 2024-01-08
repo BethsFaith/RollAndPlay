@@ -9,6 +9,7 @@
 #include <utility>
 
 #include "BasePage.hpp"
+#include "../config/Config.hpp"
 #include "../data/System.hpp"
 #include "../data/DataStorage.hpp"
 

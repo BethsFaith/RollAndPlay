@@ -5,7 +5,7 @@
 #include "MainWindow.hpp"
 
 int main() {
-    MainWindow::init("RollAndPlay - Game System");
+    MainWindow::init("RollAndPlay - Game System", "../../config.json");
 
     auto window = MainWindow::getInstance();
 

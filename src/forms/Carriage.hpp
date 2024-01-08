@@ -9,10 +9,10 @@
 #include <GraphicLib/Techniques/ColorTechnique.hpp>
 #include <GraphicLib/Techniques/TransformTechnique.hpp>
 #include <GraphicLib/Primitives/Rectangle.hpp>
+#include <GraphicLib/TextRender.hpp>
 
-#include "Color.hpp"
 #include "../config/Config.hpp"
-#include "GraphicLib/TextRender.hpp"
+#include "Color.hpp"
 
 namespace Forms {
     class Carriage {
@@ -43,7 +43,7 @@ namespace Forms {
     private:
         GraphicLib::Object::Ptr _object;
         uint8_t _position = 0;
-        float _initXPosition;
+        float _initXPosition{};
         std::vector<CharacterOffset> _characterOffsets{};
         float _textSize = 1.0f;
     };
