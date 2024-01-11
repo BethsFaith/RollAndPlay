@@ -26,6 +26,8 @@ namespace Pages {
         explicit SystemPage(GraphicLib::PickableTexture::Ptr canvas);
         ~SystemPage() override = default;
 
+        void init(const glm::vec2 &screenOffset) override;
+
     private:
         void update() override;
 
@@ -36,8 +38,11 @@ namespace Pages {
 
         Data::System::Ptr _system;
 
-        std::u16string_view _name;
-        std::u16string_view _image;
+        Forms::Button::Ptr _createButton;
+        Forms::Button::Ptr _saveButton;
+        Forms::InputField::Ptr _nameInputField;
+        Forms::ImageButton::Ptr _iconButton;
+        Forms::InputField::Ptr _iconPathInputField;
     };
 }
 

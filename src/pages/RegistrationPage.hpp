@@ -8,6 +8,7 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
 #include "BasePage.hpp"
+#include "../data/User.hpp"
 #include "../forms/TextBox.hpp"
 
 namespace Pages {
@@ -23,6 +24,8 @@ namespace Pages {
         explicit RegistrationPage(const GraphicLib::PickableTexture::Ptr &canvas);
         ~RegistrationPage() override = default;
 
+        void init(const glm::vec2 &screenOffset) override;
+
     private:
         void update() override;
         void toCreate();
@@ -30,7 +33,10 @@ namespace Pages {
 
         StateTag _currentTag = CREATE;
 
-        std::u16string _outputMessage{};
+        Forms::Button::Ptr _saveButton;
+        Forms::InputField::Ptr _loginInputField;
+        Forms::InputField::Ptr _passwordInputField;
+        Forms::TextBox::Ptr _messageBox;
     };
 }
 

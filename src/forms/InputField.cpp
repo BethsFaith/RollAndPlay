@@ -126,11 +126,13 @@ namespace Forms {
     }
 
     void InputField::clear() {
-        _carriage.move(-(int)_buf.content.size()+1);
+        if (!_buf.content.empty()) {
+            _carriage.move(-(int)_buf.content.size());
 
-        _carriage.clearAllCharacterData();
+            _carriage.clearAllCharacterData();
 
-        _buf.content.clear();
+            _buf.content.clear();
+        }
     }
 
     void InputField::renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader) {

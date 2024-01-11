@@ -19,6 +19,8 @@ namespace Pages {
         explicit SkillPage(GraphicLib::PickableTexture::Ptr canvas);
         ~SkillPage() override = default;
 
+        void init(const glm::vec2 &screenOffset) override;
+
     private:
         void update() override;
 
@@ -26,6 +28,12 @@ namespace Pages {
         void toView();
 
         StateTag _currentTag = START;
+
+        Forms::Button::Ptr _createButton;
+        Forms::Button::Ptr _saveButton;
+        Forms::InputField::Ptr _nameInputField;
+        Forms::ImageButton::Ptr _iconButton;
+        Forms::InputField::Ptr _iconPathInputField;
     };
 }
 

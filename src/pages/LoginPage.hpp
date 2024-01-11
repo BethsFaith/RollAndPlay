@@ -22,6 +22,8 @@ namespace Pages {
         explicit LoginPage(const GraphicLib::PickableTexture::Ptr &canvas);
         ~LoginPage() override = default;
 
+        void init(const glm::vec2 &screenOffset) override;
+
     private:
         void update() override;
         void toStart();
@@ -29,7 +31,10 @@ namespace Pages {
 
         StateTag _currentTag = START;
 
-        std::u16string _outputMessage{};
+        Forms::Button::Ptr _pushButton;
+        Forms::InputField::Ptr _loginInputField;
+        Forms::InputField::Ptr _passwordInputField;
+        Forms::TextBox::Ptr _messageBox;
     };
 }
 

@@ -23,13 +23,13 @@ namespace Pages {
 
         virtual ~APage() = default;
 
+        virtual void init(const glm::vec2 &screenOffset) = 0;
+
         virtual void draw() = 0;
 
         virtual void update() = 0;
 
         virtual Controllers::GLController::Ptr getController() = 0;
-
-        virtual void setScreenOffset(const glm::vec2 &screenOffset) = 0;
     };
 }
 

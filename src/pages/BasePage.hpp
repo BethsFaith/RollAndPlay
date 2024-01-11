@@ -23,7 +23,7 @@ namespace Pages {
 
         void update() override;
 
-        void setScreenOffset(const glm::vec2 &screenOffset) override;
+        void init(const glm::vec2 &screenOffset) override;
 
     protected:
         void addForm(const Forms::Form::Ptr& form);

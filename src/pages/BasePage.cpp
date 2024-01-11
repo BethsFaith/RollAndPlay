@@ -30,7 +30,7 @@ namespace Pages {
         glDisable(GL_DEPTH_TEST);
     }
 
-    void BasePage::setScreenOffset(const glm::vec2 &screenOffset) {
+    void BasePage::init(const glm::vec2 &screenOffset) {
         ScreenOffset = screenOffset;
     }
 }

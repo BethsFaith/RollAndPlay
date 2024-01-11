@@ -22,14 +22,22 @@ namespace Pages {
         canvas);
         ~RacePage() override = default;
 
+        void init(const glm::vec2 &screenOffset) override;
+
     private:
         void update() override;
 
         void toStart();
 
-        void toView();
+        void toCreate();
 
         StateTag _currentTag = START;
+
+        Forms::Button::Ptr _createButton;
+        Forms::Button::Ptr _saveButton;
+        Forms::InputField::Ptr _nameInputField;
+        Forms::ImageButton::Ptr _iconButton;
+        Forms::InputField::Ptr _iconPathInputField;
     };
 }
 
