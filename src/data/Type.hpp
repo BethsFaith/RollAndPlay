@@ -11,7 +11,8 @@ namespace Data {
         RACE,
         SKILL,
         ACTION,
-        CLASS
+        CLASS,
+        USER,
     };
 }
 

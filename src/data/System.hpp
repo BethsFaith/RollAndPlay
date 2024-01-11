@@ -13,7 +13,7 @@
 #include "Action.hpp"
 
 namespace Data {
-    class System : public ISerializable {
+    class System : public IBitwiseSerializable {
     public:
         using Ptr = std::shared_ptr<System>;
 

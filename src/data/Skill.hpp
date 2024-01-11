@@ -8,10 +8,10 @@
 #include <iostream>
 #include <utility>
 
-#include "ISerializable.hpp"
+#include "IBitwiseSerializable.hpp"
 
 namespace Data {
-    class Skill : ISerializable {
+    class Skill : IBitwiseSerializable {
     public:
         using Ptr = std::shared_ptr<Skill>;
 

@@ -12,7 +12,7 @@
 #include "Skill.hpp"
 
 namespace Data {
-    class SkillCategory : public ISerializable {
+    class SkillCategory : public IBitwiseSerializable {
     public:
         using Ptr = std::shared_ptr<SkillCategory>;
 

@@ -8,11 +8,11 @@
 #include <iostream>
 #include <utility>
 
-#include "ISerializable.hpp"
+#include "IBitwiseSerializable.hpp"
 #include "Skill.hpp"
 
 namespace Data {
-    class Action : public ISerializable {
+    class Action : public IBitwiseSerializable {
     public:
         using Ptr = std::shared_ptr<Action>;
 

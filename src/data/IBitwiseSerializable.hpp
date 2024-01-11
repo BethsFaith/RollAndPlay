@@ -10,12 +10,12 @@
 #include "storage/StreamReader.hpp"
 
 namespace Data {
-    class ISerializable {
+    class IBitwiseSerializable {
     public:
-        using Ptr = std::shared_ptr<ISerializable>;
+        using Ptr = std::shared_ptr<IBitwiseSerializable>;
 
-        ISerializable() = default;
-        virtual ~ISerializable() = default;
+        IBitwiseSerializable() = default;
+        virtual ~IBitwiseSerializable() = default;
 
         [[nodiscard]] virtual std::size_t serialize(Storage::StreamWriter &writer) const = 0;
         virtual std::size_t deserialize(Storage::StreamReader &reader) = 0;
@@ -25,6 +25,5 @@ namespace Data {
         virtual unsigned int getIndex() = 0;
     };
 }
-
 
 #endif //ROLLANDPLAY_SERIALIZABLE_HPP
