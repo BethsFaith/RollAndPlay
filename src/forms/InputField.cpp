@@ -88,7 +88,7 @@ namespace Forms {
                     _carriage.addCharacterData({.bearing = ch.bearing, .advance = ch.advance});
                 }
             }
-            _carriage.move(1);
+            _carriage.move( static_cast<int>(string.size()));
         }
     }
 
@@ -127,7 +127,7 @@ namespace Forms {
 
     void InputField::clear() {
         if (!_buf.content.empty()) {
-            _carriage.move(-(int)_buf.content.size());
+            _carriage.moveToIndex(0);
 
             _carriage.clearAllCharacterData();
 

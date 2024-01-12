@@ -32,6 +32,7 @@ namespace Forms {
         void hide();
 
         void move(int indexOffset);
+        void moveToIndex(unsigned int index);
         void moveToScreenPosition(float xPos);
 
         void addCharacterData(const CharacterOffset& character);

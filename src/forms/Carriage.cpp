@@ -108,6 +108,16 @@ namespace Forms {
         }
     }
 
+    void Carriage::moveToIndex(unsigned int index) {
+        _position = 0;
+
+        auto technique = _object->getTechnique(GraphicLib::Techniques::TRANSFORM);
+        auto transformTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(technique);
+        auto transform = transformTechnique->getTransformValue();
+
+        transformTechnique->setTransformValue({_initXPosition, transform.y, transform.z});
+    }
+
     void Carriage::addCharacterData(const CharacterOffset& character) {
         _characterOffsets.push_back(character);
     }
@@ -123,6 +133,7 @@ namespace Forms {
     void Carriage::clearAllCharacterData() {
         _characterOffsets.clear();
     }
+
 
     uint8_t Carriage::getPosition() const {
         return _position;
