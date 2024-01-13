@@ -5,7 +5,8 @@
 #ifndef ROLLANDPLAY_INPUTFIELDCONTROLLER_HPP
 #define ROLLANDPLAY_INPUTFIELDCONTROLLER_HPP
 
-/*#include <synchapi.h>*/
+#include <chrono>
+#include <thread>
 
 #include "FormController.hpp"
 #include "../forms/InputField.hpp"

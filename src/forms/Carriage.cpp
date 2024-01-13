@@ -134,7 +134,6 @@ namespace Forms {
         _characterOffsets.clear();
     }
 
-
     uint8_t Carriage::getPosition() const {
         return _position;
     }
