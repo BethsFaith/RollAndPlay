@@ -37,5 +37,8 @@
         "default": "no-img.jpg"
       }
     }
+  },
+  "net" : {
+    "server_address" : "localhost"
   }
 }
