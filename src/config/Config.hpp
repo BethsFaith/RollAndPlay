@@ -27,6 +27,7 @@ namespace Config {
         ShaderPath getShaderPath(const std::string& name);
         std::string getFontPath(const std::string& name);
         std::string getTexturePath(const std::string& name);
+        std::string getNetValue(const std::string& name);
 
     private:
         explicit Config(const std::string& filePath);
@@ -36,6 +37,7 @@ namespace Config {
         std::map<std::string, ShaderPath> _shadersPaths;
         std::map<std::string, std::string> _texturesPaths;
         std::map<std::string, std::string> _fontPaths;
+        std::map<std::string, std::string> _net;
     };
 
     void pullDesktopResolution(int& horizontal, int& vertical);

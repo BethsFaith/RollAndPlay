@@ -56,6 +56,9 @@ add_executable(RollAndPlay
         src/Toolbar.cpp
         src/config/File.cpp
         src/config/Config.cpp
+        src/net/ApiClient.cpp
+        src/net/HttpRequest.cpp
+        src/net/HttpResponse.cpp
         )
 
 

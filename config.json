@@ -39,6 +39,7 @@
     }
   },
   "net" : {
-    "server_address" : "localhost"
+    "host" : "localhost",
+    "port": "8080"
   }
 }

@@ -31,9 +31,6 @@ namespace Config {
 
         std::string getResourceDirectory();
 
-    private:
-        [[nodiscard]] std::string splitToPath(std::vector<std::string> strings) const;
-
         template<typename T>
         T getValue(const std::string& name) {
             std::ifstream ifstream(_filePath, std::ifstream::binary);
@@ -105,6 +102,8 @@ namespace Config {
 
             return result;
         }
+    private:
+        [[nodiscard]] std::string splitToPath(std::vector<std::string> strings) const;
 
         std::string _filePath;
         std::string _projectPath;
