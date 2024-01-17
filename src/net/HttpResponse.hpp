@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <asio.hpp>
+#include <json/json.h>
+#include <json/reader.h>
 
 namespace Net {
     class HttpResponse {
@@ -15,12 +17,22 @@ namespace Net {
         ~HttpResponse() = default;
 
         void read(asio::ip::tcp::socket& socket);
+
+        [[nodiscard]] const std::string &getHttpVersion() const;
+        [[nodiscard]] const std::string &getStatusMessage() const;
+        [[nodiscard]] const std::string &getCookie() const;
+        [[nodiscard]] const std::string &getErrorMessage() const;
+        [[nodiscard]] const Json::Value &getBody() const;
+        [[nodiscard]] unsigned int getStatusCode() const;
+
     private:
         std::string _httpVersion;
         std::string _statusMessage;
         std::string _cookie;
+        std::string _errorMessage;
+        Json::Value _body;
 
-        unsigned int _statusCode;
+        unsigned int _statusCode{};
     };
 }
 

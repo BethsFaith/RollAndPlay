@@ -22,7 +22,6 @@ namespace Net {
     void HttpRequest::setBodyJson(Json::Value& body) {
         Json::StyledWriter styledWriter;
         _body = styledWriter.write(body);
-        std::cout << _body << std::endl;
 
         _headers.emplace_back("Content-Length: " + std::to_string(_body.length()));
         _headers.emplace_back("Content-Type: application/json");

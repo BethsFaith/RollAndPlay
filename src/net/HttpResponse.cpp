@@ -39,6 +39,27 @@ namespace Net {
         }
         std::cout << "\n";
 
+        std::string bodyLine;
+        std::getline(responseStream, bodyLine);
+        Json::Reader reader;
+        bool parsingSuccessful = reader.parse(bodyLine.c_str(), _body);     //parse process
+        if ( !parsingSuccessful )
+        {
+            std::cout  << "Failed to parse"
+                       << reader.getFormattedErrorMessages();
+        }
+
+        // удалить потом
+        Json::ValueIterator it = _body.begin();
+        while (it != _body.end()) {
+            std::cout <<  it.key() << ":" << it->asString() << std::endl;
+            ++it;
+        } // конец удаления
+
+        if (_body.isMember("error")) {
+            _errorMessage = _body["error"].asString();
+        }
+
         // Write whatever content we already have to output.
         if (response.size() > 0)
             std::cout << &response;
@@ -50,9 +71,34 @@ namespace Net {
         asio::error_code error;
         // Read until EOF, writing data to output as we go.
         while (asio::read(socket, response,
-                          asio::transfer_at_least(1), error))
+                          asio::transfer_at_least(1), error)) {
             std::cout << &response;
+        }
         if (error != asio::error::eof)
             std::cout << "SERVER ERROR: " << error << std::endl;
+    }
+
+    const std::string &HttpResponse::getHttpVersion() const {
+        return _httpVersion;
+    }
+
+    const std::string &HttpResponse::getStatusMessage() const {
+        return _statusMessage;
+    }
+
+    const std::string &HttpResponse::getCookie() const {
+        return _cookie;
+    }
+
+    const std::string &HttpResponse::getErrorMessage() const {
+        return _errorMessage;
+    }
+
+    const Json::Value &HttpResponse::getBody() const {
+        return _body;
+    }
+
+    unsigned int HttpResponse::getStatusCode() const {
+        return _statusCode;
     }
 }

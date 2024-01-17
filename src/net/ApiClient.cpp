@@ -17,8 +17,13 @@ namespace Net {
         tcp::resolver::results_type endpoints = resolver.resolve(query);
 
         tcp::socket socket(_ioContext);
-        asio::connect(socket, endpoints);
+        asio::error_code errorCode;
+        asio::connect(socket, endpoints, errorCode);
 
+        if (errorCode) {
+            std::cout << errorCode.message() << std::endl;
+            return {};
+        }
         request.write(socket);
 
         HttpResponse response;

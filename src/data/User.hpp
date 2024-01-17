@@ -6,9 +6,10 @@
 #define ROLLANDPLAY_USER_HPP
 
 #include "IBitwiseSerializable.hpp"
+#include "IJsonSerializable.hpp"
 
 namespace Data {
-    class User : public IBitwiseSerializable {
+    class User : public IBitwiseSerializable, IJsonSerializable {
     public:
         User() = default;
         ~User() override = default;
@@ -16,6 +17,10 @@ namespace Data {
         size_t serialize(Storage::StreamWriter &writer) const override;
 
         size_t deserialize(Storage::StreamReader &reader) override;
+
+        void serialize(Json::Value &jsonValue) override;
+
+        void deserialize(Json::Value &jsonValue) override;
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
@@ -25,13 +30,14 @@ namespace Data {
 
         static bool validatePassword(const std::u16string& password);
 
-        void setName(const std::u16string &name);
+        void setEmail(const std::u16string &email);
 
         void setPassword(const std::u16string &password);
 
     private:
-        std::u16string _name;
+        std::u16string _email;
         std::u16string _password;
+        std::u16string _nickname;
     };
 }
 
