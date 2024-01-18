@@ -36,10 +36,12 @@ namespace Pages {
         StateTag _currentTag = CREATE;
 
         Forms::Button::Ptr _saveButton;
+        Forms::Button::Ptr _createButton;
         Forms::InputField::Ptr _loginInputField;
         Forms::InputField::Ptr _passwordInputField;
         Forms::InputField::Ptr _repeatedPasswordInputField;
-        Forms::TextBox::Ptr _messageBox;
+        Forms::TextBox::Ptr _creatingMessageBox;
+        Forms::TextBox::Ptr _viewMessageBox;
     };
 }
 

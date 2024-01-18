@@ -64,4 +64,8 @@ namespace Forms {
         textTechnique->setText(text.content);
         textTechnique->setColor(getRGB(text.color));
     }
+
+    void TextBox::clear() {
+        setText({.content = u""});
+    }
 }

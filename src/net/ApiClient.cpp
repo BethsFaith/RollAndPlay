@@ -26,7 +26,7 @@ namespace Net {
         asio::connect(socket, endpoints, errorCode);
 
         if (errorCode) {
-            std::cout << errorCode.message() << std::endl;
+            std::cout << errorCode.message() << errorCode << std::endl;
             return {};
         }
         request.write(socket);
