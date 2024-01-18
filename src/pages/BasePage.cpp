@@ -4,6 +4,8 @@
 
 #include "BasePage.hpp"
 
+#include <utility>
+
 namespace Pages {
     BasePage::BasePage(GraphicLib::PickableTexture::Ptr canvas)
     : _gui(std::move(canvas)){
@@ -32,5 +34,9 @@ namespace Pages {
 
     void BasePage::init(const glm::vec2 &screenOffset) {
         ScreenOffset = screenOffset;
+    }
+
+    void BasePage::setNetConfig(Pages::NetConfig netConfig) {
+        Net = std::move(netConfig);
     }
 }

@@ -4,38 +4,21 @@
 
 #include "Gui.hpp"
 
+GraphicLib::Shaders::ShaderProgram::Ptr Gui::colorShader = nullptr;
+GraphicLib::Shaders::ShaderProgram::Ptr Gui::textureShader = nullptr;
+GraphicLib::Shaders::ShaderProgram::Ptr Gui::selectableShader = nullptr;
+GraphicLib::Shaders::ShaderProgram::Ptr Gui::textShader = nullptr;
+
 Gui::Gui(GraphicLib::PickableTexture::Ptr canvas) : _canvas(std::move(canvas)) {
     _controller = std::make_shared<Controllers::GuiController>();
-
-    auto config = Config::Config::get();
-    auto guiShaderPath = config->getShaderPath("gui");
-    auto selectableShaderPath = config->getShaderPath("selectable");
-    auto textShaderPath = config->getShaderPath("text");
-    auto textureShaderPath = config->getShaderPath("texture");
-
-    _colorShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (guiShaderPath.vertex,
-             guiShaderPath.fragment);
-
-    _selectableShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (selectableShaderPath.vertex,
-             selectableShaderPath.fragment);
-
-    _textShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (textShaderPath.vertex,
-             textShaderPath.fragment);
-
-    _textureShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (textureShaderPath.vertex,
-             textureShaderPath.fragment);
 }
 
 void Gui::draw() {
     for (auto &form: _forms) {
         if (form->getType() == Forms::TEXT_BOX) {
             auto box = std::dynamic_pointer_cast<Forms::TextBox>(form);
-            box->renderForm(_colorShader);
-            box->renderText(_textShader);
+            box->renderForm(colorShader);
+            box->renderText(textShader);
         } else {
             auto button = std::dynamic_pointer_cast<Forms::Button>(form);
             if (button->isUnderCursor()) {
@@ -47,22 +30,22 @@ void Gui::draw() {
                 glStencilMask(0xFF); // включаем запись в буфер трафарета
 
                 if (button->getType() != Forms::FormType::TEXTURE_BUTTON) {
-                    button->renderForm(_colorShader);
+                    button->renderForm(colorShader);
                 } else {
-                    button->renderForm(_textureShader);
+                    button->renderForm(textureShader);
                 }
                 glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
                 glStencilMask(0x00);
                 glDisable(GL_STENCIL_TEST);
 
-                button->renderText(_textShader);
+                button->renderText(textShader);
 
-                button->renderPick(_selectableShader);
+                button->renderPick(selectableShader);
 
                 glDisable(GL_DEPTH_TEST);
                 glEnable(GL_STENCIL_TEST);
 
-                button->renderTracing(_colorShader);
+                button->renderTracing(colorShader);
 
                 glStencilMask(0xFF);
                 glStencilFunc(GL_ALWAYS, 1, 0xFF);
@@ -70,14 +53,14 @@ void Gui::draw() {
                 glDisable(GL_STENCIL_TEST);
             } else {
                 if (button->getType() != Forms::FormType::TEXTURE_BUTTON) {
-                    button->renderForm(_colorShader);
+                    button->renderForm(colorShader);
                 } else {
-                    button->renderForm(_textureShader);
+                    button->renderForm(textureShader);
                 }
 
-                button->renderText(_textShader);
+                button->renderText(textShader);
 
-                button->renderPick(_selectableShader);
+                button->renderPick(selectableShader);
             }
         }
     }
@@ -97,4 +80,20 @@ void Gui::clear() {
 
 const Controllers::GuiController::Ptr &Gui::getController() const {
     return _controller;
+}
+
+void Gui::setColorShader(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
+    colorShader = std::move(shader);
+}
+
+void Gui::setTextureShader(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
+    textureShader = std::move(shader);
+}
+
+void Gui::setSelectableShader(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
+    selectableShader = std::move(shader);
+}
+
+void Gui::setTextShader(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
+    textShader = std::move(shader);
 }

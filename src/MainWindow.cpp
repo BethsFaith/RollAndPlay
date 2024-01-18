@@ -39,7 +39,34 @@ MainWindow::MainWindow(const char *title, const std::string &configFilePath) {
     auto canvas = std::make_shared<GraphicLib::PickableTexture>();
     canvas->init(width, height);
 
-    _view = std::make_shared<ViewWindow>(0, 0, Forms::Color::DARK_GRAY, canvas);
+    auto guiShaderPath = config->getShaderPath("gui");
+    auto selectableShaderPath = config->getShaderPath("selectable");
+    auto textShaderPath = config->getShaderPath("text");
+    auto textureShaderPath = config->getShaderPath("texture");
+
+    auto guiShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
+            (guiShaderPath.vertex,
+             guiShaderPath.fragment);
+    Gui::setColorShader(guiShader);
+
+    Gui::setSelectableShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>
+            (selectableShaderPath.vertex,
+             selectableShaderPath.fragment));
+
+    Gui::setTextShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>
+            (textShaderPath.vertex,
+             textShaderPath.fragment));
+
+    Gui::setTextureShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>
+            (textureShaderPath.vertex,
+             textureShaderPath.fragment));
+
+    _view = std::make_shared<ViewWindow>(0, 0, Forms::Color::DARK_GRAY, canvas, guiShader);
+
+    auto host = config->getNetValue("host");
+    auto port = config->getNetValue("port");
+    auto domain = config->getNetValue("domain");
+    Pages::BasePage::setNetConfig({.client = std::make_shared<Net::ApiClient>(host, port), .domain = domain});
 
     auto systemPage = std::make_shared<Pages::SystemPage>(canvas);
     auto skillPage = std::make_shared<Pages::SkillPage>(canvas);

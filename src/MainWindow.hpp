@@ -13,16 +13,16 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-#include "forms/Button.hpp"
-#include "controllers/GuiController.hpp"
-#include "Gui.hpp"
-#include "ViewWindow.hpp"
-
 #include "pages/SystemPage.hpp"
 #include "pages/SkillPage.hpp"
 #include "pages/RacePage.hpp"
 #include "pages/LoginPage.hpp"
 #include "pages/RegistrationPage.hpp"
+
+#include "forms/Button.hpp"
+#include "controllers/GuiController.hpp"
+#include "Gui.hpp"
+#include "ViewWindow.hpp"
 
 #include "config/Config.hpp"
 

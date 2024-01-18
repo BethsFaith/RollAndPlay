@@ -37,7 +37,8 @@ public:
 
     using Ptr = std::shared_ptr<ViewWindow>;
 
-    ViewWindow(int x, int y, Forms::Color viewColor, GraphicLib::PickableTexture::Ptr canvas);
+    ViewWindow(int x, int y, Forms::Color viewColor, GraphicLib::PickableTexture::Ptr canvas,
+               GraphicLib::Shaders::ShaderProgram::Ptr shader);
 
     ~ViewWindow();
 

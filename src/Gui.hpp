@@ -29,11 +29,16 @@ public:
 
     [[nodiscard]] const Controllers::GuiController::Ptr &getController() const;
 
+    static void setColorShader(GraphicLib::Shaders::ShaderProgram::Ptr shader);
+    static void setTextureShader(GraphicLib::Shaders::ShaderProgram::Ptr shader);
+    static void setSelectableShader(GraphicLib::Shaders::ShaderProgram::Ptr shader);
+    static void setTextShader(GraphicLib::Shaders::ShaderProgram::Ptr shader);
+
 private:
-    GraphicLib::Shaders::ShaderProgram::Ptr _colorShader;
-    GraphicLib::Shaders::ShaderProgram::Ptr _textureShader;
-    GraphicLib::Shaders::ShaderProgram::Ptr _selectableShader;
-    GraphicLib::Shaders::ShaderProgram::Ptr _textShader;
+    static GraphicLib::Shaders::ShaderProgram::Ptr colorShader;
+    static GraphicLib::Shaders::ShaderProgram::Ptr textureShader;
+    static GraphicLib::Shaders::ShaderProgram::Ptr selectableShader;
+    static GraphicLib::Shaders::ShaderProgram::Ptr textShader;
 
     std::vector<Forms::Form::Ptr> _forms;
     GraphicLib::PickableTexture::Ptr _canvas;

@@ -29,7 +29,7 @@ namespace Config {
                                           {"vertex", "fragment"});
         auto texturePaths = file.getPaths(File::Resource::SHADERS, "texture_gui",
                                              {"vertex", "fragment"});
-        auto net = file.getValues<std::string>({"net"}, {"host", "port"});
+        auto net = file.getValues<std::string>({"net"}, {"host", "port", "domain"});
 
         _shadersPaths["gui"] = {.vertex = guiPaths.front(), .fragment = guiPaths.back()};
         _shadersPaths["selectable"] = {.vertex = selectablePaths.front(), .fragment = selectablePaths.back()};
@@ -40,8 +40,11 @@ namespace Config {
 
         _fontPaths["gui"] = file.getPath(File::Resource::TEXT, "gui");
 
-        _net["host"] = net[0];
-        _net["port"] = net[1];
+        if (net.size() >= 3) {
+            _net["host"] = net[0];
+            _net["port"] = net[1];
+            _net["domain"] = net[2];
+        }
     }
 
     Config* Config::get() {
