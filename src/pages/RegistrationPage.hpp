@@ -5,6 +5,8 @@
 #ifndef ROLLANDPLAY_REGISTRATIONPAGE_HPP
 #define ROLLANDPLAY_REGISTRATIONPAGE_HPP
 
+#include "../net/ApiClient.hpp"
+
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
 #include "BasePage.hpp"
@@ -36,6 +38,7 @@ namespace Pages {
         Forms::Button::Ptr _saveButton;
         Forms::InputField::Ptr _loginInputField;
         Forms::InputField::Ptr _passwordInputField;
+        Forms::InputField::Ptr _repeatedPasswordInputField;
         Forms::TextBox::Ptr _messageBox;
     };
 }

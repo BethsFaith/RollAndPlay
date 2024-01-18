@@ -4,12 +4,15 @@
 
 #ifndef ROLLANDPLAY_NETCONFIG_HPP
 #define ROLLANDPLAY_NETCONFIG_HPP
-
-#include "../net/ApiClient.hpp"
+//
+//#include "../net/ApiClient.hpp"
+#include <iostream>
 
 namespace Pages {
     struct NetConfig {
-        Net::ApiClient::Ptr client;
+        /*Net::ApiClient& client;*/
+        std::string host;
+        std::string port;
         std::string domain;
     };
 }

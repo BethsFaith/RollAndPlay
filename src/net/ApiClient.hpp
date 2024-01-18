@@ -17,11 +17,12 @@ namespace Net {
     public:
         using Ptr = std::shared_ptr<ApiClient>;
 
+        ApiClient() = default;
+        ApiClient(ApiClient& other);
         ApiClient(std::string host, std::string service);
         ~ApiClient() = default;
 
         HttpResponse connect(HttpRequest& request);
-
     private:
         std::string _host;
         std::string _service;

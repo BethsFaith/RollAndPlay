@@ -26,6 +26,8 @@ namespace Data {
 
         unsigned int getIndex() override;
 
+        static bool validateEmail(const std::u16string& email);
+
         static bool validateName(const std::u16string& name);
 
         static bool validatePassword(const std::u16string& password);

@@ -37,16 +37,13 @@ namespace Forms {
         void release() override;
 
         void putToBuffer(char16_t character);
-        void putToBuffer(char16_t character, unsigned int position);
-
         void putToBuffer(const std::string &string);
-        void putToBuffer(const std::string &string, unsigned int position);
-
         void putToBuffer(const std::u16string &string);
-        void putToBuffer(const std::u16string &string, unsigned int position);
 
         void popFromBuffer();
         void popFromBuffer(unsigned int position);
+
+        void hideContent(bool needHide);
 
         void clear();
 
@@ -59,9 +56,14 @@ namespace Forms {
         void moveCarriage(int offset);
         void moveCarriageToScreenPosition(float xPos);
     private:
+        void putToBuffer(char16_t character, unsigned int position);
+        void putToBuffer(const std::string &string, unsigned int position);
+        void putToBuffer(const std::u16string &string, unsigned int position);
+
         glm::vec2 _position{};
         glm::vec2 _scale{};
         Text _buf;
+        bool _needHide = false;
         float _inputTextSize = 1.4f;
 
         Carriage _carriage{};

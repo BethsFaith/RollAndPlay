@@ -66,7 +66,7 @@ MainWindow::MainWindow(const char *title, const std::string &configFilePath) {
     auto host = config->getNetValue("host");
     auto port = config->getNetValue("port");
     auto domain = config->getNetValue("domain");
-    Pages::BasePage::setNetConfig({.client = std::make_shared<Net::ApiClient>(host, port), .domain = domain});
+    Pages::BasePage::setNetConfig({.host = host, .port = port, .domain = domain});
 
     auto systemPage = std::make_shared<Pages::SystemPage>(canvas);
     auto skillPage = std::make_shared<Pages::SkillPage>(canvas);
