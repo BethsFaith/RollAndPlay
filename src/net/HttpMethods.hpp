@@ -13,6 +13,6 @@ namespace Net {
         const std::string MethodPost = "POST";
         const std::string MethodDelete = "DELETE";
     };
-}
+}    //namespace Net
 
-#endif //ROLLANDPLAY_HTTPMETHODS_HPP
+#endif    //ROLLANDPLAY_HTTPMETHODS_HPP

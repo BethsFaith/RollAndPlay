@@ -7,12 +7,14 @@
 #include <utility>
 
 namespace Net {
-    ApiClient::ApiClient(ApiClient &other) {
+    ApiClient::ApiClient(ApiClient& other) {
         _host = other._host;
         _service = other._service;
     }
 
-    ApiClient::ApiClient(std::string host, std::string service) : _host(std::move(host)), _service(std::move(service)){}
+    ApiClient::ApiClient(std::string host, std::string service)
+        : _host(std::move(host)),
+          _service(std::move(service)) {}
 
     HttpResponse ApiClient::connect(HttpRequest& request) {
         using asio::ip::tcp;
@@ -36,9 +38,9 @@ namespace Net {
 
         return response;
     }
-}
+}    //namespace Net
 
-//        Json::Value body;
+     //        Json::Value body;
 //        body["email"] = "user@example20.org";
 //        body["password"] = "pass10202";
 //        Json::StyledWriter styledWriter;

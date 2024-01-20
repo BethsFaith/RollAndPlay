@@ -7,7 +7,7 @@
 #include <utility>
 
 namespace Net {
-    HttpRequest::HttpRequest(const std::string &target, const std::string &method, const std::string &host) {
+    HttpRequest::HttpRequest(const std::string& target, const std::string& method, const std::string& host) {
         _headers.push_back(method + " " + target + " HTTP/1.1");
         _headers.emplace_back("Accept: */*");
         _headers.emplace_back("Connection: close");
@@ -15,7 +15,7 @@ namespace Net {
         _host = host;
     }
 
-    void HttpRequest::setCookie(const std::string &cookie) {
+    void HttpRequest::setCookie(const std::string& cookie) {
         _cookie = cookie;
     }
 
@@ -27,7 +27,7 @@ namespace Net {
         _headers.emplace_back("Content-Type: application/json");
     }
 
-    void HttpRequest::write(asio::ip::tcp::socket &socket) {
+    void HttpRequest::write(asio::ip::tcp::socket& socket) {
         asio::streambuf request;
         std::ostream request_stream(&request);
 
@@ -43,11 +43,11 @@ namespace Net {
 
         request_stream << "\r\n";
 
-        if (!_body.empty()){
+        if (!_body.empty()) {
             request_stream << _body << "\r\n";
             request_stream << "\r\n";
         }
 
         asio::write(socket, request);
     }
-}
+}    //namespace Net
