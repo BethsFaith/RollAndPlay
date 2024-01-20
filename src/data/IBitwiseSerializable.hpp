@@ -6,11 +6,13 @@
 #define ROLLANDPLAY_SERIALIZABLE_HPP
 
 #include <iostream>
+
+#include "ISerializable.hpp"
 #include "storage/StreamWriter.hpp"
 #include "storage/StreamReader.hpp"
 
 namespace Data {
-    class IBitwiseSerializable {
+    class IBitwiseSerializable  {
     public:
         using Ptr = std::shared_ptr<IBitwiseSerializable>;
 

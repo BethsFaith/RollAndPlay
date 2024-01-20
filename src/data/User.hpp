@@ -7,10 +7,13 @@
 
 #include "IBitwiseSerializable.hpp"
 #include "IJsonSerializable.hpp"
+#include "AData.hpp"
 
 namespace Data {
-    class User : public IBitwiseSerializable, IJsonSerializable {
+    class User : public AData, IBitwiseSerializable, IJsonSerializable {
     public:
+        using Ptr = std::shared_ptr<User>;
+
         User() = default;
         ~User() override = default;
 
@@ -35,6 +38,10 @@ namespace Data {
         void setEmail(const std::u16string &email);
 
         void setPassword(const std::u16string &password);
+        Type getType() override;
+        const std::u16string& getEmail() const;
+        const std::u16string& getPassword() const;
+        const std::u16string& getNickname() const;
 
     private:
         std::u16string _email;

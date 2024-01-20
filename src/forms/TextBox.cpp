@@ -33,6 +33,7 @@ namespace Forms {
         textTechnique->setWidth(position.x - scale.x / 2 + 0.01f);
         textTechnique->setHeight(position.y);
         textTechnique->setColor(getRGB(text.color));
+//        textTechnique->setScale(scale.x * 1.5);
 
         _object.addTechnique(GraphicLib::Techniques::TEXT, textTechnique);
     }

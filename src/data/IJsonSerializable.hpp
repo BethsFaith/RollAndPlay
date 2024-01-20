@@ -7,6 +7,8 @@
 
 #include <json/json.h>
 
+#include "ISerializable.hpp"
+
 namespace Data {
     class IJsonSerializable {
     public:

@@ -12,7 +12,11 @@ namespace Net {
         std::istream responseStream(&response);
 
         responseStream >> _httpVersion;
-        responseStream >> _statusCode;
+
+        unsigned int statusCode;
+        responseStream >> statusCode;
+        _statusCode = castToStatusCode(statusCode);
+
         std::getline(responseStream, _statusMessage);
 
         if (!responseStream || _httpVersion.substr(0, 5) != "HTTP/") {
@@ -41,7 +45,7 @@ namespace Net {
         std::getline(responseStream, bodyLine);
         std::cout << bodyLine << std::endl;
         Json::Reader reader;
-        bool parsingSuccessful = reader.parse(bodyLine.c_str(), _body);    //parse process
+        bool parsingSuccessful = reader.parse(bodyLine, _body);
         if (!parsingSuccessful) {
             std::cout << "Failed to parse" << reader.getFormattedErrorMessages();
         }
@@ -53,8 +57,10 @@ namespace Net {
             ++it;
         }    // конец удаления
 
-        if (_body.isMember("error")) {
-            _errorMessage = _body["error"].asString();
+        if (_body.isObject()) {
+            if (_body.isMember("error")) {
+                _errorMessage = _body["error"].asString();
+            }
         }
 
         // Write whatever content we already have to output.
@@ -96,7 +102,34 @@ namespace Net {
         return _body;
     }
 
-    unsigned int HttpResponse::getStatusCode() const {
+    HttpResponse::StatusCode HttpResponse::getStatusCode() const {
         return _statusCode;
+    }
+
+    HttpResponse::StatusCode HttpResponse::castToStatusCode(unsigned int code) {
+        switch (code) {
+            case OK:
+                return OK;
+            case CREATED:
+                return CREATED;
+            case ACCEPTED:
+                return ACCEPTED;
+            case BAD_REQUEST:
+                return BAD_REQUEST;
+            case UNAUTHORIZED:
+                return UNAUTHORIZED;
+            case CLIENT_CLOSED_REQUEST:
+                return CLIENT_CLOSED_REQUEST;
+            case INTERNAL_SERVER_ERROR:
+                return INTERNAL_SERVER_ERROR;
+            case NOT_IMPLEMENTED:
+                return NOT_IMPLEMENTED;
+            case BAD_GATEWAY:
+                return BAD_GATEWAY;
+            case SERVICE_UNAVAILABLE:
+                return SERVICE_UNAVAILABLE;
+            default:
+                return OTHER;
+        };
     }
 }    //namespace Net

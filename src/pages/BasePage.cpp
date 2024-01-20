@@ -36,7 +36,7 @@ namespace Pages {
         ScreenOffset = screenOffset;
     }
 
-    void BasePage::setNetConfig(Pages::NetConfig netConfig) {
-        Net = std::move(netConfig);
+    void BasePage::setCommonData(const Common& common) {
+        CommonData = common;
     }
 }

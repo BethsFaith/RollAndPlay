@@ -33,6 +33,12 @@ namespace Pages {
         void toCreate();
         void toView();
 
+        static Net::HttpSession::Result registerUser(const std::u16string& login, const std::u16string& password);
+
+        bool validate(const std::u16string& login, const std::u16string& password,
+                      const std::u16string& repeatedPassword);
+        void showResultRegistrationError(Net::HttpSession::Result& result);
+
         StateTag _currentTag = CREATE;
 
         Forms::Button::Ptr _saveButton;

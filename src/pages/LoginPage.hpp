@@ -8,13 +8,15 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
 #include "BasePage.hpp"
+#include "../data/User.hpp"
 
 namespace Pages {
     class LoginPage : public BasePage {
     public:
         enum StateTag {
             START,
-            VIEW
+            VIEW,
+            EDIT,
         };
 
         using Ptr = std::shared_ptr<LoginPage>;
@@ -28,13 +30,33 @@ namespace Pages {
         void update() override;
         void toStart();
         void toView();
+        void toEdit();
 
-        StateTag _currentTag = START;
+        bool validate(const std::u16string& login, const std::u16string& password);
+        Net::HttpSession::Result logIn(const std::u16string& login, const std::u16string& password);
+        Net::HttpSession::Result pullUserData();
+        Net::HttpSession::Result changeUserData(const std::u16string& login, const std::u16string& password,
+                                                const std::u16string& nickname);
+        void showResultError(Net::HttpSession::Result& result);
 
-        Forms::Button::Ptr _pushButton;
+        StateTag _nextState = START;
+
+        Forms::Button::Ptr _logInButton;
         Forms::InputField::Ptr _loginInputField;
         Forms::InputField::Ptr _passwordInputField;
         Forms::TextBox::Ptr _messageBox;
+
+        Forms::Button::Ptr _editButton;
+        Forms::Button::Ptr _exitButton;
+        Forms::TextBox::Ptr _emailLabel;
+        Forms::TextBox::Ptr _nicknameLabel;
+        Forms::TextBox::Ptr _emailBox;
+        Forms::TextBox::Ptr _nicknameBox;
+
+        Forms::Button::Ptr _saveButton;
+        Forms::InputField::Ptr _nicknameInputField;
+
+        Data::User _user{};
     };
 }
 

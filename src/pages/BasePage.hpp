@@ -7,8 +7,9 @@
 
 #include <utility>
 
-#include "NetConfig.hpp"
+#include "Common.hpp"
 #include "APage.hpp"
+
 #include "../Gui.hpp"
 #include "../controllers/CommonController.hpp"
 
@@ -26,13 +27,13 @@ namespace Pages {
 
         void init(const glm::vec2 &screenOffset) override;
 
-        static void setNetConfig(Pages::NetConfig netConfig);
+        static void setCommonData(const Common& common);
     protected:
         void addForm(const Forms::Form::Ptr& form);
 
         glm::vec2 ScreenOffset{};
 
-        static inline NetConfig Net;
+        static inline Common CommonData{};
     private:
         Controllers::CommonController::Ptr _controller;
         Gui _gui;

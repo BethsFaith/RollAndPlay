@@ -38,7 +38,7 @@ namespace Net {
         request_stream << "Host: " << _host << "\r\n";
 
         if (!_cookie.empty()) {
-            request_stream << "Cookie: " << _host << "\r\n";
+            request_stream << "Cookie: " << _cookie << "\r\n";
         }
 
         request_stream << "\r\n";
