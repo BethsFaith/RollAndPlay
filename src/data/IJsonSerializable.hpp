@@ -16,7 +16,7 @@ namespace Data {
         virtual ~IJsonSerializable() = default;
 
         virtual void serialize(Json::Value& jsonValue) = 0;
-        virtual void deserialize(Json::Value& jsonValue) = 0;
+        virtual void deserialize(const Json::Value& jsonValue) = 0;
     };
 }
 

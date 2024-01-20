@@ -20,7 +20,7 @@ namespace Data {
 
         void serialize(Json::Value &jsonValue) override;
 
-        void deserialize(Json::Value &jsonValue) override;
+        void deserialize(const Json::Value &jsonValue) override;
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 

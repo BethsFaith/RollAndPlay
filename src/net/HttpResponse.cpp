@@ -41,6 +41,7 @@ namespace Net {
 
         std::string bodyLine;
         std::getline(responseStream, bodyLine);
+        std::cout << bodyLine << std::endl;
         Json::Reader reader;
         bool parsingSuccessful = reader.parse(bodyLine.c_str(), _body);     //parse process
         if ( !parsingSuccessful )
