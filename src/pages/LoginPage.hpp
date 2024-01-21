@@ -7,8 +7,8 @@
 
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
-#include "../data/User.hpp"
 #include "BasePage.hpp"
+#include "../data/User.hpp"
 
 namespace Pages {
     class LoginPage : public BasePage {

@@ -7,10 +7,10 @@
 
 #include <utility>
 
+#include "Common.hpp"
+#include "APage.hpp"
 #include "../Gui.hpp"
 #include "../controllers/CommonController.hpp"
-#include "APage.hpp"
-#include "Common.hpp"
 
 namespace Pages {
     class BasePage : public APage {
