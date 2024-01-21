@@ -59,7 +59,8 @@ add_executable(RollAndPlay
         src/net/ApiClient.cpp
         src/net/HttpRequest.cpp
         src/net/HttpResponse.cpp
-        src/net/HttpSession.cpp)
+        src/net/HttpSession.cpp
+        )
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

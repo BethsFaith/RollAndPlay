@@ -8,10 +8,10 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 #include <utility>
 
+#include "BasePage.hpp"
 #include "../config/Config.hpp"
 #include "../data/DataStorage.hpp"
 #include "../data/System.hpp"
-#include "BasePage.hpp"
 
 namespace Pages {
     class SystemPage : public BasePage {
