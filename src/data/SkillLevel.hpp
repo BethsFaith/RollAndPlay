@@ -12,6 +12,6 @@ namespace Data {
         Skill::Ptr skill;
         unsigned int level;
     };
-} // Data
+}    //namespace Data
 
-#endif //ROLLANDPLAY_SKILLLEVEL_HPP
+#endif    //ROLLANDPLAY_SKILLLEVEL_HPP

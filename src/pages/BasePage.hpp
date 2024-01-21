@@ -7,9 +7,10 @@
 
 #include <utility>
 
-#include "APage.hpp"
 #include "../Gui.hpp"
 #include "../controllers/CommonController.hpp"
+#include "APage.hpp"
+#include "Common.hpp"
 
 namespace Pages {
     class BasePage : public APage {
@@ -23,16 +24,21 @@ namespace Pages {
 
         void update() override;
 
-        void setScreenOffset(const glm::vec2 &screenOffset) override;
+        void init(const glm::vec2& screenOffset) override;
+
+        static void setCommonData(const Common& common);
 
     protected:
-        void addButton(const Forms::Button::Ptr& button);
+        void addForm(const Forms::Form::Ptr& form);
 
         glm::vec2 ScreenOffset{};
+
+        static inline Common CommonData{};
+
     private:
         Controllers::CommonController::Ptr _controller;
         Gui _gui;
     };
-}
+}    //namespace Pages
 
-#endif //ROLLANDPLAY_BASEPAGE_HPP
+#endif    //ROLLANDPLAY_BASEPAGE_HPP

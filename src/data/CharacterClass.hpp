@@ -28,7 +28,6 @@ namespace Data {
         std::vector<Action::Ptr> _actions;
         std::vector<SkillLevel> _skillParameters;
     };
-}
+}    //namespace Data
 
-
-#endif //ROLLANDPLAY_CHARACTERCLASS_HPP
+#endif    //ROLLANDPLAY_CHARACTERCLASS_HPP

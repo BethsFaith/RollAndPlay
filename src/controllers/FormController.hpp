@@ -5,8 +5,8 @@
 #ifndef ROLLANDPLAY_FORMCONTROLLER_HPP
 #define ROLLANDPLAY_FORMCONTROLLER_HPP
 
-#include "GLController.hpp"
 #include "../forms/Form.hpp"
+#include "GLController.hpp"
 
 namespace Controllers {
     class FormController : public GLController {
@@ -17,7 +17,6 @@ namespace Controllers {
 
         virtual void addForm(Forms::Form::Ptr form) = 0;
     };
-}
+}    //namespace Controllers
 
-
-#endif //ROLLANDPLAY_FORMCONTROLLER_HPP
+#endif    //ROLLANDPLAY_FORMCONTROLLER_HPP

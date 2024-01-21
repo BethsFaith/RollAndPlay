@@ -13,6 +13,8 @@ namespace Controllers {
                 return std::make_shared<Controllers::InputFieldController>();
             case Forms::TEXTURE_BUTTON:
                 return std::make_shared<Controllers::ImageButtonController>();
+            default:
+                return nullptr;
         }
     }
-}
+}    //namespace Controllers

@@ -5,19 +5,19 @@
 #include "CommonController.hpp"
 
 namespace Controllers {
-    void CommonController::processKeyboardInput(GLFWwindow *window) {
+    void CommonController::processKeyboardInput(GLFWwindow* window) {
         for (const auto& controller : _subControllers) {
             controller->processKeyboardInput(window);
         }
     }
 
-    void CommonController::processMouseButton(GLFWwindow *window, int mouseButton, int action, int mods) {
+    void CommonController::processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods) {
         for (const auto& controller : _subControllers) {
             controller->processMouseButton(window, mouseButton, action, mods);
         }
     }
 
-    void CommonController::processMouseCursor(GLFWwindow *window, double xPos, double yPos) {
+    void CommonController::processMouseCursor(GLFWwindow* window, double xPos, double yPos) {
         for (const auto& controller : _subControllers) {
             controller->processMouseCursor(window, xPos, yPos);
         }
@@ -29,7 +29,7 @@ namespace Controllers {
         }
     }
 
-    void CommonController::processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) {
+    void CommonController::processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) {
         for (const auto& controller : _subControllers) {
             controller->processCharMods(window, codepoint, mods);
         }
@@ -42,4 +42,4 @@ namespace Controllers {
     void CommonController::addSubController(GLController::Ptr controller) {
         _subControllers.push_back(controller);
     }
-}
+}    //namespace Controllers

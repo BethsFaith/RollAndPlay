@@ -11,11 +11,11 @@ namespace Data {
         _index = index++;
     }
 
-    size_t SkillCategory::serialize(Storage::StreamWriter &writer) const {
+    size_t SkillCategory::serialize(Storage::StreamWriter& writer) const {
         return 0;
     }
 
-    size_t SkillCategory::deserialize(Storage::StreamReader &reader) {
+    size_t SkillCategory::deserialize(Storage::StreamReader& reader) {
         return 0;
     }
 
@@ -27,19 +27,19 @@ namespace Data {
         return _index;
     }
 
-    const std::string &SkillCategory::getName() const {
+    const std::string& SkillCategory::getName() const {
         return _name;
     }
 
-    void SkillCategory::setName(const std::string &name) {
+    void SkillCategory::setName(const std::string& name) {
         _name = name;
     }
 
-    const std::string &SkillCategory::getIconPath() const {
+    const std::string& SkillCategory::getIconPath() const {
         return _iconPath;
     }
 
-    void SkillCategory::setIconPath(const std::string &iconPath) {
+    void SkillCategory::setIconPath(const std::string& iconPath) {
         _iconPath = iconPath;
     }
-}
+}    //namespace Data

@@ -6,17 +6,20 @@
 
 namespace Forms {
     ImageButton::ImageButton(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
-    : Button(graphicPrimitive, FormType::TEXTURE_BUTTON) {}
+        : Button(graphicPrimitive, FormType::TEXTURE_BUTTON) {}
 
-    void ImageButton::init(glm::vec3 scale, glm::vec2 position, const Text &text, const std::string& texturePath,
+    void ImageButton::init(glm::vec3 scale,
+                           glm::vec2 position,
+                           const TextForm& text,
+                           const std::string& texturePath,
                            int textureIndex) {
         _texture = std::make_shared<GraphicLib::Textures::Texture>("", texturePath);
-        GraphicLib::Textures::load2d(*_texture,  {
-                                    {.name = GL_TEXTURE_MIN_FILTER, .value = GL_NEAREST},
-                                     {.name = GL_TEXTURE_MAG_FILTER, .value = GL_NEAREST},
-                                     {.name = GL_TEXTURE_WRAP_S, .value = GL_CLAMP_TO_EDGE},
-                                     {.name = GL_TEXTURE_WRAP_T, .value = GL_CLAMP_TO_EDGE},
-                                     {.name = GL_TEXTURE_WRAP_R, .value = GL_CLAMP_TO_EDGE}});
+        GraphicLib::Textures::load2d(*_texture,
+                                     {{.name = GL_TEXTURE_MIN_FILTER, .value = GL_NEAREST},
+                                      {.name = GL_TEXTURE_MAG_FILTER, .value = GL_NEAREST},
+                                      {.name = GL_TEXTURE_WRAP_S, .value = GL_CLAMP_TO_EDGE},
+                                      {.name = GL_TEXTURE_WRAP_T, .value = GL_CLAMP_TO_EDGE},
+                                      {.name = GL_TEXTURE_WRAP_R, .value = GL_CLAMP_TO_EDGE}});
 
         auto textureTechnique = std::make_shared<GraphicLib::Techniques::TextureTechnique>();
         textureTechnique->setTexture(_texture);
@@ -37,22 +40,22 @@ namespace Forms {
 
         auto textTechnique = std::make_shared<GraphicLib::Techniques::TextTechnique>();
         textTechnique->setText(text.content);
-        textTechnique->setHeight(position.y + scale.y/1.45);
+        textTechnique->setHeight(position.y + scale.y / 1.45);
         textTechnique->setWidth(position.x - scale.x / 2 + 0.01f);
         textTechnique->setColor(getRGB(text.color));
 
         _object.addTechnique(GraphicLib::Techniques::TEXT, textTechnique);
     }
 
-    void ImageButton::setImage(const std::string &texturePath) {
+    void ImageButton::setImage(const std::string& texturePath) {
         _texture->setPath(texturePath);
-        GraphicLib::Textures::load2d(*_texture,  {
-                {.name = GL_TEXTURE_MIN_FILTER, .value = GL_NEAREST},
-                {.name = GL_TEXTURE_MAG_FILTER, .value = GL_NEAREST},
-                {.name = GL_TEXTURE_WRAP_S, .value = GL_CLAMP_TO_EDGE},
-                {.name = GL_TEXTURE_WRAP_T, .value = GL_CLAMP_TO_EDGE},
-                {.name = GL_TEXTURE_WRAP_R, .value = GL_CLAMP_TO_EDGE}});
+        GraphicLib::Textures::load2d(*_texture,
+                                     {{.name = GL_TEXTURE_MIN_FILTER, .value = GL_NEAREST},
+                                      {.name = GL_TEXTURE_MAG_FILTER, .value = GL_NEAREST},
+                                      {.name = GL_TEXTURE_WRAP_S, .value = GL_CLAMP_TO_EDGE},
+                                      {.name = GL_TEXTURE_WRAP_T, .value = GL_CLAMP_TO_EDGE},
+                                      {.name = GL_TEXTURE_WRAP_R, .value = GL_CLAMP_TO_EDGE}});
     }
 
     void ImageButton::renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) {}
-}
+}    //namespace Forms

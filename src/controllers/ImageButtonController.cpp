@@ -5,7 +5,7 @@
 #include "ImageButtonController.hpp"
 
 namespace Controllers {
-    void ImageButtonController::processKeyboardInput(GLFWwindow *window) {
+    void ImageButtonController::processKeyboardInput(GLFWwindow* window) {
         if (_target != nullptr) {
             if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS
                 && glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) {
@@ -17,7 +17,7 @@ namespace Controllers {
         }
     }
 
-    void ImageButtonController::processMouseButton(GLFWwindow *window, int mouseButton, int action, int mods) {
+    void ImageButtonController::processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods) {
         if (mouseButton == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
             double xPos, yPos;
             glfwGetCursorPos(window, &xPos, &yPos);
@@ -25,8 +25,8 @@ namespace Controllers {
             int width, height;
             glfwGetWindowSize(window, &width, &height);
 
-            for (auto &button: _buttons) {
-                if (button->checkSelecting((int) xPos, int(height - yPos - 1))) {
+            for (auto& button : _buttons) {
+                if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
                     if (_target != button) {
                         button->press();
 
@@ -42,23 +42,15 @@ namespace Controllers {
         }
     }
 
-    void ImageButtonController::processMouseCursor(GLFWwindow *window, double xPos, double yPos) {
+    void ImageButtonController::processMouseCursor(GLFWwindow* window, double xPos, double yPos) {}
 
-    }
+    void ImageButtonController::processMouseScroll(double xOffset, double yOffset) {}
 
-    void ImageButtonController::processMouseScroll(double xOffset, double yOffset) {
+    void ImageButtonController::processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) {}
 
-    }
-
-    void ImageButtonController::processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) {
-
-    }
-
-    void ImageButtonController::clear() {
-
-    }
+    void ImageButtonController::clear() {}
 
     void ImageButtonController::addForm(Forms::Form::Ptr form) {
         _buttons.push_back(std::dynamic_pointer_cast<Forms::ImageButton>(form));
     }
-}
+}    //namespace Controllers

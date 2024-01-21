@@ -19,9 +19,9 @@ namespace Forms {
 
         virtual bool checkSelecting(unsigned int x, unsigned int y) = 0;
 
-        void setCanvas(const GraphicLib::PickableTexture::Ptr &canvas);
+        void setCanvas(const GraphicLib::PickableTexture::Ptr& canvas);
 
-        FormType getType() const;
+        [[nodiscard]] FormType getType() const;
 
     protected:
         GraphicLib::PickableTexture::Ptr canvas;
@@ -29,7 +29,6 @@ namespace Forms {
     private:
         FormType _type;
     };
-}
+}    //namespace Forms
 
-
-#endif //ROLLANDPLAY_FORM_HPP
+#endif    //ROLLANDPLAY_FORM_HPP
