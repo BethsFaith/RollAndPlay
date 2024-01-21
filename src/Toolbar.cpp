@@ -28,7 +28,7 @@ void Toolbar::init(glm::vec2 transform, glm::vec2 scale, bool horizontal) {
     for (int i{}; i < _names.size(); ++i) {
         auto button = std::make_shared<Forms::Button>(rectangle);
 
-        button->init({scale, -1.0f}, {xOffset, yOffset},
+        button->init({scale}, {xOffset, yOffset},
                      {.content = _names.at(i)}, _color);
 
         button->setPressCallback(_funcs[i]);

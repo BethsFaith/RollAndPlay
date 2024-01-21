@@ -18,7 +18,7 @@ namespace Forms {
 
         explicit ImageButton(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
 
-        void init(glm::vec3 scale,
+        void init(glm::vec2 scale,
                   glm::vec2 position,
                   const TextForm& text,
                   const std::string& texturePath,

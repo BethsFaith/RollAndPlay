@@ -66,6 +66,29 @@ namespace Forms {
         textTechnique->setColor(getRGB(text.color));
     }
 
+    void TextBox::setTextColor(Color color) {
+        auto technique = _object.getTechnique(GraphicLib::Techniques::TEXT);
+        auto textTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(technique);
+
+        textTechnique->setColor(getRGB(color));
+    }
+
+    void TextBox::setText(const std::u16string& content) {
+        auto technique = _object.getTechnique(GraphicLib::Techniques::TEXT);
+        auto textTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(technique);
+
+        textTechnique->setText(content);
+    }
+
+
+    void TextBox::setTextScale(float scale) {
+        auto technique = _object.getTechnique(GraphicLib::Techniques::TEXT);
+        auto textTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(technique);
+
+        textTechnique->setScale(scale);
+    }
+
+
     void TextBox::clear() {
         setTextForm({.content = u""});
     }

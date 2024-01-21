@@ -18,14 +18,14 @@ namespace Forms {
         _object->setPrimitive(rectangle);
     }
 
-    void Carriage::init(Color color, const glm::vec3& scale, const glm::vec3& position, float textSize) {
+    void Carriage::init(Color color, const glm::vec2& scale, const glm::vec2& position, float textSize) {
         auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
         colorTechnique->setColor(getRGB(color));
         _object->addTechnique(GraphicLib::Techniques::COLOR, colorTechnique);
 
         auto transformTechnique = std::make_shared<GraphicLib::Techniques::TransformTechnique>();
-        transformTechnique->enableScale(scale);
-        transformTechnique->enableTransform({position.x, position.y, position.z});
+        transformTechnique->enableScale({scale, 0.0f});
+        transformTechnique->enableTransform({position,  -0.2f});
 
         _object->addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
 

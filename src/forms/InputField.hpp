@@ -28,7 +28,7 @@ namespace Forms {
 
         ~InputField() override = default;
 
-        void init(glm::vec3 scale, glm::vec2 position, const TextForm& textForm, Color color) override;
+        void init(glm::vec2 scale, glm::vec2 position, const TextForm& textForm, Color color) override;
 
         void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
 

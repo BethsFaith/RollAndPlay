@@ -30,13 +30,12 @@ namespace Forms {
 
         void setTextForm(const TextForm& text);
         void setTextColor(Color color);
-        void setText();
+        void setText(const std::u16string& content);
+        void setTextScale(float scale);
 
         void clear();
     private:
         GraphicLib::Object _object{};
-
-        TextForm _content;
     };
 }
 

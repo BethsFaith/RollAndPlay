@@ -8,7 +8,7 @@ namespace Forms {
     ImageButton::ImageButton(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
         : Button(graphicPrimitive, FormType::TEXTURE_BUTTON) {}
 
-    void ImageButton::init(glm::vec3 scale,
+    void ImageButton::init(glm::vec2 scale,
                            glm::vec2 position,
                            const TextForm& text,
                            const std::string& texturePath,
@@ -28,7 +28,7 @@ namespace Forms {
         _object.addTechnique(GraphicLib::Techniques::COLOR, textureTechnique);
 
         auto transformTechnique = std::make_shared<GraphicLib::Techniques::TransformTechnique>();
-        transformTechnique->enableScale(scale);
+        transformTechnique->enableScale({scale, 0.0f});
         transformTechnique->enableTransform({position, -0.1f});
 
         _object.addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);

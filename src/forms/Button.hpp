@@ -27,7 +27,7 @@ namespace Forms {
         explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
         ~Button() override = default;
 
-        virtual void init(glm::vec3 scale, glm::vec2 position, const TextForm& text, Color color);
+        virtual void init(glm::vec2 scale, glm::vec2 position, const TextForm& text, Color color);
 
         virtual void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader);
         virtual void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader);

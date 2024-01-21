@@ -24,7 +24,7 @@ namespace Forms {
 
         Carriage();
 
-        void init(Color color, const glm::vec3& scale, const glm::vec3& position, float textSize);
+        void init(Color color, const glm::vec2& scale, const glm::vec2& position, float textSize);
 
         void render(const GraphicLib::Shaders::ShaderProgram::Ptr& shader);
 

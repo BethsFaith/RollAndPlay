@@ -4,6 +4,8 @@
 
 #include "Button.hpp"
 
+#include <utility>
+
 #include "TextForm.hpp"
 
 namespace Forms {
@@ -18,14 +20,14 @@ namespace Forms {
         _object.setPrimitive(graphicPrimitive);
     }
 
-    void Button::init(glm::vec3 scale, glm::vec2 position, const TextForm& text, Color color) {
+    void Button::init(glm::vec2 scale, glm::vec2 position, const TextForm& text, Color color) {
         auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
         colorTechnique->setColor(getRGB(color));
 
         _object.addTechnique(GraphicLib::Techniques::COLOR, colorTechnique);
 
         auto transformTechnique = std::make_shared<GraphicLib::Techniques::TransformTechnique>();
-        transformTechnique->enableScale(scale);
+        transformTechnique->enableScale({scale, 0.0f});
         transformTechnique->enableTransform({position, -0.1f});
 
         _object.addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
@@ -37,7 +39,7 @@ namespace Forms {
 
         auto textTechnique = std::make_shared<GraphicLib::Techniques::TextTechnique>();
         textTechnique->setText(text.content);
-        textTechnique->setWidth(position.x - scale.x / 2 + 0.01f);
+        textTechnique->setWidth(position.x - scale.x / 2.0f + 0.01f);
         textTechnique->setHeight(position.y);
         textTechnique->setColor(getRGB(text.color));
 
@@ -86,10 +88,10 @@ namespace Forms {
         auto trans = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(techn);
         auto scale = trans->getScaleValue();
         auto offset = trans->getTransformValue();
-        trans->enableScale({scale.x * 1.05, scale.y * 1.1, scale.z});
+        trans->enableScale({scale.x * 1.05f, scale.y * 1.1f, scale.z});
         trans->enableTransform({offset.x, offset.y, offset.z});
 
-        renderForm(shader);
+        renderForm(std::move(shader));
 
         trace->setColor(baseColor);
         trans->enableScale(scale);
