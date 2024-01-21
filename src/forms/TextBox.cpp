@@ -16,7 +16,7 @@ namespace Forms {
         _object.setPrimitive(rectangle);
     }
 
-    void TextBox::init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color) {
+    void TextBox::init(glm::vec3 scale, glm::vec2 position, const TextForm&text, Color color) {
         auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
         colorTechnique->setColor(getRGB(color));
 
@@ -58,7 +58,7 @@ namespace Forms {
         return false;
     }
 
-    void TextBox::setText(const Text &text) {
+    void TextBox::setTextForm(const TextForm& text) {
         auto technique = _object.getTechnique(GraphicLib::Techniques::TEXT);
         auto textTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(technique);
 
@@ -67,6 +67,6 @@ namespace Forms {
     }
 
     void TextBox::clear() {
-        setText({.content = u""});
+        setTextForm({.content = u""});
     }
 }

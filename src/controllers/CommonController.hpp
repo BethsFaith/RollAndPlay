@@ -17,23 +17,23 @@ namespace Controllers {
         CommonController() = default;
         ~CommonController() override = default;
 
-        void processKeyboardInput(GLFWwindow *window) override;
+        void processKeyboardInput(GLFWwindow* window) override;
 
-        void processMouseButton(GLFWwindow *window, int mouseButton, int action, int mods) override;
+        void processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods) override;
 
-        void processMouseCursor(GLFWwindow *window, double xPos, double yPos) override;
+        void processMouseCursor(GLFWwindow* window, double xPos, double yPos) override;
 
         void processMouseScroll(double xOffset, double yOffset) override;
 
-        void processCharMods(GLFWwindow *window, unsigned int codepoint, int mods) override;
+        void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) override;
 
         void clear() override;
 
         void addSubController(GLController::Ptr controller);
+
     private:
         std::vector<GLController::Ptr> _subControllers;
     };
-}
+}    //namespace Controllers
 
-
-#endif //ROLLANDPLAY_COMMONCONTROLLER_HPP
+#endif    //ROLLANDPLAY_COMMONCONTROLLER_HPP

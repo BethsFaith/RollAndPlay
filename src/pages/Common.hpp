@@ -5,14 +5,14 @@
 #ifndef ROLLANDPLAY_PAGECOMMONVARS_HPP
 #define ROLLANDPLAY_PAGECOMMONVARS_HPP
 
-#include "../net/HttpSession.hpp"
 #include "../data/AData.hpp"
 #include "../data/Type.hpp"
+#include "../net/HttpSession.hpp"
 
 namespace Pages {
     struct Common {
         Net::HttpSession::Ptr session;
-//        std::map<Data::Type, Data::AData::Ptr> vars;
+        //        std::map<Data::Type, Data::AData::Ptr> vars;
     };
 }
 

@@ -7,10 +7,10 @@
 
 #include <map>
 
+#include "Action.hpp"
+#include "CharacterClass.hpp"
 #include "Race.hpp"
 #include "Skill.hpp"
-#include "CharacterClass.hpp"
-#include "Action.hpp"
 
 namespace Data {
     class System : public IBitwiseSerializable {
@@ -20,24 +20,24 @@ namespace Data {
         System() = default;
         ~System() override = default;
 
-        size_t serialize(Storage::StreamWriter &writer) const override;
-        size_t deserialize(Storage::StreamReader &reader) override;
+        size_t serialize(Storage::StreamWriter& writer) const override;
+        size_t deserialize(Storage::StreamReader& reader) override;
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
-        void setName(const std::u16string &name);
-        void setImage(const std::u16string &image);
-        void setRaces(const std::vector<Race> &races);
+        void setName(const std::u16string& name);
+        void setImage(const std::u16string& image);
+        void setRaces(const std::vector<Race>& races);
 
-        void addAction(const Action &actions);
-        void addClass(CharacterClass &characterClass);
-        void addClass(Skill &skill);
+        void addAction(const Action& actions);
+        void addClass(CharacterClass& characterClass);
+        void addClass(Skill& skill);
 
         unsigned int getIndex() override;
 
-        const std::u16string &getName() const;
+        const std::u16string& getName() const;
 
-        const std::u16string &getImage() const;
+        const std::u16string& getImage() const;
 
     private:
         std::u16string _name;
@@ -48,7 +48,6 @@ namespace Data {
         std::vector<CharacterClass> _classes;
         std::vector<Skill> _skills;
     };
-}
+}    //namespace Data
 
-
-#endif //ROLLANDPLAY_SYSTEM_HPP
+#endif    //ROLLANDPLAY_SYSTEM_HPP

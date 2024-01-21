@@ -5,14 +5,13 @@
 #ifndef ROLLANDPLAY_VIEWWINDOW_HPP
 #define ROLLANDPLAY_VIEWWINDOW_HPP
 
+#include <GraphicLib/Shaders/ShaderProgram.hpp>
 #include <utility>
 
-#include <GraphicLib/Shaders/ShaderProgram.hpp>
-
+#include "Toolbar.hpp"
+#include "config/Config.hpp"
 #include "controllers/CommonController.hpp"
 #include "pages/APage.hpp"
-#include "config/Config.hpp"
-#include "Toolbar.hpp"
 
 class ViewWindow {
 public:
@@ -27,6 +26,7 @@ public:
         AUTHORIZATION,
         REGISTRATION
     };
+
     enum ViewTag {
         NULL_VIEW,
         LOGIN,
@@ -37,22 +37,25 @@ public:
 
     using Ptr = std::shared_ptr<ViewWindow>;
 
-    ViewWindow(int x, int y, Forms::Color viewColor, GraphicLib::PickableTexture::Ptr canvas,
+    ViewWindow(int x,
+               int y,
+               Forms::Color viewColor,
+               GraphicLib::PickableTexture::Ptr canvas,
                GraphicLib::Shaders::ShaderProgram::Ptr shader);
 
     ~ViewWindow();
 
     void display();
 
-    void processKeyboardInput(GLFWwindow *window);
+    void processKeyboardInput(GLFWwindow* window);
 
-    void processMouseButton(GLFWwindow *window, int mouseButton, int action, int mods);
+    void processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods);
 
-    void processMouseCursor(GLFWwindow *window, double x_pos, double y_pos);
+    void processMouseCursor(GLFWwindow* window, double x_pos, double y_pos);
 
-    void processMouseScroll(GLFWwindow *window, double x_offset, double y_offset);
+    void processMouseScroll(GLFWwindow* window, double x_offset, double y_offset);
 
-    void processCharMods(GLFWwindow *window, unsigned int codepoint, int mods);
+    void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods);
 
     void addPage(PageTag tag, Pages::APage::Ptr page);
 
@@ -77,4 +80,4 @@ private:
     Toolbar::Ptr _verticalToolbar;
 };
 
-#endif //ROLLANDPLAY_VIEWWINDOW_HPP
+#endif    //ROLLANDPLAY_VIEWWINDOW_HPP

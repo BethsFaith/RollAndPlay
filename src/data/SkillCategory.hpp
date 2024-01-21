@@ -19,17 +19,17 @@ namespace Data {
         SkillCategory();
         ~SkillCategory() override = default;
 
-        size_t serialize(Storage::StreamWriter &writer) const override;
+        size_t serialize(Storage::StreamWriter& writer) const override;
 
-        size_t deserialize(Storage::StreamReader &reader) override;
+        size_t deserialize(Storage::StreamReader& reader) override;
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
         [[nodiscard]] uint8_t getIndex() const;
-        [[nodiscard]] const std::string &getName() const;
-        [[nodiscard]] const std::string &getIconPath() const;
+        [[nodiscard]] const std::string& getName() const;
+        [[nodiscard]] const std::string& getIconPath() const;
 
-        void setName(const std::string &name);
-        void setIconPath(const std::string &iconPath);
+        void setName(const std::string& name);
+        void setIconPath(const std::string& iconPath);
 
     private:
         uint8_t _index;
@@ -38,6 +38,6 @@ namespace Data {
 
         static uint8_t index;
     };
-}
+}    //namespace Data
 
-#endif //ROLLANDPLAY_SKILLCATEGORY_HPP
+#endif    //ROLLANDPLAY_SKILLCATEGORY_HPP

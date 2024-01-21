@@ -8,16 +8,16 @@
 #include <GraphicLib/GlagGlfw.hpp>
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 
-#include "forms/Button.hpp"
-#include "forms/TextBox.hpp"
 #include "config/Config.hpp"
 #include "controllers/GuiController.hpp"
+#include "forms/Button.hpp"
+#include "forms/TextBox.hpp"
 
 class Gui {
 public:
     using Ptr = std::shared_ptr<Gui>;
 
-    explicit Gui(GraphicLib::PickableTexture::Ptr  canvas);
+    explicit Gui(GraphicLib::PickableTexture::Ptr canvas);
 
     ~Gui() = default;
 
@@ -27,7 +27,7 @@ public:
 
     void clear();
 
-    [[nodiscard]] const Controllers::GuiController::Ptr &getController() const;
+    [[nodiscard]] const Controllers::GuiController::Ptr& getController() const;
 
     static void setColorShader(GraphicLib::Shaders::ShaderProgram::Ptr shader);
     static void setTextureShader(GraphicLib::Shaders::ShaderProgram::Ptr shader);
@@ -46,5 +46,4 @@ private:
     Controllers::GuiController::Ptr _controller;
 };
 
-
-#endif //ROLLANDPLAY_GUI_HPP
+#endif    //ROLLANDPLAY_GUI_HPP

@@ -5,8 +5,8 @@
 #ifndef ROLLANDPLAY_HTTPSESSION_HPP
 #define ROLLANDPLAY_HTTPSESSION_HPP
 
-#include "ApiClient.hpp"
 #include "../data/User.hpp"
+#include "ApiClient.hpp"
 
 namespace Net {
     class HttpSession {
@@ -29,6 +29,7 @@ namespace Net {
         Result getCurrentUser();
         Result logIn(Data::User& user);
         Result updateUserData(Data::User& user);
+
     private:
         ApiClient _client;
 

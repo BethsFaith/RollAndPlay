@@ -17,6 +17,6 @@ namespace Data {
 
         virtual Type getType() = 0;
     };
-}
+}    //namespace Data
 
 #endif    //ROLLANDPLAY_ADATA_HPP

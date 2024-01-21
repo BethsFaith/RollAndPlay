@@ -20,7 +20,6 @@ namespace Data {
         virtual void serialize(Json::Value& jsonValue) = 0;
         virtual void deserialize(const Json::Value& jsonValue) = 0;
     };
-}
+}    //namespace Data
 
-
-#endif //ROLLANDPLAY_IJSONSERIALIZABLE_HPP
+#endif    //ROLLANDPLAY_IJSONSERIALIZABLE_HPP

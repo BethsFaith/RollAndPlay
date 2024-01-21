@@ -6,12 +6,11 @@
 namespace Forms {
     Form::Form(FormType type) : _type(type) {}
 
-    void Form::setCanvas(const GraphicLib::PickableTexture::Ptr &canvas) {
+    void Form::setCanvas(const GraphicLib::PickableTexture::Ptr& canvas) {
         Form::canvas = canvas;
     }
 
     FormType Form::getType() const {
         return _type;
     }
-}
-
+}    //namespace Forms

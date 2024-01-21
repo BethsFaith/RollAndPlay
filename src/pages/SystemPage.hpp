@@ -8,10 +8,10 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 #include <utility>
 
-#include "BasePage.hpp"
 #include "../config/Config.hpp"
-#include "../data/System.hpp"
 #include "../data/DataStorage.hpp"
+#include "../data/System.hpp"
+#include "BasePage.hpp"
 
 namespace Pages {
     class SystemPage : public BasePage {
@@ -26,7 +26,7 @@ namespace Pages {
         explicit SystemPage(GraphicLib::PickableTexture::Ptr canvas);
         ~SystemPage() override = default;
 
-        void init(const glm::vec2 &screenOffset) override;
+        void init(const glm::vec2& screenOffset) override;
 
     private:
         void update() override;
@@ -44,6 +44,6 @@ namespace Pages {
         Forms::ImageButton::Ptr _iconButton;
         Forms::InputField::Ptr _iconPathInputField;
     };
-}
+}    //namespace Pages
 
-#endif //ROLLANDPLAY_SYSTEMPAGE_HPP
+#endif    //ROLLANDPLAY_SYSTEMPAGE_HPP

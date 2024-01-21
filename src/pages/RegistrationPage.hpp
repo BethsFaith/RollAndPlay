@@ -5,13 +5,12 @@
 #ifndef ROLLANDPLAY_REGISTRATIONPAGE_HPP
 #define ROLLANDPLAY_REGISTRATIONPAGE_HPP
 
-#include "../net/ApiClient.hpp"
-
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
-#include "BasePage.hpp"
 #include "../data/User.hpp"
 #include "../forms/TextBox.hpp"
+#include "../net/ApiClient.hpp"
+#include "BasePage.hpp"
 
 namespace Pages {
     class RegistrationPage : public BasePage {
@@ -23,10 +22,10 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<RegistrationPage>;
 
-        explicit RegistrationPage(const GraphicLib::PickableTexture::Ptr &canvas);
+        explicit RegistrationPage(const GraphicLib::PickableTexture::Ptr& canvas);
         ~RegistrationPage() override = default;
 
-        void init(const glm::vec2 &screenOffset) override;
+        void init(const glm::vec2& screenOffset) override;
 
     private:
         void update() override;
@@ -35,7 +34,8 @@ namespace Pages {
 
         static Net::HttpSession::Result registerUser(const std::u16string& login, const std::u16string& password);
 
-        bool validate(const std::u16string& login, const std::u16string& password,
+        bool validate(const std::u16string& login,
+                      const std::u16string& password,
                       const std::u16string& repeatedPassword);
         void showResultRegistrationError(Net::HttpSession::Result& result);
 
@@ -49,6 +49,6 @@ namespace Pages {
         Forms::TextBox::Ptr _creatingMessageBox;
         Forms::TextBox::Ptr _viewMessageBox;
     };
-}
+}    //namespace Pages
 
-#endif //ROLLANDPLAY_REGISTRATIONPAGE_HPP
+#endif    //ROLLANDPLAY_REGISTRATIONPAGE_HPP

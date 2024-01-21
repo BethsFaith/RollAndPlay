@@ -18,7 +18,7 @@ namespace Forms {
             case WHITE:
                 return {255, 255, 255};
             case DARK_GRAY:
-                return glm::vec3{0.1f};;
+                return glm::vec3{0.1f};
             case GRAY:
                 return glm::vec3{0.4f};
             case LIGHT_GRAY:
@@ -32,7 +32,8 @@ namespace Forms {
             case LIGHT_BLUE:
                 return {0.47f, 0.65f, 0.75f};
             default:
-                return glm::vec3{0.0f};;
+                return glm::vec3{0.0f};
+                ;
         }
     }
-}
+}    //namespace Forms

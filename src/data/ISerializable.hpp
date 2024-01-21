@@ -12,6 +12,6 @@ namespace Data {
         ISerializable() = default;
         virtual ~ISerializable() = default;
     };
-}
+}    //namespace Data
 
 #endif    //ROLLANDPLAY_ISERIALIZABLE_HPP

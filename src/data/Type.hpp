@@ -14,6 +14,6 @@ namespace Data {
         CLASS,
         USER,
     };
-}
+}    //namespace Data
 
-#endif //ROLLANDPLAY_TYPE_HPP
+#endif    //ROLLANDPLAY_TYPE_HPP

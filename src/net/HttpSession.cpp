@@ -8,7 +8,8 @@
 
 namespace Net {
     HttpSession::HttpSession(std::string host, std::string service, std::string domain)
-        : _client(std::move(host), std::move(service)), _domain(std::move(domain)) {}
+        : _client(std::move(host), std::move(service)),
+          _domain(std::move(domain)) {}
 
     HttpSession::Result HttpSession::createUser(Data::User& user) {
         Json::Value body;
@@ -103,4 +104,4 @@ namespace Net {
 
         return result;
     }
-}
+}    //namespace Net

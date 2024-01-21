@@ -17,8 +17,8 @@ namespace Data {
 
         ~Skill() override = default;
 
-        size_t serialize(Storage::StreamWriter &writer) const override;
-        size_t deserialize(Storage::StreamReader &reader) override;
+        size_t serialize(Storage::StreamWriter& writer) const override;
+        size_t deserialize(Storage::StreamReader& reader) override;
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
@@ -27,6 +27,6 @@ namespace Data {
         std::string _iconPath;
         uint8_t _categoryIndex;
     };
-}
+}    //namespace Data
 
-#endif //ROLLANDPLAY_SKILL_HPP
+#endif    //ROLLANDPLAY_SKILL_HPP

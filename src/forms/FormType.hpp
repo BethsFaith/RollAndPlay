@@ -12,6 +12,6 @@ namespace Forms {
         TEXTURE_BUTTON,
         TEXT_BOX
     };
-}
+}    //namespace Forms
 
-#endif //ROLLANDPLAY_FORMTYPE_HPP
+#endif    //ROLLANDPLAY_FORMTYPE_HPP

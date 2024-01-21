@@ -8,55 +8,52 @@
 #include <GraphicLib/GlagGlfw.hpp>
 #include <GraphicLib/Primitives/Rectangle.hpp>
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
-
-#include <stdexcept>
 #include <glm/glm.hpp>
+#include <stdexcept>
 #include <vector>
 
-#include "pages/RegistrationPage.hpp"
-#include "pages/SystemPage.hpp"
-#include "pages/SkillPage.hpp"
-#include "pages/RacePage.hpp"
-#include "pages/LoginPage.hpp"
-
-#include "forms/Button.hpp"
-#include "controllers/GuiController.hpp"
 #include "Gui.hpp"
 #include "ViewWindow.hpp"
-
 #include "config/Config.hpp"
+#include "controllers/GuiController.hpp"
+#include "forms/Button.hpp"
+#include "pages/LoginPage.hpp"
+#include "pages/RacePage.hpp"
+#include "pages/RegistrationPage.hpp"
+#include "pages/SkillPage.hpp"
+#include "pages/SystemPage.hpp"
 
 class MainWindow {
 public:
-    static void init(const char *title, const std::string &configFilePath);
+    static void init(const char* title, const std::string& configFilePath);
 
     static void free();
 
     void run();
 
-    static MainWindow *getInstance();
+    static MainWindow* getInstance();
 
     [[nodiscard]] float getDeltaTime() const;
 
-    [[nodiscard]] GLFWwindow *getWindow() const;
+    [[nodiscard]] GLFWwindow* getWindow() const;
 
-    void setClearColor(const glm::vec4 &clearColor);
+    void setClearColor(const glm::vec4& clearColor);
 
 protected:
-    static void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
+    static void frameBufferSizeCallback(GLFWwindow* window, int width, int height);
 
-    static void mouseButtonCallback(GLFWwindow *window, int mouseButton, int action, int mods);
+    static void mouseButtonCallback(GLFWwindow* window, int mouseButton, int action, int mods);
 
-    static void mouseInputCallback(GLFWwindow *window, double xPos, double yPos);
+    static void mouseInputCallback(GLFWwindow* window, double xPos, double yPos);
 
-    static void mouseScrollCallback(GLFWwindow *window, double xOffset, double yOffset);
+    static void mouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset);
 
-    static void charModsCallback(GLFWwindow *window, unsigned int codepoint, int mods);
+    static void charModsCallback(GLFWwindow* window, unsigned int codepoint, int mods);
 
 private:
-    static MainWindow *instance;
+    static MainWindow* instance;
 
-    explicit MainWindow(const char *title, const std::string &configFilePath);
+    explicit MainWindow(const char* title, const std::string& configFilePath);
 
     ~MainWindow();
 
@@ -66,14 +63,14 @@ private:
 
     void clearColor() const;
 
-    GLFWwindow *_window = nullptr;
+    GLFWwindow* _window = nullptr;
 
     ViewWindow::Ptr _view;
 
     glm::vec4 _clearColor{};
 
     float _delta_time = 0.0f;    // время между текущим и последним кадрами
-    float _last_frame = 0.0f;   // время последнего кадра
+    float _last_frame = 0.0f;    // время последнего кадра
 };
 
-#endif //ROLLANDPLAY_MAINWINDOW_HPP
+#endif    //ROLLANDPLAY_MAINWINDOW_HPP

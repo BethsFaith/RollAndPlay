@@ -5,8 +5,8 @@
 #ifndef ROLLANDPLAY_STREAMWRITER_HPP
 #define ROLLANDPLAY_STREAMWRITER_HPP
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <utility>
 
 namespace Data::Storage {
@@ -19,11 +19,11 @@ namespace Data::Storage {
         size_t write(int data);
         size_t write(std::u16string data);
 
-        void setFileName(const std::string &fileName);
+        void setFileName(const std::string& fileName);
 
     private:
         std::string _fileName;
     };
-}
+}    //namespace Data::Storage
 
-#endif //ROLLANDPLAY_STREAMWRITER_HPP
+#endif    //ROLLANDPLAY_STREAMWRITER_HPP

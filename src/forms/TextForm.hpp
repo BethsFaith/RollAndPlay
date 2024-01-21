@@ -2,18 +2,18 @@
 // Created by VerOchka on 26.10.2023.
 //
 
-#ifndef ROLLANDPLAY_TEXT_HPP
-#define ROLLANDPLAY_TEXT_HPP
+#ifndef ROLLANDPLAY_TEXTFORM_HPP
+#define ROLLANDPLAY_TEXTFORM_HPP
 
 #include <iostream>
 
 #include "Color.hpp"
 
 namespace Forms {
-    struct Text {
+    struct TextForm {
         std::u16string content;
         Color color = Color::WHITE;
     };
 }
 
-#endif //ROLLANDPLAY_TEXT_HPP
+#endif    //ROLLANDPLAY_TEXTFORM_HPP

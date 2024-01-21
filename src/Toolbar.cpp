@@ -4,18 +4,22 @@
 
 #include "Toolbar.hpp"
 
-Toolbar::Toolbar(std::vector<std::u16string> names, std::vector<std::function<void()>> funcs, Forms::Color color,
-                 const GraphicLib::PickableTexture::Ptr &canvas)
-: _names(std::move(names)), _funcs(std::move(funcs)), _color(color), _gui(canvas) {}
+Toolbar::Toolbar(std::vector<std::u16string> names,
+                 std::vector<std::function<void()>> funcs,
+                 Forms::Color color,
+                 const GraphicLib::PickableTexture::Ptr& canvas)
+    : _names(std::move(names)),
+      _funcs(std::move(funcs)),
+      _color(color),
+      _gui(canvas) {}
 
 void Toolbar::init(glm::vec2 transform, glm::vec2 scale, bool horizontal) {
     using namespace GraphicLib;
-    Primitives::AbstractPrimitive::Ptr rectangle =
-            std::make_shared<Primitives::Rectangle>(
-                    Primitives::Primitive::Settings{.with_normals = false,
-                            .with_texture_coords = false,
-                            .with_tangent = false,
-                            .with_bitangent = false});
+    Primitives::AbstractPrimitive::Ptr rectangle = std::make_shared<Primitives::Rectangle>(
+        Primitives::Primitive::Settings{.with_normals = false,
+                                        .with_texture_coords = false,
+                                        .with_tangent = false,
+                                        .with_bitangent = false});
     rectangle->bindData(GL_STATIC_DRAW);
 
     float xOffset = transform.x;
@@ -25,7 +29,7 @@ void Toolbar::init(glm::vec2 transform, glm::vec2 scale, bool horizontal) {
         auto button = std::make_shared<Forms::Button>(rectangle);
 
         button->init({scale, -1.0f}, {xOffset, yOffset},
-                     {.content = _names.at(i)},_color);
+                     {.content = _names.at(i)}, _color);
 
         button->setPressCallback(_funcs[i]);
 
@@ -39,7 +43,7 @@ void Toolbar::init(glm::vec2 transform, glm::vec2 scale, bool horizontal) {
     }
 }
 
-const Controllers::GuiController::Ptr &Toolbar::getController() const {
+const Controllers::GuiController::Ptr& Toolbar::getController() const {
     return _gui.getController();
 }
 

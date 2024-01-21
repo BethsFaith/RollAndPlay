@@ -7,8 +7,7 @@
 #include <utility>
 
 namespace Pages {
-    BasePage::BasePage(GraphicLib::PickableTexture::Ptr canvas)
-    : _gui(std::move(canvas)){
+    BasePage::BasePage(GraphicLib::PickableTexture::Ptr canvas) : _gui(std::move(canvas)) {
         _controller = std::make_shared<Controllers::CommonController>();
     }
 
@@ -32,11 +31,11 @@ namespace Pages {
         glDisable(GL_DEPTH_TEST);
     }
 
-    void BasePage::init(const glm::vec2 &screenOffset) {
+    void BasePage::init(const glm::vec2& screenOffset) {
         ScreenOffset = screenOffset;
     }
 
     void BasePage::setCommonData(const Common& common) {
         CommonData = common;
     }
-}
+}    //namespace Pages

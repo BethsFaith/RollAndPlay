@@ -4,9 +4,9 @@
 
 #include "MainWindow.hpp"
 
-MainWindow *MainWindow::instance = nullptr;
+MainWindow* MainWindow::instance = nullptr;
 
-MainWindow::MainWindow(const char *title, const std::string &configFilePath) {
+MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     Config::Config::init(configFilePath);
     auto config = Config::Config::get();
 
@@ -29,12 +29,11 @@ MainWindow::MainWindow(const char *title, const std::string &configFilePath) {
     glfwSetCharModsCallback(_window, charModsCallback);
     stbi_set_flip_vertically_on_load(true);
 
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
-    GraphicLib::Techniques::TextTechnique::initTextRendering(width, height,
-                                                           config->getFontPath("gui"), 20);
+    GraphicLib::Techniques::TextTechnique::initTextRendering(width, height, config->getFontPath("gui"), 20);
 
     auto canvas = std::make_shared<GraphicLib::PickableTexture>();
     canvas->init(width, height);
@@ -94,7 +93,7 @@ MainWindow::~MainWindow() {
     Config::Config::free();
 }
 
-void MainWindow::init(const char *title, const std::string &configFilePath) {
+void MainWindow::init(const char* title, const std::string& configFilePath) {
     instance = new MainWindow(title, configFilePath);
 
     glfwSetMouseButtonCallback(instance->_window, mouseButtonCallback);
@@ -106,11 +105,11 @@ void MainWindow::free() {
     delete instance;
 }
 
-GLFWwindow *MainWindow::getWindow() const {
+GLFWwindow* MainWindow::getWindow() const {
     return _window;
 }
 
-MainWindow *MainWindow::getInstance() {
+MainWindow* MainWindow::getInstance() {
     return instance;
 }
 
@@ -118,7 +117,7 @@ float MainWindow::getDeltaTime() const {
     return _delta_time;
 }
 
-void MainWindow::setClearColor(const glm::vec4 &clearColor) {
+void MainWindow::setClearColor(const glm::vec4& clearColor) {
     _clearColor = clearColor;
 }
 
@@ -147,7 +146,7 @@ void MainWindow::clearColor() const {
 }
 
 void MainWindow::updateDeltaTime() {
-    auto currentFrame = (float) glfwGetTime();
+    auto currentFrame = (float)glfwGetTime();
 
     _delta_time = currentFrame - _last_frame;
     _last_frame = currentFrame;
@@ -157,22 +156,22 @@ bool MainWindow::shouldClose() {
     return glfwWindowShouldClose(_window);
 }
 
-void MainWindow::mouseButtonCallback(GLFWwindow *window, int mouseButton, int action, int mods) {
+void MainWindow::mouseButtonCallback(GLFWwindow* window, int mouseButton, int action, int mods) {
     instance->_view->processMouseButton(window, mouseButton, action, mods);
 }
 
-void MainWindow::mouseInputCallback(GLFWwindow *window, double xPos, double yPos) {
+void MainWindow::mouseInputCallback(GLFWwindow* window, double xPos, double yPos) {
     instance->_view->processMouseCursor(window, xPos, yPos);
 }
 
-void MainWindow::mouseScrollCallback(GLFWwindow *window, double xOffset, double yOffset) {
+void MainWindow::mouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
     instance->_view->processMouseCursor(window, xOffset, yOffset);
 }
 
-void MainWindow::charModsCallback(GLFWwindow *window, unsigned int codepoint, int mods) {
+void MainWindow::charModsCallback(GLFWwindow* window, unsigned int codepoint, int mods) {
     instance->_view->processCharMods(window, codepoint, mods);
 }
 
-void MainWindow::frameBufferSizeCallback(GLFWwindow *window, int width, int height) {
+void MainWindow::frameBufferSizeCallback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }

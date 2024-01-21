@@ -14,7 +14,7 @@ Gui::Gui(GraphicLib::PickableTexture::Ptr canvas) : _canvas(std::move(canvas)) {
 }
 
 void Gui::draw() {
-    for (auto &form: _forms) {
+    for (auto& form : _forms) {
         if (form->getType() == Forms::TEXT_BOX) {
             auto box = std::dynamic_pointer_cast<Forms::TextBox>(form);
             box->renderForm(colorShader);
@@ -26,8 +26,8 @@ void Gui::draw() {
                 glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
                 glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
-                glStencilFunc(GL_ALWAYS, 1, 0xFF); // все фрагменты должны пройти тест трафарета
-                glStencilMask(0xFF); // включаем запись в буфер трафарета
+                glStencilFunc(GL_ALWAYS, 1, 0xFF);    // все фрагменты должны пройти тест трафарета
+                glStencilMask(0xFF);    // включаем запись в буфер трафарета
 
                 if (button->getType() != Forms::FormType::TEXTURE_BUTTON) {
                     button->renderForm(colorShader);
@@ -78,7 +78,7 @@ void Gui::clear() {
     _forms.clear();
 }
 
-const Controllers::GuiController::Ptr &Gui::getController() const {
+const Controllers::GuiController::Ptr& Gui::getController() const {
     return _controller;
 }
 

@@ -7,8 +7,8 @@
 
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
-#include "BasePage.hpp"
 #include "../data/User.hpp"
+#include "BasePage.hpp"
 
 namespace Pages {
     class LoginPage : public BasePage {
@@ -21,10 +21,10 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<LoginPage>;
 
-        explicit LoginPage(const GraphicLib::PickableTexture::Ptr &canvas);
+        explicit LoginPage(const GraphicLib::PickableTexture::Ptr& canvas);
         ~LoginPage() override = default;
 
-        void init(const glm::vec2 &screenOffset) override;
+        void init(const glm::vec2& screenOffset) override;
 
     private:
         void update() override;
@@ -36,7 +36,8 @@ namespace Pages {
         bool validate(const std::u16string& login, const std::u16string& password, const std::u16string& nickname);
         Net::HttpSession::Result logIn(const std::u16string& login, const std::u16string& password);
         Net::HttpSession::Result pullUserData();
-        Net::HttpSession::Result changeUserData(const std::u16string& login, const std::u16string& password,
+        Net::HttpSession::Result changeUserData(const std::u16string& login,
+                                                const std::u16string& password,
                                                 const std::u16string& nickname);
         void showResultError(Net::HttpSession::Result& result);
 
@@ -59,6 +60,6 @@ namespace Pages {
 
         Data::User _user{};
     };
-}
+}    //namespace Pages
 
-#endif //ROLLANDPLAY_LOGINPAGE_HPP
+#endif    //ROLLANDPLAY_LOGINPAGE_HPP

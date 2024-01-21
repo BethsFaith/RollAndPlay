@@ -6,8 +6,8 @@
 #define ROLLANDPLAY_RACE_HPP
 
 #include <iostream>
-#include <vector>
 #include <utility>
+#include <vector>
 
 #include "SkillLevel.hpp"
 #include "graphic/Model.hpp"
@@ -21,9 +21,9 @@ namespace Data {
 
         void setModel(Graphic::Model::Ptr model);
 
-        void setName(const std::string &name);
+        void setName(const std::string& name);
 
-        void setIconPath(const std::string &iconPath);
+        void setIconPath(const std::string& iconPath);
 
     private:
         std::string _name;
@@ -31,6 +31,6 @@ namespace Data {
         Graphic::Model::Ptr _model{};
         std::vector<SkillLevel> _skillParameters;
     };
-} // Data
+}    //namespace Data
 
-#endif //ROLLANDPLAY_RACE_HPP
+#endif    //ROLLANDPLAY_RACE_HPP
