@@ -5,6 +5,8 @@
 #ifndef ROLLANDPLAY_ADATA_HPP
 #define ROLLANDPLAY_ADATA_HPP
 
+#include <iostream>
+
 #include "Type.hpp"
 
 namespace Data {

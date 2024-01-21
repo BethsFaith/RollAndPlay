@@ -12,16 +12,16 @@
 #include <stdexcept>
 #include <vector>
 
+#include "pages/RacePage.hpp"
+#include "pages/LoginPage.hpp"
+#include "pages/RegistrationPage.hpp"
+#include "pages/SkillPage.hpp"
+#include "pages/SystemPage.hpp"
 #include "Gui.hpp"
 #include "ViewWindow.hpp"
 #include "config/Config.hpp"
 #include "controllers/GuiController.hpp"
 #include "forms/Button.hpp"
-#include "pages/LoginPage.hpp"
-#include "pages/RacePage.hpp"
-#include "pages/RegistrationPage.hpp"
-#include "pages/SkillPage.hpp"
-#include "pages/SystemPage.hpp"
 
 class MainWindow {
 public:
