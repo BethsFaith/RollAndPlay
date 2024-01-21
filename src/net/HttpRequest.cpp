@@ -32,6 +32,7 @@ namespace Net {
         std::ostream request_stream(&request);
 
         for (const auto& header : _headers) {
+            std::cout << header << std::endl;
             request_stream << header << "\r\n";
         }
 

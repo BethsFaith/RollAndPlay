@@ -28,6 +28,7 @@ namespace Net {
         Result createUser(Data::User& user);
         Result getCurrentUser();
         Result logIn(Data::User& user);
+        Result updateUserData(Data::User& user);
     private:
         ApiClient _client;
 

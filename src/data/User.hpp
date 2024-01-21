@@ -47,6 +47,9 @@ namespace Data {
         std::u16string _email;
         std::u16string _password;
         std::u16string _nickname;
+
+    public:
+        void setNickname(const std::u16string& nickname);
     };
 }
 

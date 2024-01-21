@@ -81,4 +81,26 @@ namespace Net {
 
         return result;
     }
+
+    HttpSession::Result HttpSession::updateUserData(Data::User& user) {
+        Net::HttpRequest request("/private/users", Net::Http::MethodPut, _domain);
+        request.setCookie(_cookie);
+
+        Json::Value body;
+        user.serialize(body);
+        request.setBodyJson(body);
+
+        auto response = _client.connect(request);
+
+        Result result;
+
+        if (response.getStatusCode() != HttpResponse::StatusCode::OK) {
+            result.haveError = true;
+            result.errorMessage = response.getErrorMessage();
+        }
+
+        result.statusMessage = response.getStatusMessage();
+
+        return result;
+    }
 }

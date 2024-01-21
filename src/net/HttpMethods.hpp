@@ -11,6 +11,7 @@ namespace Net {
     namespace Http {
         const std::string MethodGet = "GET";
         const std::string MethodPost = "POST";
+        const std::string MethodPut = "PUT";
         const std::string MethodDelete = "DELETE";
     };
 }    //namespace Net
