@@ -3,22 +3,22 @@
 //
 
 #include "Button.hpp"
-#include "Text.hpp"
+
+#include "TextForm.hpp"
 
 namespace Forms {
     int Button::IdCounter = 0;
 
     Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
-    : Button(graphicPrimitive, FormType::COLOR_BUTTON){}
+        : Button(graphicPrimitive, FormType::COLOR_BUTTON) {}
 
-    Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr &graphicPrimitive, FormType type)
-    : Form(type) {
+    Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, FormType type) : Form(type) {
         id = ++IdCounter;
 
         _object.setPrimitive(graphicPrimitive);
     }
 
-    void Button::init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color) {
+    void Button::init(glm::vec3 scale, glm::vec2 position, const TextForm& text, Color color) {
         auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
         colorTechnique->setColor(getRGB(color));
 
@@ -86,7 +86,7 @@ namespace Forms {
         auto trans = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(techn);
         auto scale = trans->getScaleValue();
         auto offset = trans->getTransformValue();
-        trans->enableScale({scale.x*1.05, scale.y*1.1, scale.z});
+        trans->enableScale({scale.x * 1.05, scale.y * 1.1, scale.z});
         trans->enableTransform({offset.x, offset.y, offset.z});
 
         renderForm(shader);
@@ -115,22 +115,22 @@ namespace Forms {
 
         auto info = canvas->readPixel(x, y);
 
-        return id == (int) info.ObjectID;
+        return id == (int)info.ObjectID;
     }
 
     void Button::setUnderCursor(bool isUnderCursor) {
         _isUnderCursor = isUnderCursor;
     }
 
-    void Button::setPressCallback(const std::function<void()> &function) {
+    void Button::setPressCallback(const std::function<void()>& function) {
         _pressCallback = function;
     }
 
-    void Button::setReleaseCallback(const std::function<void()> &function) {
+    void Button::setReleaseCallback(const std::function<void()>& function) {
         _releaseCallback = function;
     }
 
     void Button::setTraceColor(Color traceColor) {
         _traceColor = traceColor;
     }
-}
+}    //namespace Forms

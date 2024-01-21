@@ -5,20 +5,19 @@
 #ifndef ROLLANDPLAY_BUTTON_HPP
 #define ROLLANDPLAY_BUTTON_HPP
 
-#include <iostream>
-#include <functional>
-#include <utility>
-
 #include <GraphicLib/GlagGlfw.hpp>
 #include <GraphicLib/Object.hpp>
 #include <GraphicLib/Techniques/ColorTechnique.hpp>
 #include <GraphicLib/Techniques/PickTechnique.hpp>
-#include <GraphicLib/Techniques/TransformTechnique.hpp>
 #include <GraphicLib/Techniques/TextTechnique.hpp>
+#include <GraphicLib/Techniques/TransformTechnique.hpp>
+#include <functional>
+#include <iostream>
+#include <utility>
 
-#include "Form.hpp"
 #include "Color.hpp"
-#include "Text.hpp"
+#include "Form.hpp"
+#include "TextForm.hpp"
 
 namespace Forms {
     class Button : public Form {
@@ -28,7 +27,7 @@ namespace Forms {
         explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
         ~Button() override = default;
 
-        virtual void init(glm::vec3 scale, glm::vec2 position, const Text &text, Color color);
+        virtual void init(glm::vec3 scale, glm::vec2 position, const TextForm& text, Color color);
 
         virtual void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader);
         virtual void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader);
@@ -38,8 +37,8 @@ namespace Forms {
         virtual void press();
         virtual void release();
 
-        void setPressCallback(const std::function<void()> &function);
-        void setReleaseCallback(const std::function<void()> &function);
+        void setPressCallback(const std::function<void()>& function);
+        void setReleaseCallback(const std::function<void()>& function);
 
         [[nodiscard]] bool isUnderCursor() const;
 
@@ -54,7 +53,7 @@ namespace Forms {
         int id;
         static int IdCounter;
         bool _isUnderCursor = false;
-        
+
         Color _traceColor = Color::WHITE;
 
         std::function<void()> _pressCallback{[]() {}};
@@ -62,6 +61,6 @@ namespace Forms {
 
         GraphicLib::Object _object{};
     };
-}
+}    //namespace Forms
 
-#endif //ROLLANDPLAY_BUTTON_HPP
+#endif    //ROLLANDPLAY_BUTTON_HPP

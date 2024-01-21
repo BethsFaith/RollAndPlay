@@ -15,11 +15,11 @@ namespace Data {
         _model = std::move(model);
     }
 
-    void Race::setIconPath(const std::string &iconPath) {
+    void Race::setIconPath(const std::string& iconPath) {
         _iconPath = iconPath;
     }
 
-    void Race::setName(const std::string &name) {
+    void Race::setName(const std::string& name) {
         _name = name;
     }
-} // Data
+}    //namespace Data

@@ -5,10 +5,10 @@
 #ifndef ROLLANDPLAY_FORMCONTROLLERFACTORY_HPP
 #define ROLLANDPLAY_FORMCONTROLLERFACTORY_HPP
 
-#include "ButtonController.hpp"
-#include "InputFieldController.hpp"
-#include "ImageButtonController.hpp"
 #include "../forms/FormType.hpp"
+#include "ButtonController.hpp"
+#include "ImageButtonController.hpp"
+#include "InputFieldController.hpp"
 
 namespace Controllers {
     class FormControllerFactory {
@@ -19,6 +19,6 @@ namespace Controllers {
         FormControllerFactory() = default;
         ~FormControllerFactory() = default;
     };
-}
+}    //namespace Controllers
 
-#endif //ROLLANDPLAY_FORMCONTROLLERFACTORY_HPP
+#endif    //ROLLANDPLAY_FORMCONTROLLERFACTORY_HPP

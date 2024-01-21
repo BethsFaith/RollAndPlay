@@ -26,6 +26,6 @@ namespace Forms {
     };
 
     [[maybe_unused]] glm::vec3 getRGB(Color color);
-}
+}    //namespace Forms
 
-#endif //ROLLANDPLAY_COLOR_HPP
+#endif    //ROLLANDPLAY_COLOR_HPP

@@ -5,8 +5,9 @@
 #include "CharacterClass.hpp"
 
 namespace Data {
-    CharacterClass::CharacterClass(std::string name, std::string iconPath) : _name(std::move(name)),
-                                                                                           _iconPath(std::move(iconPath)) {}
+    CharacterClass::CharacterClass(std::string name, std::string iconPath)
+        : _name(std::move(name)),
+          _iconPath(std::move(iconPath)) {}
 
     void CharacterClass::addAction(const Action::Ptr& action) {
         _actions.push_back(action);
@@ -22,4 +23,4 @@ namespace Data {
     void CharacterClass::addInitialSkillLevel(Skill::Ptr skill, unsigned int level) {
         _skillParameters.push_back(SkillLevel{.skill = std::move(skill), .level = level});
     }
-}
+}    //namespace Data

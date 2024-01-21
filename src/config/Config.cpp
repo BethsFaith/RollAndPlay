@@ -1,54 +1,93 @@
 //
-// Created by VeraTag on 10.11.2023.
+// Created by VerOchka on 08.01.2024.
 //
 
 #include "Config.hpp"
 
-#include <utility>
-
 namespace Config {
-    std::string getPath(Resource resource, const std::string& name) {
-        std::string resourceKey;
+    void pullDesktopResolution(int &horizontal, int &vertical) {
+        RECT desktop;
 
-        switch (resource) {
-            case SHADERS:
-                resourceKey = "shaders";
-            case TEXTURES:
-                resourceKey = "textures";
-            case TEXT:
-                resourceKey = "fonts";
-        }
+        HWND hDesktop = GetDesktopWindow();
 
-        auto directory = getValue<std::string>(std::vector<std::string>{"resources", resourceKey, "directory"});
-        auto file = getValue<std::string>(std::vector<std::string>{"resources", resourceKey, "files",
-                                                                   name});
+        GetWindowRect(hDesktop, &desktop);
 
-        return splitToPath({projectPath, getResourceDirectory(), directory, file});
+        horizontal = desktop.right;
+        vertical = desktop.bottom;
     }
 
-    std::string getResourceDirectory() {
-        return getValue<std::string>(std::vector<std::string>{"resources", "directory"});
-    }
+    Config *Config::_instance = nullptr;
 
-    std::string getDirectory(Resource resDirectory) {
-        switch (resDirectory) {
-            case SHADERS:
-                return getValue<std::string>(std::vector<std::string>{"resources", "shaders", "directory"});
-            case TEXTURES:
-                return getValue<std::string>(std::vector<std::string>{"resources", "textures", "directory"});
-            case TEXT:
-                return getValue<std::string>(std::vector<std::string>{"resources", "fonts", "directory"});
+    Config::Config(const std::string &filePath) {
+        File file(filePath);
+
+        auto guiPaths = file.getPaths(File::Resource::SHADERS, "gui",
+                                         {"vertex", "fragment"});
+        auto selectablePaths = file.getPaths(File::Resource::SHADERS, "selectable",
+                                                {"vertex", "fragment"});
+        auto textPaths = file.getPaths(File::Resource::SHADERS, "text",
+                                          {"vertex", "fragment"});
+        auto texturePaths = file.getPaths(File::Resource::SHADERS, "texture_gui",
+                                             {"vertex", "fragment"});
+        auto net = file.getValues<std::string>({"net"}, {"host", "port", "domain"});
+
+        _shadersPaths["gui"] = {.vertex = guiPaths.front(), .fragment = guiPaths.back()};
+        _shadersPaths["selectable"] = {.vertex = selectablePaths.front(), .fragment = selectablePaths.back()};
+        _shadersPaths["text"] = {.vertex = textPaths.front(), .fragment = textPaths.back()};
+        _shadersPaths["texture"] = {.vertex = texturePaths.front(), .fragment = texturePaths.back()};
+
+        _texturesPaths["default"] = file.getPath(File::Resource::TEXTURES, "default");
+
+        _fontPaths["gui"] = file.getPath(File::Resource::TEXT, "gui");
+
+        if (net.size() >= 3) {
+            _net["host"] = net[0];
+            _net["port"] = net[1];
+            _net["domain"] = net[2];
         }
     }
 
-    std::string splitToPath(std::vector<std::string> strings) {
-        if (strings.empty()) return "";
+    Config* Config::get() {
+        return _instance;
+    }
 
-        std::string path = strings.at(0);
-        for (int i{1}; i < strings.size(); ++i) {
-            path += separator + strings.at(i);
+    void Config::init(const std::string& filePath) {
+        _instance = new Config(filePath);
+    }
+
+    void Config::free() {
+        delete _instance;
+    }
+
+    Config::ShaderPath Config::getShaderPath(const std::string &name) {
+        if (_shadersPaths.contains(name)) {
+            return _shadersPaths[name];
+        } else {
+            return {};
         }
+    }
 
-        return path;
+    std::string Config::getFontPath(const std::string &name) {
+        if (_fontPaths.contains(name)) {
+            return _fontPaths[name];
+        } else {
+            return "";
+        }
+    }
+
+    std::string Config::getTexturePath(const std::string &name) {
+        if (_texturesPaths.contains(name)) {
+            return _texturesPaths[name];
+        } else {
+            return "";
+        }
+    }
+
+    std::string Config::getNetValue(const std::string &name) {
+        if (_net.contains(name)) {
+            return _net[name];
+        } else {
+            return "";
+        }
     }
 }

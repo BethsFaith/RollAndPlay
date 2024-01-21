@@ -5,8 +5,9 @@
 #ifndef ROLLANDPLAY_RACEPAGE_HPP
 #define ROLLANDPLAY_RACEPAGE_HPP
 
-#include "BasePage.hpp"
 #include <GraphicLib/Primitives/Rectangle.hpp>
+
+#include "BasePage.hpp"
 
 namespace Pages {
     class RacePage : public BasePage {
@@ -18,20 +19,26 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<RacePage>;
 
-        explicit RacePage(GraphicLib::PickableTexture::Ptr
-        canvas);
+        explicit RacePage(GraphicLib::PickableTexture::Ptr canvas);
         ~RacePage() override = default;
+
+        void init(const glm::vec2& screenOffset) override;
 
     private:
         void update() override;
 
         void toStart();
 
-        void toView();
+        void toCreate();
 
         StateTag _currentTag = START;
+
+        Forms::Button::Ptr _createButton;
+        Forms::Button::Ptr _saveButton;
+        Forms::InputField::Ptr _nameInputField;
+        Forms::ImageButton::Ptr _iconButton;
+        Forms::InputField::Ptr _iconPathInputField;
     };
-}
+}    //namespace Pages
 
-
-#endif //ROLLANDPLAY_RACEPAGE_HPP
+#endif    //ROLLANDPLAY_RACEPAGE_HPP

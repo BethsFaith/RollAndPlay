@@ -4,9 +4,12 @@
 
 #include "MainWindow.hpp"
 
-MainWindow *MainWindow::instance = nullptr;
+MainWindow* MainWindow::instance = nullptr;
 
-MainWindow::MainWindow(const char *title) {
+MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
+    Config::Config::init(configFilePath);
+    auto config = Config::Config::get();
+
     int height, width;
     Config::pullDesktopResolution(width, height);
 
@@ -26,26 +29,55 @@ MainWindow::MainWindow(const char *title) {
     glfwSetCharModsCallback(_window, charModsCallback);
     stbi_set_flip_vertically_on_load(true);
 
-    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
-    auto font = Config::getPath(Config::Resource::TEXT, "gui");
-    GraphicLib::Techniques::TextTechnique::initTextRendering(width, height,
-                                                           font, 20);
+    GraphicLib::Techniques::TextTechnique::initTextRendering(width, height, config->getFontPath("gui"), 20);
 
     auto canvas = std::make_shared<GraphicLib::PickableTexture>();
     canvas->init(width, height);
 
-    _view = std::make_shared<ViewWindow>(0, 0, Forms::Color::DARK_GRAY, canvas);
+    auto guiShaderPath = config->getShaderPath("gui");
+    auto selectableShaderPath = config->getShaderPath("selectable");
+    auto textShaderPath = config->getShaderPath("text");
+    auto textureShaderPath = config->getShaderPath("texture");
+
+    auto guiShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
+            (guiShaderPath.vertex,
+             guiShaderPath.fragment);
+    Gui::setColorShader(guiShader);
+
+    Gui::setSelectableShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>
+            (selectableShaderPath.vertex,
+             selectableShaderPath.fragment));
+
+    Gui::setTextShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>
+            (textShaderPath.vertex,
+             textShaderPath.fragment));
+
+    Gui::setTextureShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>
+            (textureShaderPath.vertex,
+             textureShaderPath.fragment));
+
+    _view = std::make_shared<ViewWindow>(0, 0, Forms::Color::DARK_GRAY, canvas, guiShader);
+
+    auto host = config->getNetValue("host");
+    auto port = config->getNetValue("port");
+    auto domain = config->getNetValue("domain");
+    Pages::BasePage::setCommonData({.session = std::make_shared<Net::HttpSession>(host, port, domain)});
 
     auto systemPage = std::make_shared<Pages::SystemPage>(canvas);
     auto skillPage = std::make_shared<Pages::SkillPage>(canvas);
     auto racePage = std::make_shared<Pages::RacePage>(canvas);
+    auto loginPage = std::make_shared<Pages::LoginPage>(canvas);
+    auto registrationPage = std::make_shared<Pages::RegistrationPage>(canvas);
 
     _view->addPage(ViewWindow::PageTag::SYSTEM, systemPage);
     _view->addPage(ViewWindow::PageTag::SKILL, skillPage);
     _view->addPage(ViewWindow::PageTag::RACE, racePage);
+    _view->addPage(ViewWindow::PageTag::AUTHORIZATION, loginPage);
+    _view->addPage(ViewWindow::PageTag::REGISTRATION, registrationPage);
 }
 
 MainWindow::~MainWindow() {
@@ -57,10 +89,12 @@ MainWindow::~MainWindow() {
         glfwDestroyWindow(_window);
     }
     glfwTerminate();
+
+    Config::Config::free();
 }
 
-void MainWindow::init(const char *title) {
-    instance = new MainWindow(title);
+void MainWindow::init(const char* title, const std::string& configFilePath) {
+    instance = new MainWindow(title, configFilePath);
 
     glfwSetMouseButtonCallback(instance->_window, mouseButtonCallback);
     glfwSetCursorPosCallback(instance->_window, mouseInputCallback);
@@ -71,11 +105,11 @@ void MainWindow::free() {
     delete instance;
 }
 
-GLFWwindow *MainWindow::getWindow() const {
+GLFWwindow* MainWindow::getWindow() const {
     return _window;
 }
 
-MainWindow *MainWindow::getInstance() {
+MainWindow* MainWindow::getInstance() {
     return instance;
 }
 
@@ -83,7 +117,7 @@ float MainWindow::getDeltaTime() const {
     return _delta_time;
 }
 
-void MainWindow::setClearColor(const glm::vec4 &clearColor) {
+void MainWindow::setClearColor(const glm::vec4& clearColor) {
     _clearColor = clearColor;
 }
 
@@ -112,7 +146,7 @@ void MainWindow::clearColor() const {
 }
 
 void MainWindow::updateDeltaTime() {
-    auto currentFrame = (float) glfwGetTime();
+    auto currentFrame = (float)glfwGetTime();
 
     _delta_time = currentFrame - _last_frame;
     _last_frame = currentFrame;
@@ -122,22 +156,22 @@ bool MainWindow::shouldClose() {
     return glfwWindowShouldClose(_window);
 }
 
-void MainWindow::mouseButtonCallback(GLFWwindow *window, int mouseButton, int action, int mods) {
+void MainWindow::mouseButtonCallback(GLFWwindow* window, int mouseButton, int action, int mods) {
     instance->_view->processMouseButton(window, mouseButton, action, mods);
 }
 
-void MainWindow::mouseInputCallback(GLFWwindow *window, double xPos, double yPos) {
+void MainWindow::mouseInputCallback(GLFWwindow* window, double xPos, double yPos) {
     instance->_view->processMouseCursor(window, xPos, yPos);
 }
 
-void MainWindow::mouseScrollCallback(GLFWwindow *window, double xOffset, double yOffset) {
+void MainWindow::mouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
     instance->_view->processMouseCursor(window, xOffset, yOffset);
 }
 
-void MainWindow::charModsCallback(GLFWwindow *window, unsigned int codepoint, int mods) {
+void MainWindow::charModsCallback(GLFWwindow* window, unsigned int codepoint, int mods) {
     instance->_view->processCharMods(window, codepoint, mods);
 }
 
-void MainWindow::frameBufferSizeCallback(GLFWwindow *window, int width, int height) {
+void MainWindow::frameBufferSizeCallback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }

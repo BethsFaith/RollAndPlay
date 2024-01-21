@@ -4,9 +4,10 @@
 
 #include "BasePage.hpp"
 
+#include <utility>
+
 namespace Pages {
-    BasePage::BasePage(GraphicLib::PickableTexture::Ptr canvas)
-    : _gui(std::move(canvas)){
+    BasePage::BasePage(GraphicLib::PickableTexture::Ptr canvas) : _gui(std::move(canvas)) {
         _controller = std::make_shared<Controllers::CommonController>();
     }
 
@@ -20,8 +21,8 @@ namespace Pages {
         return _controller;
     }
 
-    void BasePage::addButton(const Forms::Button::Ptr& button) {
-        _gui.addButton(button);
+    void BasePage::addForm(const Forms::Form::Ptr& form) {
+        _gui.addForm(form);
     }
 
     void BasePage::draw() {
@@ -30,7 +31,11 @@ namespace Pages {
         glDisable(GL_DEPTH_TEST);
     }
 
-    void BasePage::setScreenOffset(const glm::vec2 &screenOffset) {
+    void BasePage::init(const glm::vec2& screenOffset) {
         ScreenOffset = screenOffset;
     }
-}
+
+    void BasePage::setCommonData(const Common& common) {
+        CommonData = common;
+    }
+}    //namespace Pages

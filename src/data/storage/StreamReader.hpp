@@ -5,8 +5,8 @@
 #ifndef ROLLANDPLAY_STREAMREADER_HPP
 #define ROLLANDPLAY_STREAMREADER_HPP
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <utility>
 
 namespace Data::Storage {
@@ -15,15 +15,14 @@ namespace Data::Storage {
         explicit StreamReader(std::string fileName);
         ~StreamReader() = default;
 
-        size_t read(std::u16string &container);
-        size_t read(uint32_t &container);
+        size_t read(std::u16string& container);
+        size_t read(uint32_t& container);
 
-        void setFileName(const std::string &fileName);
+        void setFileName(const std::string& fileName);
 
     private:
         std::string _fileName;
     };
-}
+}    //namespace Data::Storage
 
-
-#endif //ROLLANDPLAY_STREAMREADER_HPP
+#endif    //ROLLANDPLAY_STREAMREADER_HPP

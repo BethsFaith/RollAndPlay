@@ -11,8 +11,9 @@ namespace Data {
         RACE,
         SKILL,
         ACTION,
-        CLASS
+        CLASS,
+        USER,
     };
-}
+}    //namespace Data
 
-#endif //ROLLANDPLAY_TYPE_HPP
+#endif    //ROLLANDPLAY_TYPE_HPP

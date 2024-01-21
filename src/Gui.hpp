@@ -8,36 +8,42 @@
 #include <GraphicLib/GlagGlfw.hpp>
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 
-#include "forms/Button.hpp"
+#include "config/Config.hpp"
 #include "controllers/GuiController.hpp"
+#include "forms/Button.hpp"
+#include "forms/TextBox.hpp"
 
 class Gui {
 public:
     using Ptr = std::shared_ptr<Gui>;
 
-    explicit Gui(GraphicLib::PickableTexture::Ptr  canvas);
+    explicit Gui(GraphicLib::PickableTexture::Ptr canvas);
 
     ~Gui() = default;
 
     void draw();
 
-    void addButton(const Forms::Button::Ptr& button);
+    void addForm(const Forms::Form::Ptr& form);
 
     void clear();
 
-    [[nodiscard]] const Controllers::GuiController::Ptr &getController() const;
+    [[nodiscard]] const Controllers::GuiController::Ptr& getController() const;
+
+    static void setColorShader(GraphicLib::Shaders::ShaderProgram::Ptr shader);
+    static void setTextureShader(GraphicLib::Shaders::ShaderProgram::Ptr shader);
+    static void setSelectableShader(GraphicLib::Shaders::ShaderProgram::Ptr shader);
+    static void setTextShader(GraphicLib::Shaders::ShaderProgram::Ptr shader);
 
 private:
-    GraphicLib::Shaders::ShaderProgram::Ptr _colorShader;
-    GraphicLib::Shaders::ShaderProgram::Ptr _textureShader;
-    GraphicLib::Shaders::ShaderProgram::Ptr _selectableShader;
-    GraphicLib::Shaders::ShaderProgram::Ptr _textShader;
+    static GraphicLib::Shaders::ShaderProgram::Ptr colorShader;
+    static GraphicLib::Shaders::ShaderProgram::Ptr textureShader;
+    static GraphicLib::Shaders::ShaderProgram::Ptr selectableShader;
+    static GraphicLib::Shaders::ShaderProgram::Ptr textShader;
 
-    std::vector<Forms::Button::Ptr> _buttons;
+    std::vector<Forms::Form::Ptr> _forms;
     GraphicLib::PickableTexture::Ptr _canvas;
 
     Controllers::GuiController::Ptr _controller;
 };
 
-
-#endif //ROLLANDPLAY_GUI_HPP
+#endif    //ROLLANDPLAY_GUI_HPP

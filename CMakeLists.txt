@@ -27,6 +27,7 @@ add_executable(RollAndPlay
         src/data/Race.cpp
         src/data/System.cpp
         src/data/SkillCategory.cpp
+        src/data/User.cpp
         src/MainWindow.cpp
         src/ViewWindow.cpp
         src/forms/Color.cpp
@@ -36,10 +37,13 @@ add_executable(RollAndPlay
         src/forms/InputField.cpp
         src/forms/ImageButton.cpp
         src/forms/Carriage.cpp
+        src/forms/TextBox.cpp
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
         src/pages/SkillPage.cpp
         src/pages/RacePage.cpp
+        src/pages/LoginPage.cpp
+        src/pages/RegistrationPage.cpp
         src/controllers/GuiController.cpp
         src/controllers/InputFieldContoller.cpp
         src/controllers/CommonController.cpp
@@ -50,7 +54,12 @@ add_executable(RollAndPlay
         src/data/storage/StreamReader.cpp
         src/data/DataStorage.cpp
         src/Toolbar.cpp
-        src/config/Config.cpp)
+        src/config/File.cpp
+        src/config/Config.cpp
+        src/net/ApiClient.cpp
+        src/net/HttpRequest.cpp
+        src/net/HttpResponse.cpp
+        src/net/HttpSession.cpp)
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

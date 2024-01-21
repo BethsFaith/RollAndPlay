@@ -9,7 +9,7 @@ namespace Data {
         return 0;
     }
 
-    size_t Action::deserialize(Storage::StreamReader &reader) {
+    size_t Action::deserialize(Storage::StreamReader& reader) {
         return 0;
     }
 
@@ -17,7 +17,7 @@ namespace Data {
         return 0;
     }
 
-    void Action::setName(const std::string &name) {
+    void Action::setName(const std::string& name) {
         _name = name;
     }
 
@@ -33,7 +33,7 @@ namespace Data {
         _skill = skill;
     }
 
-    const std::string &Action::getName() const {
+    const std::string& Action::getName() const {
         return _name;
     }
 
@@ -48,4 +48,4 @@ namespace Data {
     Skill::Ptr Action::getSkill() const {
         return _skill;
     }
-}
+}    //namespace Data
