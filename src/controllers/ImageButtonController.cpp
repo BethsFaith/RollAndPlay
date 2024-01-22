@@ -50,7 +50,7 @@ namespace Controllers {
 
     void ImageButtonController::clear() {}
 
-    void ImageButtonController::addForm(Forms::Form::Ptr form) {
-        _buttons.push_back(std::dynamic_pointer_cast<Forms::ImageButton>(form));
+    void ImageButtonController::addWidget(Widgets::Widget::Ptr widget) {
+        _buttons.push_back(std::dynamic_pointer_cast<Widgets::ImageButton>(widget));
     }
 }    //namespace Controllers

@@ -16,18 +16,18 @@
 #include <utility>
 
 #include "Color.hpp"
-#include "Form.hpp"
-#include "TextForm.hpp"
+#include "TextData.hpp"
+#include "Widget.hpp"
 
-namespace Forms {
-    class Button : public Form {
+namespace Widgets {
+    class Button : public Widget {
     public:
         using Ptr = std::shared_ptr<Button>;
 
         explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
         ~Button() override = default;
 
-        virtual void init(glm::vec2 scale, glm::vec2 position, const TextForm& text, Color color);
+        virtual void init(glm::vec2 scale, glm::vec2 position, const TextData& text, Color color);
 
         virtual void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader);
         virtual void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader);
@@ -48,7 +48,7 @@ namespace Forms {
         void setTraceColor(Color traceColor);
 
     protected:
-        explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, FormType type);
+        explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, WidgetType type);
 
         int id;
         static int IdCounter;

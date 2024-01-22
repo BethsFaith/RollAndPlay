@@ -8,6 +8,8 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
 #include "BasePage.hpp"
+#include "../widgets/TextForm.hpp"
+#include "../widgets/ImageButton.hpp"
 
 namespace Pages {
     class RacePage : public BasePage {
@@ -33,11 +35,11 @@ namespace Pages {
 
         StateTag _currentTag = START;
 
-        Forms::Button::Ptr _createButton;
-        Forms::Button::Ptr _saveButton;
-        Forms::InputField::Ptr _nameInputField;
-        Forms::ImageButton::Ptr _iconButton;
-        Forms::InputField::Ptr _iconPathInputField;
+        Widgets::Button::Ptr _createButton;
+        Widgets::Button::Ptr _saveButton;
+        Widgets::TextForm::Ptr _nameInput;
+        Widgets::ImageButton::Ptr _iconButton;
+        Widgets::TextForm::Ptr _iconPathInput;
     };
 }    //namespace Pages
 

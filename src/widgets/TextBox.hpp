@@ -11,24 +11,24 @@
 #include <GraphicLib/Techniques/TextTechnique.hpp>
 #include <GraphicLib/Techniques/TransformTechnique.hpp>
 
-#include "Form.hpp"
-#include "TextForm.hpp"
+#include "TextData.hpp"
+#include "Widget.hpp"
 
-namespace Forms {
-    class TextBox : public Form {
+namespace Widgets {
+    class TextBox : public Widget {
     public:
         using Ptr = std::shared_ptr<TextBox>;
         TextBox();
         ~TextBox() override = default;
 
-        void init(glm::vec3 scale, glm::vec2 position, const TextForm&text, Color color);
+        void init(glm::vec3 scale, glm::vec2 position, const TextData&text, Color color);
 
         void renderText(const GraphicLib::Shaders::ShaderProgram::Ptr& shader);
         void renderForm(const GraphicLib::Shaders::ShaderProgram::Ptr& shader);
 
         bool checkSelecting(unsigned int x, unsigned int y) override;
 
-        void setTextForm(const TextForm& text);
+        void setTextForm(const TextData& text);
         void setTextColor(Color color);
         void setText(const std::u16string& content);
         void setTextScale(float scale);

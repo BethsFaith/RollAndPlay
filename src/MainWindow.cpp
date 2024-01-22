@@ -60,7 +60,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
             (textureShaderPath.vertex,
              textureShaderPath.fragment));
 
-    _view = std::make_shared<ViewWindow>(0, 0, Forms::Color::DARK_GRAY, canvas, guiShader);
+    _view = std::make_shared<ViewWindow>(0, 0,  Widgets::Color::DARK_GRAY, canvas, guiShader);
 
     auto host = config->getNetValue("host");
     auto port = config->getNetValue("port");

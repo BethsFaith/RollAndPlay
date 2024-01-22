@@ -10,8 +10,8 @@
 
 #include "config/Config.hpp"
 #include "controllers/GuiController.hpp"
-#include "forms/Button.hpp"
-#include "forms/TextBox.hpp"
+#include "widgets/Button.hpp"
+#include "widgets/TextBox.hpp"
 
 class Gui {
 public:
@@ -23,7 +23,7 @@ public:
 
     void draw();
 
-    void addForm(const Forms::Form::Ptr& form);
+    void addWidget(const Widgets::Widget::Ptr& widget);
 
     void clear();
 
@@ -40,9 +40,8 @@ private:
     static GraphicLib::Shaders::ShaderProgram::Ptr selectableShader;
     static GraphicLib::Shaders::ShaderProgram::Ptr textShader;
 
-    std::vector<Forms::Form::Ptr> _forms;
+    std::vector<Widgets::Widget::Ptr> _widget;
     GraphicLib::PickableTexture::Ptr _canvas;
-
     Controllers::GuiController::Ptr _controller;
 };
 

@@ -6,21 +6,21 @@
 
 #include <utility>
 
-#include "TextForm.hpp"
+#include "TextData.hpp"
 
-namespace Forms {
+namespace Widgets {
     int Button::IdCounter = 0;
 
     Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
-        : Button(graphicPrimitive, FormType::COLOR_BUTTON) {}
+        : Button(graphicPrimitive, WidgetType::BUTTON) {}
 
-    Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, FormType type) : Form(type) {
+    Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, WidgetType type) : Widget(type) {
         id = ++IdCounter;
 
         _object.setPrimitive(graphicPrimitive);
     }
 
-    void Button::init(glm::vec2 scale, glm::vec2 position, const TextForm& text, Color color) {
+    void Button::init(glm::vec2 scale, glm::vec2 position, const TextData& text, Color color) {
         auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
         colorTechnique->setColor(getRGB(color));
 

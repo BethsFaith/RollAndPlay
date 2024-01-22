@@ -5,15 +5,15 @@
 #ifndef ROLLANDPLAY_IMAGEBUTTONCONTROLLER_HPP
 #define ROLLANDPLAY_IMAGEBUTTONCONTROLLER_HPP
 
-#include "../forms/ImageButton.hpp"
-#include "FormController.hpp"
+#include "../widgets/ImageButton.hpp"
+#include "WidgetController.hpp"
 
 namespace Controllers {
-    class ImageButtonController : public FormController {
+    class ImageButtonController : public WidgetController {
     public:
         ~ImageButtonController() override = default;
 
-        void addForm(Forms::Form::Ptr form) override;
+        void addWidget(Widgets::Widget::Ptr widget) override;
 
         void processKeyboardInput(GLFWwindow* window) override;
 
@@ -28,8 +28,8 @@ namespace Controllers {
         void clear() override;
 
     private:
-        Forms::ImageButton::Ptr _target = nullptr;
-        std::vector<Forms::ImageButton::Ptr> _buttons;
+        Widgets::ImageButton::Ptr _target = nullptr;
+        std::vector<Widgets::ImageButton::Ptr> _buttons;
     };
 }    //namespace Controllers
 

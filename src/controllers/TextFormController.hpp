@@ -2,19 +2,19 @@
 // Created by VeraTag on 25.10.2023.
 //
 
-#ifndef ROLLANDPLAY_INPUTFIELDCONTROLLER_HPP
-#define ROLLANDPLAY_INPUTFIELDCONTROLLER_HPP
+#ifndef ROLLANDPLAY_TEXTFORMCONTROLLER_HPP
+#define ROLLANDPLAY_TEXTFORMCONTROLLER_HPP
 
 #include <chrono>
 #include <thread>
 
-#include "../forms/InputField.hpp"
-#include "FormController.hpp"
+#include "../widgets/TextForm.hpp"
+#include "WidgetController.hpp"
 
 namespace Controllers {
-    class InputFieldController : public FormController {
+    class TextFormController : public WidgetController {
     public:
-        ~InputFieldController() override = default;
+        ~TextFormController() override = default;
 
         void processKeyboardInput(GLFWwindow* window) override;
 
@@ -28,12 +28,12 @@ namespace Controllers {
 
         void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) override;
 
-        void addForm(Forms::Form::Ptr form) override;
+        void addWidget(Widgets::Widget::Ptr widget) override;
 
     private:
-        Forms::InputField::Ptr _target = nullptr;
-        std::vector<Forms::InputField::Ptr> _buttons;
+        Widgets::TextForm::Ptr _target = nullptr;
+        std::vector<Widgets::TextForm::Ptr> _buttons;
     };
 }    //namespace Controllers
 
-#endif    //ROLLANDPLAY_INPUTFIELDCONTROLLER_HPP
+#endif    //ROLLANDPLAY_TEXTFORMCONTROLLER_HPP

@@ -4,13 +4,13 @@
 
 #include "ImageButton.hpp"
 
-namespace Forms {
+namespace Widgets {
     ImageButton::ImageButton(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
-        : Button(graphicPrimitive, FormType::TEXTURE_BUTTON) {}
+        : Button(graphicPrimitive, WidgetType::IMAGE_BUTTON) {}
 
     void ImageButton::init(glm::vec2 scale,
                            glm::vec2 position,
-                           const TextForm& text,
+                           const TextData& text,
                            const std::string& texturePath,
                            int textureIndex) {
         _texture = std::make_shared<GraphicLib::Textures::Texture>("", texturePath);

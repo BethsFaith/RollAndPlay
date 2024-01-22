@@ -4,8 +4,8 @@
 
 #include "TextBox.hpp"
 
-namespace Forms {
-    TextBox::TextBox() : Form(FormType::TEXT_BOX) {
+namespace Widgets {
+    TextBox::TextBox() : Widget(WidgetType::TEXT_BOX) {
         GraphicLib::Primitives::AbstractPrimitive::Ptr rectangle =
                 std::make_shared<GraphicLib::Primitives::Rectangle>(
                         GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
@@ -16,7 +16,7 @@ namespace Forms {
         _object.setPrimitive(rectangle);
     }
 
-    void TextBox::init(glm::vec3 scale, glm::vec2 position, const TextForm&text, Color color) {
+    void TextBox::init(glm::vec3 scale, glm::vec2 position, const TextData&text, Color color) {
         auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
         colorTechnique->setColor(getRGB(color));
 
@@ -58,7 +58,7 @@ namespace Forms {
         return false;
     }
 
-    void TextBox::setTextForm(const TextForm& text) {
+    void TextBox::setTextForm(const TextData& text) {
         auto technique = _object.getTechnique(GraphicLib::Techniques::TEXT);
         auto textTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(technique);
 

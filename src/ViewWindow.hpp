@@ -8,7 +8,8 @@
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 #include <utility>
 
-#include "Toolbar.hpp"
+#include "MenuBar.hpp"
+#include "ViewDrawer.hpp"
 #include "config/Config.hpp"
 #include "controllers/CommonController.hpp"
 #include "pages/APage.hpp"
@@ -28,18 +29,18 @@ public:
     };
 
     enum ViewTag {
-        NULL_VIEW,
-        LOGIN,
-        SYSTEMS,
-        GAME,
-        LOBBY
+        NULL_VIEW = -1,
+        LOGIN = 0,
+        SYSTEMS = 1,
+        GAME = 2,
+        LOBBY = 3
     };
 
     using Ptr = std::shared_ptr<ViewWindow>;
 
     ViewWindow(int x,
                int y,
-               Forms::Color viewColor,
+               Widgets::Color viewColor,
                GraphicLib::PickableTexture::Ptr canvas,
                GraphicLib::Shaders::ShaderProgram::Ptr shader);
 
@@ -60,11 +61,11 @@ public:
     void addPage(PageTag tag, Pages::APage::Ptr page);
 
 private:
-    void initView(int x, int y, Forms::Color viewColor);
+    void initView(int x, int y, Widgets::Color viewColor);
     void updateControllers();
     void updateGui();
 
-    GraphicLib::Object _view;
+    ViewDrawer _view;
     GraphicLib::Shaders::ShaderProgram::Ptr _shader;
 
     const GraphicLib::PickableTexture::Ptr _canvas;
@@ -76,8 +77,8 @@ private:
     ViewTag _currentViewTag = ViewTag::NULL_VIEW;
     bool _switched = true;
 
-    Toolbar::Ptr _horizonToolbar;
-    Toolbar::Ptr _verticalToolbar;
+    MenuBar::Ptr _horizonToolbar;
+    MenuBar::Ptr _verticalToolbar;
 };
 
 #endif    //ROLLANDPLAY_VIEWWINDOW_HPP

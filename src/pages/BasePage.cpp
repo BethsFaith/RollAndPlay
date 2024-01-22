@@ -21,8 +21,8 @@ namespace Pages {
         return _controller;
     }
 
-    void BasePage::addForm(const Forms::Form::Ptr& form) {
-        _gui.addForm(form);
+    void BasePage::addWidget(const Widgets::Widget::Ptr& widget) {
+        _gui.addWidget(widget);
     }
 
     void BasePage::draw() {

@@ -12,6 +12,8 @@
 #include "../config/Config.hpp"
 #include "../data/DataStorage.hpp"
 #include "../data/System.hpp"
+#include "../widgets/TextForm.hpp"
+#include "../widgets/ImageButton.hpp"
 
 namespace Pages {
     class SystemPage : public BasePage {
@@ -38,11 +40,11 @@ namespace Pages {
 
         Data::System::Ptr _system;
 
-        Forms::Button::Ptr _createButton;
-        Forms::Button::Ptr _saveButton;
-        Forms::InputField::Ptr _nameInputField;
-        Forms::ImageButton::Ptr _iconButton;
-        Forms::InputField::Ptr _iconPathInputField;
+        Widgets::Button::Ptr _createButton;
+        Widgets::Button::Ptr _saveButton;
+        Widgets::TextForm::Ptr _nameInputField;
+        Widgets::ImageButton::Ptr _iconButton;
+        Widgets::TextForm::Ptr _iconPathInputField;
     };
 }    //namespace Pages
 

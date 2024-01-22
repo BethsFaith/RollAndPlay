@@ -2,21 +2,21 @@
 // Created by VerOchka on 02.11.2023.
 //
 
-#ifndef ROLLANDPLAY_TOOLBAR_HPP
-#define ROLLANDPLAY_TOOLBAR_HPP
+#ifndef ROLLANDPLAY_MENUBAR_HPP
+#define ROLLANDPLAY_MENUBAR_HPP
 
 #include <GraphicLib/Primitives/Rectangle.hpp>
 #include <utility>
 
 #include "Gui.hpp"
 
-class Toolbar {
+class MenuBar {
 public:
-    using Ptr = std::shared_ptr<Toolbar>;
+    using Ptr = std::shared_ptr<MenuBar>;
 
-    Toolbar(std::vector<std::u16string> names,
+    MenuBar(std::vector<std::u16string> names,
             std::vector<std::function<void()>> funcs,
-            Forms::Color color,
+            Widgets::Color buttonColor,
             const GraphicLib::PickableTexture::Ptr& canvas);
 
     void init(glm::vec2 transform, glm::vec2 scale, bool horizontal);
@@ -28,9 +28,9 @@ public:
 private:
     std::vector<std::u16string> _names{};
     std::vector<std::function<void()>> _funcs{};
-    Forms::Color _color;
+    Widgets::Color _buttonColor;
 
     Gui _gui;
 };
 
-#endif    //ROLLANDPLAY_TOOLBAR_HPP
+#endif    //ROLLANDPLAY_MENUBAR_HPP

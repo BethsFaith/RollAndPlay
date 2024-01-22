@@ -2,8 +2,8 @@
 // Created by VeraTag on 25.10.2023.
 //
 
-#ifndef ROLLANDPLAY_INPUTFIELD_HPP
-#define ROLLANDPLAY_INPUTFIELD_HPP
+#ifndef ROLLANDPLAY_TEXTFORM_HPP
+#define ROLLANDPLAY_TEXTFORM_HPP
 
 #include <iostream>
 #include <utility>
@@ -18,17 +18,16 @@
 #include "Button.hpp"
 #include "Carriage.hpp"
 
-namespace Forms {
-    class InputField : public Button {
+namespace Widgets {
+    class TextForm : public Button {
     public:
-        using Ptr = std::shared_ptr<InputField>;
+        using Ptr = std::shared_ptr<TextForm>;
 
-        explicit InputField(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive,
-                            TextForm inputParams);
+        explicit TextForm(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, TextData inputParams);
 
-        ~InputField() override = default;
+        ~TextForm() override = default;
 
-        void init(glm::vec2 scale, glm::vec2 position, const TextForm& textForm, Color color) override;
+        void init(glm::vec2 scale, glm::vec2 position, const TextData& textForm, Color color) override;
 
         void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
 
@@ -64,11 +63,11 @@ namespace Forms {
 
         glm::vec2 _position{};
         glm::vec2 _scale{};
-        TextForm _buf;
+        TextData _buf;
         bool _needHide = false;
         float _inputTextSize = 1.4f;
 
         Carriage _carriage{};
     };
 }    //namespace Forms
-#endif    //ROLLANDPLAY_INPUTFIELD_HPP
+#endif    //ROLLANDPLAY_TEXTFORM_HPP

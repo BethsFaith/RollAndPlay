@@ -21,7 +21,7 @@
 #include "ViewWindow.hpp"
 #include "config/Config.hpp"
 #include "controllers/GuiController.hpp"
-#include "forms/Button.hpp"
+#include "widgets/Button.hpp"
 
 class MainWindow {
 public:

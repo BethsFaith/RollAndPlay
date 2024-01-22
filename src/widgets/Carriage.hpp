@@ -14,7 +14,7 @@
 #include "../config/Config.hpp"
 #include "Color.hpp"
 
-namespace Forms {
+namespace Widgets {
     class Carriage {
     public:
         struct CharacterOffset {

@@ -9,6 +9,8 @@
 
 #include "BasePage.hpp"
 #include "../data/User.hpp"
+#include "../widgets/TextForm.hpp"
+#include "../widgets/ImageButton.hpp"
 
 namespace Pages {
     class LoginPage : public BasePage {
@@ -43,20 +45,20 @@ namespace Pages {
 
         StateTag _nextState = START;
 
-        Forms::Button::Ptr _logInButton;
-        Forms::InputField::Ptr _loginInputField;
-        Forms::InputField::Ptr _passwordInputField;
-        Forms::TextBox::Ptr _messageBox;
+        Widgets::Button::Ptr _logInButton;
+        Widgets::TextForm::Ptr _loginInputField;
+        Widgets::TextForm::Ptr _passwordInputField;
+        Widgets::TextBox::Ptr _messageBox;
 
-        Forms::Button::Ptr _editButton;
-        Forms::Button::Ptr _exitButton;
-        Forms::TextBox::Ptr _emailLabel;
-        Forms::TextBox::Ptr _nicknameLabel;
-        Forms::TextBox::Ptr _emailBox;
-        Forms::TextBox::Ptr _nicknameBox;
+        Widgets::Button::Ptr _editButton;
+        Widgets::Button::Ptr _exitButton;
+        Widgets::TextBox::Ptr _emailLabel;
+        Widgets::TextBox::Ptr _nicknameLabel;
+        Widgets::TextBox::Ptr _emailBox;
+        Widgets::TextBox::Ptr _nicknameBox;
 
-        Forms::Button::Ptr _saveButton;
-        Forms::InputField::Ptr _nicknameInputField;
+        Widgets::Button::Ptr _saveButton;
+        Widgets::TextForm::Ptr _nicknameInputField;
 
         Data::User _user{};
     };

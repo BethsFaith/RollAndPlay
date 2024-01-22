@@ -2,16 +2,16 @@
 // Created by VerOchka on 26.10.2023.
 //
 
-#include "FormControllerFactory.hpp"
+#include "WidgetControllerFactory.hpp"
 
 namespace Controllers {
-    FormController::Ptr FormControllerFactory::create(Forms::FormType type) {
+    WidgetController::Ptr WidgetControllerFactory::create(Widgets::WidgetType type) {
         switch (type) {
-            case Forms::COLOR_BUTTON:
+            case Widgets::BUTTON:
                 return std::make_shared<Controllers::ButtonController>();
-            case Forms::INPUT_FIELD:
-                return std::make_shared<Controllers::InputFieldController>();
-            case Forms::TEXTURE_BUTTON:
+            case Widgets::TEXT_FORM:
+                return std::make_shared<Controllers::TextFormController>();
+            case Widgets::IMAGE_BUTTON:
                 return std::make_shared<Controllers::ImageButtonController>();
             default:
                 return nullptr;

@@ -11,7 +11,7 @@
 
 #include "Button.hpp"
 
-namespace Forms {
+namespace Widgets {
     class ImageButton : public Button {
     public:
         using Ptr = std::shared_ptr<ImageButton>;
@@ -20,7 +20,7 @@ namespace Forms {
 
         void init(glm::vec2 scale,
                   glm::vec2 position,
-                  const TextForm& text,
+                  const TextData& text,
                   const std::string& texturePath,
                   int textureIndex);
 

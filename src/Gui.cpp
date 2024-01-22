@@ -14,13 +14,13 @@ Gui::Gui(GraphicLib::PickableTexture::Ptr canvas) : _canvas(std::move(canvas)) {
 }
 
 void Gui::draw() {
-    for (auto& form : _forms) {
-        if (form->getType() == Forms::TEXT_BOX) {
-            auto box = std::dynamic_pointer_cast<Forms::TextBox>(form);
+    for (auto& form : _widget) {
+        if (form->getType() ==  Widgets::TEXT_BOX) {
+            auto box = std::dynamic_pointer_cast< Widgets::TextBox>(form);
             box->renderForm(colorShader);
             box->renderText(textShader);
         } else {
-            auto button = std::dynamic_pointer_cast<Forms::Button>(form);
+            auto button = std::dynamic_pointer_cast< Widgets::Button>(form);
             if (button->isUnderCursor()) {
                 glEnable(GL_STENCIL_TEST);
                 glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
@@ -29,7 +29,7 @@ void Gui::draw() {
                 glStencilFunc(GL_ALWAYS, 1, 0xFF);    // все фрагменты должны пройти тест трафарета
                 glStencilMask(0xFF);    // включаем запись в буфер трафарета
 
-                if (button->getType() != Forms::FormType::TEXTURE_BUTTON) {
+                if (button->getType() !=  Widgets:: WidgetType::IMAGE_BUTTON) {
                     button->renderForm(colorShader);
                 } else {
                     button->renderForm(textureShader);
@@ -52,7 +52,7 @@ void Gui::draw() {
                 glEnable(GL_DEPTH_TEST);
                 glDisable(GL_STENCIL_TEST);
             } else {
-                if (button->getType() != Forms::FormType::TEXTURE_BUTTON) {
+                if (button->getType() !=  Widgets:: WidgetType::IMAGE_BUTTON) {
                     button->renderForm(colorShader);
                 } else {
                     button->renderForm(textureShader);
@@ -66,16 +66,16 @@ void Gui::draw() {
     }
 }
 
-void Gui::addForm(const Forms::Form::Ptr& form) {
-    form->setCanvas(_canvas);
+void Gui::addWidget(const Widgets::Widget::Ptr& widget) {
+    widget->setCanvas(_canvas);
 
-    _controller->addForm(form);
+    _controller->addWidget(widget);
 
-    _forms.push_back(form);
+    _widget.push_back(widget);
 }
 
 void Gui::clear() {
-    _forms.clear();
+    _widget.clear();
 }
 
 const Controllers::GuiController::Ptr& Gui::getController() const {

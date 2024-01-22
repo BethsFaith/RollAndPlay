@@ -4,7 +4,7 @@
 
 #include "Carriage.hpp"
 
-namespace Forms {
+namespace Widgets {
     Carriage::Carriage() {
         _object = std::make_shared<GraphicLib::Object>();
 

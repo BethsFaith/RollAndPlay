@@ -29,7 +29,7 @@ namespace Pages {
         static void setCommonData(const Common& common);
 
     protected:
-        void addForm(const Forms::Form::Ptr& form);
+        void addWidget(const Widgets::Widget::Ptr& widget);
 
         glm::vec2 ScreenOffset{};
 

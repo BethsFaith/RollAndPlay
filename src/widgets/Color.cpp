@@ -4,8 +4,8 @@
 
 #include "Color.hpp"
 
-namespace Forms {
-    glm::vec3 Forms::getRGB(Color color) {
+namespace Widgets {
+    glm::vec3 Widgets::getRGB(Color color) {
         switch (color) {
             case RED:
                 return {1.0f, 0, 0};

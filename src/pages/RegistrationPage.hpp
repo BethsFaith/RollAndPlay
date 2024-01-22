@@ -8,7 +8,7 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
 #include "../data/User.hpp"
-#include "../forms/TextBox.hpp"
+#include "../widgets/TextBox.hpp"
 #include "../net/ApiClient.hpp"
 #include "BasePage.hpp"
 
@@ -41,13 +41,13 @@ namespace Pages {
 
         StateTag _currentTag = CREATE;
 
-        Forms::Button::Ptr _saveButton;
-        Forms::Button::Ptr _createButton;
-        Forms::InputField::Ptr _loginInputField;
-        Forms::InputField::Ptr _passwordInputField;
-        Forms::InputField::Ptr _repeatedPasswordInputField;
-        Forms::TextBox::Ptr _creatingMessageBox;
-        Forms::TextBox::Ptr _viewMessageBox;
+        Widgets::Button::Ptr _saveButton;
+        Widgets::Button::Ptr _createButton;
+        Widgets::TextForm::Ptr _loginInputField;
+        Widgets::TextForm::Ptr _passwordInputField;
+        Widgets::TextForm::Ptr _repeatedPasswordInputField;
+        Widgets::TextBox::Ptr _creatingMessageBox;
+        Widgets::TextBox::Ptr _viewMessageBox;
     };
 }    //namespace Pages
 

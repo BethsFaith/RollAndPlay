@@ -2,18 +2,18 @@
 // Created by VerOchka on 02.11.2023.
 //
 
-#include "Toolbar.hpp"
+#include "MenuBar.hpp"
 
-Toolbar::Toolbar(std::vector<std::u16string> names,
+MenuBar::MenuBar(std::vector<std::u16string> names,
                  std::vector<std::function<void()>> funcs,
-                 Forms::Color color,
+                 Widgets::Color buttonColor,
                  const GraphicLib::PickableTexture::Ptr& canvas)
     : _names(std::move(names)),
       _funcs(std::move(funcs)),
-      _color(color),
+      _buttonColor(buttonColor),
       _gui(canvas) {}
 
-void Toolbar::init(glm::vec2 transform, glm::vec2 scale, bool horizontal) {
+void MenuBar::init(glm::vec2 transform, glm::vec2 scale, bool horizontal) {
     using namespace GraphicLib;
     Primitives::AbstractPrimitive::Ptr rectangle = std::make_shared<Primitives::Rectangle>(
         Primitives::Primitive::Settings{.with_normals = false,
@@ -26,14 +26,13 @@ void Toolbar::init(glm::vec2 transform, glm::vec2 scale, bool horizontal) {
     float yOffset = transform.y;
 
     for (int i{}; i < _names.size(); ++i) {
-        auto button = std::make_shared<Forms::Button>(rectangle);
+        auto button = std::make_shared<Widgets::Button>(rectangle);
 
-        button->init({scale}, {xOffset, yOffset},
-                     {.content = _names.at(i)}, _color);
+        button->init({scale}, {xOffset, yOffset}, {.content = _names.at(i)}, _buttonColor);
 
         button->setPressCallback(_funcs[i]);
 
-        _gui.addForm(button);
+        _gui.addWidget(button);
 
         if (horizontal) {
             xOffset += (scale.x + 0.01f);
@@ -43,10 +42,10 @@ void Toolbar::init(glm::vec2 transform, glm::vec2 scale, bool horizontal) {
     }
 }
 
-const Controllers::GuiController::Ptr& Toolbar::getController() const {
+const Controllers::GuiController::Ptr& MenuBar::getController() const {
     return _gui.getController();
 }
 
-void Toolbar::draw() {
+void MenuBar::draw() {
     _gui.draw();
 }
