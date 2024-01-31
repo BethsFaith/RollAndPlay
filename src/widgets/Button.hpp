@@ -5,12 +5,6 @@
 #ifndef ROLLANDPLAY_BUTTON_HPP
 #define ROLLANDPLAY_BUTTON_HPP
 
-#include <GraphicLib/GlagGlfw.hpp>
-#include <GraphicLib/Object.hpp>
-#include <GraphicLib/Techniques/ColorTechnique.hpp>
-#include <GraphicLib/Techniques/PickTechnique.hpp>
-#include <GraphicLib/Techniques/TextTechnique.hpp>
-#include <GraphicLib/Techniques/TransformTechnique.hpp>
 #include <functional>
 #include <iostream>
 #include <utility>
@@ -18,6 +12,7 @@
 #include "Color.hpp"
 #include "TextData.hpp"
 #include "Widget.hpp"
+#include "graphic/PickableForm.hpp"
 
 namespace Widgets {
     class Button : public Widget {
@@ -27,25 +22,37 @@ namespace Widgets {
         explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
         ~Button() override = default;
 
-        virtual void init(glm::vec2 scale, glm::vec2 position, const TextData& text, Color color);
+        void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+                   GraphicLib::Shaders::ShaderProgram::Ptr textShader,
+                   GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 
-        virtual void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader);
-        virtual void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader);
-        virtual void renderPick(GraphicLib::Shaders::ShaderProgram::Ptr shader);
-        virtual void renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader);
+        bool checkSelecting(unsigned int x, unsigned int y) override;
+
+        void setTransform(glm::vec2 position, glm::vec2 scale) override;
+        void setTransform(glm::vec2 position) override;
+
+        glm::vec2 getPosition() override;
+        glm::vec2 getScale() override;
 
         virtual void press();
         virtual void release();
 
+        [[nodiscard]] bool isUnderCursor() const;
+        [[nodiscard]] bool checkId(int id_) const;
+
         void setPressCallback(const std::function<void()>& function);
         void setReleaseCallback(const std::function<void()>& function);
 
-        [[nodiscard]] bool isUnderCursor() const;
-
-        bool checkSelecting(unsigned int x, unsigned int y) override;
         void setUnderCursor(bool isUnderCursor);
 
-        void setTraceColor(Color traceColor);
+        virtual void setTextLabel(const TextData& text);
+        virtual void setTextLabelPosition(glm::vec2 position, glm::vec2 scale);
+        virtual void setColor(Color color);
+        virtual void setTraceColor(Color traceColor);
+
+        std::u16string getTextLabelContent();
+        glm::vec2 getTextLabelPosition();
+        void setScale(glm::vec2 scale) override;
 
     protected:
         explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, WidgetType type);
@@ -54,12 +61,11 @@ namespace Widgets {
         static int IdCounter;
         bool _isUnderCursor = false;
 
-        Color _traceColor = Color::WHITE;
-
         std::function<void()> _pressCallback{[]() {}};
         std::function<void()> _releaseCallback{[]() {}};
 
-        GraphicLib::Object _object{};
+        Graphic::PickableForm _form;
+        Graphic::Form _tracing;
     };
 }    //namespace Forms
 

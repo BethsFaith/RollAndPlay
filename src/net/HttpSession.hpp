@@ -5,8 +5,8 @@
 #ifndef ROLLANDPLAY_HTTPSESSION_HPP
 #define ROLLANDPLAY_HTTPSESSION_HPP
 
-#include "../data/User.hpp"
 #include "ApiClient.hpp"
+#include "../data/User.hpp"
 
 namespace Net {
     class HttpSession {

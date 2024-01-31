@@ -39,7 +39,7 @@ namespace Controllers {
         _subControllers.clear();
     }
 
-    void CommonController::addSubController(GLController::Ptr controller) {
+    void CommonController::addSubController(const GLController::Ptr& controller) {
         _subControllers.push_back(controller);
     }
 }    //namespace Controllers

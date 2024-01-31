@@ -13,83 +13,62 @@ namespace Widgets {
                                 .with_tangent = false,
                                 .with_bitangent = false});
         rectangle->bindData(GL_STATIC_DRAW);
-        _object.setPrimitive(rectangle);
+
+        _form = std::make_unique<Graphic::Form>(rectangle);
     }
 
-    void TextBox::init(glm::vec3 scale, glm::vec2 position, const TextData&text, Color color) {
-        auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
-        colorTechnique->setColor(getRGB(color));
-
-        _object.addTechnique(GraphicLib::Techniques::COLOR, colorTechnique);
-
-        auto transformTechnique = std::make_shared<GraphicLib::Techniques::TransformTechnique>();
-        transformTechnique->enableScale(scale);
-        transformTechnique->enableTransform({position, -0.1f});
-
-        _object.addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
-
-        auto textTechnique = std::make_shared<GraphicLib::Techniques::TextTechnique>();
-        textTechnique->setText(text.content);
-        textTechnique->setWidth(position.x - scale.x / 2 + 0.01f);
-        textTechnique->setHeight(position.y);
-        textTechnique->setColor(getRGB(text.color));
-//        textTechnique->setScale(scale.x * 1.5);
-
-        _object.addTechnique(GraphicLib::Techniques::TEXT, textTechnique);
+    void TextBox::setTransform(glm::vec2 position, glm::vec2 scale) {
+        _form->setTransform(position, scale);
     }
 
-    void TextBox::renderText(const GraphicLib::Shaders::ShaderProgram::Ptr& shader) {
-        _object.disableTechnique(GraphicLib::Techniques::COLOR);
-        _object.disableTechnique(GraphicLib::Techniques::TRANSFORM);
-        _object.enableTechnique(GraphicLib::Techniques::TEXT);
-
-        _object.render(shader);
+    void TextBox::setTransform(glm::vec2 position) {
+        _form->setTransform(position);
     }
 
-    void TextBox::renderForm(const GraphicLib::Shaders::ShaderProgram::Ptr& shader) {
-        _object.enableTechnique(GraphicLib::Techniques::COLOR);
-        _object.enableTechnique(GraphicLib::Techniques::TRANSFORM);
-        _object.disableTechnique(GraphicLib::Techniques::TEXT);
+    void TextBox::setScale(glm::vec2 scale) {
+        _form->setScale(scale);
+    }
 
-        _object.render(shader);
+    void TextBox::setColor(Color color) {
+        _form->setColor(getRGB(color));
+    }
+
+    void TextBox::setTextForm(const TextData& text) {
+        _form->setText(text.content, getRGB(text.color));
+    }
+
+    void TextBox::setTextColor(Color color) {
+        _form->setTextColor(getRGB(color));
+    }
+
+    void TextBox::setText(const std::u16string& content) {
+        _form->setText(content);
+    }
+
+    void TextBox::setTextScale(float scale) {
+        _form->setTextScale(scale);
+    }
+
+    void TextBox::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+                       GraphicLib::Shaders::ShaderProgram::Ptr textShader,
+                       GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
+        _form->renderForm(formShader);
+        _form->renderText(textShader);
     }
 
     bool TextBox::checkSelecting(unsigned int x, unsigned int y) {
         return false;
     }
 
-    void TextBox::setTextForm(const TextData& text) {
-        auto technique = _object.getTechnique(GraphicLib::Techniques::TEXT);
-        auto textTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(technique);
-
-        textTechnique->setText(text.content);
-        textTechnique->setColor(getRGB(text.color));
-    }
-
-    void TextBox::setTextColor(Color color) {
-        auto technique = _object.getTechnique(GraphicLib::Techniques::TEXT);
-        auto textTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(technique);
-
-        textTechnique->setColor(getRGB(color));
-    }
-
-    void TextBox::setText(const std::u16string& content) {
-        auto technique = _object.getTechnique(GraphicLib::Techniques::TEXT);
-        auto textTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(technique);
-
-        textTechnique->setText(content);
-    }
-
-
-    void TextBox::setTextScale(float scale) {
-        auto technique = _object.getTechnique(GraphicLib::Techniques::TEXT);
-        auto textTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TextTechnique>(technique);
-
-        textTechnique->setScale(scale);
-    }
-
-
     void TextBox::clear() {
         setTextForm({.content = u""});
+    }
+
+    glm::vec2 TextBox::getScale() {
+        return _form->getScale();
+    }
+
+    glm::vec2 TextBox::getPosition() {
+        return _form->getPosition();
     }
 }

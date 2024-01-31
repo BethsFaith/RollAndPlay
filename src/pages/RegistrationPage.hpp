@@ -7,10 +7,10 @@
 
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
+#include "BasePage.hpp"
 #include "../data/User.hpp"
 #include "../widgets/TextBox.hpp"
 #include "../net/ApiClient.hpp"
-#include "BasePage.hpp"
 
 namespace Pages {
     class RegistrationPage : public BasePage {
@@ -43,9 +43,9 @@ namespace Pages {
 
         Widgets::Button::Ptr _saveButton;
         Widgets::Button::Ptr _createButton;
-        Widgets::TextForm::Ptr _loginInputField;
-        Widgets::TextForm::Ptr _passwordInputField;
-        Widgets::TextForm::Ptr _repeatedPasswordInputField;
+        Widgets::TextInputField::Ptr _loginInputField;
+        Widgets::TextInputField::Ptr _passwordInputField;
+        Widgets::TextInputField::Ptr _repeatedPasswordInputField;
         Widgets::TextBox::Ptr _creatingMessageBox;
         Widgets::TextBox::Ptr _viewMessageBox;
     };

@@ -8,11 +8,7 @@ namespace Widgets {
     ImageButton::ImageButton(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
         : Button(graphicPrimitive, WidgetType::IMAGE_BUTTON) {}
 
-    void ImageButton::init(glm::vec2 scale,
-                           glm::vec2 position,
-                           const TextData& text,
-                           const std::string& texturePath,
-                           int textureIndex) {
+    void ImageButton::setImage(const std::string& texturePath, int textureIndex) {
         _texture = std::make_shared<GraphicLib::Textures::Texture>("", texturePath);
         GraphicLib::Textures::load2d(*_texture,
                                      {{.name = GL_TEXTURE_MIN_FILTER, .value = GL_NEAREST},
@@ -20,42 +16,20 @@ namespace Widgets {
                                       {.name = GL_TEXTURE_WRAP_S, .value = GL_CLAMP_TO_EDGE},
                                       {.name = GL_TEXTURE_WRAP_T, .value = GL_CLAMP_TO_EDGE},
                                       {.name = GL_TEXTURE_WRAP_R, .value = GL_CLAMP_TO_EDGE}});
-
-        auto textureTechnique = std::make_shared<GraphicLib::Techniques::TextureTechnique>();
-        textureTechnique->setTexture(_texture);
-        textureTechnique->setTextureIndex(textureIndex);
-
-        _object.addTechnique(GraphicLib::Techniques::COLOR, textureTechnique);
-
-        auto transformTechnique = std::make_shared<GraphicLib::Techniques::TransformTechnique>();
-        transformTechnique->enableScale({scale, 0.0f});
-        transformTechnique->enableTransform({position, -0.1f});
-
-        _object.addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
-
-        auto picking = std::make_shared<GraphicLib::Techniques::PickTechnique>();
-        picking->setObjectId(id);
-
-        _object.addTechnique(GraphicLib::Techniques::PICK, picking);
-
-        auto textTechnique = std::make_shared<GraphicLib::Techniques::TextTechnique>();
-        textTechnique->setText(text.content);
-        textTechnique->setHeight(position.y + scale.y / 1.45);
-        textTechnique->setWidth(position.x - scale.x / 2 + 0.01f);
-        textTechnique->setColor(getRGB(text.color));
-
-        _object.addTechnique(GraphicLib::Techniques::TEXT, textTechnique);
-    }
-
-    void ImageButton::setImage(const std::string& texturePath) {
         _texture->setPath(texturePath);
-        GraphicLib::Textures::load2d(*_texture,
-                                     {{.name = GL_TEXTURE_MIN_FILTER, .value = GL_NEAREST},
-                                      {.name = GL_TEXTURE_MAG_FILTER, .value = GL_NEAREST},
-                                      {.name = GL_TEXTURE_WRAP_S, .value = GL_CLAMP_TO_EDGE},
-                                      {.name = GL_TEXTURE_WRAP_T, .value = GL_CLAMP_TO_EDGE},
-                                      {.name = GL_TEXTURE_WRAP_R, .value = GL_CLAMP_TO_EDGE}});
+
+        _form.setTexture(_texture, textureIndex);
     }
 
-    void ImageButton::renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) {}
+    void ImageButton::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+                           GraphicLib::Shaders::ShaderProgram::Ptr textShader,
+                           GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
+        Button::draw(formShader, textShader, pickShader);
+    }
+
+    void ImageButton::setTransform(glm::vec2 position, glm::vec2 scale) {
+        Button::setTransform(position, scale);
+
+        _form.setTextPosition({position.y + scale.y / 1.45, position.x - scale.x / 2 + 0.01f});
+    }
 }    //namespace Forms

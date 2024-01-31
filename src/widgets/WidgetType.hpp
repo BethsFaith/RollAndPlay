@@ -8,9 +8,11 @@
 namespace Widgets {
     enum WidgetType {
         BUTTON,
-        TEXT_FORM,
+        LAYOUT,
+        TEXT_INPUT_FIELD,
         IMAGE_BUTTON,
-        TEXT_BOX
+        TEXT_BOX,
+        MENU_BAR,
     };
 }    //namespace Forms
 

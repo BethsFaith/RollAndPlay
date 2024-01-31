@@ -8,8 +8,8 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
 #include "BasePage.hpp"
-#include "../widgets/TextForm.hpp"
 #include "../widgets/ImageButton.hpp"
+#include "../widgets/TextInputField.hpp"
 
 namespace Pages {
     class SkillPage : public BasePage {
@@ -34,9 +34,9 @@ namespace Pages {
 
         Widgets::Button::Ptr _createButton;
         Widgets::Button::Ptr _saveButton;
-        Widgets::TextForm::Ptr _nameTextForm;
+        Widgets::TextInputField::Ptr _nameTextForm;
         Widgets::ImageButton::Ptr _iconButton;
-        Widgets::TextForm::Ptr _iconPathTextForm;
+        Widgets::TextInputField::Ptr _iconPathTextForm;
     };
 }    //namespace Pages
 

@@ -8,7 +8,8 @@
 #include "../widgets/WidgetType.hpp"
 #include "ButtonController.hpp"
 #include "ImageButtonController.hpp"
-#include "TextFormController.hpp"
+#include "MenuBarController.hpp"
+#include "TextInputFieldController.hpp"
 
 namespace Controllers {
     class WidgetControllerFactory {

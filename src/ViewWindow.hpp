@@ -75,10 +75,6 @@ private:
 
     PageTag _currentPageTag = PageTag::NULL_PAGE;
     ViewTag _currentViewTag = ViewTag::NULL_VIEW;
-    bool _switched = true;
-
-    MenuBar::Ptr _horizonToolbar;
-    MenuBar::Ptr _verticalToolbar;
 };
 
 #endif    //ROLLANDPLAY_VIEWWINDOW_HPP

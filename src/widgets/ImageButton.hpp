@@ -5,7 +5,6 @@
 #ifndef ROLLANDPLAY_IMAGEBUTTON_HPP
 #define ROLLANDPLAY_IMAGEBUTTON_HPP
 
-#include <GraphicLib/Techniques/TextureTechnique.hpp>
 #include <GraphicLib/Textures/Loader.hpp>
 #include <GraphicLib/Textures/Texture.hpp>
 
@@ -18,15 +17,12 @@ namespace Widgets {
 
         explicit ImageButton(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
 
-        void init(glm::vec2 scale,
-                  glm::vec2 position,
-                  const TextData& text,
-                  const std::string& texturePath,
-                  int textureIndex);
+        void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr textShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 
-        void renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
-
-        void setImage(const std::string& texturePath);
+        void setImage(const std::string& texturePath, int textureIndex);
+        void setTransform(glm::vec2 position, glm::vec2 scale) override;
 
     private:
         GraphicLib::Textures::Texture::Ptr _texture;

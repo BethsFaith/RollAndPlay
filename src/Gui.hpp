@@ -8,10 +8,7 @@
 #include <GraphicLib/GlagGlfw.hpp>
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 
-#include "config/Config.hpp"
 #include "controllers/GuiController.hpp"
-#include "widgets/Button.hpp"
-#include "widgets/TextBox.hpp"
 
 class Gui {
 public:

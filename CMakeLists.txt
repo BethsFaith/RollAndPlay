@@ -35,10 +35,13 @@ add_executable(RollAndPlay
         src/widgets/Button.cpp
         src/Gui.cpp
         src/widgets/Widget.cpp
-        src/widgets/TextForm.cpp
+        src/widgets/TextInputField.cpp
         src/widgets/ImageButton.cpp
         src/widgets/Carriage.cpp
         src/widgets/TextBox.cpp
+        src/widgets/MenuBar.cpp
+        src/widgets/graphic/Form.cpp
+        src/widgets/graphic/PickableForm.cpp
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
         src/pages/SkillPage.cpp
@@ -46,15 +49,15 @@ add_executable(RollAndPlay
         src/pages/LoginPage.cpp
         src/pages/RegistrationPage.cpp
         src/controllers/GuiController.cpp
-        src/controllers/TextFormContoller.cpp
+        src/controllers/TextInputContoller.cpp
         src/controllers/CommonController.cpp
         src/controllers/ButtonController.cpp
         src/controllers/WidgetControllerFactory.cpp
         src/controllers/ImageButtonController.cpp
+        src/controllers/MenuBarController.cpp
         src/data/storage/StreamWriter.cpp
         src/data/storage/StreamReader.cpp
         src/data/DataStorage.cpp
-        src/MenuBar.cpp
         src/config/File.cpp
         src/config/Config.cpp
         src/net/ApiClient.cpp

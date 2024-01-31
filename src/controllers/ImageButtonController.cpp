@@ -11,7 +11,7 @@ namespace Controllers {
                 && glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) {
                 auto string = glfwGetClipboardString(window);
                 if (string != NULL) {
-                    _target->setImage(string);
+                    _target->setImage(string, 0);
                 }
             }
         }

@@ -14,88 +14,89 @@ namespace Widgets {
     Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
         : Button(graphicPrimitive, WidgetType::BUTTON) {}
 
-    Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, WidgetType type) : Widget(type) {
-        id = ++IdCounter;
+    Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, WidgetType type) : Widget(type),
+          _form(graphicPrimitive, (float)++IdCounter),
+          _tracing(graphicPrimitive) {
+        id = IdCounter;
 
-        _object.setPrimitive(graphicPrimitive);
+        _tracing.setColor(getRGB(Color::WHITE));
     }
 
-    void Button::init(glm::vec2 scale, glm::vec2 position, const TextData& text, Color color) {
-        auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
-        colorTechnique->setColor(getRGB(color));
-
-        _object.addTechnique(GraphicLib::Techniques::COLOR, colorTechnique);
-
-        auto transformTechnique = std::make_shared<GraphicLib::Techniques::TransformTechnique>();
-        transformTechnique->enableScale({scale, 0.0f});
-        transformTechnique->enableTransform({position, -0.1f});
-
-        _object.addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
-
-        auto picking = std::make_shared<GraphicLib::Techniques::PickTechnique>();
-        picking->setObjectId(id);
-
-        _object.addTechnique(GraphicLib::Techniques::PICK, picking);
-
-        auto textTechnique = std::make_shared<GraphicLib::Techniques::TextTechnique>();
-        textTechnique->setText(text.content);
-        textTechnique->setWidth(position.x - scale.x / 2.0f + 0.01f);
-        textTechnique->setHeight(position.y);
-        textTechnique->setColor(getRGB(text.color));
-
-        _object.addTechnique(GraphicLib::Techniques::TEXT, textTechnique);
+    void Button::setTransform(glm::vec2 position) {
+        _form.setTransform(position);
+        _tracing.setTransform(position);
+        _form.setTextPosition({position.x - 1.0 / 2.0f + 0.01f, position.y});
     }
 
-    void Button::renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
-        _object.disableTechnique(GraphicLib::Techniques::PICK);
-        _object.enableTechnique(GraphicLib::Techniques::COLOR);
-        _object.enableTechnique(GraphicLib::Techniques::TRANSFORM);
-        _object.disableTechnique(GraphicLib::Techniques::TEXT);
-
-        _object.render(std::move(shader));
+    void Button::setTransform(glm::vec2 position, glm::vec2 scale) {
+        _form.setTransform(position, scale);
+        _tracing.setTransform(position, {scale.x * 1.05f, scale.y * 1.1f});
+        _form.setTextPosition({position.x - scale.x / 2.0f + 0.01f, position.y});
     }
 
-    void Button::renderPick(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
-        canvas->enableWriting();
+    void Button::setScale(glm::vec2 scale) {
+        _form.setScale(scale);
+        _tracing.setScale({scale.x * 1.05f, scale.y * 1.1f});
 
-        _object.disableTechnique(GraphicLib::Techniques::COLOR);
-        _object.enableTechnique(GraphicLib::Techniques::PICK);
-        _object.enableTechnique(GraphicLib::Techniques::TRANSFORM);
-        _object.disableTechnique(GraphicLib::Techniques::TEXT);
-
-        _object.render(std::move(shader));
-
-        canvas->disableWriting();
+        auto position = _form.getPosition();
+        _form.setTextPosition({position.x - scale.x / 2.0f + 0.01f, position.y});
     }
 
-    void Button::renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
-        _object.disableTechnique(GraphicLib::Techniques::PICK);
-        _object.disableTechnique(GraphicLib::Techniques::COLOR);
-        _object.disableTechnique(GraphicLib::Techniques::TRANSFORM);
-        _object.enableTechnique(GraphicLib::Techniques::TEXT);
-
-        _object.render(std::move(shader));
+    void Button::setTextLabelPosition(glm::vec2 position, glm::vec2 scale) {
+        _form.setTextPosition({position.x, position.y});
     }
 
-    void Button::renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) {
-        // нарисовать обводку;
-        auto techn = _object.getTechnique(GraphicLib::Techniques::COLOR);
-        auto trace = std::dynamic_pointer_cast<GraphicLib::Techniques::ColorTechnique>(techn);
-        auto baseColor = trace->getRgb();
-        trace->setColor(getRGB(_traceColor));
+    void Button::setTextLabel(const TextData& text) {
+        _form.setText(text.content, getRGB(text.color));
+    }
 
-        techn = _object.getTechnique(GraphicLib::Techniques::TRANSFORM);
-        auto trans = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(techn);
-        auto scale = trans->getScaleValue();
-        auto offset = trans->getTransformValue();
-        trans->enableScale({scale.x * 1.05f, scale.y * 1.1f, scale.z});
-        trans->enableTransform({offset.x, offset.y, offset.z});
+    void Button::setColor(Color color) {
+        _form.setColor(getRGB(color));
+    }
 
-        renderForm(std::move(shader));
+    void Button::setTraceColor(Color traceColor) {
+        _tracing.setColor(getRGB(traceColor));
+    }
 
-        trace->setColor(baseColor);
-        trans->enableScale(scale);
-        trans->enableTransform(offset);
+    void Button::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+                      GraphicLib::Shaders::ShaderProgram::Ptr textShader,
+                      GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
+        if (isUnderCursor()) {
+            glStencilMask(0xFF);
+            glStencilFunc(GL_ALWAYS, 1, 0xFF);
+            glEnable(GL_DEPTH_TEST);
+            glDisable(GL_STENCIL_TEST);
+
+            glEnable(GL_STENCIL_TEST);
+            glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+            glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
+            glStencilFunc(GL_ALWAYS, 1, 0xFF);    // все фрагменты должны пройти тест трафарета
+            glStencilMask(0xFF);    // включаем запись в буфер трафарета
+
+            _form.renderForm(formShader);
+
+            glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+            glStencilMask(0x00);
+            glDisable(GL_STENCIL_TEST);
+
+            _form.renderText(textShader);
+            _form.renderPick(pickShader, canvas);
+
+            glDisable(GL_DEPTH_TEST);
+            glEnable(GL_STENCIL_TEST);
+
+            _tracing.renderForm(formShader);
+
+            glStencilMask(0xFF);
+            glStencilFunc(GL_ALWAYS, 1, 0xFF);
+            glEnable(GL_DEPTH_TEST);
+            glDisable(GL_STENCIL_TEST);
+        } else {
+            _form.renderForm(formShader);
+            _form.renderText(textShader);
+            _form.renderPick(pickShader, canvas);
+        }
     }
 
     void Button::press() {
@@ -120,6 +121,10 @@ namespace Widgets {
         return id == (int)info.ObjectID;
     }
 
+    bool Button::checkId(int id_) const {
+        return id == id_;
+    }
+
     void Button::setUnderCursor(bool isUnderCursor) {
         _isUnderCursor = isUnderCursor;
     }
@@ -132,7 +137,19 @@ namespace Widgets {
         _releaseCallback = function;
     }
 
-    void Button::setTraceColor(Color traceColor) {
-        _traceColor = traceColor;
+    glm::vec2 Button::getPosition() {
+        return _form.getPosition();
+    }
+
+    glm::vec2 Button::getScale() {
+        return _form.getScale();
+    }
+
+    std::u16string Button::getTextLabelContent() {
+        return _form.getText();
+    }
+
+    glm::vec2 Button::getTextLabelPosition() {
+        return _form.getTextPosition();
     }
 }    //namespace Forms

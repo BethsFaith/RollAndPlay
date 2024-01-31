@@ -2,8 +2,8 @@
 // Created by VeraTag on 25.10.2023.
 //
 
-#ifndef ROLLANDPLAY_TEXTFORM_HPP
-#define ROLLANDPLAY_TEXTFORM_HPP
+#ifndef ROLLANDPLAY_TEXTINPUTFIELD_HPP
+#define ROLLANDPLAY_TEXTINPUTFIELD_HPP
 
 #include <iostream>
 #include <utility>
@@ -19,19 +19,19 @@
 #include "Carriage.hpp"
 
 namespace Widgets {
-    class TextForm : public Button {
+    class TextInputField : public Button {
     public:
-        using Ptr = std::shared_ptr<TextForm>;
+        using Ptr = std::shared_ptr<TextInputField>;
 
-        explicit TextForm(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, TextData inputParams);
+        explicit TextInputField(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, TextData inputParams);
 
-        ~TextForm() override = default;
+        ~TextInputField() override = default;
 
-        void init(glm::vec2 scale, glm::vec2 position, const TextData& textForm, Color color) override;
+        void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr textShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 
-        void renderText(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
-
-        void renderTracing(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
+        void setTransform(glm::vec2 position, glm::vec2 scale) override;
 
         void press() override;
         void release() override;
@@ -47,27 +47,25 @@ namespace Widgets {
 
         void clear();
 
-        [[nodiscard]] const std::u16string& getBuf() const;
-
-        [[nodiscard]] std::string getU8Buf() const;
-
-        void renderForm(GraphicLib::Shaders::ShaderProgram::Ptr shader) override;
-
         void moveCarriage(int offset);
         void moveCarriageToScreenPosition(float xPos);
 
-    private:
+        [[nodiscard]] std::string getU8Buf() const;
+        [[nodiscard]] const std::u16string& getBuf() const;
+
+    protected:
+        void updateTextField();
+
         void putToBuffer(char16_t character, unsigned int position);
         void putToBuffer(const std::string& string, unsigned int position);
         void putToBuffer(const std::u16string& string, unsigned int position);
 
-        glm::vec2 _position{};
-        glm::vec2 _scale{};
+        Graphic::Form _textField;
+    private:
         TextData _buf;
         bool _needHide = false;
-        float _inputTextSize = 1.4f;
 
         Carriage _carriage{};
     };
 }    //namespace Forms
-#endif    //ROLLANDPLAY_TEXTFORM_HPP
+#endif    //ROLLANDPLAY_TEXTINPUTFIELD_HPP

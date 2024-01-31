@@ -6,8 +6,8 @@
 namespace Widgets {
     Widget::Widget(WidgetType type) : _type(type) {}
 
-    void Widget::setCanvas(const GraphicLib::PickableTexture::Ptr& canvas) {
-        Widget::canvas = canvas;
+    void Widget::setCanvas(const GraphicLib::PickableTexture::Ptr& pickableTexture) {
+        Widget::canvas = pickableTexture;
     }
 
     WidgetType Widget::getType() const {
