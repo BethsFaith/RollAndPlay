@@ -8,7 +8,6 @@
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 #include <utility>
 
-#include "MenuBar.hpp"
 #include "ViewDrawer.hpp"
 #include "config/Config.hpp"
 #include "controllers/CommonController.hpp"

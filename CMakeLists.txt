@@ -20,6 +20,10 @@ conan_cmake_run(CONANFILE conanfile.txt
 
 add_executable(RollAndPlay
         src/main.cpp
+        src/Gui.cpp
+        src/MainWindow.cpp
+        src/ViewWindow.cpp
+        src/ViewDrawer.cpp
         src/data/Skill.cpp
         src/data/Action.cpp
         src/data/CharacterClass.cpp
@@ -28,20 +32,19 @@ add_executable(RollAndPlay
         src/data/System.cpp
         src/data/SkillCategory.cpp
         src/data/User.cpp
-        src/MainWindow.cpp
-        src/ViewWindow.cpp
-        src/ViewDrawer.cpp
         src/widgets/Color.cpp
         src/widgets/Button.cpp
-        src/Gui.cpp
+        src/widgets/graphic/Form.cpp
+        src/widgets/graphic/PickableForm.cpp
         src/widgets/Widget.cpp
         src/widgets/TextInputField.cpp
         src/widgets/ImageButton.cpp
         src/widgets/Carriage.cpp
         src/widgets/TextBox.cpp
         src/widgets/MenuBar.cpp
-        src/widgets/graphic/Form.cpp
-        src/widgets/graphic/PickableForm.cpp
+        src/widgets/HorizontalLayout.cpp
+        src/widgets/VerticalLayout.cpp
+        src/widgets/Layout.cpp
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
         src/pages/SkillPage.cpp
