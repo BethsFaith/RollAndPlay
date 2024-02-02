@@ -15,14 +15,17 @@ namespace Widgets {
     public:
         using Ptr = std::shared_ptr<ImageButton>;
 
-        explicit ImageButton(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
+        explicit ImageButton(GraphicLib::Primitives::AbstractPrimitive::Ptr graphicPrimitive);
 
         void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 
+        void setColor(Styles::Color color) override;
         void setImage(const std::string& texturePath, int textureIndex);
-        void setTransform(glm::vec2 position, glm::vec2 scale) override;
+
+    protected:
+        void updateTextPosition(glm::vec2 position, glm::vec2 scale) override;
 
     private:
         GraphicLib::Textures::Texture::Ptr _texture;

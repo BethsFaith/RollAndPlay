@@ -12,7 +12,7 @@
 #include <GraphicLib/TextRender.hpp>
 
 #include "../config/Config.hpp"
-#include "Color.hpp"
+#include "styles/Color.hpp"
 
 namespace Widgets {
     class Carriage {
@@ -24,7 +24,7 @@ namespace Widgets {
 
         Carriage();
 
-        void init(Color color, const glm::vec2& scale, const glm::vec2& position, float textSize);
+        void init(Styles::Color color, const glm::vec2& scale, const glm::vec2& position, float textSize);
 
         void render(const GraphicLib::Shaders::ShaderProgram::Ptr& shader);
 

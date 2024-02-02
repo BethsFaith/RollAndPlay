@@ -10,13 +10,11 @@
 namespace Widgets {
     class HorizontalLayout : public Layout {
     public:
-        explicit HorizontalLayout(glm::vec2 pos);
+        explicit HorizontalLayout();
         ~HorizontalLayout() override = default;
 
         void addWidget(const Ptr& widget) override;
         void removeWidget(const Ptr& widget) override;
-    private:
-        glm::vec2 _position;
     };
 }    //namespace Widgets
 

@@ -18,7 +18,7 @@ namespace Widgets {
         _object->setPrimitive(rectangle);
     }
 
-    void Carriage::init(Color color, const glm::vec2& scale, const glm::vec2& position, float textSize) {
+    void Carriage::init(Styles::Color color, const glm::vec2& scale, const glm::vec2& position, float textSize) {
         auto colorTechnique = std::make_shared<GraphicLib::Techniques::ColorTechnique>();
         colorTechnique->setColor(getRGB(color));
         _object->addTechnique(GraphicLib::Techniques::COLOR, colorTechnique);

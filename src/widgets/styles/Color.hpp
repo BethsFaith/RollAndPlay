@@ -9,20 +9,20 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-namespace Widgets {
+namespace Widgets::Styles {
     enum Color {
+        WHITE,
+        GRAY,
+        BLACK,
         RED,
         GREEN,
         BLUE,
         YELLOW,
-        WHITE,
-        DARK_GRAY,
-        GRAY,
-        LIGHT_GRAY,
         ORANGE,
         VIOLET,
-        BLACK,
-        LIGHT_BLUE
+        LIGHT_GRAY,
+        LIGHT_BLUE,
+        DARK_GRAY,
     };
 
     [[maybe_unused]] glm::vec3 getRGB(Color color);

@@ -60,24 +60,78 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
             (textureShaderPath.vertex,
              textureShaderPath.fragment));
 
-    _view = std::make_shared<ViewWindow>(0, 0,  Widgets::Color::DARK_GRAY, canvas, guiShader);
+    _view = std::make_shared<View>(0, 0,  Widgets::Styles::Color::DARK_GRAY, canvas, guiShader);
 
     auto host = config->getNetValue("host");
     auto port = config->getNetValue("port");
     auto domain = config->getNetValue("domain");
     Pages::BasePage::setCommonData({.session = std::make_shared<Net::HttpSession>(host, port, domain)});
 
-    auto systemPage = std::make_shared<Pages::SystemPage>(canvas);
-    auto skillPage = std::make_shared<Pages::SkillPage>(canvas);
-    auto racePage = std::make_shared<Pages::RacePage>(canvas);
-    auto loginPage = std::make_shared<Pages::LoginPage>(canvas);
-    auto registrationPage = std::make_shared<Pages::RegistrationPage>(canvas);
+    GraphicLib::Primitives::AbstractPrimitive::Ptr rectangle = std::make_shared<GraphicLib::Primitives::Rectangle>(
+        GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
+                                                    .with_texture_coords = false,
+                                                    .with_tangent = false,
+                                                    .with_bitangent = false});
+    rectangle->bindData(GL_STATIC_DRAW);
 
-    _view->addPage(ViewWindow::PageTag::SYSTEM, systemPage);
-    _view->addPage(ViewWindow::PageTag::SKILL, skillPage);
-    _view->addPage(ViewWindow::PageTag::RACE, racePage);
-    _view->addPage(ViewWindow::PageTag::AUTHORIZATION, loginPage);
-    _view->addPage(ViewWindow::PageTag::REGISTRATION, registrationPage);
+    auto textureRectangle = std::make_shared<GraphicLib::Primitives::Rectangle>(
+        GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
+                                                    .with_texture_coords = true,
+                                                    .with_tangent = false,
+                                                    .with_bitangent = false});
+    textureRectangle->bindData(GL_STATIC_DRAW);
+
+    Widgets::Styles::ButtonStyle::Ptr buttonStyle = std::make_shared<Widgets::Styles::ButtonStyle>();
+    buttonStyle->color = Widgets::Styles::GRAY;
+    buttonStyle->traceColor = Widgets::Styles::WHITE;
+    buttonStyle->pressColor = Widgets::Styles::BLUE;
+    buttonStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
+    buttonStyle->scale = {0.1, 0.1f};
+    buttonStyle->figure = rectangle;
+
+    Widgets::Styles::TextInputFieldStyle::Ptr textInputFieldStyle = std::make_shared<Widgets::Styles::TextInputFieldStyle>();
+    textInputFieldStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
+    textInputFieldStyle->inputParams = {.color = Widgets::Styles::BLACK, .size = 1.4f};
+    textInputFieldStyle->color = Widgets::Styles::LIGHT_GRAY;
+    textInputFieldStyle->traceColor = Widgets::Styles::WHITE;
+    textInputFieldStyle->scale = {0.7f, 0.1f};
+    textInputFieldStyle->figure = rectangle;
+
+    Widgets::Styles::TextBoxStyle::Ptr textBoxStyle = std::make_shared<Widgets::Styles::TextBoxStyle>();
+    textBoxStyle->color = Widgets::Styles::DARK_GRAY;
+    textBoxStyle->scale = {0.7f, 0.1f};
+    textBoxStyle->textLabelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
+
+    Widgets::Styles::ImageButtonStyle::Ptr imageButtonStyle = std::make_shared<Widgets::Styles::ImageButtonStyle>();
+    imageButtonStyle->scale = {0.1f, 0.15f};
+    imageButtonStyle->defaultTexturePath = Config::Config::get()->getTexturePath("default");
+    imageButtonStyle->defaultTextureIndex = 0;
+    imageButtonStyle->traceColor = Widgets::Styles::WHITE;
+    imageButtonStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
+    imageButtonStyle->figure = textureRectangle;
+
+    Widgets::Styles::LayoutStyle::Ptr layoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
+    layoutStyle->widgetOffset = 0.1f;
+
+    Widgets::WidgetBuilder::Ptr widgetBuilder = std::make_shared<Widgets::WidgetBuilder>();
+    widgetBuilder->addWidgetStyle(Widgets::BUTTON, buttonStyle);
+    widgetBuilder->addWidgetStyle(Widgets::TEXT_INPUT_FIELD, textInputFieldStyle);
+    widgetBuilder->addWidgetStyle(Widgets::IMAGE_BUTTON, imageButtonStyle);
+    widgetBuilder->addWidgetStyle(Widgets::TEXT_BOX, textBoxStyle);
+    widgetBuilder->addWidgetStyle(Widgets::HORIZONTAL_LAYOUT, layoutStyle);
+    widgetBuilder->addWidgetStyle(Widgets::VERTICAL_LAYOUT, layoutStyle);
+
+    auto systemPage = std::make_shared<Pages::SystemPage>(canvas, widgetBuilder);
+    auto skillPage = std::make_shared<Pages::SkillPage>(canvas, widgetBuilder);
+    auto racePage = std::make_shared<Pages::RacePage>(canvas, widgetBuilder);
+    auto loginPage = std::make_shared<Pages::LoginPage>(canvas, widgetBuilder);
+    auto registrationPage = std::make_shared<Pages::RegistrationPage>(canvas, widgetBuilder);
+
+    _view->addPage(View::PageTag::SYSTEM, systemPage);
+    _view->addPage(View::PageTag::SKILL, skillPage);
+    _view->addPage(View::PageTag::RACE, racePage);
+    _view->addPage(View::PageTag::AUTHORIZATION, loginPage);
+    _view->addPage(View::PageTag::REGISTRATION, registrationPage);
 }
 
 MainWindow::~MainWindow() {

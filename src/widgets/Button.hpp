@@ -9,17 +9,17 @@
 #include <iostream>
 #include <utility>
 
-#include "Color.hpp"
-#include "TextData.hpp"
 #include "Widget.hpp"
 #include "graphic/PickableForm.hpp"
+#include "styles/Color.hpp"
+#include "styles/TextParams.hpp"
 
 namespace Widgets {
     class Button : public Widget {
     public:
         using Ptr = std::shared_ptr<Button>;
 
-        explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
+        explicit Button(GraphicLib::Primitives::AbstractPrimitive::Ptr graphicPrimitive);
         ~Button() override = default;
 
         void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
@@ -45,16 +45,21 @@ namespace Widgets {
 
         void setUnderCursor(bool isUnderCursor);
 
-        virtual void setTextLabel(const TextData& text);
-        virtual void setTextLabelPosition(glm::vec2 position, glm::vec2 scale);
-        virtual void setColor(Color color);
-        virtual void setTraceColor(Color traceColor);
+        virtual void setLabelParams(const Styles::TextParams& text);
+        virtual void setLabelText(const std::u16string& text);
+        virtual void setLabelPosition(glm::vec2 position);
+        virtual void setLabelColor(Styles::Color color);
+        virtual void setLabelTextSize(float size);
+
+        virtual void setColor(Styles::Color color);
+        virtual void setTraceColor(Styles::Color traceColor);
 
         std::u16string getTextLabelContent();
         glm::vec2 getTextLabelPosition();
         void setScale(glm::vec2 scale) override;
 
     protected:
+        virtual void updateTextPosition(glm::vec2 position, glm::vec2 scale);
         explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, WidgetType type);
 
         int id;

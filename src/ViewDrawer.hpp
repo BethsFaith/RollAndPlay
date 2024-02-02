@@ -15,7 +15,7 @@ class ViewDrawer {
 public:
     ViewDrawer(GraphicLib::PickableTexture::Ptr canvas, GraphicLib::Shaders::ShaderProgram::Ptr shader);
 
-    void init(int x, int y, Widgets::Color viewColor);
+    void init(int x, int y, Widgets::Styles::Color viewColor);
 
     void draw();
 

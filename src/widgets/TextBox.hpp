@@ -8,9 +8,9 @@
 #include <GraphicLib/Object.hpp>
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
-#include "TextData.hpp"
 #include "Widget.hpp"
 #include "graphic/Form.hpp"
+#include "styles/TextParams.hpp"
 
 namespace Widgets {
     class TextBox : public Widget {
@@ -34,11 +34,11 @@ namespace Widgets {
 
         void clear();
 
+        void setTextParams(const Styles::TextParams& text);
+        void setTextColor(Styles::Color color);
+        void setTextSize(float size);
         void setText(const std::u16string& content);
-        void setTextForm(const TextData& text);
-        void setTextColor(Color color);
-        void setTextScale(float scale);
-        void setColor(Color color);
+        void setColor(Styles::Color color);
 
     private:
         std::unique_ptr<Graphic::Form> _form;

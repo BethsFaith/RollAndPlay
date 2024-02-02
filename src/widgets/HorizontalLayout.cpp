@@ -5,14 +5,14 @@
 #include "HorizontalLayout.hpp"
 
 namespace Widgets {
-    HorizontalLayout::HorizontalLayout(glm::vec2 pos) : _position(pos) {}
+    HorizontalLayout::HorizontalLayout() : Layout(HORIZONTAL_LAYOUT) {}
 
     void HorizontalLayout::addWidget(const Widget::Ptr& widget) {
         Layout::addWidget(widget);
 
-        widget->setTransform(_position);
+        widget->setTransform(position);
 
-        _position.x += widget->getScale().x + 0.01f;
+        position.x += widget->getScale().x + widgetOffset;
     }
 
     void HorizontalLayout::removeWidget(const Widget::Ptr& widget) {

@@ -2,8 +2,8 @@
 // Created by VerOchka on 25.10.2023.
 //
 
-#ifndef ROLLANDPLAY_VIEWWINDOW_HPP
-#define ROLLANDPLAY_VIEWWINDOW_HPP
+#ifndef ROLLANDPLAY_VIEW_HPP
+#define ROLLANDPLAY_VIEW_HPP
 
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 #include <utility>
@@ -13,7 +13,7 @@
 #include "controllers/CommonController.hpp"
 #include "pages/APage.hpp"
 
-class ViewWindow {
+class View {
 public:
     enum PageTag {
         NULL_PAGE,
@@ -35,15 +35,15 @@ public:
         LOBBY = 3
     };
 
-    using Ptr = std::shared_ptr<ViewWindow>;
+    using Ptr = std::shared_ptr<View>;
 
-    ViewWindow(int x,
+    View(int x,
                int y,
-               Widgets::Color viewColor,
+               Widgets::Styles::Color viewColor,
                GraphicLib::PickableTexture::Ptr canvas,
                GraphicLib::Shaders::ShaderProgram::Ptr shader);
 
-    ~ViewWindow();
+    ~View();
 
     void display();
 
@@ -60,7 +60,7 @@ public:
     void addPage(PageTag tag, Pages::APage::Ptr page);
 
 private:
-    void initView(int x, int y, Widgets::Color viewColor);
+    void initView(int x, int y, Widgets::Styles::Color viewColor);
     void updateControllers();
     void updateGui();
 
@@ -76,4 +76,4 @@ private:
     ViewTag _currentViewTag = ViewTag::NULL_VIEW;
 };
 
-#endif    //ROLLANDPLAY_VIEWWINDOW_HPP
+#endif    //ROLLANDPLAY_VIEW_HPP

@@ -24,7 +24,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<LoginPage>;
 
-        explicit LoginPage(const GraphicLib::PickableTexture::Ptr& canvas);
+        explicit LoginPage(GraphicLib::PickableTexture::Ptr canvas,  Widgets::WidgetBuilder::Ptr builder);
         ~LoginPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;

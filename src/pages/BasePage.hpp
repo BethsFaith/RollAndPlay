@@ -8,14 +8,15 @@
 #include <utility>
 
 #include "Common.hpp"
-#include "APage.hpp"
 #include "../Gui.hpp"
 #include "../controllers/CommonController.hpp"
+#include "../widgets/WidgetBuilder.hpp"
+#include "APage.hpp"
 
 namespace Pages {
     class BasePage : public APage {
     public:
-        explicit BasePage(GraphicLib::PickableTexture::Ptr canvas);
+        explicit BasePage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
         ~BasePage() override = default;
 
         Controllers::GLController::Ptr getController() override;
@@ -27,8 +28,15 @@ namespace Pages {
         void init(const glm::vec2& screenOffset) override;
 
         static void setCommonData(const Common& common);
-
     protected:
+        Widgets::Widget::Ptr createStyledWidget(Widgets::WidgetType type);
+        Widgets::Button::Ptr createStyledButton();
+        Widgets::TextInputField::Ptr createStyledInputField();
+        Widgets::ImageButton::Ptr createStyledImageButton();
+        Widgets::TextBox::Ptr createStyledTextBox();
+        Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout();
+        Widgets::VerticalLayout::Ptr createStyledVerticalLayout();
+
         void addWidget(const Widgets::Widget::Ptr& widget);
 
         glm::vec2 ScreenOffset{};
@@ -38,6 +46,7 @@ namespace Pages {
     private:
         Controllers::CommonController::Ptr _controller;
         Gui _gui;
+        Widgets::WidgetBuilder::Ptr _builder;
     };
 }    //namespace Pages
 

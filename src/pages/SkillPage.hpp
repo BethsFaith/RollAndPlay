@@ -19,7 +19,7 @@ namespace Pages {
             VIEW
         };
 
-        explicit SkillPage(GraphicLib::PickableTexture::Ptr canvas);
+        explicit SkillPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
         ~SkillPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;
@@ -34,9 +34,9 @@ namespace Pages {
 
         Widgets::Button::Ptr _createButton;
         Widgets::Button::Ptr _saveButton;
-        Widgets::TextInputField::Ptr _nameTextForm;
+        Widgets::TextInputField::Ptr _nameInputField;
         Widgets::ImageButton::Ptr _iconButton;
-        Widgets::TextInputField::Ptr _iconPathTextForm;
+        Widgets::TextInputField::Ptr _iconPathInputField;
     };
 }    //namespace Pages
 

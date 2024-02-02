@@ -21,7 +21,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<RacePage>;
 
-        explicit RacePage(GraphicLib::PickableTexture::Ptr canvas);
+        explicit RacePage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
         ~RacePage() override = default;
 
         void init(const glm::vec2& screenOffset) override;

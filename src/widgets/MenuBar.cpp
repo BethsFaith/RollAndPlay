@@ -76,9 +76,9 @@ namespace Widgets {
 
         element->setTransform(_position, _scale);
         if (_horizontal) {
-            _position.x += _scale.x + 0.01f;
+            _position.x += _scale.x + _elemOffset;
         } else {
-            _position.y -= _scale.y + 0.01f;
+            _position.y -= _scale.y + _elemOffset;
         }
 
         _elements.push_back(element);
@@ -124,9 +124,9 @@ namespace Widgets {
 
     void MenuBar::clear() {
         if (_horizontal) {
-            _position.x -= (_scale.x + 0.01f) * (float)_elements.size();
+            _position.x -= (_scale.x + _elemOffset) * (float)_elements.size();
         } else {
-            _position.y += (_scale.y + 0.01f) * (float)_elements.size();
+            _position.y += (_scale.y + _elemOffset) * (float)_elements.size();
         }
 
         _elements.clear();

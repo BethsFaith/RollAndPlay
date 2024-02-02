@@ -20,7 +20,7 @@ namespace Widgets::Graphic {
             _object.disableTechnique(GraphicLib::Techniques::TRANSFORM);
         } else {
             transformTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(technique);
-            transformTechnique->setTransformValue({position, -0.1f});
+            transformTechnique->enableTransform({position, -0.1f});
         }
     }
 
@@ -36,8 +36,8 @@ namespace Widgets::Graphic {
             _object.disableTechnique(GraphicLib::Techniques::TRANSFORM);
         } else {
             transformTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(technique);
-            transformTechnique->setScaleValue({scale, 0.0f});
-            transformTechnique->setTransformValue({position, -0.1f});
+            transformTechnique->enableScale({scale, 0.0f});
+            transformTechnique->enableTransform({position, -0.1f});
         }
     }
 
@@ -52,7 +52,7 @@ namespace Widgets::Graphic {
             _object.disableTechnique(GraphicLib::Techniques::TRANSFORM);
         } else {
             transformTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(technique);
-            transformTechnique->setScaleValue({scale, 0.0f});
+            transformTechnique->enableScale({scale, 0.0f});
         }
     }
 
@@ -72,7 +72,7 @@ namespace Widgets::Graphic {
         textTechnique->setHeight(position.y);
     }
 
-    void Form::setTextScale(float scale) {
+    void Form::setTextSize(float scale) {
         auto technique = _object.getTechnique(GraphicLib::Techniques::TEXT);
         GraphicLib::Techniques::TextTechnique::Ptr textTechnique;
 

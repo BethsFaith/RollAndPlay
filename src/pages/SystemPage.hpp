@@ -25,7 +25,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<SystemPage>;
 
-        explicit SystemPage(GraphicLib::PickableTexture::Ptr canvas);
+        explicit SystemPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
         ~SystemPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;

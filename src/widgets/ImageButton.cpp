@@ -5,7 +5,7 @@
 #include "ImageButton.hpp"
 
 namespace Widgets {
-    ImageButton::ImageButton(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
+    ImageButton::ImageButton(GraphicLib::Primitives::AbstractPrimitive::Ptr graphicPrimitive)
         : Button(graphicPrimitive, WidgetType::IMAGE_BUTTON) {}
 
     void ImageButton::setImage(const std::string& texturePath, int textureIndex) {
@@ -27,9 +27,9 @@ namespace Widgets {
         Button::draw(formShader, textShader, pickShader);
     }
 
-    void ImageButton::setTransform(glm::vec2 position, glm::vec2 scale) {
-        Button::setTransform(position, scale);
-
+    void ImageButton::updateTextPosition(glm::vec2 position, glm::vec2 scale) {
         _form.setTextPosition({position.y + scale.y / 1.45, position.x - scale.x / 2 + 0.01f});
     }
+
+    void ImageButton::setColor(Styles::Color color) {}
 }    //namespace Forms

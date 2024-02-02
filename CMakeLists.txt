@@ -22,7 +22,7 @@ add_executable(RollAndPlay
         src/main.cpp
         src/Gui.cpp
         src/MainWindow.cpp
-        src/ViewWindow.cpp
+        src/View.cpp
         src/ViewDrawer.cpp
         src/data/Skill.cpp
         src/data/Action.cpp
@@ -32,7 +32,7 @@ add_executable(RollAndPlay
         src/data/System.cpp
         src/data/SkillCategory.cpp
         src/data/User.cpp
-        src/widgets/Color.cpp
+        src/widgets/styles/Color.cpp
         src/widgets/Button.cpp
         src/widgets/graphic/Form.cpp
         src/widgets/graphic/PickableForm.cpp
@@ -67,7 +67,7 @@ add_executable(RollAndPlay
         src/net/HttpRequest.cpp
         src/net/HttpResponse.cpp
         src/net/HttpSession.cpp
-        )
+        src/widgets/styles/WidgetStyle.hpp src/widgets/WidgetFactory.cpp src/widgets/WidgetFactory.hpp src/widgets/styles/ButtonStyle.hpp src/widgets/styles/ImageButtonStyle.hpp src/widgets/styles/TextBoxStyle.hpp src/widgets/styles/TextInputFieldStyle.hpp src/widgets/styles/MenuBarStyle.hpp src/widgets/styles/LayoutStyle.hpp src/widgets/WidgetBuilder.cpp src/widgets/WidgetBuilder.hpp)
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

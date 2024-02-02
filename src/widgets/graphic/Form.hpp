@@ -28,7 +28,7 @@ namespace Widgets::Graphic {
         virtual void setText(std::u16string content);
         virtual void setText(std::u16string content, glm::vec3 color);
         virtual void setTextPosition(glm::vec2 position);
-        virtual void setTextScale(float scale);
+        virtual void setTextSize(float scale);
         virtual void setTextColor(glm::vec3 color);
         virtual void setColor(glm::vec3 color);
         virtual void setTexture(GraphicLib::Textures::Texture::Ptr, int textureIndex);

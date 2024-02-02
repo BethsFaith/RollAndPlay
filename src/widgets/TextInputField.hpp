@@ -23,7 +23,8 @@ namespace Widgets {
     public:
         using Ptr = std::shared_ptr<TextInputField>;
 
-        explicit TextInputField(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, TextData inputParams);
+        explicit TextInputField(GraphicLib::Primitives::Rectangle::Ptr graphicPrimitive,
+                                Styles::TextParams inputParams);
 
         ~TextInputField() override = default;
 
@@ -32,26 +33,29 @@ namespace Widgets {
                   GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 
         void setTransform(glm::vec2 position, glm::vec2 scale) override;
+        void setTransform(glm::vec2 position) override;
 
         void press() override;
         void release() override;
 
         void putToBuffer(char16_t character);
         void putToBuffer(const std::string& string);
-        void putToBuffer(const std::u16string& string);
 
+        void putToBuffer(const std::u16string& string);
         void popFromBuffer();
+
         void popFromBuffer(unsigned int position);
 
         void hideContent(bool needHide);
 
         void clear();
-
         void moveCarriage(int offset);
+
         void moveCarriageToScreenPosition(float xPos);
 
         [[nodiscard]] std::string getU8Buf() const;
         [[nodiscard]] const std::u16string& getBuf() const;
+        void setScale(glm::vec2 scale) override;
 
     protected:
         void updateTextField();
@@ -59,10 +63,11 @@ namespace Widgets {
         void putToBuffer(char16_t character, unsigned int position);
         void putToBuffer(const std::string& string, unsigned int position);
         void putToBuffer(const std::u16string& string, unsigned int position);
+        void updateTextPosition(glm::vec2 position, glm::vec2 scale) override;
 
         Graphic::Form _textField;
     private:
-        TextData _buf;
+        std::u16string _buf;
         bool _needHide = false;
 
         Carriage _carriage{};

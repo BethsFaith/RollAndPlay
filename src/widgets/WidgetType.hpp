@@ -7,12 +7,13 @@
 
 namespace Widgets {
     enum WidgetType {
-        BUTTON,
-        LAYOUT,
+        HORIZONTAL_LAYOUT,
+        VERTICAL_LAYOUT,
         TEXT_INPUT_FIELD,
         IMAGE_BUTTON,
         TEXT_BOX,
         MENU_BAR,
+        BUTTON,
     };
 }    //namespace Forms
 

@@ -6,55 +6,77 @@
 
 #include <utility>
 
-#include "TextData.hpp"
+#include "styles/TextParams.hpp"
 
 namespace Widgets {
     int Button::IdCounter = 0;
 
-    Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive)
+    Button::Button(GraphicLib::Primitives::AbstractPrimitive::Ptr graphicPrimitive)
         : Button(graphicPrimitive, WidgetType::BUTTON) {}
 
     Button::Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, WidgetType type) : Widget(type),
           _form(graphicPrimitive, (float)++IdCounter),
           _tracing(graphicPrimitive) {
+
         id = IdCounter;
 
-        _tracing.setColor(getRGB(Color::WHITE));
+        _tracing.setColor(getRGB(Styles::Color::WHITE));
     }
 
     void Button::setTransform(glm::vec2 position) {
         _form.setTransform(position);
-        _tracing.setTransform(position);
-        _form.setTextPosition({position.x - 1.0 / 2.0f + 0.01f, position.y});
+
+        auto scale = getScale();
+
+        _tracing.setTransform(position, {scale.x * 1.05f, scale.y * 1.1f});
+
+        updateTextPosition(position, scale);
     }
 
     void Button::setTransform(glm::vec2 position, glm::vec2 scale) {
         _form.setTransform(position, scale);
         _tracing.setTransform(position, {scale.x * 1.05f, scale.y * 1.1f});
-        _form.setTextPosition({position.x - scale.x / 2.0f + 0.01f, position.y});
+
+        updateTextPosition(position, scale);
     }
 
     void Button::setScale(glm::vec2 scale) {
         _form.setScale(scale);
-        _tracing.setScale({scale.x * 1.05f, scale.y * 1.1f});
 
-        auto position = _form.getPosition();
+        updateTextPosition(getPosition(), scale);
+    }
+
+    void Button::updateTextPosition(glm::vec2 position, glm::vec2 scale) {
         _form.setTextPosition({position.x - scale.x / 2.0f + 0.01f, position.y});
     }
 
-    void Button::setTextLabelPosition(glm::vec2 position, glm::vec2 scale) {
+    void Button::setLabelPosition(glm::vec2 position) {
         _form.setTextPosition({position.x, position.y});
     }
 
-    void Button::setTextLabel(const TextData& text) {
-        _form.setText(text.content, getRGB(text.color));
+    void Button::setLabelParams(const Styles::TextParams& text) {
+        _form.setTextColor(getRGB(text.color));
+        _form.setTextPosition(text.position);
+        _form.setTextSize(text.size);
     }
 
-    void Button::setColor(Color color) {
+    void Button::setLabelColor(Styles::Color color) {
+        _form.setTextColor(getRGB(color));
+    }
+
+    void Button::setLabelText(const std::u16string& text) {
+        _form.setText(text);
+    }
+
+    void Button::setLabelTextSize(float size) {
+        _form.setTextSize(size);
+    }
+
+    void Button::setColor(Styles::Color color) {
         _form.setColor(getRGB(color));
     }
 
-    void Button::setTraceColor(Color traceColor) {
+    void Button::setTraceColor(Styles::Color traceColor) {
         _tracing.setColor(getRGB(traceColor));
     }
 
@@ -135,6 +157,7 @@ namespace Widgets {
 
     void Button::setReleaseCallback(const std::function<void()>& function) {
         _releaseCallback = function;
+
     }
 
     glm::vec2 Button::getPosition() {

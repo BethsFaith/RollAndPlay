@@ -22,7 +22,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<RegistrationPage>;
 
-        explicit RegistrationPage(const GraphicLib::PickableTexture::Ptr& canvas);
+        explicit RegistrationPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
         ~RegistrationPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;

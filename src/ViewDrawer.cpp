@@ -9,7 +9,7 @@
 ViewDrawer::ViewDrawer(GraphicLib::PickableTexture::Ptr canvas, GraphicLib::Shaders::ShaderProgram::Ptr shader) :
       _gui(std::move(canvas)), _shader(std::move(shader)) {}
 
-void ViewDrawer::init(int x, int y, Widgets::Color viewColor) {
+void ViewDrawer::init(int x, int y, Widgets::Styles::Color viewColor) {
     using namespace GraphicLib;
 
     auto rectangle = std::make_shared<Primitives::Rectangle>(
@@ -22,7 +22,7 @@ void ViewDrawer::init(int x, int y, Widgets::Color viewColor) {
     _view.setPrimitive(rectangle);
 
     auto colorTechnique = std::make_shared<Techniques::ColorTechnique>();
-    colorTechnique->setColor( Widgets::getRGB(viewColor));
+    colorTechnique->setColor( Widgets::Styles::getRGB(viewColor));
     _view.addTechnique(Techniques::COLOR, colorTechnique);
 
     auto transformTechnique = std::make_shared<Techniques::TransformTechnique>();
@@ -59,8 +59,8 @@ void ViewDrawer::createHorizontalMenu(int menuId, std::vector<std::u16string> na
     for (int i{}; i < names.size(); ++i) {
         auto button = std::make_shared<Widgets::Button>(rectangle);
 
-        button->setColor(Widgets::Color::LIGHT_BLUE);
-        button->setTextLabel({.content = names.at(i)});
+        button->setColor(Widgets::Styles::Color::LIGHT_BLUE);
+        button->setLabelText(names.at(i));
         button->setPressCallback(funcs[i]);
 
         buttons.push_back(button);
@@ -81,8 +81,8 @@ void ViewDrawer::createVerticalMenu(std::vector<std::u16string> names,
     for (int i{}; i < names.size(); ++i) {
         auto button = std::make_shared<Widgets::Button>(rectangle);
 
-        button->setColor(Widgets::Color::GRAY);
-        button->setTextLabel({.content = names.at(i)});
+        button->setColor(Widgets::Styles::Color::GRAY);
+        button->setLabelText(names.at(i));
         button->setPressCallback(funcs[i]);
 
         _verticalMenu->addElement(button);

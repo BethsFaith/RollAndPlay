@@ -19,25 +19,31 @@ namespace Widgets {
 
     void TextBox::setTransform(glm::vec2 position, glm::vec2 scale) {
         _form->setTransform(position, scale);
+        _form->setTextPosition({position.x - scale.x / 2.0f + 0.01f, position.y});
     }
 
     void TextBox::setTransform(glm::vec2 position) {
         _form->setTransform(position);
+        _form->setTextPosition({position.x - _form->getScale().x / 2.0f + 0.01f, position.y});
     }
 
     void TextBox::setScale(glm::vec2 scale) {
         _form->setScale(scale);
+
+        auto position = _form->getPosition();
+        _form->setTextPosition({position.x - _form->getScale().x / 2.0f + 0.01f, position.y});
     }
 
-    void TextBox::setColor(Color color) {
+    void TextBox::setColor(Styles::Color color) {
         _form->setColor(getRGB(color));
     }
 
-    void TextBox::setTextForm(const TextData& text) {
-        _form->setText(text.content, getRGB(text.color));
+    void TextBox::setTextParams(const Styles::TextParams& text) {
+        _form->setTextColor(getRGB(text.color));
+        _form->setTextSize(text.size);
     }
 
-    void TextBox::setTextColor(Color color) {
+    void TextBox::setTextColor(Styles::Color color) {
         _form->setTextColor(getRGB(color));
     }
 
@@ -45,8 +51,8 @@ namespace Widgets {
         _form->setText(content);
     }
 
-    void TextBox::setTextScale(float scale) {
-        _form->setTextScale(scale);
+    void TextBox::setTextSize(float size) {
+        _form->setTextSize(size);
     }
 
     void TextBox::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
@@ -61,7 +67,7 @@ namespace Widgets {
     }
 
     void TextBox::clear() {
-        setTextForm({.content = u""});
+        setText(u"");
     }
 
     glm::vec2 TextBox::getScale() {

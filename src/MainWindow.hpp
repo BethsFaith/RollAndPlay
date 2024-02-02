@@ -12,16 +12,16 @@
 #include <stdexcept>
 #include <vector>
 
-#include "pages/RacePage.hpp"
 #include "pages/LoginPage.hpp"
+#include "pages/RacePage.hpp"
 #include "pages/RegistrationPage.hpp"
 #include "pages/SkillPage.hpp"
 #include "pages/SystemPage.hpp"
+#include "widgets/Button.hpp"
 #include "Gui.hpp"
-#include "ViewWindow.hpp"
+#include "View.hpp"
 #include "config/Config.hpp"
 #include "controllers/GuiController.hpp"
-#include "widgets/Button.hpp"
 
 class MainWindow {
 public:
@@ -65,7 +65,7 @@ private:
 
     GLFWwindow* _window = nullptr;
 
-    ViewWindow::Ptr _view;
+    View::Ptr _view;
 
     glm::vec4 _clearColor{};
 
