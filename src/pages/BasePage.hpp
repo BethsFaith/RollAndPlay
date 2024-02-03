@@ -29,13 +29,13 @@ namespace Pages {
 
         static void setCommonData(const Common& common);
     protected:
-        Widgets::Widget::Ptr createStyledWidget(Widgets::WidgetType type);
-        Widgets::Button::Ptr createStyledButton();
-        Widgets::TextInputField::Ptr createStyledInputField();
-        Widgets::ImageButton::Ptr createStyledImageButton();
-        Widgets::TextBox::Ptr createStyledTextBox();
-        Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout();
-        Widgets::VerticalLayout::Ptr createStyledVerticalLayout();
+        Widgets::Widget::Ptr createStyledWidget(Widgets::WidgetType type, glm::vec2 pos);
+        Widgets::Button::Ptr createStyledButton(glm::vec2 pos);
+        Widgets::TextInputField::Ptr createStyledInputField(glm::vec2 pos);
+        Widgets::ImageButton::Ptr createStyledImageButton(glm::vec2 pos);
+        Widgets::TextBox::Ptr createStyledTextBox(glm::vec2 pos);
+        Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout(glm::vec2 pos);
+        Widgets::VerticalLayout::Ptr createStyledVerticalLayout(glm::vec2 pos);
 
         void addWidget(const Widgets::Widget::Ptr& widget);
 

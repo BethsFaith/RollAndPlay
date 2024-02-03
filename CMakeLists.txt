@@ -42,9 +42,11 @@ add_executable(RollAndPlay
         src/widgets/Carriage.cpp
         src/widgets/TextBox.cpp
         src/widgets/MenuBar.cpp
+        src/widgets/Layout.cpp
         src/widgets/HorizontalLayout.cpp
         src/widgets/VerticalLayout.cpp
-        src/widgets/Layout.cpp
+        src/widgets/WidgetFactory.cpp
+        src/widgets/WidgetBuilder.cpp
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
         src/pages/SkillPage.cpp
@@ -58,6 +60,7 @@ add_executable(RollAndPlay
         src/controllers/WidgetControllerFactory.cpp
         src/controllers/ImageButtonController.cpp
         src/controllers/MenuBarController.cpp
+        src/controllers/LayoutController.cpp
         src/data/storage/StreamWriter.cpp
         src/data/storage/StreamReader.cpp
         src/data/DataStorage.cpp
@@ -67,7 +70,7 @@ add_executable(RollAndPlay
         src/net/HttpRequest.cpp
         src/net/HttpResponse.cpp
         src/net/HttpSession.cpp
-        src/widgets/styles/WidgetStyle.hpp src/widgets/WidgetFactory.cpp src/widgets/WidgetFactory.hpp src/widgets/styles/ButtonStyle.hpp src/widgets/styles/ImageButtonStyle.hpp src/widgets/styles/TextBoxStyle.hpp src/widgets/styles/TextInputFieldStyle.hpp src/widgets/styles/MenuBarStyle.hpp src/widgets/styles/LayoutStyle.hpp src/widgets/WidgetBuilder.cpp src/widgets/WidgetBuilder.hpp)
+        )
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

@@ -10,6 +10,8 @@
 namespace Widgets {
     class Layout : public Widget{
     public:
+        using Ptr = std::shared_ptr<Layout>;
+
         explicit Layout(WidgetType type);
         ~Layout() override = default;
 
@@ -32,9 +34,15 @@ namespace Widgets {
         void setWidgetOffset(float offset);
         bool checkSelecting(unsigned int x, unsigned int y) override;
 
+
+
     protected:
         std::vector<Widget::Ptr> widgets;
 
+    public:
+        const std::vector<Widget::Ptr>& getWidgets() const;
+
+    protected:
         float widgetOffset = 0.1f;
 
         glm::vec2 position{};

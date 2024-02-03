@@ -10,11 +10,13 @@
 namespace Widgets {
     class HorizontalLayout : public Layout {
     public:
+        using Ptr = std::shared_ptr<HorizontalLayout>;
+
         explicit HorizontalLayout();
         ~HorizontalLayout() override = default;
 
-        void addWidget(const Ptr& widget) override;
-        void removeWidget(const Ptr& widget) override;
+        void addWidget(const Widget::Ptr& widget) override;
+        void removeWidget(const Widget::Ptr& widget) override;
     };
 }    //namespace Widgets
 

@@ -9,7 +9,7 @@
 
 #include "BasePage.hpp"
 #include "../data/User.hpp"
-#include "../widgets/TextBox.hpp"
+#include "../widgets/VerticalLayout.hpp"
 #include "../net/ApiClient.hpp"
 
 namespace Pages {
@@ -41,6 +41,7 @@ namespace Pages {
 
         StateTag _currentTag = CREATE;
 
+        Widgets::VerticalLayout::Ptr _inputFieldsLayout;
         Widgets::Button::Ptr _saveButton;
         Widgets::Button::Ptr _createButton;
         Widgets::TextInputField::Ptr _loginInputField;

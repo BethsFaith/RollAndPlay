@@ -74,4 +74,8 @@ namespace Widgets {
     glm::vec2 Layout::getPosition() {
         return position;
     }
+
+    const std::vector<Widget::Ptr>& Layout::getWidgets() const {
+        return widgets;
+    }
 }    //namespace Widgets

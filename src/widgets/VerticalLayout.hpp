@@ -10,11 +10,13 @@
 namespace Widgets {
     class VerticalLayout : public Layout {
     public:
+        using Ptr = std::shared_ptr<VerticalLayout>;
+
         explicit VerticalLayout();
         ~VerticalLayout() override = default;
 
-        void addWidget(const Ptr& widget) override;
-        void removeWidget(const Ptr& widget) override;
+        void addWidget(const Widget::Ptr& widget) override;
+        void removeWidget(const Widget::Ptr& widget) override;
     };
 }
 #endif    //ROLLANDPLAY_VERTICALLAYOUT_HPP

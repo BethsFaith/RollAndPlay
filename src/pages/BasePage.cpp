@@ -8,7 +8,8 @@
 
 namespace Pages {
     BasePage::BasePage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder)
-        : _gui(std::move(canvas)), _builder(std::move(builder)) {
+        : _gui(std::move(canvas)),
+          _builder(std::move(builder)) {
         _controller = std::make_shared<Controllers::CommonController>();
     }
 
@@ -22,32 +23,37 @@ namespace Pages {
         return _controller;
     }
 
-    Widgets::Widget::Ptr BasePage::createStyledWidget(Widgets::WidgetType type) {
-        return _builder->createWidget(type);
+    Widgets::Widget::Ptr BasePage::createStyledWidget(Widgets::WidgetType type, glm::vec2 pos) {
+        auto widget = _builder->createWidget(type);
+
+        widget->setTransform(ScreenOffset + pos);
+
+        return widget;
     }
 
-    Widgets::Button::Ptr BasePage::createStyledButton() {
-        return std::dynamic_pointer_cast<Widgets::Button>(createStyledWidget(Widgets::BUTTON));
+    Widgets::Button::Ptr BasePage::createStyledButton(glm::vec2 pos) {
+        return std::dynamic_pointer_cast<Widgets::Button>(createStyledWidget(Widgets::BUTTON, pos));
     }
 
-    Widgets::TextInputField::Ptr BasePage::createStyledInputField() {
-        return std::dynamic_pointer_cast<Widgets::TextInputField>(createStyledWidget(Widgets::TEXT_INPUT_FIELD));
+    Widgets::TextInputField::Ptr BasePage::createStyledInputField(glm::vec2 pos) {
+        return std::dynamic_pointer_cast<Widgets::TextInputField>(createStyledWidget(Widgets::TEXT_INPUT_FIELD, pos));
     }
 
-    Widgets::ImageButton::Ptr BasePage::createStyledImageButton() {
-        return std::dynamic_pointer_cast<Widgets::ImageButton>(createStyledWidget(Widgets::IMAGE_BUTTON));
+    Widgets::ImageButton::Ptr BasePage::createStyledImageButton(glm::vec2 pos) {
+        return std::dynamic_pointer_cast<Widgets::ImageButton>(createStyledWidget(Widgets::IMAGE_BUTTON, pos));
     }
 
-    Widgets::TextBox::Ptr BasePage::createStyledTextBox() {
-        return std::dynamic_pointer_cast<Widgets::TextBox>(createStyledWidget(Widgets::TEXT_BOX));
+    Widgets::TextBox::Ptr BasePage::createStyledTextBox(glm::vec2 pos) {
+        return std::dynamic_pointer_cast<Widgets::TextBox>(createStyledWidget(Widgets::TEXT_BOX, pos));
     }
 
-    Widgets::HorizontalLayout::Ptr BasePage::createStyledHorizontalLayout() {
-        return std::dynamic_pointer_cast<Widgets::TextBox>(createStyledWidget(Widgets::HORIZONTAL_LAYOUT));
+    Widgets::HorizontalLayout::Ptr BasePage::createStyledHorizontalLayout(glm::vec2 pos) {
+        return std::dynamic_pointer_cast<Widgets::HorizontalLayout>(
+            createStyledWidget(Widgets::HORIZONTAL_LAYOUT, pos));
     }
 
-    Widgets::VerticalLayout::Ptr BasePage::createStyledVerticalLayout() {
-        return std::dynamic_pointer_cast<Widgets::TextBox>(createStyledWidget(Widgets::VERTICAL_LAYOUT));
+    Widgets::VerticalLayout::Ptr BasePage::createStyledVerticalLayout(glm::vec2 pos) {
+        return std::dynamic_pointer_cast<Widgets::VerticalLayout>(createStyledWidget(Widgets::VERTICAL_LAYOUT, pos));
     }
 
     void BasePage::addWidget(const Widgets::Widget::Ptr& widget) {

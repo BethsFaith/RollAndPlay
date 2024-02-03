@@ -28,7 +28,7 @@ namespace Widgets {
     }
 
     void ImageButton::updateTextPosition(glm::vec2 position, glm::vec2 scale) {
-        _form.setTextPosition({position.y + scale.y / 1.45, position.x - scale.x / 2 + 0.01f});
+        _form.setTextPosition({position.x - scale.x / 2 + 0.01f, position.y + scale.y / 1.45});
     }
 
     void ImageButton::setColor(Styles::Color color) {}

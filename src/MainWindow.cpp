@@ -86,7 +86,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     buttonStyle->traceColor = Widgets::Styles::WHITE;
     buttonStyle->pressColor = Widgets::Styles::BLUE;
     buttonStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
-    buttonStyle->scale = {0.1, 0.1f};
+    buttonStyle->scale = {0.1f, 0.1f};
     buttonStyle->figure = rectangle;
 
     Widgets::Styles::TextInputFieldStyle::Ptr textInputFieldStyle = std::make_shared<Widgets::Styles::TextInputFieldStyle>();
