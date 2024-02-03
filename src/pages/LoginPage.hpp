@@ -9,6 +9,9 @@
 
 #include "BasePage.hpp"
 #include "../data/User.hpp"
+#include "../widgets/ImageButton.hpp"
+#include "../widgets/TextInputField.hpp"
+#include "../widgets/TextBox.hpp"
 
 namespace Pages {
     class LoginPage : public BasePage {
@@ -21,7 +24,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<LoginPage>;
 
-        explicit LoginPage(const GraphicLib::PickableTexture::Ptr& canvas);
+        explicit LoginPage(GraphicLib::PickableTexture::Ptr canvas,  Widgets::WidgetBuilder::Ptr builder);
         ~LoginPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;
@@ -43,20 +46,20 @@ namespace Pages {
 
         StateTag _nextState = START;
 
-        Forms::Button::Ptr _logInButton;
-        Forms::InputField::Ptr _loginInputField;
-        Forms::InputField::Ptr _passwordInputField;
-        Forms::TextBox::Ptr _messageBox;
+        Widgets::Button::Ptr _logInButton;
+        Widgets::TextInputField::Ptr _loginInputField;
+        Widgets::TextInputField::Ptr _passwordInputField;
+        Widgets::TextBox::Ptr _messageBox{};
 
-        Forms::Button::Ptr _editButton;
-        Forms::Button::Ptr _exitButton;
-        Forms::TextBox::Ptr _emailLabel;
-        Forms::TextBox::Ptr _nicknameLabel;
-        Forms::TextBox::Ptr _emailBox;
-        Forms::TextBox::Ptr _nicknameBox;
+        Widgets::Button::Ptr _editButton;
+        Widgets::Button::Ptr _exitButton;
+        Widgets::TextBox::Ptr _emailLabel{};
+        Widgets::TextBox::Ptr _nicknameLabel{};
+        Widgets::TextBox::Ptr _emailBox{};
+        Widgets::TextBox::Ptr _nicknameBox{};
 
-        Forms::Button::Ptr _saveButton;
-        Forms::InputField::Ptr _nicknameInputField;
+        Widgets::Button::Ptr _saveButton;
+        Widgets::TextInputField::Ptr _nicknameInputField;
 
         Data::User _user{};
     };

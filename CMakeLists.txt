@@ -20,6 +20,10 @@ conan_cmake_run(CONANFILE conanfile.txt
 
 add_executable(RollAndPlay
         src/main.cpp
+        src/Gui.cpp
+        src/MainWindow.cpp
+        src/View.cpp
+        src/ViewDrawer.cpp
         src/data/Skill.cpp
         src/data/Action.cpp
         src/data/CharacterClass.cpp
@@ -28,16 +32,21 @@ add_executable(RollAndPlay
         src/data/System.cpp
         src/data/SkillCategory.cpp
         src/data/User.cpp
-        src/MainWindow.cpp
-        src/ViewWindow.cpp
-        src/forms/Color.cpp
-        src/forms/Button.cpp
-        src/Gui.cpp
-        src/forms/Form.cpp
-        src/forms/InputField.cpp
-        src/forms/ImageButton.cpp
-        src/forms/Carriage.cpp
-        src/forms/TextBox.cpp
+        src/widgets/styles/Color.cpp
+        src/widgets/Button.cpp
+        src/widgets/graphic/Form.cpp
+        src/widgets/graphic/PickableForm.cpp
+        src/widgets/Widget.cpp
+        src/widgets/TextInputField.cpp
+        src/widgets/ImageButton.cpp
+        src/widgets/Carriage.cpp
+        src/widgets/TextBox.cpp
+        src/widgets/MenuBar.cpp
+        src/widgets/Layout.cpp
+        src/widgets/HorizontalLayout.cpp
+        src/widgets/VerticalLayout.cpp
+        src/widgets/WidgetFactory.cpp
+        src/widgets/WidgetBuilder.cpp
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
         src/pages/SkillPage.cpp
@@ -45,15 +54,16 @@ add_executable(RollAndPlay
         src/pages/LoginPage.cpp
         src/pages/RegistrationPage.cpp
         src/controllers/GuiController.cpp
-        src/controllers/InputFieldContoller.cpp
+        src/controllers/TextInputContoller.cpp
         src/controllers/CommonController.cpp
         src/controllers/ButtonController.cpp
-        src/controllers/FormControllerFactory.cpp
+        src/controllers/WidgetControllerFactory.cpp
         src/controllers/ImageButtonController.cpp
+        src/controllers/MenuBarController.cpp
+        src/controllers/LayoutController.cpp
         src/data/storage/StreamWriter.cpp
         src/data/storage/StreamReader.cpp
         src/data/DataStorage.cpp
-        src/Toolbar.cpp
         src/config/File.cpp
         src/config/Config.cpp
         src/net/ApiClient.cpp

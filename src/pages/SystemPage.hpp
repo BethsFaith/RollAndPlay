@@ -12,6 +12,8 @@
 #include "../config/Config.hpp"
 #include "../data/DataStorage.hpp"
 #include "../data/System.hpp"
+#include "../widgets/ImageButton.hpp"
+#include "../widgets/TextInputField.hpp"
 
 namespace Pages {
     class SystemPage : public BasePage {
@@ -23,7 +25,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<SystemPage>;
 
-        explicit SystemPage(GraphicLib::PickableTexture::Ptr canvas);
+        explicit SystemPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
         ~SystemPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;
@@ -38,11 +40,11 @@ namespace Pages {
 
         Data::System::Ptr _system;
 
-        Forms::Button::Ptr _createButton;
-        Forms::Button::Ptr _saveButton;
-        Forms::InputField::Ptr _nameInputField;
-        Forms::ImageButton::Ptr _iconButton;
-        Forms::InputField::Ptr _iconPathInputField;
+        Widgets::Button::Ptr _createButton;
+        Widgets::Button::Ptr _saveButton;
+        Widgets::TextInputField::Ptr _nameInputField;
+        Widgets::ImageButton::Ptr _iconButton;
+        Widgets::TextInputField::Ptr _iconPathInputField;
     };
 }    //namespace Pages
 

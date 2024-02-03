@@ -29,7 +29,7 @@ namespace Controllers {
 
         void clear() override;
 
-        void addSubController(GLController::Ptr controller);
+        void addSubController(const GLController::Ptr& controller);
 
     private:
         std::vector<GLController::Ptr> _subControllers;

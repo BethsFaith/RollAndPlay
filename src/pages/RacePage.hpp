@@ -8,6 +8,8 @@
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
 #include "BasePage.hpp"
+#include "../widgets/ImageButton.hpp"
+#include "../widgets/TextInputField.hpp"
 
 namespace Pages {
     class RacePage : public BasePage {
@@ -19,7 +21,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<RacePage>;
 
-        explicit RacePage(GraphicLib::PickableTexture::Ptr canvas);
+        explicit RacePage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
         ~RacePage() override = default;
 
         void init(const glm::vec2& screenOffset) override;
@@ -33,11 +35,11 @@ namespace Pages {
 
         StateTag _currentTag = START;
 
-        Forms::Button::Ptr _createButton;
-        Forms::Button::Ptr _saveButton;
-        Forms::InputField::Ptr _nameInputField;
-        Forms::ImageButton::Ptr _iconButton;
-        Forms::InputField::Ptr _iconPathInputField;
+        Widgets::Button::Ptr _createButton;
+        Widgets::Button::Ptr _saveButton;
+        Widgets::TextInputField::Ptr _nameInput;
+        Widgets::ImageButton::Ptr _iconButton;
+        Widgets::TextInputField::Ptr _iconPathInput;
     };
 }    //namespace Pages
 
