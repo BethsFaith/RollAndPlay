@@ -7,10 +7,10 @@
 
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
-#include "../data/User.hpp"
-#include "../forms/TextBox.hpp"
-#include "../net/ApiClient.hpp"
 #include "BasePage.hpp"
+#include "../data/User.hpp"
+#include "../widgets/VerticalLayout.hpp"
+#include "../net/ApiClient.hpp"
 
 namespace Pages {
     class RegistrationPage : public BasePage {
@@ -22,7 +22,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<RegistrationPage>;
 
-        explicit RegistrationPage(const GraphicLib::PickableTexture::Ptr& canvas);
+        explicit RegistrationPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
         ~RegistrationPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;
@@ -41,13 +41,14 @@ namespace Pages {
 
         StateTag _currentTag = CREATE;
 
-        Forms::Button::Ptr _saveButton;
-        Forms::Button::Ptr _createButton;
-        Forms::InputField::Ptr _loginInputField;
-        Forms::InputField::Ptr _passwordInputField;
-        Forms::InputField::Ptr _repeatedPasswordInputField;
-        Forms::TextBox::Ptr _creatingMessageBox;
-        Forms::TextBox::Ptr _viewMessageBox;
+        Widgets::VerticalLayout::Ptr _inputFieldsLayout;
+        Widgets::Button::Ptr _saveButton;
+        Widgets::Button::Ptr _createButton;
+        Widgets::TextInputField::Ptr _loginInputField;
+        Widgets::TextInputField::Ptr _passwordInputField;
+        Widgets::TextInputField::Ptr _repeatedPasswordInputField;
+        Widgets::TextBox::Ptr _creatingMessageBox;
+        Widgets::TextBox::Ptr _viewMessageBox;
     };
 }    //namespace Pages
 

@@ -5,11 +5,11 @@
 #ifndef ROLLANDPLAY_BUTTONCONTROLLER_HPP
 #define ROLLANDPLAY_BUTTONCONTROLLER_HPP
 
-#include "../forms/Button.hpp"
-#include "FormController.hpp"
+#include "../widgets/Button.hpp"
+#include "WidgetController.hpp"
 
 namespace Controllers {
-    class ButtonController : public FormController {
+    class ButtonController : public WidgetController {
     public:
         ~ButtonController() override = default;
 
@@ -25,10 +25,10 @@ namespace Controllers {
 
         void clear() override;
 
-        void addForm(Forms::Form::Ptr form) override;
+        void addWidget(Widgets::Widget::Ptr widget) override;
 
     private:
-        std::vector<Forms::Button::Ptr> _buttons;
+        std::vector<Widgets::Button::Ptr> _buttons;
     };
 }    //namespace Controllers
 

@@ -8,9 +8,9 @@
 #include <GraphicLib/PickableTexture.hpp>
 #include <vector>
 
-#include "FormController.hpp"
-#include "FormControllerFactory.hpp"
 #include "GLController.hpp"
+#include "WidgetController.hpp"
+#include "WidgetControllerFactory.hpp"
 
 namespace Controllers {
     class GuiController : public Controllers::GLController {
@@ -32,10 +32,10 @@ namespace Controllers {
 
         void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) override;
 
-        void addForm(const Forms::Form::Ptr& form);
+        void addWidget(const Widgets::Widget::Ptr& widget);
 
     private:
-        std::map<Forms::FormType, FormController::Ptr> _formControllers;
+        std::map<Widgets::WidgetType, WidgetController::Ptr> _widgetsControllers;
     };
 }    //namespace Controllers
 
