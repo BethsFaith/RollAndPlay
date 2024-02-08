@@ -14,7 +14,7 @@ Gui::Gui(GraphicLib::PickableTexture::Ptr canvas) : _canvas(std::move(canvas)) {
 }
 
 void Gui::draw() {
-    for (auto& form : _widget) {
+    for (auto& form : _widgets) {
         if (form->getType() == Widgets::IMAGE_BUTTON) {
             form->draw(textureShader, textShader, selectableShader);
         } else {
@@ -28,11 +28,12 @@ void Gui::addWidget(const Widgets::Widget::Ptr& widget) {
 
     _controller->addWidget(widget);
 
-    _widget.push_back(widget);
+    _widgets.push_back(widget);
 }
 
 void Gui::clear() {
-    _widget.clear();
+    _widgets.clear();
+//    _controller->clear();
 }
 
 const Controllers::GuiController::Ptr& Gui::getController() const {

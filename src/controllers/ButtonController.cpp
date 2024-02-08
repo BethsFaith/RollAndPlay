@@ -5,7 +5,6 @@
 #include "ButtonController.hpp"
 
 namespace Controllers {
-
     void ButtonController::processKeyboardInput(GLFWwindow* window) {}
 
     void ButtonController::processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods) {
@@ -18,7 +17,13 @@ namespace Controllers {
 
             for (auto& button : _buttons) {
                 if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
+                    if (_lastButton.lock() != nullptr) {
+                        _lastButton.lock()->release();
+                    }
+                    _lastButton = button;
+
                     button->press();
+
                     break;
                 }
             }

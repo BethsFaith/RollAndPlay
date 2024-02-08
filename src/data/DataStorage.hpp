@@ -25,9 +25,9 @@ namespace Data {
         static size_t save(const IBitwiseSerializable::Ptr& data, Type type);
         static size_t load(std::vector<IBitwiseSerializable::Ptr>& container, Type type);
 
+        static IBitwiseSerializable::Ptr create(Type type);
     private:
         static std::string getDirectory(Type type);
-        static IBitwiseSerializable::Ptr create(Type type);
     };
 }    //namespace Data
 

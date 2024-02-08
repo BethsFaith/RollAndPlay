@@ -28,7 +28,8 @@ namespace Controllers {
         void clear() override;
 
     private:
-        ButtonController _controller;
+        std::weak_ptr<Widgets::Button> _lastButton;
+        std::vector<Widgets::MenuBar::Ptr> _widgets;
     };
 }
 #endif    //ROLLANDPLAY_MENUBARCONTROLLER_HPP

@@ -11,9 +11,10 @@
 #include "CharacterClass.hpp"
 #include "Race.hpp"
 #include "Skill.hpp"
+#include "IJsonSerializable.hpp"
 
 namespace Data {
-    class System : public IBitwiseSerializable {
+    class System : public IBitwiseSerializable, public IJsonSerializable {
     public:
         using Ptr = std::shared_ptr<System>;
 
@@ -23,20 +24,23 @@ namespace Data {
         size_t serialize(Storage::StreamWriter& writer) const override;
         size_t deserialize(Storage::StreamReader& reader) override;
 
-        [[nodiscard]] size_t serialized_size() const noexcept override;
+        void serialize(Json::Value& jsonValue) override;
+        void deserialize(const Json::Value& jsonValue) override;
 
+        [[nodiscard]] size_t serialized_size() const noexcept override;
         void setName(const std::u16string& name);
+
         void setImage(const std::u16string& image);
         void setRaces(const std::vector<Race>& races);
-
         void addAction(const Action& actions);
+
         void addClass(CharacterClass& characterClass);
+
         void addClass(Skill& skill);
 
         unsigned int getIndex() override;
 
         const std::u16string& getName() const;
-
         const std::u16string& getImage() const;
 
     private:

@@ -34,6 +34,12 @@ void ViewDrawer::init(int x, int y, Widgets::Styles::Color viewColor) {
                                                        glm::vec2{0.09f, 0.1f}, false);
     _horizontalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.8f, 0.9f},
                                                          glm::vec2{0.2f, 0.1f});
+
+    _verticalMenu->setSelectedItemColor(Widgets::Styles::LIGHT_BLUE);
+    _horizontalMenu->setSelectedItemColor(Widgets::Styles::LIGHT_GRAY);
+
+    _gui.addWidget(_verticalMenu);
+    _gui.addWidget(_horizontalMenu);
 }
 
 void ViewDrawer::draw() {
@@ -87,21 +93,16 @@ void ViewDrawer::createVerticalMenu(std::vector<std::u16string> names,
 
         _verticalMenu->addElement(button);
     }
-
-    _gui.addWidget(_verticalMenu);
 }
 
 void ViewDrawer::showHorizontalMenu(int menuId) {
-    _gui.clear();
+    _horizontalMenu->update();
     _horizontalMenu->clear();
 
     auto buttons = _horizontalMenuButtons[menuId];
     for (const auto& button : buttons) {
         _horizontalMenu->addElement(button);
     }
-
-    _gui.addWidget(_horizontalMenu);
-    _gui.addWidget(_verticalMenu);
 }
 
 Controllers::GuiController::Ptr ViewDrawer::getController() {

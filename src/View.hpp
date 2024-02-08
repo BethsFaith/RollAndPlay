@@ -62,7 +62,6 @@ public:
 private:
     void initView(int x, int y, Widgets::Styles::Color viewColor);
     void updateControllers();
-    void updateGui();
 
     ViewDrawer _view;
     GraphicLib::Shaders::ShaderProgram::Ptr _shader;
@@ -73,7 +72,6 @@ private:
     std::map<PageTag, Pages::APage::Ptr> _pages;
 
     PageTag _currentPageTag = PageTag::NULL_PAGE;
-    ViewTag _currentViewTag = ViewTag::NULL_VIEW;
 };
 
 #endif    //ROLLANDPLAY_VIEW_HPP

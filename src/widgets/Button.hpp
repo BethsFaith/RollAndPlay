@@ -38,6 +38,7 @@ namespace Widgets {
         virtual void release();
 
         [[nodiscard]] bool isUnderCursor() const;
+        [[nodiscard]] bool isPressed() const;
         [[nodiscard]] bool checkId(int id_) const;
 
         void setPressCallback(const std::function<void()>& function);
@@ -53,18 +54,24 @@ namespace Widgets {
 
         virtual void setColor(Styles::Color color);
         virtual void setTraceColor(Styles::Color traceColor);
+        virtual void setColor(glm::vec3 color);
+        virtual void setTraceColor(glm::vec3 traceColor);
 
         std::u16string getTextLabelContent();
         glm::vec2 getTextLabelPosition();
-        void setScale(glm::vec2 scale) override;
+        glm::vec3 getColor();
 
+        void setScale(glm::vec2 scale) override;
     protected:
-        virtual void updateTextPosition(glm::vec2 position, glm::vec2 scale);
         explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, WidgetType type);
 
-        int id;
+        virtual void updateTextPosition(glm::vec2 position, glm::vec2 scale);
+
         static int IdCounter;
+
+        int id;
         bool _isUnderCursor = false;
+        bool _isPressed = false;
 
         std::function<void()> _pressCallback{[]() {}};
         std::function<void()> _releaseCallback{[]() {}};

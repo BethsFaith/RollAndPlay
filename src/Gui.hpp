@@ -37,7 +37,7 @@ private:
     static GraphicLib::Shaders::ShaderProgram::Ptr selectableShader;
     static GraphicLib::Shaders::ShaderProgram::Ptr textShader;
 
-    std::vector<Widgets::Widget::Ptr> _widget;
+    std::vector<Widgets::Widget::Ptr> _widgets;
     GraphicLib::PickableTexture::Ptr _canvas;
     Controllers::GuiController::Ptr _controller;
 };

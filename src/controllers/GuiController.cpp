@@ -12,8 +12,8 @@ namespace Controllers {
     }
 
     void GuiController::processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods) {
-        for (const auto& controller : _widgetsControllers) {
-            controller.second->processMouseButton(window, mouseButton, action, mods);
+        for (const auto& pair : _widgetsControllers) {
+            pair.second->processMouseButton(window, mouseButton, action, mods);
         }
     }
 
