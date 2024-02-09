@@ -31,6 +31,8 @@ namespace Widgets::Styles {
                 return {0.47f, 0.65f, 0.75f};
             case DARK_GRAY:
                 return glm::vec3{0.1f};
+            case DARK_BLUE:
+                return {0.0f, 0.31f, 0.37f};
             default:
                 return glm::vec3{0.0f};
         }

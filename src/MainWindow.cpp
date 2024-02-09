@@ -82,11 +82,11 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     textureRectangle->bindData(GL_STATIC_DRAW);
 
     Widgets::Styles::ButtonStyle::Ptr buttonStyle = std::make_shared<Widgets::Styles::ButtonStyle>();
-    buttonStyle->color = Widgets::Styles::GRAY;
+    buttonStyle->color = Widgets::Styles::VIOLET;
     buttonStyle->traceColor = Widgets::Styles::WHITE;
     buttonStyle->pressColor = Widgets::Styles::BLUE;
     buttonStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
-    buttonStyle->scale = {0.1f, 0.1f};
+    buttonStyle->scale = {0.11f, 0.1f};
     buttonStyle->figure = rectangle;
 
     Widgets::Styles::TextInputFieldStyle::Ptr textInputFieldStyle = std::make_shared<Widgets::Styles::TextInputFieldStyle>();
@@ -112,6 +112,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
 
     Widgets::Styles::LayoutStyle::Ptr layoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
     layoutStyle->widgetOffset = 0.1f;
+    layoutStyle->scale = {0.7f, 0.1f};
 
     Widgets::WidgetBuilder::Ptr widgetBuilder = std::make_shared<Widgets::WidgetBuilder>();
     widgetBuilder->addWidgetStyle(Widgets::BUTTON, buttonStyle);

@@ -12,6 +12,7 @@ namespace Widgets {
         TEXT_INPUT_FIELD,
         IMAGE_BUTTON,
         TEXT_BOX,
+        IMAGE_BOX,
         MENU_BAR,
         BUTTON,
     };

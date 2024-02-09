@@ -26,6 +26,10 @@ namespace Pages {
     Widgets::Widget::Ptr BasePage::createStyledWidget(Widgets::WidgetType type, glm::vec2 pos) {
         auto widget = _builder->createWidget(type);
 
+        auto scale = widget->getScale();
+        pos.x = pos.x + (scale.x/2);
+        pos.y = pos.y - (scale.y/2);
+
         widget->setTransform(ScreenOffset + pos);
 
         return widget;

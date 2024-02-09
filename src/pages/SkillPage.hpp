@@ -16,6 +16,8 @@ namespace Pages {
     public:
         enum StateTag {
             START,
+            CREATE_SKILL,
+            CREATE_CATEGORY,
             VIEW
         };
 
@@ -32,7 +34,7 @@ namespace Pages {
 
         StateTag _currentTag = START;
 
-        Widgets::Button::Ptr _createButton;
+        Widgets::Button::Ptr _createCategoryButton;
         Widgets::Button::Ptr _saveButton;
         Widgets::TextInputField::Ptr _nameInputField;
         Widgets::ImageButton::Ptr _iconButton;

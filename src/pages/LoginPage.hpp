@@ -61,6 +61,10 @@ namespace Pages {
         Widgets::Button::Ptr _saveButton;
         Widgets::TextInputField::Ptr _nicknameInputField;
 
+        Widgets::VerticalLayout::Ptr _startLayout;
+        Widgets::VerticalLayout::Ptr _viewLayout;
+        Widgets::VerticalLayout::Ptr _editLayout;
+
         Data::User _user{};
     };
 }    //namespace Pages

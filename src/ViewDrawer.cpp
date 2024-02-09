@@ -30,13 +30,13 @@ void ViewDrawer::init(int x, int y, Widgets::Styles::Color viewColor) {
     transformTechnique->enableTransform(glm::vec3(x, y, 0.0f));
     _view.addTechnique(Techniques::TRANSFORM, transformTechnique);
 
-    _verticalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.95, 0.76},
+    _verticalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.95f, 0.77f},
                                                        glm::vec2{0.09f, 0.1f}, false);
     _horizontalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.8f, 0.9f},
                                                          glm::vec2{0.2f, 0.1f});
 
     _verticalMenu->setSelectedItemColor(Widgets::Styles::LIGHT_BLUE);
-    _horizontalMenu->setSelectedItemColor(Widgets::Styles::LIGHT_GRAY);
+    _horizontalMenu->setSelectedItemColor(Widgets::Styles::DARK_GRAY);
 
     _gui.addWidget(_verticalMenu);
     _gui.addWidget(_horizontalMenu);

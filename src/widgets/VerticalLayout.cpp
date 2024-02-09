@@ -10,9 +10,9 @@ namespace Widgets {
     void VerticalLayout::addWidget(const Widget::Ptr& widget) {
         Layout::addWidget(widget);
 
-        widget->setTransform(position);
+        widget->setTransform(position, scale);
 
-        position.y -= widget->getScale().y + widgetOffset;
+        position.y -= scale.y + widgetOffset;
     }
 
     void VerticalLayout::removeWidget(const Widget::Ptr& widget) {
