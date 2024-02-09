@@ -45,6 +45,7 @@ add_executable(RollAndPlay
         src/widgets/Layout.cpp
         src/widgets/HorizontalLayout.cpp
         src/widgets/VerticalLayout.cpp
+        src/widgets/ImageBox.cpp
         src/widgets/WidgetFactory.cpp
         src/widgets/WidgetBuilder.cpp
         src/pages/BasePage.cpp
