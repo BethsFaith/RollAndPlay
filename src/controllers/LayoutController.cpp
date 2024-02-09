@@ -35,6 +35,12 @@ namespace Controllers {
         }
     }
 
+    void LayoutController::processDrop(GLFWwindow* window, int count, const char** paths) {
+        for (const auto& controller : _widgetsControllers) {
+            controller.second->processDrop(window, count, paths);
+        }
+    }
+
     void LayoutController::clear() {
         _widgetsControllers.clear();
     }

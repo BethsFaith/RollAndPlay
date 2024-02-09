@@ -154,6 +154,7 @@ void MainWindow::init(const char* title, const std::string& configFilePath) {
     glfwSetMouseButtonCallback(instance->_window, mouseButtonCallback);
     glfwSetCursorPosCallback(instance->_window, mouseInputCallback);
     glfwSetScrollCallback(instance->_window, mouseScrollCallback);
+    glfwSetDropCallback(instance->_window, dropCallback);
 }
 
 void MainWindow::free() {
@@ -225,6 +226,10 @@ void MainWindow::mouseScrollCallback(GLFWwindow* window, double xOffset, double 
 
 void MainWindow::charModsCallback(GLFWwindow* window, unsigned int codepoint, int mods) {
     instance->_view->processCharMods(window, codepoint, mods);
+}
+
+void MainWindow::dropCallback(GLFWwindow* window, int count, const char** paths) {
+    instance->_view->processDrop(window, count, paths);
 }
 
 void MainWindow::frameBufferSizeCallback(GLFWwindow* window, int width, int height) {

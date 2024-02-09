@@ -26,8 +26,9 @@ namespace Controllers {
 
         void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) override;
 
-        void clear() override;
+        void processDrop(GLFWwindow* window, int count, const char** paths) override;
 
+        void clear() override;
         void addWidget(Widgets::Widget::Ptr widget) override;
 
     private:

@@ -50,6 +50,8 @@ protected:
 
     static void charModsCallback(GLFWwindow* window, unsigned int codepoint, int mods);
 
+    static void dropCallback(GLFWwindow* window, int count, const char** paths);
+
 private:
     static MainWindow* instance;
 

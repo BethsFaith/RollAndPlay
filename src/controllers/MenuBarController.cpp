@@ -60,6 +60,8 @@ namespace Controllers {
 
     }
 
+    void MenuBarController::processDrop(GLFWwindow* window, int count, const char** paths) {}
+
     void MenuBarController::clear() {
         _widgets.clear();
     }

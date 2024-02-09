@@ -29,6 +29,7 @@ namespace Controllers {
         void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) override;
 
         void addWidget(Widgets::Widget::Ptr widget) override;
+        void processDrop(GLFWwindow* window, int count, const char** paths) override;
 
     private:
         Widgets::TextInputField::Ptr _target = nullptr;

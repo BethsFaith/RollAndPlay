@@ -35,6 +35,12 @@ namespace Controllers {
         }
     }
 
+    void GuiController::processDrop(GLFWwindow* window, int count, const char** paths) {
+        for (const auto& controller : _widgetsControllers) {
+            controller.second->processDrop(window, count, paths);
+        }
+    }
+
     void GuiController::addWidget(const Widgets::Widget::Ptr& widget){
         auto type = widget->getType();
 

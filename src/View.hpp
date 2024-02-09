@@ -57,6 +57,8 @@ public:
 
     void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods);
 
+    void processDrop(GLFWwindow* window, int count, const char** paths);
+
     void addPage(PageTag tag, Pages::APage::Ptr page);
 
 private:

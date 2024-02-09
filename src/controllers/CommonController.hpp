@@ -30,6 +30,7 @@ namespace Controllers {
         void clear() override;
 
         void addSubController(const GLController::Ptr& controller);
+        void processDrop(GLFWwindow* window, int count, const char** paths) override;
 
     private:
         std::vector<GLController::Ptr> _subControllers;

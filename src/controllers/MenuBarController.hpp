@@ -26,6 +26,7 @@ namespace Controllers {
 
         void addWidget(Widgets::Widget::Ptr widget) override;
         void clear() override;
+        void processDrop(GLFWwindow* window, int count, const char** paths) override;
 
     private:
         std::weak_ptr<Widgets::Button> _lastButton;

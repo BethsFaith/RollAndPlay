@@ -47,6 +47,8 @@ namespace Controllers {
 
     void ButtonController::processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) {}
 
+    void ButtonController::processDrop(GLFWwindow* window, int count, const char** paths) {}
+
     void ButtonController::addWidget(Widgets::Widget::Ptr widget) {
         _buttons.push_back(std::dynamic_pointer_cast<Widgets::Button>(widget));
     }
