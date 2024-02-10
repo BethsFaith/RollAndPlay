@@ -31,8 +31,10 @@ namespace Widgets {
 
         void setImage(const std::string& texturePath, int textureIndex);
 
+        [[nodiscard]] const GraphicLib::Textures::Texture::Ptr& getTexture() const;
     private:
         Graphic::Form _form;
+
         GraphicLib::Textures::Texture::Ptr _texture;
     };
 

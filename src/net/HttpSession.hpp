@@ -6,7 +6,9 @@
 #define ROLLANDPLAY_HTTPSESSION_HPP
 
 #include "ApiClient.hpp"
+#include "Route.hpp"
 #include "../data/User.hpp"
+#include "../data/DataFactory.hpp"
 
 namespace Net {
     class HttpSession {
@@ -23,15 +25,18 @@ namespace Net {
 
         using Ptr = std::shared_ptr<HttpSession>;
 
-        HttpSession(std::string host, std::string service, std::string domain);
+        HttpSession(std::string host, std::string service, std::string domain, Route* route);
 
         Result createUser(Data::User& user);
         Result getCurrentUser();
         Result logIn(Data::User& user);
         Result updateUserData(Data::User& user);
 
+        Result create(const Data::AData::Ptr& data);
+
     private:
         ApiClient _client;
+        Route& _route;
 
         std::string _domain;
         std::string _cookie;

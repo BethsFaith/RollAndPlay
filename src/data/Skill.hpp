@@ -8,10 +8,10 @@
 #include <iostream>
 #include <utility>
 
-#include "IBitwiseSerializable.hpp"
+#include "AData.hpp"
 
 namespace Data {
-    class Skill : IBitwiseSerializable {
+    class Skill : public AData {
     public:
         using Ptr = std::shared_ptr<Skill>;
 
@@ -21,6 +21,10 @@ namespace Data {
         size_t deserialize(Storage::StreamReader& reader) override;
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
+        Type getType() override;
+        unsigned int getIndex() override;
+        void serialize(Json::Value& jsonValue) override;
+        void deserialize(const Json::Value& jsonValue) override;
 
     private:
         std::string _name;

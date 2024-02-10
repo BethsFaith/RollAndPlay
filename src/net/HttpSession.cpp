@@ -7,9 +7,10 @@
 #include <utility>
 
 namespace Net {
-    HttpSession::HttpSession(std::string host, std::string service, std::string domain)
+    HttpSession::HttpSession(std::string host, std::string service, std::string domain, Route* route)
         : _client(std::move(host), std::move(service)),
-          _domain(std::move(domain)) {}
+          _domain(std::move(domain)),
+          _route(*route) {}
 
     HttpSession::Result HttpSession::createUser(Data::User& user) {
         Json::Value body;
@@ -96,6 +97,45 @@ namespace Net {
         Result result;
 
         if (response.getStatusCode() != HttpResponse::StatusCode::OK) {
+            result.haveError = true;
+            result.errorMessage = response.getErrorMessage();
+        }
+
+        result.statusMessage = response.getStatusMessage();
+
+        return result;
+    }
+
+    HttpSession::Result HttpSession::create(const Data::AData::Ptr& data) {
+        auto type = data->getType();
+        if (type == Data::USER) {
+            return createUser(*std::dynamic_pointer_cast<Data::User>(data));
+        }
+
+        auto paths = _route.getPaths();
+        auto target = std::string(paths[type][Net::Http::MethodPost]);
+        Net::HttpRequest request(target,Net::Http::MethodPost, _domain);
+
+        Json::Value body;
+        auto jsonData = std::dynamic_pointer_cast<Data::IJsonSerializable>(data);
+        jsonData->serialize(body);
+        request.setBodyJson(body);
+
+        request.setCookie(_cookie);
+
+        auto response = _client.connect(request);
+
+        Result result;
+
+        if (response.getStatusCode() == HttpResponse::StatusCode::CREATED) {
+            auto createdData = Data::DataFactory::create(type);
+            auto createdJsonData =  std::dynamic_pointer_cast<Data::IJsonSerializable>(createdData);
+
+            createdJsonData->deserialize(response.getBody());
+
+            result.containData = true;
+            result.data = createdData;
+        } else {
             result.haveError = true;
             result.errorMessage = response.getErrorMessage();
         }

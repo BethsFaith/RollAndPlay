@@ -32,4 +32,8 @@ namespace Widgets {
     }
 
     void ImageButton::setColor(Styles::Color color) {}
+
+    const GraphicLib::Textures::Texture::Ptr& ImageButton::getTexture() const {
+        return _texture;
+    }
 }    //namespace Forms

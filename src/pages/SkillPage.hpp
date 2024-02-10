@@ -30,12 +30,20 @@ namespace Pages {
         void update() override;
 
         void toStart();
-        void toView();
+        void toCategoryCreate();
+
+        Net::HttpSession::Result pushCategory();
 
         StateTag _currentTag = START;
 
         Widgets::Button::Ptr _createCategoryButton;
-        Widgets::Button::Ptr _saveButton;
+        Widgets::Button::Ptr _saveCategoryButton;
+        Widgets::Button::Ptr _createSkillButton;
+        Widgets::Button::Ptr _saveSkillButton;
+
+        Widgets::VerticalLayout::Ptr _startLayout;
+        Widgets::VerticalLayout::Ptr _createLayout;
+
         Widgets::TextInputField::Ptr _nameInputField;
         Widgets::ImageButton::Ptr _iconButton;
         Widgets::TextInputField::Ptr _iconPathInputField;

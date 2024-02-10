@@ -19,6 +19,16 @@ namespace Data {
         return 0;
     }
 
+    void SkillCategory::serialize(Json::Value& jsonValue) {
+        jsonValue["name"] = Convert::toUTF8(_name);
+        jsonValue["icon"] = _iconPath;
+    }
+
+    void SkillCategory::deserialize(const Json::Value& jsonValue) {
+        _name = Convert::toUTF16(jsonValue["email"].asString());
+        _iconPath = jsonValue["icon"].asString();
+    }
+
     size_t SkillCategory::serialized_size() const noexcept {
         return 0;
     }
@@ -27,12 +37,16 @@ namespace Data {
         return _index;
     }
 
-    const std::string& SkillCategory::getName() const {
+    const std::u16string& SkillCategory::getName() const {
         return _name;
     }
 
-    void SkillCategory::setName(const std::string& name) {
+    void SkillCategory::setName(const std::u16string& name) {
         _name = name;
+    }
+
+    void SkillCategory::setName(const std::string& name) {
+        _name = std::u16string(name.begin(), name.end());
     }
 
     const std::string& SkillCategory::getIconPath() const {
@@ -41,5 +55,13 @@ namespace Data {
 
     void SkillCategory::setIconPath(const std::string& iconPath) {
         _iconPath = iconPath;
+    }
+
+    unsigned int SkillCategory::getIndex() {
+        return _index;
+    }
+
+    Type SkillCategory::getType() {
+        return SKILL_CATEGORY;
     }
 }    //namespace Data

@@ -65,13 +65,13 @@ add_executable(RollAndPlay
         src/data/storage/StreamWriter.cpp
         src/data/storage/StreamReader.cpp
         src/data/DataStorage.cpp
-        src/config/File.cpp
+        src/config/Parser.cpp
         src/config/Config.cpp
         src/net/ApiClient.cpp
         src/net/HttpRequest.cpp
         src/net/HttpResponse.cpp
         src/net/HttpSession.cpp
-        )
+        src/data/convert/Convert.cpp src/data/convert/Convert.hpp src/net/Route.cpp src/net/Route.hpp src/config/JsonParser.hpp src/data/DataFactory.cpp src/data/DataFactory.hpp)
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

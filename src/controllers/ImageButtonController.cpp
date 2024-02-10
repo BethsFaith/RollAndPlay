@@ -72,6 +72,7 @@ namespace Controllers {
         if (count == 1) {
             if (_target != nullptr) {
                 _target->setImage(paths[0], 0);
+                _target->release();
             }
         }
     }

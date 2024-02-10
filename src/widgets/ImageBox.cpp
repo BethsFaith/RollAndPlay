@@ -48,4 +48,8 @@ namespace Widgets {
     glm::vec2 ImageBox::getPosition() {
         return _form.getPosition();
     }
+
+    const GraphicLib::Textures::Texture::Ptr& ImageBox::getTexture() const {
+        return _texture;
+    }
 }    //namespace Widgets

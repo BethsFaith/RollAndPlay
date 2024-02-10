@@ -1,0 +1,78 @@
+{
+  "private" : "/private",
+  "user" : {
+    "path": "/users",
+    "GET": {
+      "private": true
+    },
+    "POST": {
+      "private": false
+    },
+    "PUT": {
+      "private": true
+    },
+    "DELETE": {
+      "private": true
+    }
+  },
+  "session" : {
+    "path":  "/sessions",
+    "GET": {
+      "private": true
+    },
+    "POST": {
+      "private": false
+    },
+    "PUT": {
+      "private": true
+    },
+    "DELETE": {
+      "private": true
+    }
+  },
+  "skill" : {
+    "path": "/skills",
+    "GET": {
+      "private": false
+    },
+    "POST": {
+      "private": true
+    },
+    "PUT": {
+      "private": true
+    },
+    "DELETE": {
+      "private": true
+    }
+  },
+  "category": {
+    "path": "/skill-categories",
+    "GET": {
+      "private": false
+    },
+    "POST": {
+      "private": true
+    },
+    "PUT": {
+      "private": true
+    },
+    "DELETE": {
+      "private": true
+    }
+  },
+  "action": {
+    "path": "/actions",
+    "GET": {
+      "private": false
+    },
+    "POST": {
+      "private": true
+    },
+    "PUT": {
+      "private": true
+    },
+    "DELETE": {
+      "private": true
+    }
+  }
+}

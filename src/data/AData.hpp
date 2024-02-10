@@ -8,14 +8,16 @@
 #include <iostream>
 
 #include "Type.hpp"
+#include "IJsonSerializable.hpp"
+#include "IBitwiseSerializable.hpp"
 
 namespace Data {
-    class AData {
+    class AData : public IJsonSerializable, public IBitwiseSerializable {
     public:
         using Ptr = std::shared_ptr<AData>;
 
         AData() = default;
-        virtual ~AData() = default;
+        ~AData() override = default;
 
         virtual Type getType() = 0;
     };

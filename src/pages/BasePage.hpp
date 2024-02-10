@@ -37,6 +37,14 @@ namespace Pages {
         Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout(glm::vec2 pos);
         Widgets::VerticalLayout::Ptr createStyledVerticalLayout(glm::vec2 pos);
 
+        Widgets::Widget::Ptr createStyledWidget(Widgets::WidgetType type);
+        Widgets::Button::Ptr createStyledButton();
+        Widgets::TextInputField::Ptr createStyledInputField();
+        Widgets::ImageButton::Ptr createStyledImageButton();
+        Widgets::TextBox::Ptr createStyledTextBox();
+        Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout();
+        Widgets::VerticalLayout::Ptr createStyledVerticalLayout();
+
         void addWidget(const Widgets::Widget::Ptr& widget);
 
         glm::vec2 ScreenOffset{};

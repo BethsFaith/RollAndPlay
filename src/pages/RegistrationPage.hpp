@@ -32,11 +32,14 @@ namespace Pages {
         void toCreate();
         void toView();
 
-        static Net::HttpSession::Result registerUser(const std::u16string& login, const std::u16string& password);
+        static Net::HttpSession::Result registerUser(const std::u16string& login,
+                                                     const std::u16string& password,
+                                                     const std::u16string& nickname);
 
         bool validate(const std::u16string& login,
                       const std::u16string& password,
-                      const std::u16string& repeatedPassword);
+                      const std::u16string& repeatedPassword,
+                      const std::u16string& nickname);
         void showResultRegistrationError(Net::HttpSession::Result& result);
 
         StateTag _currentTag = CREATE;
@@ -45,6 +48,7 @@ namespace Pages {
         Widgets::Button::Ptr _saveButton;
         Widgets::Button::Ptr _createButton;
         Widgets::TextInputField::Ptr _loginInputField;
+        Widgets::TextInputField::Ptr _nicknameInputField;
         Widgets::TextInputField::Ptr _passwordInputField;
         Widgets::TextInputField::Ptr _repeatedPasswordInputField;
         Widgets::TextBox::Ptr _creatingMessageBox;

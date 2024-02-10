@@ -13,7 +13,19 @@ namespace Data {
         return 0;
     }
 
+    void Skill::serialize(Json::Value& jsonValue) {}
+
+    void Skill::deserialize(const Json::Value& jsonValue) {}
+
     size_t Skill::serialized_size() const noexcept {
+        return 0;
+    }
+
+    Type Skill::getType() {
+        return SKILL;
+    }
+
+    unsigned int Skill::getIndex() {
         return 0;
     }
 }    //namespace Data

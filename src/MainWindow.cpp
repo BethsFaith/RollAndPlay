@@ -7,8 +7,7 @@
 MainWindow* MainWindow::instance = nullptr;
 
 MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
-    Config::Config::init(configFilePath);
-    auto config = Config::Config::get();
+    Config::Config config(configFilePath);
 
     int height, width;
     Config::pullDesktopResolution(width, height);
@@ -33,15 +32,15 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
-    GraphicLib::Techniques::TextTechnique::initTextRendering(width, height, config->getFontPath("gui"), 20);
+    GraphicLib::Techniques::TextTechnique::initTextRendering(width, height, config.getFontPath("gui"), 20);
 
     auto canvas = std::make_shared<GraphicLib::PickableTexture>();
     canvas->init(width, height);
 
-    auto guiShaderPath = config->getShaderPath("gui");
-    auto selectableShaderPath = config->getShaderPath("selectable");
-    auto textShaderPath = config->getShaderPath("text");
-    auto textureShaderPath = config->getShaderPath("texture");
+    auto guiShaderPath = config.getShaderPath("gui");
+    auto selectableShaderPath = config.getShaderPath("selectable");
+    auto textShaderPath = config.getShaderPath("text");
+    auto textureShaderPath = config.getShaderPath("texture");
 
     auto guiShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
             (guiShaderPath.vertex,
@@ -62,10 +61,11 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
 
     _view = std::make_shared<View>(0, 0,  Widgets::Styles::Color::DARK_GRAY, canvas, guiShader);
 
-    auto host = config->getNetValue("host");
-    auto port = config->getNetValue("port");
-    auto domain = config->getNetValue("domain");
-    Pages::BasePage::setCommonData({.session = std::make_shared<Net::HttpSession>(host, port, domain)});
+    auto host = config.getNetValue("host");
+    auto port = config.getNetValue("port");
+    auto domain = config.getNetValue("domain");
+    Pages::BasePage::setCommonData({.session = std::make_shared<Net::HttpSession>(host, port, domain,
+                                                                                  new Net::Route("../../paths.json"))});
 
     GraphicLib::Primitives::AbstractPrimitive::Ptr rectangle = std::make_shared<GraphicLib::Primitives::Rectangle>(
         GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
@@ -103,8 +103,8 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     textBoxStyle->textLabelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
 
     Widgets::Styles::ImageButtonStyle::Ptr imageButtonStyle = std::make_shared<Widgets::Styles::ImageButtonStyle>();
-    imageButtonStyle->scale = {0.1f, 0.15f};
-    imageButtonStyle->defaultTexturePath = Config::Config::get()->getTexturePath("default");
+    imageButtonStyle->scale = {0.1f, 0.2f};
+    imageButtonStyle->defaultTexturePath = config.getTexturePath("default");
     imageButtonStyle->defaultTextureIndex = 0;
     imageButtonStyle->traceColor = Widgets::Styles::WHITE;
     imageButtonStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
@@ -144,8 +144,6 @@ MainWindow::~MainWindow() {
         glfwDestroyWindow(_window);
     }
     glfwTerminate();
-
-    Config::Config::free();
 }
 
 void MainWindow::init(const char* title, const std::string& configFilePath) {
