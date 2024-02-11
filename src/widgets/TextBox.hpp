@@ -39,6 +39,7 @@ namespace Widgets {
         void setTextSize(float size);
         void setText(const std::u16string& content);
         void setColor(Styles::Color color);
+        void setProjection(float minX, float maxX, float minY, float maxY) override;
 
     private:
         std::unique_ptr<Graphic::Form> _form;

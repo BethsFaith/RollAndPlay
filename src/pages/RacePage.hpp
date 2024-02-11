@@ -24,7 +24,7 @@ namespace Pages {
         explicit RacePage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
         ~RacePage() override = default;
 
-        void init(const glm::vec2& screenOffset) override;
+        void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) override;
 
     private:
         void update() override;

@@ -22,6 +22,10 @@ namespace Widgets {
         _form->setTextPosition({position.x - scale.x / 2.0f + 0.01f, position.y});
     }
 
+    void TextBox::setProjection(float minX, float maxX, float minY, float maxY) {
+        _form->setProjection(minX, maxX, minY, maxY);
+    }
+
     void TextBox::setTransform(glm::vec2 position) {
         _form->setTransform(position);
         _form->setTextPosition({position.x - _form->getScale().x / 2.0f + 0.01f, position.y});

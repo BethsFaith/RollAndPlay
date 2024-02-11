@@ -40,6 +40,7 @@ namespace Widgets {
 
         [[nodiscard]] const std::vector<Button::Ptr>& getElements() const;
         [[nodiscard]] const glm::vec3& getSelectedItemColor() const;
+        void setProjection(float minX, float maxX, float minY, float maxY) override;
 
     private:
         glm::vec2 _position;
@@ -49,6 +50,10 @@ namespace Widgets {
 
         bool _horizontal;
         float _elemOffset = 0.01f;
+        float _minX = -1;
+        float _minY = -1;
+        float _maxX = 1;
+        float _maxY = 1;
 
         std::vector<Button::Ptr> _elements;
         std::weak_ptr<Widgets::Button> _activeElement;

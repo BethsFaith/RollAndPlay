@@ -75,6 +75,7 @@ namespace Widgets {
         }
 
         element->setTransform(_position, _scale);
+        element->setProjection(_minX, _maxX, _minY, _maxY);
         if (_horizontal) {
             _position.x += _scale.x + _elemOffset;
         } else {
@@ -170,5 +171,12 @@ namespace Widgets {
 
     const glm::vec3& MenuBar::getSelectedItemColor() const {
         return _selectedItemColor;
+    }
+
+    void MenuBar::setProjection(float minX, float maxX, float minY, float maxY) {
+        _minX = minX;
+        _maxX = maxX;
+        _minY = minY;
+        _maxY = maxY;
     }
 }    //namespace Widgets

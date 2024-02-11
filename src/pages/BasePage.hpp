@@ -25,7 +25,7 @@ namespace Pages {
 
         void update() override;
 
-        void init(const glm::vec2& screenOffset) override;
+        void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) override;
 
         static void setCommonData(const Common& common);
     protected:
@@ -48,6 +48,8 @@ namespace Pages {
         void addWidget(const Widgets::Widget::Ptr& widget);
 
         glm::vec2 ScreenOffset{};
+        glm::vec2 min{};
+        glm::vec2 max{};
 
         static inline Common CommonData{};
 

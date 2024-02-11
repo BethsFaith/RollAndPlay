@@ -32,6 +32,8 @@ namespace Widgets {
         void setImage(const std::string& texturePath, int textureIndex);
 
         [[nodiscard]] const GraphicLib::Textures::Texture::Ptr& getTexture() const;
+        void setProjection(float minX, float maxX, float minY, float maxY) override;
+
     private:
         Graphic::Form _form;
 

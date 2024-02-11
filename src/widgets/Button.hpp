@@ -28,6 +28,7 @@ namespace Widgets {
 
         bool checkSelecting(unsigned int x, unsigned int y) override;
 
+        void setProjection(float minX, float maxX, float minY, float maxY) override;
         void setTransform(glm::vec2 position, glm::vec2 scale) override;
         void setTransform(glm::vec2 position) override;
 
@@ -39,29 +40,30 @@ namespace Widgets {
 
         [[nodiscard]] bool isUnderCursor() const;
         [[nodiscard]] bool isPressed() const;
-        [[nodiscard]] bool checkId(int id_) const;
 
+        [[nodiscard]] bool checkId(int id_) const;
         void setPressCallback(const std::function<void()>& function);
+
         void setReleaseCallback(const std::function<void()>& function);
 
         void setUnderCursor(bool isUnderCursor);
-
         virtual void setLabelParams(const Styles::TextParams& text);
         virtual void setLabelText(const std::u16string& text);
         virtual void setLabelPosition(glm::vec2 position);
         virtual void setLabelColor(Styles::Color color);
-        virtual void setLabelTextSize(float size);
 
+        virtual void setLabelTextSize(float size);
         virtual void setColor(Styles::Color color);
         virtual void setTraceColor(Styles::Color traceColor);
         virtual void setColor(glm::vec3 color);
-        virtual void setTraceColor(glm::vec3 traceColor);
 
+        virtual void setTraceColor(glm::vec3 traceColor);
         std::u16string getTextLabelContent();
         glm::vec2 getTextLabelPosition();
-        glm::vec3 getColor();
 
+        glm::vec3 getColor();
         void setScale(glm::vec2 scale) override;
+
     protected:
         explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, WidgetType type);
 

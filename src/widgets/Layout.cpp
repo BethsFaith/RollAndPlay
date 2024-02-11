@@ -67,6 +67,9 @@ namespace Widgets {
         scale = scale_;
     }
 
+    void Layout::setProjection(float minX, float maxX, float minY, float maxY) {
+    }
+
     glm::vec2 Layout::getScale() {
         return scale;
     }

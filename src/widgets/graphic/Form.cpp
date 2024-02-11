@@ -9,6 +9,22 @@ namespace Widgets::Graphic {
         _object.setPrimitive(graphicPrimitive);
     }
 
+    void Form::setProjection(float minX, float maxX, float minY, float maxY) {
+        auto technique =  _object.getTechnique(GraphicLib::Techniques::TRANSFORM);
+        GraphicLib::Techniques::TransformTechnique::Ptr transformTechnique;
+        if (technique == nullptr) {
+            transformTechnique = std::make_shared<GraphicLib::Techniques::TransformTechnique>();
+            transformTechnique->enableProjection(minX, maxX, minY, maxY);
+
+            _object.addTechnique(GraphicLib::Techniques::TRANSFORM, transformTechnique);
+            _object.disableTechnique(GraphicLib::Techniques::TRANSFORM);
+        } else {
+            transformTechnique = std::dynamic_pointer_cast<GraphicLib::Techniques::TransformTechnique>(technique);
+
+            transformTechnique->enableProjection(minX, maxX, minY, maxY);
+        }
+    }
+
     void Form::setTransform(glm::vec2 position) {
         auto technique =  _object.getTechnique(GraphicLib::Techniques::TRANSFORM);
         GraphicLib::Techniques::TransformTechnique::Ptr transformTechnique;

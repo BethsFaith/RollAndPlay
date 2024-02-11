@@ -25,7 +25,7 @@ namespace Pages {
         explicit RegistrationPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
         ~RegistrationPage() override = default;
 
-        void init(const glm::vec2& screenOffset) override;
+        void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) override;
 
     private:
         void update() override;

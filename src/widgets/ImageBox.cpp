@@ -16,6 +16,10 @@ namespace Widgets {
                         GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                         GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {}
 
+    void ImageBox::setProjection(float minX, float maxX, float minY, float maxY) {
+        _form.setProjection(maxX, minY, 0, 0);
+    }
+
     void ImageBox::setTransform(glm::vec2 position, glm::vec2 scale) {
         _form.setTransform(position, scale);
     }

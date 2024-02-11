@@ -110,6 +110,10 @@ namespace Widgets {
         _releaseCallback = function;
     }
 
+    void Button::setProjection(float minX, float maxX, float minY, float maxY) {
+        _form.setProjection(minX, maxX, minY, maxY);
+    }
+
     void Button::setTransform(glm::vec2 position) {
         _form.setTransform(position);
 

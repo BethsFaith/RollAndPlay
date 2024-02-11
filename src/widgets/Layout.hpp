@@ -41,6 +41,7 @@ namespace Widgets {
 
     public:
         const std::vector<Widget::Ptr>& getWidgets() const;
+        void setProjection(float minX, float maxX, float minY, float maxY) override;
 
     protected:
         float widgetOffset = 0.1f;

@@ -31,6 +31,7 @@ namespace Pages {
         pos.y = pos.y - (scale.y/2);
 
         widget->setTransform(ScreenOffset + pos);
+        widget->setProjection(min.x, max.x, min.y, max.y);
 
         return widget;
     }
@@ -99,8 +100,11 @@ namespace Pages {
         glDisable(GL_DEPTH_TEST);
     }
 
-    void BasePage::init(const glm::vec2& screenOffset) {
+    void BasePage::init(const glm::vec2& screenOffset, const glm::vec2& min_, const glm::vec2& max_) {
         ScreenOffset = screenOffset;
+
+        min = min_;
+        max = max_;
     }
 
     void BasePage::setCommonData(const Common& common) {

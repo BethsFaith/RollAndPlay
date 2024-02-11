@@ -28,12 +28,15 @@ void ViewDrawer::init(int x, int y, Widgets::Styles::Color viewColor) {
     auto transformTechnique = std::make_shared<Techniques::TransformTechnique>();
     transformTechnique->enableScale(glm::vec3(1.80, 1.65, 0.0f));
     transformTechnique->enableTransform(glm::vec3(x, y, 0.0f));
+    transformTechnique->enableProjection(-1, 1, -1, 1);
     _view.addTechnique(Techniques::TRANSFORM, transformTechnique);
 
     _verticalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.95f, 0.77f},
                                                        glm::vec2{0.09f, 0.1f}, false);
+    _verticalMenu->setProjection(-1, 1, -1, 1);
     _horizontalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.8f, 0.9f},
                                                          glm::vec2{0.2f, 0.1f});
+    _horizontalMenu->setProjection(-1, 1, -1, 1);
 
     _verticalMenu->setSelectedItemColor(Widgets::Styles::LIGHT_BLUE);
     _horizontalMenu->setSelectedItemColor(Widgets::Styles::DARK_GRAY);
