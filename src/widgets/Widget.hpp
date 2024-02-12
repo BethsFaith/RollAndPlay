@@ -20,7 +20,8 @@ namespace Widgets {
 
         virtual bool checkSelecting(unsigned int x, unsigned int y) = 0;
 
-        virtual void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+        virtual void draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                          GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                           GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                           GraphicLib::Shaders::ShaderProgram::Ptr pickShader) = 0;
 

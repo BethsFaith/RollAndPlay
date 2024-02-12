@@ -25,7 +25,7 @@ namespace Data {
     }
 
     void SkillCategory::deserialize(const Json::Value& jsonValue) {
-        _name = Convert::toUTF16(jsonValue["email"].asString());
+        _name = Convert::toUTF16(jsonValue["name"].asString());
         _iconPath = jsonValue["icon"].asString();
     }
 

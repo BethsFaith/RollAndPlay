@@ -18,4 +18,10 @@ namespace Widgets {
     void HorizontalLayout::removeWidget(const Widget::Ptr& widget) {
         Layout::removeWidget(widget);
     }
+
+    void HorizontalLayout::clear() {
+        position.x -= (scale.x + widgetOffset) * (float)widgets.size();
+
+        widgets.clear();
+    }
 }    //namespace Widgets

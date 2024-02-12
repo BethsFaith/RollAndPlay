@@ -53,7 +53,9 @@ namespace Net {
         // удалить потом
         Json::ValueIterator it = _body.begin();
         while (it != _body.end()) {
-            std::cout << it.key() << ":" << it->asString() << std::endl;
+            if (it->isString()) {
+                std::cout << it.key() << ":" << it->asString() << std::endl;
+            }
             ++it;
         }    // конец удаления
 

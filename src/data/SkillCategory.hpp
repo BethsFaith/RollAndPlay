@@ -34,8 +34,8 @@ namespace Data {
 
         void setName(const std::u16string& name);
         void setName(const std::string& name);
-
         void setIconPath(const std::string& iconPath);
+
         [[nodiscard]] uint8_t getIndex() const;
         [[nodiscard]] const std::u16string& getName() const;
         [[nodiscard]] const std::string& getIconPath() const;

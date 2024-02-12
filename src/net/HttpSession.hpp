@@ -18,9 +18,8 @@ namespace Net {
             std::string errorMessage;
 
             bool haveError = false;
-            bool containData = false;
 
-            Data::AData::Ptr data;
+            std::vector<Data::AData::Ptr> data;
         };
 
         using Ptr = std::shared_ptr<HttpSession>;
@@ -33,6 +32,7 @@ namespace Net {
         Result updateUserData(Data::User& user);
 
         Result create(const Data::AData::Ptr& data);
+        Result getList(Data::Type type);
 
     private:
         ApiClient _client;

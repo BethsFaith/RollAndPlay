@@ -15,11 +15,7 @@ Gui::Gui(GraphicLib::PickableTexture::Ptr canvas) : _canvas(std::move(canvas)) {
 
 void Gui::draw() {
     for (auto& form : _widgets) {
-        if (form->getType() == Widgets::IMAGE_BUTTON) {
-            form->draw(textureShader, textShader, selectableShader);
-        } else {
-            form->draw(colorShader, textShader, selectableShader);
-        }
+        form->draw(colorShader, textureShader, textShader, selectableShader);
     }
 }
 

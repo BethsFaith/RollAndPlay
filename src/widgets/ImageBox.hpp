@@ -18,7 +18,8 @@ namespace Widgets {
         ~ImageBox() override = default;
 
         bool checkSelecting(unsigned int x, unsigned int y) override;
-        void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+        void draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 

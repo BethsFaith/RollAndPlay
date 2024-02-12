@@ -23,7 +23,8 @@ namespace Widgets {
         _tracing.setColor(getRGB(Styles::Color::WHITE));
     }
 
-    void Button::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+    void Button::draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                      GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                       GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                       GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
         if (isUnderCursor()) {
@@ -39,7 +40,7 @@ namespace Widgets {
             glStencilFunc(GL_ALWAYS, 1, 0xFF);    // все фрагменты должны пройти тест трафарета
             glStencilMask(0xFF);    // включаем запись в буфер трафарета
 
-            _form.renderForm(formShader);
+            _form.renderForm(colorShader);
 
             glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
             glStencilMask(0x00);
@@ -51,14 +52,14 @@ namespace Widgets {
             glDisable(GL_DEPTH_TEST);
             glEnable(GL_STENCIL_TEST);
 
-            _tracing.renderForm(formShader);
+            _tracing.renderForm(colorShader);
 
             glStencilMask(0xFF);
             glStencilFunc(GL_ALWAYS, 1, 0xFF);
             glEnable(GL_DEPTH_TEST);
             glDisable(GL_STENCIL_TEST);
         } else {
-            _form.renderForm(formShader);
+            _form.renderForm(colorShader);
             _form.renderText(textShader);
             _form.renderPick(pickShader, canvas);
         }

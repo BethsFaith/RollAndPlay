@@ -21,4 +21,10 @@ namespace Widgets {
     void VerticalLayout::removeWidget(const Widget::Ptr& widget) {
         Layout::removeWidget(widget);
     }
+
+    void VerticalLayout::clear() {
+        position.y += (scale.y + widgetOffset) * (float)widgets.size();
+
+        widgets.clear();
+    }
 }

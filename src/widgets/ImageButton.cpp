@@ -21,10 +21,11 @@ namespace Widgets {
         _form.setTexture(_texture, textureIndex);
     }
 
-    void ImageButton::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+    void ImageButton::draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                           GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                            GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                            GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
-        Button::draw(formShader, textShader, pickShader);
+        Button::draw(textureShader, textureShader, textShader, pickShader);
     }
 
     void ImageButton::updateTextPosition(glm::vec2 position, glm::vec2 scale) {

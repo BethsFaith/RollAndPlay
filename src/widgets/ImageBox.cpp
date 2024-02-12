@@ -12,12 +12,16 @@ namespace Widgets {
         return false;
     }
 
-    void ImageBox::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+    void ImageBox::draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                        GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                         GraphicLib::Shaders::ShaderProgram::Ptr textShader,
-                        GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {}
+                        GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
+        _form.renderForm(textureShader);
+        _form.renderText(textShader);
+    }
 
     void ImageBox::setProjection(float minX, float maxX, float minY, float maxY) {
-        _form.setProjection(maxX, minY, 0, 0);
+        _form.setProjection(minX, maxX, minY, maxY);
     }
 
     void ImageBox::setTransform(glm::vec2 position, glm::vec2 scale) {

@@ -26,8 +26,7 @@ namespace Net {
             Data::User::Ptr createdUser = std::make_shared<Data::User>();
             createdUser->deserialize(response.getBody());
 
-            result.containData = true;
-            result.data = createdUser;
+            result.data.push_back(createdUser);
         } else {
             result.haveError = true;
             result.errorMessage = response.getErrorMessage();
@@ -72,8 +71,7 @@ namespace Net {
             Data::User::Ptr user = std::make_shared<Data::User>();
             user->deserialize(response.getBody());
 
-            result.containData = true;
-            result.data = user;
+            result.data.push_back(user);
         } else {
             result.haveError = true;
             result.errorMessage = response.getErrorMessage();
@@ -133,8 +131,40 @@ namespace Net {
 
             createdJsonData->deserialize(response.getBody());
 
-            result.containData = true;
-            result.data = createdData;
+            result.data.push_back(createdData);
+        } else {
+            result.haveError = true;
+            result.errorMessage = response.getErrorMessage();
+        }
+
+        result.statusMessage = response.getStatusMessage();
+
+        return result;
+    }
+
+    HttpSession::Result HttpSession::getList(Data::Type type) {
+        auto paths = _route.getPaths();
+        auto target = std::string(paths[type][Net::Http::MethodGet]);
+        Net::HttpRequest request(target,Net::Http::MethodGet, _domain);
+
+        request.setCookie(_cookie);
+
+        auto response = _client.connect(request);
+
+        Result result;
+
+        if (response.getStatusCode() == HttpResponse::StatusCode::OK) {
+            auto body = response.getBody();
+            if (body.isArray()) {
+                for (int i{}; i < body.size(); ++i) {
+                    auto createdData = Data::DataFactory::create(type);
+                    auto createdJsonData =  std::dynamic_pointer_cast<Data::IJsonSerializable>(createdData);
+
+                    createdJsonData->deserialize(body[i]);
+
+                    result.data.push_back(createdData);
+                }
+            }
         } else {
             result.haveError = true;
             result.errorMessage = response.getErrorMessage();

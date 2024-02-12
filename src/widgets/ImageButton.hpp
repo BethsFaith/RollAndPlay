@@ -17,7 +17,8 @@ namespace Widgets {
 
         explicit ImageButton(GraphicLib::Primitives::AbstractPrimitive::Ptr graphicPrimitive);
 
-        void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+        void draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 

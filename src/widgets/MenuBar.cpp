@@ -44,11 +44,12 @@ namespace Widgets {
         }
     }
 
-    void MenuBar::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+    void MenuBar::draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                       GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                        GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                        GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
         for (auto& widget : _elements) {
-            widget->draw(formShader, textShader, pickShader);
+            widget->draw(colorShader, GraphicLib::Shaders::ShaderProgram::Ptr(), textShader, pickShader);
         }
     }
 

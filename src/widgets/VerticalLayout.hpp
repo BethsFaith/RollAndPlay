@@ -17,6 +17,7 @@ namespace Widgets {
 
         void addWidget(const Widget::Ptr& widget) override;
         void removeWidget(const Widget::Ptr& widget) override;
+        void clear() override;
     };
 }
 #endif    //ROLLANDPLAY_VERTICALLAYOUT_HPP

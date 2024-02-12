@@ -27,8 +27,21 @@ namespace Pages {
         auto widget = _builder->createWidget(type);
 
         auto scale = widget->getScale();
-        pos.x = pos.x + (scale.x/2);
-        pos.y = pos.y - (scale.y/2);
+        pos.x = pos.x + (scale.x / 2);
+        pos.y = pos.y - (scale.y / 2);
+
+        widget->setTransform(ScreenOffset + pos);
+        widget->setProjection(min.x, max.x, min.y, max.y);
+
+        return widget;
+    }
+
+    Widgets::Widget::Ptr BasePage::createStyledWidget(Widgets::WidgetType type, glm::vec2 pos, glm::vec2 scale) {
+        auto widget = _builder->createWidget(type);
+
+        widget->setScale(scale);
+        pos.x = pos.x + (scale.x / 2);
+        pos.y = pos.y - (scale.y / 2);
 
         widget->setTransform(ScreenOffset + pos);
         widget->setProjection(min.x, max.x, min.y, max.y);
@@ -40,16 +53,33 @@ namespace Pages {
         return std::dynamic_pointer_cast<Widgets::Button>(createStyledWidget(Widgets::BUTTON, pos));
     }
 
+    Widgets::Button::Ptr BasePage::createStyledButton(glm::vec2 pos, glm::vec2 scale) {
+        return std::dynamic_pointer_cast<Widgets::Button>(createStyledWidget(Widgets::BUTTON, pos, scale));
+    }
+
     Widgets::TextInputField::Ptr BasePage::createStyledInputField(glm::vec2 pos) {
         return std::dynamic_pointer_cast<Widgets::TextInputField>(createStyledWidget(Widgets::TEXT_INPUT_FIELD, pos));
+    }
+
+    Widgets::TextInputField::Ptr BasePage::createStyledInputField(glm::vec2 pos, glm::vec2 scale) {
+        return std::dynamic_pointer_cast<Widgets::TextInputField>(
+            createStyledWidget(Widgets::TEXT_INPUT_FIELD, pos, scale));
     }
 
     Widgets::ImageButton::Ptr BasePage::createStyledImageButton(glm::vec2 pos) {
         return std::dynamic_pointer_cast<Widgets::ImageButton>(createStyledWidget(Widgets::IMAGE_BUTTON, pos));
     }
 
+    Widgets::ImageButton::Ptr BasePage::createStyledImageButton(glm::vec2 pos, glm::vec2 scale) {
+        return std::dynamic_pointer_cast<Widgets::ImageButton>(createStyledWidget(Widgets::IMAGE_BUTTON, pos, scale));
+    }
+
     Widgets::TextBox::Ptr BasePage::createStyledTextBox(glm::vec2 pos) {
         return std::dynamic_pointer_cast<Widgets::TextBox>(createStyledWidget(Widgets::TEXT_BOX, pos));
+    }
+
+    Widgets::TextBox::Ptr BasePage::createStyledTextBox(glm::vec2 pos, glm::vec2 scale) {
+        return std::dynamic_pointer_cast<Widgets::TextBox>(createStyledWidget(Widgets::TEXT_BOX, pos, scale));
     }
 
     Widgets::HorizontalLayout::Ptr BasePage::createStyledHorizontalLayout(glm::vec2 pos) {
@@ -57,8 +87,18 @@ namespace Pages {
             createStyledWidget(Widgets::HORIZONTAL_LAYOUT, pos));
     }
 
+    Widgets::HorizontalLayout::Ptr BasePage::createStyledHorizontalLayout(glm::vec2 pos, glm::vec2 scale) {
+        return std::dynamic_pointer_cast<Widgets::HorizontalLayout>(
+            createStyledWidget(Widgets::HORIZONTAL_LAYOUT, pos, scale));
+    }
+
     Widgets::VerticalLayout::Ptr BasePage::createStyledVerticalLayout(glm::vec2 pos) {
         return std::dynamic_pointer_cast<Widgets::VerticalLayout>(createStyledWidget(Widgets::VERTICAL_LAYOUT, pos));
+    }
+
+    Widgets::VerticalLayout::Ptr BasePage::createStyledVerticalLayout(glm::vec2 pos, glm::vec2 scale) {
+        return std::dynamic_pointer_cast<Widgets::VerticalLayout>(
+            createStyledWidget(Widgets::VERTICAL_LAYOUT, pos, scale));
     }
 
     Widgets::Widget::Ptr BasePage::createStyledWidget(Widgets::WidgetType type) {
@@ -82,8 +122,7 @@ namespace Pages {
     }
 
     Widgets::HorizontalLayout::Ptr BasePage::createStyledHorizontalLayout() {
-        return std::dynamic_pointer_cast<Widgets::HorizontalLayout>(
-            createStyledWidget(Widgets::HORIZONTAL_LAYOUT));
+        return std::dynamic_pointer_cast<Widgets::HorizontalLayout>(createStyledWidget(Widgets::HORIZONTAL_LAYOUT));
     }
 
     Widgets::VerticalLayout::Ptr BasePage::createStyledVerticalLayout() {

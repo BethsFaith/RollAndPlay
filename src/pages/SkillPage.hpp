@@ -31,17 +31,24 @@ namespace Pages {
 
         void toStart();
         void toCategoryCreate();
+        void toSkillCreate();
 
         Net::HttpSession::Result pushCategory();
+        Net::HttpSession::Result pushSkills();
+
+        static Net::HttpSession::Result pullCategories();
+        static Net::HttpSession::Result pullSkills();
 
         StateTag _currentTag = START;
 
-        Widgets::Button::Ptr _createCategoryButton;
-        Widgets::Button::Ptr _saveCategoryButton;
-        Widgets::Button::Ptr _createSkillButton;
-        Widgets::Button::Ptr _saveSkillButton;
+        Widgets::TextBox::Ptr _categoriesLabel;
+        Widgets::TextBox::Ptr _skillLabel;
 
-        Widgets::VerticalLayout::Ptr _startLayout;
+        Widgets::HorizontalLayout::Ptr _createButtonLayout;
+        Widgets::HorizontalLayout::Ptr _createCategoryLayout;
+        Widgets::HorizontalLayout::Ptr _createSkillLayout;
+        Widgets::HorizontalLayout::Ptr _viewCategoryLayout;
+        Widgets::HorizontalLayout::Ptr _viewSkillLayout;
         Widgets::VerticalLayout::Ptr _createLayout;
 
         Widgets::TextInputField::Ptr _nameInputField;

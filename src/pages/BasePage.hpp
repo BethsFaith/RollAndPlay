@@ -30,12 +30,21 @@ namespace Pages {
         static void setCommonData(const Common& common);
     protected:
         Widgets::Widget::Ptr createStyledWidget(Widgets::WidgetType type, glm::vec2 pos);
+        Widgets::Widget::Ptr createStyledWidget(Widgets::WidgetType type, glm::vec2 pos, glm::vec2 scale);
+
         Widgets::Button::Ptr createStyledButton(glm::vec2 pos);
+        Widgets::Button::Ptr createStyledButton(glm::vec2 pos, glm::vec2 scale);
         Widgets::TextInputField::Ptr createStyledInputField(glm::vec2 pos);
+        Widgets::TextInputField::Ptr createStyledInputField(glm::vec2 pos, glm::vec2 scale);
         Widgets::ImageButton::Ptr createStyledImageButton(glm::vec2 pos);
+        Widgets::ImageButton::Ptr createStyledImageButton(glm::vec2 pos, glm::vec2 scale);
         Widgets::TextBox::Ptr createStyledTextBox(glm::vec2 pos);
+        Widgets::TextBox::Ptr createStyledTextBox(glm::vec2 pos, glm::vec2 scale);
+
         Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout(glm::vec2 pos);
+        Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout(glm::vec2 pos, glm::vec2 scale);
         Widgets::VerticalLayout::Ptr createStyledVerticalLayout(glm::vec2 pos);
+        Widgets::VerticalLayout::Ptr createStyledVerticalLayout(glm::vec2 pos, glm::vec2 scale);
 
         Widgets::Widget::Ptr createStyledWidget(Widgets::WidgetType type);
         Widgets::Button::Ptr createStyledButton();

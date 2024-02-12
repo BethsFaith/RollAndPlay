@@ -114,12 +114,16 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     layoutStyle->widgetOffset = 0.1f;
     layoutStyle->scale = {0.7f, 0.1f};
 
+    Widgets::Styles::LayoutStyle::Ptr horStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
+    horStyle->widgetOffset = 0.01f;
+    horStyle->scale = {0.7f, 0.1f};
+
     Widgets::WidgetBuilder::Ptr widgetBuilder = std::make_shared<Widgets::WidgetBuilder>();
     widgetBuilder->addWidgetStyle(Widgets::BUTTON, buttonStyle);
     widgetBuilder->addWidgetStyle(Widgets::TEXT_INPUT_FIELD, textInputFieldStyle);
     widgetBuilder->addWidgetStyle(Widgets::IMAGE_BUTTON, imageButtonStyle);
     widgetBuilder->addWidgetStyle(Widgets::TEXT_BOX, textBoxStyle);
-    widgetBuilder->addWidgetStyle(Widgets::HORIZONTAL_LAYOUT, layoutStyle);
+    widgetBuilder->addWidgetStyle(Widgets::HORIZONTAL_LAYOUT, horStyle);
     widgetBuilder->addWidgetStyle(Widgets::VERTICAL_LAYOUT, layoutStyle);
 
     auto systemPage = std::make_shared<Pages::SystemPage>(canvas, widgetBuilder);

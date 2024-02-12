@@ -18,11 +18,12 @@ namespace Widgets {
         }
     }
 
-    void Layout::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+    void Layout::draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                      GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                       GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                       GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
         for (auto& widget : widgets) {
-            widget->draw(formShader, textShader, pickShader);
+            widget->draw(colorShader, textureShader, textShader, pickShader);
         }
     }
 
@@ -65,6 +66,12 @@ namespace Widgets {
 
     void Layout::setScale(glm::vec2 scale_) {
         scale = scale_;
+
+        auto elements = widgets;
+        widgets.clear();
+        for (auto& elem : elements) {
+            addWidget(elem);
+        }
     }
 
     void Layout::setProjection(float minX, float maxX, float minY, float maxY) {

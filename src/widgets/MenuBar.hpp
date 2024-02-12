@@ -14,7 +14,8 @@ namespace Widgets {
 
         explicit MenuBar(glm::vec2 position, glm::vec2 scale, bool horizontal = true);
         ~MenuBar() override = default;
-        void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+        void draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 
