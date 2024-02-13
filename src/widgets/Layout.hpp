@@ -25,7 +25,7 @@ namespace Widgets {
         void setProjection(float minX, float maxX, float minY, float maxY) override;
         void setTransform(glm::vec2 position, glm::vec2 scale) override;
         void setTransform(glm::vec2 position) override;
-        void setScale(glm::vec2 scale) override;
+        void setScale(glm::vec2 elemScale) override;
 
         bool checkSelecting(unsigned int x, unsigned int y) override;
 
@@ -46,6 +46,7 @@ namespace Widgets {
         float widgetOffset = 0.1f;
 
         glm::vec2 position{};
+        glm::vec2 elemScale{};
         glm::vec2 scale{};
     };
 }    //namespace Widgets

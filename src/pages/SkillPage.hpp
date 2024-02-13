@@ -18,7 +18,14 @@ namespace Pages {
             START,
             CREATE_SKILL,
             CREATE_CATEGORY,
-            VIEW
+            VIEW_SKILL,
+            VIEW_CATEGORY,
+            EDIT_SKILL,
+            EDIT_CATEGORY,
+        };
+        struct Buffer {
+            Data::Skill::Ptr skill;
+            Data::SkillCategory::Ptr category;
         };
 
         explicit SkillPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
@@ -30,30 +37,34 @@ namespace Pages {
         void update() override;
 
         void toStart();
-        void toCategoryCreate();
         void toSkillCreate();
+        void toCategoryCreate();
+        void toSkillView();
+        void toCategoryView();
+        void toSkillEdit();
+        void toCategoryEdit();
 
-        Net::HttpSession::Result pushCategory();
-        Net::HttpSession::Result pushSkills();
+        Net::HttpSession::Result postCategory();
+        Net::HttpSession::Result postSkills();
 
-        static Net::HttpSession::Result pullCategories();
-        static Net::HttpSession::Result pullSkills();
+        Net::HttpSession::Result pullCategories();
+        Net::HttpSession::Result pullSkills();
+
+        Net::HttpSession::Result updateCategory();
+        Net::HttpSession::Result updateSkills();
 
         StateTag _currentTag = START;
 
-        Widgets::TextBox::Ptr _categoriesLabel;
-        Widgets::TextBox::Ptr _skillLabel;
-
-        Widgets::HorizontalLayout::Ptr _createButtonLayout;
-        Widgets::HorizontalLayout::Ptr _createCategoryLayout;
-        Widgets::HorizontalLayout::Ptr _createSkillLayout;
         Widgets::HorizontalLayout::Ptr _viewCategoryLayout;
         Widgets::HorizontalLayout::Ptr _viewSkillLayout;
-        Widgets::VerticalLayout::Ptr _createLayout;
+        Widgets::HorizontalLayout::Ptr _categoryListLayout;
+        Widgets::HorizontalLayout::Ptr _skillsListLayout;
 
         Widgets::TextInputField::Ptr _nameInputField;
         Widgets::ImageButton::Ptr _iconButton;
         Widgets::TextInputField::Ptr _iconPathInputField;
+
+        Buffer _buf;
     };
 }    //namespace Pages
 

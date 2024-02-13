@@ -71,7 +71,7 @@ add_executable(RollAndPlay
         src/net/HttpRequest.cpp
         src/net/HttpResponse.cpp
         src/net/HttpSession.cpp
-        src/data/convert/Convert.cpp src/data/convert/Convert.hpp src/net/Route.cpp src/net/Route.hpp src/config/JsonParser.hpp src/data/DataFactory.cpp src/data/DataFactory.hpp)
+        src/data/convert/Convert.cpp src/data/convert/Convert.hpp src/net/Route.cpp src/net/Route.hpp src/config/JsonParser.hpp src/data/DataFactory.cpp src/data/DataFactory.hpp src/widgets/styles/ImageBoxStyle.hpp)
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

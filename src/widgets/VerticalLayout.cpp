@@ -10,12 +10,20 @@ namespace Widgets {
     void VerticalLayout::addWidget(const Widget::Ptr& widget) {
         Layout::addWidget(widget);
 
-        if (widget->getType() == IMAGE_BUTTON || widget->getType() == IMAGE_BOX) {
-            widget->setTransform(position);
+        glm::vec2 widgetScale;
+        if (elemScale.x == 0.0f && elemScale.y == 0.0f) {
+            widgetScale = widget->getScale();
+            widget->setTransform({position.x + widgetScale.x/2, position.y});
         } else {
-            widget->setTransform(position, scale);
+            widgetScale = elemScale;
+            widget->setTransform({position.x + widgetScale.x/2, position.y}, elemScale);
         }
-        position.y -= widget->getScale().y + widgetOffset;
+
+        position.y -= widgetScale.y + widgetOffset;
+        scale.y += widgetScale.y/2;
+        if (scale.x < widgetScale.x) {
+            scale.x = widgetScale.x;
+        }
     }
 
     void VerticalLayout::removeWidget(const Widget::Ptr& widget) {
@@ -23,8 +31,10 @@ namespace Widgets {
     }
 
     void VerticalLayout::clear() {
-        position.y += (scale.y + widgetOffset) * (float)widgets.size();
+        position.y += (scale.y*2 + widgetOffset * (float)widgets.size());
 
         widgets.clear();
+
+        scale = {};
     }
 }

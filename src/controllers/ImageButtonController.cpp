@@ -27,15 +27,13 @@ namespace Controllers {
 
             for (auto& button : _buttons) {
                 if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
-                    if (_target != button) {
-                        button->press();
-
-                        if (_target != nullptr) {
-                            _target->setUnderCursor(false);
-                        }
-                        _target = button;
-                        _target->setUnderCursor(true);
+                    if (_target != button && _target != nullptr) {
+                        _target->release();
                     }
+                    button->press();
+
+                    _target = button;
+
                     break;
                 }
             }
@@ -51,8 +49,6 @@ namespace Controllers {
         for (auto& button : _buttons) {
             if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
                 if (_target != button) {
-                    button->press();
-
                     if (_target != nullptr) {
                         _target->setUnderCursor(false);
                     }

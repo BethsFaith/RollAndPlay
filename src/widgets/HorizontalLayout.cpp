@@ -10,9 +10,20 @@ namespace Widgets {
     void HorizontalLayout::addWidget(const Widget::Ptr& widget) {
         Layout::addWidget(widget);
 
-        widget->setTransform(position, scale);
+        glm::vec2 widgetScale;
+        if (elemScale.x == 0.0f && elemScale.y == 0.0f) {
+            widgetScale = widget->getScale();
+            widget->setTransform({position.x + widgetScale.x/2, position.y - widgetScale.y/2});
+        } else {
+            widgetScale = elemScale;
+            widget->setTransform({position.x + widgetScale.x/2, position.y - widgetScale.y/2}, elemScale);
+        }
 
-        position.x += scale.x + widgetOffset;
+        position.x += widgetScale.x + widgetOffset;
+        scale.x += widgetScale.x/2;
+        if (scale.y < widgetScale.y) {
+            scale.y = widgetScale.y;
+        }
     }
 
     void HorizontalLayout::removeWidget(const Widget::Ptr& widget) {
@@ -20,8 +31,14 @@ namespace Widgets {
     }
 
     void HorizontalLayout::clear() {
-        position.x -= (scale.x + widgetOffset) * (float)widgets.size();
+        position.x -= (scale.x*2 + widgetOffset * (float)widgets.size());
 
         widgets.clear();
+
+        scale = {};
+    }
+
+    glm::vec2 HorizontalLayout::getScale() {
+        return {0.0f, scale.y};
     }
 }    //namespace Widgets

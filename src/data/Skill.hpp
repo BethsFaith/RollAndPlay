@@ -16,6 +16,7 @@ namespace Data {
     public:
         using Ptr = std::shared_ptr<Skill>;
 
+        Skill() = default;
         ~Skill() override = default;
 
         size_t serialize(Storage::StreamWriter& writer) const override;
@@ -26,8 +27,10 @@ namespace Data {
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
+        void setIndex(unsigned int index) override;
+
         Type getType() override;
-        unsigned int getIndex() override;
+        int getIndex() override;
 
         void setName(const std::u16string& name);
         void setName(const std::string& name);
@@ -36,12 +39,11 @@ namespace Data {
 
         [[nodiscard]] const std::u16string& getName() const;
         [[nodiscard]] const std::string& getIconPath() const;
-        [[nodiscard]] uint8_t getCategoryIndex() const;
-
+        [[nodiscard]] int getCategoryIndex() const;
     private:
         std::u16string _name;
         std::string _iconPath;
-        uint8_t _categoryIndex = -1;
+        int _categoryId = -1;
     };
 }    //namespace Data
 

@@ -110,21 +110,28 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     imageButtonStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
     imageButtonStyle->figure = textureRectangle;
 
-    Widgets::Styles::LayoutStyle::Ptr layoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
-    layoutStyle->widgetOffset = 0.1f;
-    layoutStyle->scale = {0.7f, 0.1f};
+    auto imageBoxStyle = std::make_shared<Widgets::Styles::ImageBoxStyle>();
+    imageBoxStyle->scale = {0.1f, 0.2f};
+    imageBoxStyle->defaultTexturePath = config.getTexturePath("default");
+    imageBoxStyle->defaultTextureIndex = 0;
+    imageBoxStyle->figure = textureRectangle;
 
-    Widgets::Styles::LayoutStyle::Ptr horStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
-    horStyle->widgetOffset = 0.01f;
-    horStyle->scale = {0.7f, 0.1f};
+    Widgets::Styles::LayoutStyle::Ptr vertLayoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
+    vertLayoutStyle->widgetOffset = 0.1f;
+    vertLayoutStyle->scale = {0.0f, 0.0f};
+
+    Widgets::Styles::LayoutStyle::Ptr horizLayoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
+    horizLayoutStyle->widgetOffset = 0.01f;
+    horizLayoutStyle->scale = {0.0f, 0.0f};
 
     Widgets::WidgetBuilder::Ptr widgetBuilder = std::make_shared<Widgets::WidgetBuilder>();
     widgetBuilder->addWidgetStyle(Widgets::BUTTON, buttonStyle);
     widgetBuilder->addWidgetStyle(Widgets::TEXT_INPUT_FIELD, textInputFieldStyle);
     widgetBuilder->addWidgetStyle(Widgets::IMAGE_BUTTON, imageButtonStyle);
+    widgetBuilder->addWidgetStyle(Widgets::IMAGE_BOX, imageBoxStyle);
     widgetBuilder->addWidgetStyle(Widgets::TEXT_BOX, textBoxStyle);
-    widgetBuilder->addWidgetStyle(Widgets::HORIZONTAL_LAYOUT, horStyle);
-    widgetBuilder->addWidgetStyle(Widgets::VERTICAL_LAYOUT, layoutStyle);
+    widgetBuilder->addWidgetStyle(Widgets::HORIZONTAL_LAYOUT, horizLayoutStyle);
+    widgetBuilder->addWidgetStyle(Widgets::VERTICAL_LAYOUT, vertLayoutStyle);
 
     auto systemPage = std::make_shared<Pages::SystemPage>(canvas, widgetBuilder);
     auto skillPage = std::make_shared<Pages::SkillPage>(canvas, widgetBuilder);
@@ -186,10 +193,8 @@ void MainWindow::run() {
         clearColor();
         updateDeltaTime();
 
-        if (_view != nullptr) {
-            _view->processKeyboardInput(_window);
-            _view->display();
-        }
+        _view->processKeyboardInput(_window);
+        _view->display();
 
         glfwSwapBuffers(_window);
         glfwPollEvents();

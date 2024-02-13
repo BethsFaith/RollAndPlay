@@ -14,6 +14,8 @@ namespace Widgets {
     void Layout::removeWidget(const Widget::Ptr& widget) {
         auto pos = std::find(widgets.begin(), widgets.end(), widget);
         if (pos != widgets.end()) {
+            scale -= widget->getScale();
+
             widgets.erase(pos);
         }
     }
@@ -50,7 +52,7 @@ namespace Widgets {
     }
 
     void Layout::setTransform(glm::vec2 position_, glm::vec2 scale_) {
-        scale = scale_;
+        elemScale = scale_;
         setTransform(position_);
     }
 
@@ -64,8 +66,8 @@ namespace Widgets {
         }
     }
 
-    void Layout::setScale(glm::vec2 scale_) {
-        scale = scale_;
+    void Layout::setScale(glm::vec2 elemScale_) {
+        elemScale = elemScale_;
 
         auto elements = widgets;
         widgets.clear();

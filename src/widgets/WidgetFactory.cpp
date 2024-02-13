@@ -76,6 +76,18 @@ namespace Widgets {
 
                 break;
             }
+            case IMAGE_BOX: {
+                auto imageBoxStyle = std::dynamic_pointer_cast<Styles::ImageBoxStyle>(style);
+                auto imageBox = std::make_shared<ImageBox>(imageBoxStyle->figure);
+
+                if (imageBox != nullptr && imageBoxStyle != nullptr) {
+                    imageBox->setImage(imageBoxStyle->defaultTexturePath, imageBoxStyle->defaultTextureIndex);
+                }
+
+                result = imageBox;
+
+                break;
+            }
             case MENU_BAR: {
                 auto menuBarStyle = std::dynamic_pointer_cast<Styles::MenuBarStyle>(style);
                 auto menuBar = std::make_shared<MenuBar>(menuBarStyle->defaultPosition,

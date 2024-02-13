@@ -31,7 +31,6 @@ namespace Pages {
     protected:
         Widgets::Widget::Ptr createStyledWidget(Widgets::WidgetType type, glm::vec2 pos);
         Widgets::Widget::Ptr createStyledWidget(Widgets::WidgetType type, glm::vec2 pos, glm::vec2 scale);
-
         Widgets::Button::Ptr createStyledButton(glm::vec2 pos);
         Widgets::Button::Ptr createStyledButton(glm::vec2 pos, glm::vec2 scale);
         Widgets::TextInputField::Ptr createStyledInputField(glm::vec2 pos);
@@ -40,7 +39,8 @@ namespace Pages {
         Widgets::ImageButton::Ptr createStyledImageButton(glm::vec2 pos, glm::vec2 scale);
         Widgets::TextBox::Ptr createStyledTextBox(glm::vec2 pos);
         Widgets::TextBox::Ptr createStyledTextBox(glm::vec2 pos, glm::vec2 scale);
-
+        Widgets::ImageBox::Ptr createStyledImageBox(glm::vec2 pos);
+        Widgets::ImageBox::Ptr createStyledImageBox(glm::vec2 pos, glm::vec2 scale);
         Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout(glm::vec2 pos);
         Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout(glm::vec2 pos, glm::vec2 scale);
         Widgets::VerticalLayout::Ptr createStyledVerticalLayout(glm::vec2 pos);
@@ -53,8 +53,10 @@ namespace Pages {
         Widgets::TextBox::Ptr createStyledTextBox();
         Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout();
         Widgets::VerticalLayout::Ptr createStyledVerticalLayout();
+        Widgets::ImageBox::Ptr createStyledImageBox();
 
         void addWidget(const Widgets::Widget::Ptr& widget);
+        void addWidget(const Widgets::Widget::Ptr& widget, glm::vec2 pos);
 
         glm::vec2 ScreenOffset{};
         glm::vec2 min{};

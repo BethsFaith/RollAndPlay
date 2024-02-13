@@ -5,12 +5,6 @@
 #include "SkillCategory.hpp"
 
 namespace Data {
-    uint8_t SkillCategory::index = 0;
-
-    SkillCategory::SkillCategory() {
-        _index = index++;
-    }
-
     size_t SkillCategory::serialize(Storage::StreamWriter& writer) const {
         return 0;
     }
@@ -20,11 +14,17 @@ namespace Data {
     }
 
     void SkillCategory::serialize(Json::Value& jsonValue) {
+        if (id != -1) {
+            jsonValue["id"] = id;
+        }
+
         jsonValue["name"] = Convert::toUTF8(_name);
         jsonValue["icon"] = _iconPath;
     }
 
     void SkillCategory::deserialize(const Json::Value& jsonValue) {
+        id = jsonValue["id"].asInt();
+
         _name = Convert::toUTF16(jsonValue["name"].asString());
         _iconPath = jsonValue["icon"].asString();
     }
@@ -33,12 +33,8 @@ namespace Data {
         return 0;
     }
 
-    [[maybe_unused]] uint8_t SkillCategory::getIndex() const {
-        return _index;
-    }
-
-    const std::u16string& SkillCategory::getName() const {
-        return _name;
+    void SkillCategory::setIndex(unsigned int index) {
+        id = (int)index;
     }
 
     void SkillCategory::setName(const std::u16string& name) {
@@ -49,6 +45,10 @@ namespace Data {
         _name = std::u16string(name.begin(), name.end());
     }
 
+    const std::u16string& SkillCategory::getName() const {
+        return _name;
+    }
+
     const std::string& SkillCategory::getIconPath() const {
         return _iconPath;
     }
@@ -57,8 +57,8 @@ namespace Data {
         _iconPath = iconPath;
     }
 
-    unsigned int SkillCategory::getIndex() {
-        return _index;
+    int SkillCategory::getIndex() {
+        return id;
     }
 
     Type SkillCategory::getType() {

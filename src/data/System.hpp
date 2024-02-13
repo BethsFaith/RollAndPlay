@@ -38,8 +38,6 @@ namespace Data {
 
         void addClass(Skill& skill);
 
-        unsigned int getIndex() override;
-
         const std::u16string& getName() const;
         const std::u16string& getImage() const;
 

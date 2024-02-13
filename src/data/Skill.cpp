@@ -14,19 +14,26 @@ namespace Data {
     }
 
     void Skill::serialize(Json::Value& jsonValue) {
+        if (id != -1) {
+            jsonValue["id"] = id;
+        }
+
         jsonValue["name"] = Convert::toUTF8(_name);
         jsonValue["icon"] = _iconPath;
-        if (_categoryIndex != -1) {
-            jsonValue["category_index"] = _categoryIndex;
+
+        if (_categoryId != -1) {
+            jsonValue["category_index"] = _categoryId;
         }
     }
 
     void Skill::deserialize(const Json::Value& jsonValue) {
+        id = jsonValue["id"].asInt();
+
         _name = Convert::toUTF16(jsonValue["name"].asString());
         _iconPath = jsonValue["icon"].asString();
 
         if (jsonValue.isMember("category_index")) {
-            _categoryIndex = jsonValue["category_index"].asUInt();
+            _categoryId = jsonValue["category_index"].asInt();
         }
     }
 
@@ -38,8 +45,12 @@ namespace Data {
         return SKILL;
     }
 
-    unsigned int Skill::getIndex() {
-        return 0;
+    int Skill::getIndex() {
+        return id;
+    }
+
+    void Skill::setIndex(unsigned int index) {
+        id = index;
     }
 
     void Skill::setName(const std::u16string& name) {
@@ -55,7 +66,7 @@ namespace Data {
     }
 
     void Skill::setCategory(const uint8_t& index) {
-        _categoryIndex = index;
+        _categoryId = index;
     }
 
     const std::u16string& Skill::getName() const {
@@ -66,7 +77,7 @@ namespace Data {
         return _iconPath;
     }
 
-    uint8_t Skill::getCategoryIndex() const {
-        return _categoryIndex;
+    int Skill::getCategoryIndex() const {
+        return _categoryId;
     }
 }    //namespace Data

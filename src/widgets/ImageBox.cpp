@@ -17,7 +17,6 @@ namespace Widgets {
                         GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                         GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
         _form.renderForm(textureShader);
-        _form.renderText(textShader);
     }
 
     void ImageBox::setProjection(float minX, float maxX, float minY, float maxY) {

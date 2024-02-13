@@ -23,8 +23,6 @@ namespace Data {
         virtual std::size_t deserialize(Storage::StreamReader& reader) = 0;
 
         [[nodiscard]] virtual std::size_t serialized_size() const noexcept = 0;
-
-        virtual unsigned int getIndex() = 0;
     };
 }    //namespace Data
 

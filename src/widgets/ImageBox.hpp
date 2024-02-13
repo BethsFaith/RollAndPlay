@@ -14,6 +14,8 @@
 namespace Widgets {
     class ImageBox : public Widget {
     public:
+        using Ptr = std::shared_ptr<ImageBox>;
+
         explicit ImageBox(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
         ~ImageBox() override = default;
 
@@ -23,6 +25,7 @@ namespace Widgets {
                   GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 
+        void setProjection(float minX, float maxX, float minY, float maxY) override;
         void setTransform(glm::vec2 position, glm::vec2 scale) override;
         void setTransform(glm::vec2 position) override;
         void setScale(glm::vec2 scale) override;
@@ -33,7 +36,6 @@ namespace Widgets {
         void setImage(const std::string& texturePath, int textureIndex);
 
         [[nodiscard]] const GraphicLib::Textures::Texture::Ptr& getTexture() const;
-        void setProjection(float minX, float maxX, float minY, float maxY) override;
 
     private:
         Graphic::Form _form;

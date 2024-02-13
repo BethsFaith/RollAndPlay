@@ -101,6 +101,16 @@ namespace Pages {
             createStyledWidget(Widgets::VERTICAL_LAYOUT, pos, scale));
     }
 
+    Widgets::ImageBox::Ptr BasePage::createStyledImageBox(glm::vec2 pos) {
+        return std::dynamic_pointer_cast<Widgets::ImageBox>(
+            createStyledWidget(Widgets::IMAGE_BOX, pos));
+    }
+
+    Widgets::ImageBox::Ptr BasePage::createStyledImageBox(glm::vec2 pos, glm::vec2 scale) {
+        return std::dynamic_pointer_cast<Widgets::ImageBox>(
+            createStyledWidget(Widgets::IMAGE_BOX, pos));
+    }
+
     Widgets::Widget::Ptr BasePage::createStyledWidget(Widgets::WidgetType type) {
         return _builder->createWidget(type);
     }
@@ -129,7 +139,24 @@ namespace Pages {
         return std::dynamic_pointer_cast<Widgets::VerticalLayout>(createStyledWidget(Widgets::VERTICAL_LAYOUT));
     }
 
+    Widgets::ImageBox::Ptr BasePage::createStyledImageBox() {
+        return std::dynamic_pointer_cast<Widgets::ImageBox>(
+            createStyledWidget(Widgets::IMAGE_BOX));
+    }
+
     void BasePage::addWidget(const Widgets::Widget::Ptr& widget) {
+        _gui.addWidget(widget);
+    }
+
+    void BasePage::addWidget(const Widgets::Widget::Ptr& widget, glm::vec2 pos) {
+        auto scale = widget->getScale();
+
+        pos.x = pos.x + (scale.x / 2);
+        pos.y = pos.y - (scale.y / 2);
+
+        widget->setTransform(ScreenOffset + pos);
+        widget->setProjection(min.x, max.x, min.y, max.y);
+
         _gui.addWidget(widget);
     }
 

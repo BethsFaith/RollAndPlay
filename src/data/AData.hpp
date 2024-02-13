@@ -19,7 +19,13 @@ namespace Data {
         AData() = default;
         ~AData() override = default;
 
+        virtual void setIndex(unsigned int index) = 0;
+
+        virtual int getIndex() = 0;
         virtual Type getType() = 0;
+
+    protected:
+        int id = -1;
     };
 }    //namespace Data
 
