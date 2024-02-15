@@ -73,6 +73,8 @@ private:
 
     float _delta_time = 0.0f;    // время между текущим и последним кадрами
     float _last_frame = 0.0f;    // время последнего кадра
+
+    GraphicLib::PickableTexture::Ptr _canvas;
 };
 
 #endif    //ROLLANDPLAY_MAINWINDOW_HPP

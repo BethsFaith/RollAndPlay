@@ -37,15 +37,11 @@ public:
 
     using Ptr = std::shared_ptr<View>;
 
-    View(int x,
-               int y,
-               Widgets::Styles::Color viewColor,
-               GraphicLib::PickableTexture::Ptr canvas,
-               GraphicLib::Shaders::ShaderProgram::Ptr shader);
+    View(glm::vec2 minPos, glm::vec2 maxPos, Widgets::Styles::Color viewColor, GraphicLib::PickableTexture::Ptr canvas);
 
     ~View();
 
-    void display();
+    void display(int windowWidth, int windowHeight);
 
     void processKeyboardInput(GLFWwindow* window);
 
@@ -62,18 +58,15 @@ public:
     void addPage(PageTag tag, Pages::APage::Ptr page);
 
 private:
-    void initView(int x, int y, Widgets::Styles::Color viewColor);
-    void updateControllers();
+    void initView(glm::vec2 minPos, glm::vec2 maxPos, Widgets::Styles::Color viewColor);
+    void update();
 
     ViewDrawer _view;
-    GraphicLib::Shaders::ShaderProgram::Ptr _shader;
 
     const GraphicLib::PickableTexture::Ptr _canvas;
     Controllers::CommonController _controller;
 
     std::map<PageTag, Pages::APage::Ptr> _pages;
-
-    PageTag _currentPageTag = PageTag::NULL_PAGE;
 };
 
 #endif    //ROLLANDPLAY_VIEW_HPP

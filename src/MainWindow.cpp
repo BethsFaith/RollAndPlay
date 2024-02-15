@@ -34,38 +34,35 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
 
     GraphicLib::Techniques::TextTechnique::initTextRendering(width, height, config.getFontPath("gui"), 20);
 
-    auto canvas = std::make_shared<GraphicLib::PickableTexture>();
-    canvas->init(width, height);
+    _canvas = std::make_shared<GraphicLib::PickableTexture>();
+    _canvas->init(width, height);
+    _view = std::make_shared<View>(glm::vec2{-0.9f, -0.83f},
+                                   glm::vec2{0.9f, 0.83f},
+                                   Widgets::Styles::Color::DARK_GRAY,
+                                   _canvas);
 
     auto guiShaderPath = config.getShaderPath("gui");
     auto selectableShaderPath = config.getShaderPath("selectable");
     auto textShaderPath = config.getShaderPath("text");
     auto textureShaderPath = config.getShaderPath("texture");
 
-    auto guiShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (guiShaderPath.vertex,
-             guiShaderPath.fragment);
+    auto guiShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>(guiShaderPath.vertex, guiShaderPath.fragment);
     Gui::setColorShader(guiShader);
 
-    Gui::setSelectableShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (selectableShaderPath.vertex,
-             selectableShaderPath.fragment));
+    Gui::setSelectableShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>(selectableShaderPath.vertex,
+                                                                                  selectableShaderPath.fragment));
 
-    Gui::setTextShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (textShaderPath.vertex,
-             textShaderPath.fragment));
+    Gui::setTextShader(
+        std::make_shared<GraphicLib::Shaders::ShaderProgram>(textShaderPath.vertex, textShaderPath.fragment));
 
-    Gui::setTextureShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>
-            (textureShaderPath.vertex,
-             textureShaderPath.fragment));
-
-    _view = std::make_shared<View>(0, 0,  Widgets::Styles::Color::DARK_GRAY, canvas, guiShader);
+    Gui::setTextureShader(
+        std::make_shared<GraphicLib::Shaders::ShaderProgram>(textureShaderPath.vertex, textureShaderPath.fragment));
 
     auto host = config.getNetValue("host");
     auto port = config.getNetValue("port");
     auto domain = config.getNetValue("domain");
-    Pages::BasePage::setCommonData({.session = std::make_shared<Net::HttpSession>(host, port, domain,
-                                                                                  new Net::Route("../../paths.json"))});
+    Pages::BasePage::setCommonData(
+        {.session = std::make_shared<Net::HttpSession>(host, port, domain, new Net::Route("../../paths.json"))});
 
     GraphicLib::Primitives::AbstractPrimitive::Ptr rectangle = std::make_shared<GraphicLib::Primitives::Rectangle>(
         GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
@@ -89,7 +86,8 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     buttonStyle->scale = {0.11f, 0.1f};
     buttonStyle->figure = rectangle;
 
-    Widgets::Styles::TextInputFieldStyle::Ptr textInputFieldStyle = std::make_shared<Widgets::Styles::TextInputFieldStyle>();
+    Widgets::Styles::TextInputFieldStyle::Ptr textInputFieldStyle =
+        std::make_shared<Widgets::Styles::TextInputFieldStyle>();
     textInputFieldStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
     textInputFieldStyle->inputParams = {.color = Widgets::Styles::BLACK, .size = 1.4f};
     textInputFieldStyle->color = Widgets::Styles::LIGHT_GRAY;
@@ -133,11 +131,11 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     widgetBuilder->addWidgetStyle(Widgets::HORIZONTAL_LAYOUT, horizLayoutStyle);
     widgetBuilder->addWidgetStyle(Widgets::VERTICAL_LAYOUT, vertLayoutStyle);
 
-    auto systemPage = std::make_shared<Pages::SystemPage>(canvas, widgetBuilder);
-    auto skillPage = std::make_shared<Pages::SkillPage>(canvas, widgetBuilder);
-    auto racePage = std::make_shared<Pages::RacePage>(canvas, widgetBuilder);
-    auto loginPage = std::make_shared<Pages::LoginPage>(canvas, widgetBuilder);
-    auto registrationPage = std::make_shared<Pages::RegistrationPage>(canvas, widgetBuilder);
+    auto systemPage = std::make_shared<Pages::SystemPage>(_canvas, widgetBuilder);
+    auto skillPage = std::make_shared<Pages::SkillPage>(_canvas, widgetBuilder);
+    auto racePage = std::make_shared<Pages::RacePage>(_canvas, widgetBuilder);
+    auto loginPage = std::make_shared<Pages::LoginPage>(_canvas, widgetBuilder);
+    auto registrationPage = std::make_shared<Pages::RegistrationPage>(_canvas, widgetBuilder);
 
     _view->addPage(View::PageTag::SYSTEM, systemPage);
     _view->addPage(View::PageTag::SKILL, skillPage);
@@ -147,6 +145,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
 }
 
 MainWindow::~MainWindow() {
+    _canvas.reset();
     _view.reset();
 
     GraphicLib::Techniques::TextTechnique::freeTextRendering();
@@ -193,8 +192,11 @@ void MainWindow::run() {
         clearColor();
         updateDeltaTime();
 
+        int width, height;
+        glfwGetWindowSize(_window, &width, &height);
+
         _view->processKeyboardInput(_window);
-        _view->display();
+        _view->display(width, height);
 
         glfwSwapBuffers(_window);
         glfwPollEvents();
@@ -241,4 +243,6 @@ void MainWindow::dropCallback(GLFWwindow* window, int count, const char** paths)
 
 void MainWindow::frameBufferSizeCallback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
+
+    instance->_canvas->init(width, height);
 }
