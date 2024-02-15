@@ -151,7 +151,7 @@ namespace Pages {
     void BasePage::addWidget(const Widgets::Widget::Ptr& widget, glm::vec2 pos) {
         auto scale = widget->getScale();
 
-        pos.x = pos.x + (scale.x / 2);
+        pos.x = pos.x - (scale.x / 2);
         pos.y = pos.y - (scale.y / 2);
 
         widget->setTransform(ScreenOffset + pos);

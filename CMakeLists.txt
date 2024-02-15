@@ -27,11 +27,13 @@ add_executable(RollAndPlay
         src/data/Skill.cpp
         src/data/Action.cpp
         src/data/CharacterClass.cpp
-        src/data/graphic/Model.cpp
-        src/data/Race.cpp
         src/data/System.cpp
         src/data/SkillCategory.cpp
         src/data/User.cpp
+        src/data/DataFactory.cpp
+        src/data/Race.cpp
+        src/data/convert/Convert.cpp
+        src/data/graphic/Model.cpp
         src/widgets/styles/Color.cpp
         src/widgets/Button.cpp
         src/widgets/graphic/Form.cpp
@@ -71,7 +73,8 @@ add_executable(RollAndPlay
         src/net/HttpRequest.cpp
         src/net/HttpResponse.cpp
         src/net/HttpSession.cpp
-        src/data/convert/Convert.cpp src/data/convert/Convert.hpp src/net/Route.cpp src/net/Route.hpp src/config/JsonParser.hpp src/data/DataFactory.cpp src/data/DataFactory.hpp src/widgets/styles/ImageBoxStyle.hpp)
+        src/net/Route.cpp
+        )
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

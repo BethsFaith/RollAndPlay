@@ -59,6 +59,33 @@ namespace Net {
         return result;
     }
 
+    HttpSession::Result HttpSession::getUser(unsigned int id) {
+        Net::HttpRequest request("/view-user", Net::Http::MethodGet, _domain);
+        request.setCookie(_cookie);
+
+        Json::Value body;
+        body["id"] = id;
+        request.setBodyJson(body);
+
+        auto response = _client.connect(request);
+
+        Result result;
+
+        if (response.getStatusCode() == HttpResponse::StatusCode::OK) {
+            Data::User::Ptr user = std::make_shared<Data::User>();
+            user->deserialize(response.getBody());
+
+            result.data.push_back(user);
+        } else {
+            result.haveError = true;
+            result.errorMessage = response.getErrorMessage();
+        }
+
+        result.statusMessage = response.getStatusMessage();
+
+        return result;
+    }
+
     HttpSession::Result HttpSession::getCurrentUser() {
         Net::HttpRequest request("/private/who-am-i", Net::Http::MethodGet, _domain);
         request.setCookie(_cookie);
@@ -165,6 +192,44 @@ namespace Net {
                     result.data.push_back(createdData);
                 }
             }
+        } else {
+            result.haveError = true;
+            result.errorMessage = response.getErrorMessage();
+        }
+
+        result.statusMessage = response.getStatusMessage();
+
+        return result;
+    }
+
+    HttpSession::Result HttpSession::update(const Data::AData::Ptr& data) {
+        auto type = data->getType();
+        if (type == Data::USER) {
+            return updateUserData(*std::dynamic_pointer_cast<Data::User>(data));
+        }
+
+        auto paths = _route.getPaths();
+        auto target = std::string(paths[type][Net::Http::MethodPut]);
+        Net::HttpRequest request(target,Net::Http::MethodPut, _domain);
+
+        Json::Value body;
+        auto jsonData = std::dynamic_pointer_cast<Data::IJsonSerializable>(data);
+        jsonData->serialize(body);
+        request.setBodyJson(body);
+
+        request.setCookie(_cookie);
+
+        auto response = _client.connect(request);
+
+        Result result;
+
+        if (response.getStatusCode() == HttpResponse::StatusCode::OK) {
+            auto updatedData = Data::DataFactory::create(type);
+            auto updatedJsonData =  std::dynamic_pointer_cast<Data::IJsonSerializable>(updatedData);
+
+            updatedJsonData->deserialize(response.getBody());
+
+            result.data.push_back(updatedData);
         } else {
             result.haveError = true;
             result.errorMessage = response.getErrorMessage();

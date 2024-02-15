@@ -27,12 +27,14 @@ namespace Net {
         HttpSession(std::string host, std::string service, std::string domain, Route* route);
 
         Result createUser(Data::User& user);
+        Result getUser(unsigned int id);
         Result getCurrentUser();
         Result logIn(Data::User& user);
         Result updateUserData(Data::User& user);
 
         Result create(const Data::AData::Ptr& data);
         Result getList(Data::Type type);
+        Result update(const Data::AData::Ptr& data);
 
     private:
         ApiClient _client;

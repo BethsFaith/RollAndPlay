@@ -27,23 +27,26 @@ namespace Data {
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
-        void setIndex(unsigned int index) override;
+        void setId(unsigned int index) override;
 
         Type getType() override;
-        int getIndex() override;
+        int getId() override;
 
         void setName(const std::u16string& name);
         void setName(const std::string& name);
         void setIconPath(const std::string& iconPath);
         void setCategory(const uint8_t& index);
+        void setUserId(unsigned int userId);
 
         [[nodiscard]] const std::u16string& getName() const;
         [[nodiscard]] const std::string& getIconPath() const;
         [[nodiscard]] int getCategoryIndex() const;
+        [[nodiscard]] const unsigned int& getUserId() const;
     private:
         std::u16string _name;
         std::string _iconPath;
         int _categoryId = -1;
+        unsigned int _userId;
     };
 }    //namespace Data
 

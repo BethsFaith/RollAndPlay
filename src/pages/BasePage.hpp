@@ -11,6 +11,7 @@
 #include "../Gui.hpp"
 #include "../controllers/CommonController.hpp"
 #include "../widgets/WidgetBuilder.hpp"
+#include "Anchors.hpp"
 #include "APage.hpp"
 
 namespace Pages {

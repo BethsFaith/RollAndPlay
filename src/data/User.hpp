@@ -25,9 +25,9 @@ namespace Data {
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
-        void setIndex(unsigned int index) override;
+        void setId(unsigned int index) override;
 
-        int getIndex() override;
+        int getId() override;
 
         static bool validateEmail(const std::u16string& email);
         static bool validateName(const std::u16string& name);

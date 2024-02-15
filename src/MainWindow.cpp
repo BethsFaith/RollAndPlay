@@ -117,7 +117,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     imageBoxStyle->figure = textureRectangle;
 
     Widgets::Styles::LayoutStyle::Ptr vertLayoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
-    vertLayoutStyle->widgetOffset = 0.1f;
+    vertLayoutStyle->widgetOffset = 0.12f;
     vertLayoutStyle->scale = {0.0f, 0.0f};
 
     Widgets::Styles::LayoutStyle::Ptr horizLayoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();

@@ -51,7 +51,7 @@ namespace Pages {
         Net::HttpSession::Result pullSkills();
 
         Net::HttpSession::Result updateCategory();
-        Net::HttpSession::Result updateSkills();
+        Net::HttpSession::Result updateSkill();
 
         StateTag _currentTag = START;
 

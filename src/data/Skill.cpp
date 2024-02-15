@@ -31,6 +31,7 @@ namespace Data {
 
         _name = Convert::toUTF16(jsonValue["name"].asString());
         _iconPath = jsonValue["icon"].asString();
+        _userId = jsonValue["user_id"].asInt();
 
         if (jsonValue.isMember("category_index")) {
             _categoryId = jsonValue["category_index"].asInt();
@@ -45,11 +46,15 @@ namespace Data {
         return SKILL;
     }
 
-    int Skill::getIndex() {
+    int Skill::getId() {
         return id;
     }
 
-    void Skill::setIndex(unsigned int index) {
+    const unsigned int& Skill::getUserId() const {
+        return _userId;
+    }
+
+    void Skill::setId(unsigned int index) {
         id = index;
     }
 
@@ -67,6 +72,10 @@ namespace Data {
 
     void Skill::setCategory(const uint8_t& index) {
         _categoryId = index;
+    }
+
+    void Skill::setUserId(unsigned int userId) {
+        _userId = userId;
     }
 
     const std::u16string& Skill::getName() const {

@@ -27,13 +27,14 @@ namespace Data {
 
         _name = Convert::toUTF16(jsonValue["name"].asString());
         _iconPath = jsonValue["icon"].asString();
+        _userId = jsonValue["user_id"].asInt();
     }
 
     size_t SkillCategory::serialized_size() const noexcept {
         return 0;
     }
 
-    void SkillCategory::setIndex(unsigned int index) {
+    void SkillCategory::setId(unsigned int index) {
         id = (int)index;
     }
 
@@ -57,11 +58,19 @@ namespace Data {
         _iconPath = iconPath;
     }
 
-    int SkillCategory::getIndex() {
+    int SkillCategory::getId() {
         return id;
     }
 
     Type SkillCategory::getType() {
         return SKILL_CATEGORY;
+    }
+
+    void SkillCategory::setUserId(unsigned int userId) {
+        _userId = userId;
+    }
+
+    const unsigned int& SkillCategory::getUserId() const {
+        return _userId;
     }
 }    //namespace Data

@@ -3,7 +3,7 @@
   "user" : {
     "path": "/users",
     "GET": {
-      "private": true
+      "private": false
     },
     "POST": {
       "private": false
