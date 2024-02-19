@@ -89,4 +89,12 @@ namespace Data {
     int Skill::getCategoryIndex() const {
         return _categoryId;
     }
+
+    void Skill::setUserName(const std::u16string& userName) {
+        _userName = userName;
+    }
+
+    const std::u16string& Skill::getUserName() const {
+        return _userName;
+    }
 }    //namespace Data

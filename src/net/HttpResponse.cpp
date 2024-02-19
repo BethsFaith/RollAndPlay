@@ -42,10 +42,28 @@ namespace Net {
         std::cout << "\n";
 
         std::string bodyLine;
-        std::getline(responseStream, bodyLine);
-        std::cout << bodyLine << std::endl;
+        std::string body;
+        while (std::getline(responseStream, bodyLine)) {
+            std::cout << bodyLine << std::endl;
+            body += bodyLine;
+        }
+
+        asio::streambuf restResponse;
+        asio::error_code error;
+        // Read until EOF, writing data to output as we go.
+        while (asio::read(socket, restResponse, asio::transfer_at_least(1), error)) {
+            std::cout << &response << std::endl;
+        }
+        if (error != asio::error::eof) {
+            std::cout << "SERVER ERROR: " << error << std::endl;
+        }
+        std::istream restResponseStream(&restResponse);
+        while (std::getline(restResponseStream, bodyLine)) {
+            std::cout << bodyLine << std::endl;
+            body += bodyLine;
+        }
         Json::Reader reader;
-        bool parsingSuccessful = reader.parse(bodyLine, _body);
+        bool parsingSuccessful = reader.parse(body, _body);
         if (!parsingSuccessful) {
             std::cout << "Failed to parse" << reader.getFormattedErrorMessages();
         }
@@ -72,15 +90,6 @@ namespace Net {
 
         if (!_cookie.empty()) {
             std::cout << "Cookies: " << _cookie << std::endl;
-        }
-
-        asio::error_code error;
-        // Read until EOF, writing data to output as we go.
-        while (asio::read(socket, response, asio::transfer_at_least(1), error)) {
-            std::cout << &response;
-        }
-        if (error != asio::error::eof) {
-            std::cout << "SERVER ERROR: " << error << std::endl;
         }
     }
 

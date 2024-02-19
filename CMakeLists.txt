@@ -56,6 +56,7 @@ add_executable(RollAndPlay
         src/pages/RacePage.cpp
         src/pages/LoginPage.cpp
         src/pages/RegistrationPage.cpp
+        src/pages/threads/Worker.cpp
         src/controllers/GuiController.cpp
         src/controllers/TextInputContoller.cpp
         src/controllers/CommonController.cpp

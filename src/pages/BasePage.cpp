@@ -13,10 +13,47 @@ namespace Pages {
         _controller = std::make_shared<Controllers::CommonController>();
     }
 
+    BasePage::~BasePage() {
+        for (auto &task : _tasks) {
+            task.reset();
+        }
+    }
+
+    void BasePage::init(const glm::vec2& screenOffset, const glm::vec2& min_, const glm::vec2& max_) {
+        ScreenOffset = screenOffset;
+
+        min = min_;
+        max = max_;
+    }
+
+    void BasePage::draw() {
+        glEnable(GL_DEPTH_TEST);
+        _gui.draw();
+        glDisable(GL_DEPTH_TEST);
+    }
+
+    void BasePage::start() {
+        // запуск потоков
+        for (auto &task : _tasks) {
+            task->start(10000);
+        }
+    }
+
+    void BasePage::stop() {
+        // остановка потоков
+        for (auto &task : _tasks) {
+            task->stop();
+        }
+    }
+
     void BasePage::update() {
         _controller->clear();
         _gui.clear();
         _controller->addSubController(_gui.getController());
+    }
+
+    void BasePage::setCommonData(const Common& common) {
+        CommonData = common;
     }
 
     Controllers::GLController::Ptr BasePage::getController() {
@@ -144,6 +181,12 @@ namespace Pages {
             createStyledWidget(Widgets::IMAGE_BOX));
     }
 
+    void BasePage::createTaskThread(const std::shared_ptr<std::mutex>& mutex,
+                                    std::condition_variable& conditionVariable,
+                                    const std::function<void()>& func) {
+        _tasks.push_back(std::make_unique<Threads::Worker>(mutex, conditionVariable, func));
+    }
+
     void BasePage::addWidget(const Widgets::Widget::Ptr& widget) {
         _gui.addWidget(widget);
     }
@@ -160,20 +203,12 @@ namespace Pages {
         _gui.addWidget(widget);
     }
 
-    void BasePage::draw() {
-        glEnable(GL_DEPTH_TEST);
-        _gui.draw();
-        glDisable(GL_DEPTH_TEST);
+    void BasePage::removeWidget(const Widgets::Widget::Ptr& widget) {
+        _gui.removeWidget(widget);
     }
 
-    void BasePage::init(const glm::vec2& screenOffset, const glm::vec2& min_, const glm::vec2& max_) {
-        ScreenOffset = screenOffset;
-
-        min = min_;
-        max = max_;
-    }
-
-    void BasePage::setCommonData(const Common& common) {
-        CommonData = common;
+    void BasePage::updateWidget(const Widgets::Widget::Ptr& widget) {
+        _gui.removeWidget(widget);
+        _gui.addWidget(widget);
     }
 }    //namespace Pages

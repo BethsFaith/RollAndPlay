@@ -44,6 +44,8 @@ namespace Pages {
         void toSkillEdit();
         void toCategoryEdit();
 
+        void updateLists();
+
         Net::HttpSession::Result postCategory();
         Net::HttpSession::Result postSkills();
 
@@ -53,18 +55,25 @@ namespace Pages {
         Net::HttpSession::Result updateCategory();
         Net::HttpSession::Result updateSkill();
 
+        std::vector<Widgets::ImageButton::Ptr> createCategoryButtons();
+        std::vector<Widgets::ImageButton::Ptr> createSkillButtons();
+
         StateTag _currentTag = START;
 
         Widgets::HorizontalLayout::Ptr _viewCategoryLayout;
         Widgets::HorizontalLayout::Ptr _viewSkillLayout;
-        Widgets::HorizontalLayout::Ptr _categoryListLayout;
-        Widgets::HorizontalLayout::Ptr _skillsListLayout;
 
         Widgets::TextInputField::Ptr _nameInputField;
         Widgets::ImageButton::Ptr _iconButton;
         Widgets::TextInputField::Ptr _iconPathInputField;
 
         Buffer _buf;
+        std::vector<Data::SkillCategory::Ptr> _categoryList;
+        std::vector<Data::Skill::Ptr> _skillList;
+        std::unique_ptr<std::thread> _updateListsThread;
+
+        std::condition_variable _cv;
+        std::shared_ptr<std::mutex> _mutex;
     };
 }    //namespace Pages
 

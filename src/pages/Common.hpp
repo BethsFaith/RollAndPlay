@@ -12,6 +12,7 @@
 namespace Pages {
     struct Common {
         Net::HttpSession::Ptr session;
+        Data::User user;
         //        std::map<Data::Type, Data::AData::Ptr> vars;
     };
 }

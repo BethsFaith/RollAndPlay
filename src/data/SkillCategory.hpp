@@ -37,15 +37,17 @@ namespace Data {
         void setName(const std::string& name);
         void setIconPath(const std::string& iconPath);
         void setUserId(unsigned int userId);
+        void setUserName(const std::u16string& userName);
 
         [[nodiscard]] const std::u16string& getName() const;
         [[nodiscard]] const std::string& getIconPath() const;
         [[nodiscard]] const unsigned int& getUserId() const;
-
+        [[nodiscard]] const std::u16string& getUserName() const;
     private:
         std::u16string _name;
         std::string _iconPath;
         unsigned int _userId;
+        std::u16string _userName;
     };
 }    //namespace Data
 
