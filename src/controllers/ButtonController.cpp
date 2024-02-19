@@ -53,6 +53,11 @@ namespace Controllers {
         _buttons.push_back(std::dynamic_pointer_cast<Widgets::Button>(widget));
     }
 
+    void ButtonController::removeWidget(const Widgets::Widget::Ptr& widget) {
+        auto end = std::remove(_buttons.begin(), _buttons.end(), widget);
+        _buttons.erase(end, _buttons.end());
+    }
+
     void ButtonController::clear() {
         _buttons.clear();
     }

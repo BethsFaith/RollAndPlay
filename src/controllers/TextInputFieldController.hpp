@@ -30,6 +30,7 @@ namespace Controllers {
 
         void addWidget(Widgets::Widget::Ptr widget) override;
         void processDrop(GLFWwindow* window, int count, const char** paths) override;
+        void removeWidget(const Widgets::Widget::Ptr& widget) override;
 
     private:
         Widgets::TextInputField::Ptr _target = nullptr;

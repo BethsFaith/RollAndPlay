@@ -22,6 +22,8 @@ public:
 
     void addWidget(const Widgets::Widget::Ptr& widget);
 
+    void removeWidget(const Widgets::Widget::Ptr& widget);
+
     void clear();
 
     [[nodiscard]] const Controllers::GuiController::Ptr& getController() const;

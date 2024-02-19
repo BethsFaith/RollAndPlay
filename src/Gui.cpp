@@ -27,6 +27,13 @@ void Gui::addWidget(const Widgets::Widget::Ptr& widget) {
     _widgets.push_back(widget);
 }
 
+void Gui::removeWidget(const Widgets::Widget::Ptr& widget) {
+    _controller->removeWidget(widget);
+
+    auto end = std::remove(_widgets.begin(), _widgets.end(), widget);
+    _widgets.erase(end, _widgets.end());
+}
+
 void Gui::clear() {
     _widgets.clear();
 //    _controller->clear();

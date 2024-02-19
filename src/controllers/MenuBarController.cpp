@@ -76,4 +76,9 @@ namespace Controllers {
             _widgets.push_back(menuBar);
         }
     }
+
+    void MenuBarController::removeWidget(const Widgets::Widget::Ptr& widget) {
+        auto it = std::remove(_widgets.begin(), _widgets.end(), widget);
+        _widgets.erase(it, _widgets.end());
+    }
 }

@@ -23,10 +23,11 @@ namespace Controllers {
         void processMouseCursor(GLFWwindow* window, double xPos, double yPos) override;
         void processMouseScroll(double xOffset, double yOffset) override;
         void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) override;
+        void processDrop(GLFWwindow* window, int count, const char** paths) override;
 
         void addWidget(Widgets::Widget::Ptr widget) override;
+        void removeWidget(const Widgets::Widget::Ptr& widget) override;
         void clear() override;
-        void processDrop(GLFWwindow* window, int count, const char** paths) override;
 
     private:
         std::weak_ptr<Widgets::Button> _lastButton;

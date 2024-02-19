@@ -78,4 +78,9 @@ namespace Controllers {
     void ImageButtonController::addWidget(Widgets::Widget::Ptr widget) {
         _buttons.push_back(std::dynamic_pointer_cast<Widgets::ImageButton>(widget));
     }
+
+    void ImageButtonController::removeWidget(const Widgets::Widget::Ptr& widget) {
+        auto end = std::remove(_buttons.begin(), _buttons.end(), widget);
+        _buttons.erase(end, _buttons.end());
+    }
 }    //namespace Controllers

@@ -54,6 +54,14 @@ namespace Controllers {
         _widgetsControllers[type]->addWidget(widget);
     }
 
+    void GuiController::removeWidget(const Widgets::Widget::Ptr& widget) {
+        auto type = widget->getType();
+
+        if (_widgetsControllers.contains(type)) {
+            _widgetsControllers[type]->removeWidget(widget);
+        }
+    }
+
     void GuiController::clear() {
         _widgetsControllers.clear();
     }

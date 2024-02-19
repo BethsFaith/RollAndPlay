@@ -62,4 +62,16 @@ namespace Controllers {
         }
     }
 
+    void LayoutController::removeWidget(const Widgets::Widget::Ptr& widget) {
+        auto layout = std::dynamic_pointer_cast<Widgets::Layout>(widget);
+        auto elems = layout->getWidgets();
+        for (const auto& elem : elems) {
+            auto type = elem->getType();
+
+            if (_widgetsControllers.contains(type)) {
+                _widgetsControllers[type]->removeWidget(elem);
+            }
+        }
+    }
+
 }

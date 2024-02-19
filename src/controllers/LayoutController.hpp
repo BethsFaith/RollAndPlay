@@ -32,6 +32,7 @@ namespace Controllers {
 
         void clear() override;
         void addWidget(Widgets::Widget::Ptr widget) override;
+        void removeWidget(const Widgets::Widget::Ptr& widget) override;
 
     private:
         std::map<Widgets::WidgetType, WidgetController::Ptr> _widgetsControllers;

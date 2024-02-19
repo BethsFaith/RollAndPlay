@@ -30,6 +30,7 @@ namespace Controllers {
 
         void clear() override;
         void addWidget(Widgets::Widget::Ptr widget) override;
+        void removeWidget(const Widgets::Widget::Ptr& widget) override;
 
     private:
         std::vector<Widgets::Button::Ptr> _buttons;

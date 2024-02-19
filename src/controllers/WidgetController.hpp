@@ -16,6 +16,7 @@ namespace Controllers {
         ~WidgetController() override = default;
 
         virtual void addWidget(Widgets::Widget::Ptr widget) = 0;
+        virtual void removeWidget(const Widgets::Widget::Ptr& widget) = 0;
     };
 }    //namespace Controllers
 
