@@ -47,9 +47,7 @@ namespace Pages {
         Widgets::ImageBox::Ptr createStyledImageBox(glm::vec2 pos);
         Widgets::ImageBox::Ptr createStyledImageBox(glm::vec2 pos, glm::vec2 scale);
         Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout(glm::vec2 pos);
-        Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout(glm::vec2 pos, glm::vec2 scale);
         Widgets::VerticalLayout::Ptr createStyledVerticalLayout(glm::vec2 pos);
-        Widgets::VerticalLayout::Ptr createStyledVerticalLayout(glm::vec2 pos, glm::vec2 scale);
 
         Widgets::Widget::Ptr createStyledWidget(Widgets::WidgetType type);
         Widgets::Button::Ptr createStyledButton();
@@ -66,6 +64,7 @@ namespace Pages {
 
         void addWidget(const Widgets::Widget::Ptr& widget);
         void addWidget(const Widgets::Widget::Ptr& widget, glm::vec2 pos);
+        void addLayout(const Widgets::Layout::Ptr& layout);
         void removeWidget(const Widgets::Widget::Ptr& widget);
         void updateWidget(const Widgets::Widget::Ptr& widget);
 

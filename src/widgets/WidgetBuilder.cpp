@@ -12,4 +12,12 @@ namespace Widgets {
     Widget::Ptr WidgetBuilder::createWidget(WidgetType type) {
         return WidgetFactory::create(type, styles[type]);
     }
+
+    void WidgetBuilder::addLayoutStyle(LayoutType type, const Styles::LayoutStyle::Ptr& style) {
+        layoutStyles[type] = style;
+    }
+
+    Layout::Ptr WidgetBuilder::createLayout(LayoutType type) {
+        return WidgetFactory::create(type, layoutStyles[type]);
+    }
 }

@@ -64,7 +64,6 @@ add_executable(RollAndPlay
         src/controllers/WidgetControllerFactory.cpp
         src/controllers/ImageButtonController.cpp
         src/controllers/MenuBarController.cpp
-        src/controllers/LayoutController.cpp
         src/data/storage/StreamWriter.cpp
         src/data/storage/StreamReader.cpp
         src/data/DataStorage.cpp
@@ -75,7 +74,7 @@ add_executable(RollAndPlay
         src/net/HttpResponse.cpp
         src/net/HttpSession.cpp
         src/net/Route.cpp
-        )
+        src/widgets/LayoutType.hpp)
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

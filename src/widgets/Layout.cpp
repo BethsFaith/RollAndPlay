@@ -5,7 +5,7 @@
 #include "Layout.hpp"
 
 namespace Widgets {
-    Layout::Layout(WidgetType type) : Widget(type) {}
+    Layout::Layout(LayoutType type) : _type(type) {}
 
     void Layout::addWidget(const Widget::Ptr& widget) {
         widgets.push_back(widget);
@@ -17,33 +17,6 @@ namespace Widgets {
             scale -= widget->getScale();
 
             widgets.erase(pos);
-        }
-    }
-
-    void Layout::draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
-                      GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
-                      GraphicLib::Shaders::ShaderProgram::Ptr textShader,
-                      GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
-        for (auto& widget : widgets) {
-            widget->draw(colorShader, textureShader, textShader, pickShader);
-        }
-    }
-
-    bool Layout::checkSelecting(unsigned int x, unsigned int y) {
-        for (auto& widget : widgets) {
-            if (widget->checkSelecting(x,y)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    void Layout::setCanvas(const GraphicLib::PickableTexture::Ptr& canvas) {
-        Widget::setCanvas(canvas);
-
-        for (auto& widget : widgets) {
-            widget->setCanvas(canvas);
         }
     }
 
@@ -89,5 +62,9 @@ namespace Widgets {
 
     const std::vector<Widget::Ptr>& Layout::getWidgets() const {
         return widgets;
+    }
+
+    LayoutType Layout::getType() const {
+        return _type;
     }
 }    //namespace Widgets

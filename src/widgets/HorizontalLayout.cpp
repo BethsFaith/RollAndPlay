@@ -5,7 +5,7 @@
 #include "HorizontalLayout.hpp"
 
 namespace Widgets {
-    HorizontalLayout::HorizontalLayout() : Layout(HORIZONTAL_LAYOUT) {}
+    HorizontalLayout::HorizontalLayout() : Layout(HORIZONTAL) {}
 
     void HorizontalLayout::addWidget(const Widget::Ptr& widget) {
         Layout::addWidget(widget);
@@ -17,6 +17,27 @@ namespace Widgets {
         } else {
             widgetScale = elemScale;
             widget->setTransform({position.x + widgetScale.x/2, position.y - widgetScale.y/2}, elemScale);
+        }
+
+        position.x += widgetScale.x + widgetOffset;
+        scale.x += widgetScale.x/2;
+        if (scale.y < widgetScale.y) {
+            scale.y = widgetScale.y;
+        }
+    }
+
+    void HorizontalLayout::addLayout(Layout::Ptr layout) {
+        glm::vec2 widgetScale;
+        if (elemScale.x == 0.0f && elemScale.y == 0.0f) {
+            widgetScale = layout->getScale();
+            layout->setTransform({position.x + widgetScale.x/2, position.y - widgetScale.y/2});
+        } else {
+            widgetScale = elemScale;
+            layout->setTransform({position.x + widgetScale.x/2, position.y - widgetScale.y/2}, elemScale);
+        }
+
+        for (const auto& widget : layout->getWidgets()) {
+            Layout::addWidget(widget);
         }
 
         position.x += widgetScale.x + widgetOffset;

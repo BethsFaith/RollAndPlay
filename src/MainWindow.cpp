@@ -116,11 +116,9 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
 
     Widgets::Styles::LayoutStyle::Ptr vertLayoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
     vertLayoutStyle->widgetOffset = 0.12f;
-    vertLayoutStyle->scale = {0.0f, 0.0f};
 
     Widgets::Styles::LayoutStyle::Ptr horizLayoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
     horizLayoutStyle->widgetOffset = 0.01f;
-    horizLayoutStyle->scale = {0.0f, 0.0f};
 
     Widgets::WidgetBuilder::Ptr widgetBuilder = std::make_shared<Widgets::WidgetBuilder>();
     widgetBuilder->addWidgetStyle(Widgets::BUTTON, buttonStyle);
@@ -128,8 +126,8 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     widgetBuilder->addWidgetStyle(Widgets::IMAGE_BUTTON, imageButtonStyle);
     widgetBuilder->addWidgetStyle(Widgets::IMAGE_BOX, imageBoxStyle);
     widgetBuilder->addWidgetStyle(Widgets::TEXT_BOX, textBoxStyle);
-    widgetBuilder->addWidgetStyle(Widgets::HORIZONTAL_LAYOUT, horizLayoutStyle);
-    widgetBuilder->addWidgetStyle(Widgets::VERTICAL_LAYOUT, vertLayoutStyle);
+    widgetBuilder->addLayoutStyle(Widgets::HORIZONTAL, horizLayoutStyle);
+    widgetBuilder->addLayoutStyle(Widgets::VERTICAL, vertLayoutStyle);
 
     auto systemPage = std::make_shared<Pages::SystemPage>(_canvas, widgetBuilder);
     auto skillPage = std::make_shared<Pages::SkillPage>(_canvas, widgetBuilder);

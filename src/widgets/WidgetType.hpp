@@ -7,8 +7,6 @@
 
 namespace Widgets {
     enum WidgetType {
-        HORIZONTAL_LAYOUT,
-        VERTICAL_LAYOUT,
         TEXT_INPUT_FIELD,
         IMAGE_BUTTON,
         TEXT_BOX,

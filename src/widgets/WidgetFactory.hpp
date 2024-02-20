@@ -26,6 +26,7 @@ namespace Widgets {
     class WidgetFactory {
     public:
         static Widget::Ptr create(WidgetType type, const Styles::WidgetStyle::Ptr&);
+        static Layout::Ptr create(LayoutType type, const Styles::LayoutStyle::Ptr&);
 
     private:
         WidgetFactory() = default;

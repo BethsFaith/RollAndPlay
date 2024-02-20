@@ -12,13 +12,14 @@ namespace Widgets {
     public:
         using Ptr = std::shared_ptr<HorizontalLayout>;
 
-        explicit HorizontalLayout();
-        ~HorizontalLayout() override = default;
+        HorizontalLayout();
+        ~HorizontalLayout() = default;
 
         void addWidget(const Widget::Ptr& widget) override;
         void removeWidget(const Widget::Ptr& widget) override;
         void clear() override;
         glm::vec2 getScale() override;
+        void addLayout(Layout::Ptr layout) override;
     };
 }    //namespace Widgets
 

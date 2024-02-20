@@ -8,11 +8,11 @@
 #include "WidgetStyle.hpp"
 
 namespace Widgets::Styles {
-    struct LayoutStyle : public WidgetStyle {
+    struct LayoutStyle {
         using Ptr = std::shared_ptr<LayoutStyle>;
 
         LayoutStyle() = default;
-        ~LayoutStyle() override = default;
+        ~LayoutStyle() = default;
 
         float widgetOffset{0.1f};
     };

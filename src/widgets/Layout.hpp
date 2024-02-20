@@ -6,39 +6,32 @@
 #define ROLLANDPLAY_LAYOUT_HPP
 
 #include "Widget.hpp"
+#include "LayoutType.hpp"
 
 namespace Widgets {
-    class Layout : public Widget{
+    class Layout {
     public:
         using Ptr = std::shared_ptr<Layout>;
 
-        explicit Layout(WidgetType type);
-        ~Layout() override = default;
-
-        void draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
-                  GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
-                  GraphicLib::Shaders::ShaderProgram::Ptr textShader,
-                  GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
-
-        void setCanvas(const GraphicLib::PickableTexture::Ptr& canvas) override;
-
-        void setProjection(float minX, float maxX, float minY, float maxY) override;
-        void setTransform(glm::vec2 position, glm::vec2 scale) override;
-        void setTransform(glm::vec2 position) override;
-        void setScale(glm::vec2 elemScale) override;
-
-        bool checkSelecting(unsigned int x, unsigned int y) override;
-
-        glm::vec2 getScale() override;
-        glm::vec2 getPosition() override;
+        explicit Layout(LayoutType type);
+        ~Layout() = default;
 
         virtual void clear() = 0;
+        virtual void addLayout(Layout::Ptr layout) = 0;
 
         virtual void addWidget(const Widget::Ptr& widget);
         virtual void removeWidget(const Widget::Ptr& widget);
 
-        void setWidgetOffset(float offset);
+        virtual glm::vec2 getScale();
+        virtual glm::vec2 getPosition();
 
+        void setProjection(float minX, float maxX, float minY, float maxY);
+        void setTransform(glm::vec2 position, glm::vec2 scale);
+        void setTransform(glm::vec2 position);
+        void setWidgetOffset(float offset);
+        void setScale(glm::vec2 elemScale);
+
+        [[nodiscard]] LayoutType getType() const;
         [[nodiscard]] const std::vector<Widget::Ptr>& getWidgets() const;
     protected:
         std::vector<Widget::Ptr> widgets;
@@ -48,6 +41,9 @@ namespace Widgets {
         glm::vec2 position{};
         glm::vec2 elemScale{};
         glm::vec2 scale{};
+
+    private:
+        LayoutType _type;
     };
 }    //namespace Widgets
 

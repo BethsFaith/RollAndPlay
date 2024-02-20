@@ -120,22 +120,33 @@ namespace Pages {
     }
 
     Widgets::HorizontalLayout::Ptr BasePage::createStyledHorizontalLayout(glm::vec2 pos) {
-        return std::dynamic_pointer_cast<Widgets::HorizontalLayout>(
-            createStyledWidget(Widgets::HORIZONTAL_LAYOUT, pos));
-    }
+        auto layout = _builder->createLayout(Widgets::HORIZONTAL);
 
-    Widgets::HorizontalLayout::Ptr BasePage::createStyledHorizontalLayout(glm::vec2 pos, glm::vec2 scale) {
-        return std::dynamic_pointer_cast<Widgets::HorizontalLayout>(
-            createStyledWidget(Widgets::HORIZONTAL_LAYOUT, pos, scale));
+        auto scale = layout->getScale();
+        pos.x = pos.x + (scale.x / 2);
+        pos.y = pos.y - (scale.y / 2);
+
+        layout->setTransform(ScreenOffset + pos);
+        layout->setProjection(min.x, max.x, min.y, max.y);
+
+
+
+        return std::dynamic_pointer_cast<Widgets::HorizontalLayout>(layout);
     }
 
     Widgets::VerticalLayout::Ptr BasePage::createStyledVerticalLayout(glm::vec2 pos) {
-        return std::dynamic_pointer_cast<Widgets::VerticalLayout>(createStyledWidget(Widgets::VERTICAL_LAYOUT, pos));
-    }
+        auto layout = _builder->createLayout(Widgets::VERTICAL);
 
-    Widgets::VerticalLayout::Ptr BasePage::createStyledVerticalLayout(glm::vec2 pos, glm::vec2 scale) {
-        return std::dynamic_pointer_cast<Widgets::VerticalLayout>(
-            createStyledWidget(Widgets::VERTICAL_LAYOUT, pos, scale));
+        auto scale = layout->getScale();
+        pos.x = pos.x + (scale.x / 2);
+        pos.y = pos.y - (scale.y / 2);
+
+        layout->setTransform(ScreenOffset + pos);
+        layout->setProjection(min.x, max.x, min.y, max.y);
+
+
+
+        return std::dynamic_pointer_cast<Widgets::VerticalLayout>(layout);
     }
 
     Widgets::ImageBox::Ptr BasePage::createStyledImageBox(glm::vec2 pos) {
@@ -169,11 +180,11 @@ namespace Pages {
     }
 
     Widgets::HorizontalLayout::Ptr BasePage::createStyledHorizontalLayout() {
-        return std::dynamic_pointer_cast<Widgets::HorizontalLayout>(createStyledWidget(Widgets::HORIZONTAL_LAYOUT));
+        return std::dynamic_pointer_cast<Widgets::HorizontalLayout>(_builder->createLayout(Widgets::HORIZONTAL));
     }
 
     Widgets::VerticalLayout::Ptr BasePage::createStyledVerticalLayout() {
-        return std::dynamic_pointer_cast<Widgets::VerticalLayout>(createStyledWidget(Widgets::VERTICAL_LAYOUT));
+        return std::dynamic_pointer_cast<Widgets::VerticalLayout>(_builder->createLayout(Widgets::VERTICAL));
     }
 
     Widgets::ImageBox::Ptr BasePage::createStyledImageBox() {
@@ -201,6 +212,12 @@ namespace Pages {
         widget->setProjection(min.x, max.x, min.y, max.y);
 
         _gui.addWidget(widget);
+    }
+
+    void BasePage::addLayout(const Widgets::Layout::Ptr& layout) {
+        for (const auto& widget : layout->getWidgets()) {
+            _gui.addWidget(widget);
+        }
     }
 
     void BasePage::removeWidget(const Widgets::Widget::Ptr& widget) {
