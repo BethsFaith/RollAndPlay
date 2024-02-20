@@ -60,6 +60,7 @@ public:
 private:
     void initView(glm::vec2 minPos, glm::vec2 maxPos, Widgets::Styles::Color viewColor);
     void update();
+    void switchPage(PageTag tag);
 
     ViewDrawer _view;
 
@@ -67,6 +68,8 @@ private:
     Controllers::CommonController _controller;
 
     std::map<PageTag, Pages::APage::Ptr> _pages;
+
+    std::unique_ptr<std::thread> _stopPageThread;
 };
 
 #endif    //ROLLANDPLAY_VIEW_HPP

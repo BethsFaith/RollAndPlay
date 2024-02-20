@@ -118,15 +118,7 @@ void ViewDrawer::setPosition(glm::vec2 xLine, glm::vec2 yLine) {
 }
 
 void ViewDrawer::setPage(const Pages::APage::Ptr& page) {
-    if (_page != nullptr) {
-        _page->stop();
-    }
-
     _page = page;
-
-    if (_page != nullptr) {
-        _page->start();
-    }
 }
 
 Controllers::GuiController::Ptr ViewDrawer::getController() {

@@ -35,7 +35,7 @@ namespace Pages {
     void BasePage::start() {
         // запуск потоков
         for (auto &task : _tasks) {
-            task->start(10000);
+            task->start(1000);
         }
     }
 
@@ -129,8 +129,6 @@ namespace Pages {
         layout->setTransform(ScreenOffset + pos);
         layout->setProjection(min.x, max.x, min.y, max.y);
 
-
-
         return std::dynamic_pointer_cast<Widgets::HorizontalLayout>(layout);
     }
 
@@ -143,8 +141,6 @@ namespace Pages {
 
         layout->setTransform(ScreenOffset + pos);
         layout->setProjection(min.x, max.x, min.y, max.y);
-
-
 
         return std::dynamic_pointer_cast<Widgets::VerticalLayout>(layout);
     }

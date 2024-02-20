@@ -29,7 +29,7 @@ namespace Pages {
         };
 
         explicit SkillPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
-        ~SkillPage() override = default;
+        ~SkillPage() override;
 
         void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) override;
 
@@ -73,7 +73,9 @@ namespace Pages {
         std::unique_ptr<std::thread> _updateListsThread;
 
         std::condition_variable _cv;
-        std::shared_ptr<std::mutex> _mutex;
+        std::condition_variable _cv2;
+        std::shared_ptr<std::mutex> _categoryMutex;
+        std::shared_ptr<std::mutex> _skillMutex;
     };
 }    //namespace Pages
 
