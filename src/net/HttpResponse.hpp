@@ -46,6 +46,9 @@ namespace Net {
         std::string _statusMessage;
         std::string _cookie;
         std::string _errorMessage;
+
+        std::map<std::string, std::string> _headers;
+
         Json::Value _body;
 
         StatusCode _statusCode{};

@@ -52,6 +52,9 @@ namespace Pages {
         Net::HttpSession::Result pullCategories();
         Net::HttpSession::Result pullSkills();
 
+        static Net::HttpSession::Result pullCategory(int id);
+        static Net::HttpSession::Result pullSkill(int id);
+
         Net::HttpSession::Result updateCategory();
         Net::HttpSession::Result updateSkill();
 

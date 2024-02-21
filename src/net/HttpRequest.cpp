@@ -10,7 +10,7 @@ namespace Net {
     HttpRequest::HttpRequest(const std::string& target, const std::string& method, const std::string& host) {
         _headers.push_back(method + " " + target + " HTTP/1.1");
         _headers.emplace_back("Accept: */*");
-        _headers.emplace_back("Connection: close");
+        _headers.emplace_back("Connection: keep-alive");
 
         _host = host;
     }

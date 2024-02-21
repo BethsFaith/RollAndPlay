@@ -7,34 +7,35 @@
 #include <utility>
 
 namespace Net {
-    ApiClient::ApiClient(ApiClient& other) {
+    ApiClient::ApiClient(ApiClient& other) : _resolver(_ioContext) {
         _host = other._host;
         _service = other._service;
     }
 
     ApiClient::ApiClient(std::string host, std::string service)
         : _host(std::move(host)),
-          _service(std::move(service)) {}
+          _service(std::move(service)), _resolver(_ioContext)  {}
 
-    HttpResponse ApiClient::connect(HttpRequest& request) {
+    void ApiClient::connect() {
         using asio::ip::tcp;
 
-        tcp::resolver resolver(_ioContext);
         tcp::resolver::query query(_host, _service);
-        tcp::resolver::results_type endpoints = resolver.resolve(query);
+        tcp::resolver::results_type endpoints = _resolver.resolve(query);
 
-        tcp::socket socket(_ioContext);
+        _socket = std::make_unique<tcp::socket>(_ioContext);
         asio::error_code errorCode;
-        asio::connect(socket, endpoints, errorCode);
+        asio::connect(*_socket, endpoints, errorCode);
 
         if (errorCode) {
             std::cout << errorCode.message() << errorCode << std::endl;
-            return {};
         }
-        request.write(socket);
+    }
+
+    HttpResponse ApiClient::send(HttpRequest& request) {
+        request.write(*_socket);
 
         HttpResponse response;
-        response.read(socket);
+        response.read(*_socket);
 
         return response;
     }

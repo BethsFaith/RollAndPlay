@@ -10,7 +10,9 @@ namespace Net {
     HttpSession::HttpSession(std::string host, std::string service, std::string domain, Route* route)
         : _client(std::move(host), std::move(service)),
           _domain(std::move(domain)),
-          _route(*route) {}
+          _route(*route) {
+        _client.connect();
+    }
 
     HttpSession::Result HttpSession::createUser(Data::User& user) {
         Json::Value body;
@@ -18,7 +20,7 @@ namespace Net {
         Net::HttpRequest request("/users", Net::Http::MethodPost, _domain);
         request.setBodyJson(body);
 
-        auto response = _client.connect(request);
+        auto response = _client.send(request);
 
         Result result;
 
@@ -43,7 +45,7 @@ namespace Net {
         Net::HttpRequest request("/sessions", Net::Http::MethodPost, _domain);
         request.setBodyJson(body);
 
-        auto response = _client.connect(request);
+        auto response = _client.send(request);
 
         _cookie = response.getCookie();
 
@@ -67,7 +69,7 @@ namespace Net {
         body["id"] = id;
         request.setBodyJson(body);
 
-        auto response = _client.connect(request);
+        auto response = _client.send(request);
 
         Result result;
 
@@ -90,7 +92,7 @@ namespace Net {
         Net::HttpRequest request("/private/who-am-i", Net::Http::MethodGet, _domain);
         request.setCookie(_cookie);
 
-        auto response = _client.connect(request);
+        auto response = _client.send(request);
 
         Result result;
 
@@ -117,7 +119,7 @@ namespace Net {
         user.serialize(body);
         request.setBodyJson(body);
 
-        auto response = _client.connect(request);
+        auto response = _client.send(request);
 
         Result result;
 
@@ -148,7 +150,7 @@ namespace Net {
 
         request.setCookie(_cookie);
 
-        auto response = _client.connect(request);
+        auto response = _client.send(request);
 
         Result result;
 
@@ -176,7 +178,7 @@ namespace Net {
 
         request.setCookie(_cookie);
 
-        auto response = _client.connect(request);
+        auto response = _client.send(request);
 
         Result result;
 
@@ -202,6 +204,38 @@ namespace Net {
         return result;
     }
 
+    HttpSession::Result HttpSession::get(Data::Type type, int id) {
+        if (type == Data::USER) {
+            return getUser(id);
+        }
+
+        auto paths = _route.getPaths();
+        auto target = std::string(paths[type][Net::Http::MethodGet]);
+        Net::HttpRequest request(target,Net::Http::MethodPut, _domain);
+
+        Json::Value body;
+        body["id"] = id;
+
+        request.setCookie(_cookie);
+
+        auto response = _client.send(request);
+
+        Result result;
+        if (response.getStatusCode() == HttpResponse::StatusCode::OK) {
+            auto createdData = Data::DataFactory::create(type);
+            auto createdJsonData =  std::dynamic_pointer_cast<Data::IJsonSerializable>(createdData);
+
+            createdJsonData->deserialize(response.getBody());
+
+            result.data.push_back(createdData);
+        } else {
+            result.haveError = true;
+            result.errorMessage = response.getErrorMessage();
+        }
+
+        return result;
+    }
+
     HttpSession::Result HttpSession::update(const Data::AData::Ptr& data) {
         auto type = data->getType();
         if (type == Data::USER) {
@@ -219,7 +253,7 @@ namespace Net {
 
         request.setCookie(_cookie);
 
-        auto response = _client.connect(request);
+        auto response = _client.send(request);
 
         Result result;
 

@@ -31,65 +31,62 @@ namespace Net {
         // Process the response headers.
         std::string header;
         while (std::getline(responseStream, header) && header != "\r") {
-            if (header.find("Set-Cookie") != std::string::npos) {
-                auto endPos = header.find_first_of(';');
-                if (endPos != std::string::npos) {
-                    _cookie = header.substr(12, endPos - 12);
-                }
+            auto valuePos = header.find_first_of(':');
+            auto endPos = header.find_first_of('\r');
+            if (endPos != std::string::npos && valuePos != std::string::npos) {
+                _headers[header.substr(0, valuePos)] = header.substr(valuePos + 2, endPos - valuePos - 2);
             }
             std::cout << header << "\n";
         }
         std::cout << "\n";
 
-        std::string bodyLine;
-        std::string body;
-        while (std::getline(responseStream, bodyLine)) {
-            std::cout << bodyLine << std::endl;
-            body += bodyLine;
+        if (_headers.contains("Set-Cookie")) {
+            _cookie = _headers["Set-Cookie"];
         }
 
-        asio::streambuf restResponse;
-        asio::error_code error;
-        // Read until EOF, writing data to output as we go.
-        while (asio::read(socket, restResponse, asio::transfer_at_least(1), error)) {
-            std::cout << &response << std::endl;
-        }
-        if (error != asio::error::eof) {
-            std::cout << "SERVER ERROR: " << error << std::endl;
-        }
-        std::istream restResponseStream(&restResponse);
-        while (std::getline(restResponseStream, bodyLine)) {
-            std::cout << bodyLine << std::endl;
-            body += bodyLine;
-        }
-        Json::Reader reader;
-        bool parsingSuccessful = reader.parse(body, _body);
-        if (!parsingSuccessful) {
-            std::cout << "Failed to parse" << reader.getFormattedErrorMessages();
-        }
+        auto contentSize = std::stoi(_headers["Content-Length"]);
+        if  (contentSize > 0) {
+            char* content = new char[contentSize];
 
-        // удалить потом
-        Json::ValueIterator it = _body.begin();
-        while (it != _body.end()) {
-            if (it->isString()) {
-                std::cout << it.key() << ":" << it->asString() << std::endl;
+            responseStream.get(content, contentSize);
+            std::string body{content};
+
+            delete[] content;
+
+            if (contentSize > body.size() + 1) {
+                asio::error_code errorCode;
+
+                asio::streambuf endBuf;
+                asio::read(socket, endBuf, asio::transfer_at_least(1), errorCode);
+                std::istream endStream(&endBuf);
+
+                std::string end;
+                std::getline(endStream, end);
+
+                body += end;
             }
-            ++it;
-        }    // конец удаления
+            std::cout << body << std::endl;
 
-        if (_body.isObject()) {
-            if (_body.isMember("error")) {
-                _errorMessage = _body["error"].asString();
+            Json::Reader reader;
+            bool parsingSuccessful = reader.parse(body, _body);
+            if (!parsingSuccessful) {
+                std::cout << "Failed to parse" << reader.getFormattedErrorMessages();
             }
-        }
 
-        // Write whatever content we already have to output.
-        if (response.size() > 0) {
-            std::cout << &response;
-        }
+            // удалить потом
+            Json::ValueIterator it = _body.begin();
+            while (it != _body.end()) {
+                if (it->isString()) {
+                    std::cout << it.key() << ":" << it->asString() << std::endl;
+                }
+                ++it;
+            }    // конец удаления
 
-        if (!_cookie.empty()) {
-            std::cout << "Cookies: " << _cookie << std::endl;
+            if (_body.isObject()) {
+                if (_body.isMember("error")) {
+                    _errorMessage = _body["error"].asString();
+                }
+            }
         }
     }
 

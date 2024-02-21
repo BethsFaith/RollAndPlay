@@ -34,6 +34,7 @@ namespace Net {
 
         Result create(const Data::AData::Ptr& data);
         Result getList(Data::Type type);
+        Result get(Data::Type type, int id);
         Result update(const Data::AData::Ptr& data);
 
     private:

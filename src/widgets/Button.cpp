@@ -194,7 +194,6 @@ namespace Widgets {
 
     glm::vec2 Button::getTextLabelPosition() {
         return _form.getTextPosition();
-
     }
 
     glm::vec3 Button::getColor() {
