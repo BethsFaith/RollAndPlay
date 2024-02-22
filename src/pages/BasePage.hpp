@@ -14,6 +14,7 @@
 #include "../Gui.hpp"
 #include "../controllers/CommonController.hpp"
 #include "../widgets/WidgetBuilder.hpp"
+#include "../logger/Logger.hpp"
 
 namespace Pages {
     class BasePage : public APage {

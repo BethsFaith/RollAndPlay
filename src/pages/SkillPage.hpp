@@ -22,6 +22,7 @@ namespace Pages {
             VIEW_CATEGORY,
             EDIT_SKILL,
             EDIT_CATEGORY,
+            CATEGORY_CHOICE,
         };
         struct Buffer {
             Data::Skill::Ptr skill;
@@ -43,6 +44,7 @@ namespace Pages {
         void toCategoryView();
         void toSkillEdit();
         void toCategoryEdit();
+        void toCategoryChoice();
 
         void updateLists();
 
@@ -74,11 +76,6 @@ namespace Pages {
         std::vector<Data::SkillCategory::Ptr> _categoryList;
         std::vector<Data::Skill::Ptr> _skillList;
         std::unique_ptr<std::thread> _updateListsThread;
-
-        std::condition_variable _cv;
-        std::condition_variable _cv2;
-        std::shared_ptr<std::mutex> _categoryMutex;
-        std::shared_ptr<std::mutex> _skillMutex;
     };
 }    //namespace Pages
 

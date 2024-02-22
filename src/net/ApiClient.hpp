@@ -11,6 +11,7 @@
 
 #include "HttpRequest.hpp"
 #include "HttpResponse.hpp"
+#include "../logger/Logger.hpp"
 
 namespace Net {
     class ApiClient {

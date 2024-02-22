@@ -10,6 +10,8 @@
 #include <json/json.h>
 #include <json/reader.h>
 
+#include "../logger/Logger.hpp"
+
 namespace Net {
     class HttpResponse {
     public:

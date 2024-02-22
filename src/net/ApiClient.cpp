@@ -27,15 +27,24 @@ namespace Net {
         asio::connect(*_socket, endpoints, errorCode);
 
         if (errorCode) {
-            std::cout << errorCode.message() << errorCode << std::endl;
+            Logger::error("Error {1} when connect: {0}", errorCode.message(), (int)errorCode.value());
         }
     }
 
     HttpResponse ApiClient::send(HttpRequest& request) {
-        request.write(*_socket);
+        auto code = request.write(*_socket);
+        if (code == asio::error::connection_aborted) {
+            connect();
+            code = request.write(*_socket);
+        }
 
         HttpResponse response;
-        response.read(*_socket);
+        try {
+            response.read(*_socket);
+        }
+        catch (std::exception &e) {
+            Logger::error("Error when request: {0}", e.what());
+        }
 
         return response;
     }

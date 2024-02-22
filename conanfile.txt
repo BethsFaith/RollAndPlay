@@ -7,9 +7,13 @@ glm/cci.20230113
 jsoncpp/1.9.5
 freetype/2.13.0
 asio/1.29.0
+spdlog/1.13.0
 
 [generators]
 cmake
 
 [options]
 *:shared=False
+
+[layout]
+cmake_layout

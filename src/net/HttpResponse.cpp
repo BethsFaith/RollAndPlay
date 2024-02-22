@@ -20,10 +20,10 @@ namespace Net {
         std::getline(responseStream, _statusMessage);
 
         if (!responseStream || _httpVersion.substr(0, 5) != "HTTP/") {
-            std::cout << "Invalid response\n";
+            Logger::error("Invalid response");
         }
-        if (_statusCode != 200) {
-            std::cout << "Response returned with status code " << _statusCode << "\n";
+        if (_statusCode != StatusCode::OK && _statusCode != StatusCode::CREATED) {
+            Logger::error("Response returned with status code: {}", (int)_statusCode);
         }
 
         // Read the response headers, which are terminated by a blank line.
@@ -36,9 +36,8 @@ namespace Net {
             if (endPos != std::string::npos && valuePos != std::string::npos) {
                 _headers[header.substr(0, valuePos)] = header.substr(valuePos + 2, endPos - valuePos - 2);
             }
-            std::cout << header << "\n";
+            Logger::debug(header);
         }
-        std::cout << "\n";
 
         if (_headers.contains("Set-Cookie")) {
             _cookie = _headers["Set-Cookie"];
@@ -65,19 +64,19 @@ namespace Net {
 
                 body += end;
             }
-            std::cout << body << std::endl;
+            Logger::debug(body);
 
             Json::Reader reader;
             bool parsingSuccessful = reader.parse(body, _body);
             if (!parsingSuccessful) {
-                std::cout << "Failed to parse" << reader.getFormattedErrorMessages();
+                Logger::error("Failed to parse response content : {}", reader.getFormattedErrorMessages());
             }
 
             // удалить потом
             Json::ValueIterator it = _body.begin();
             while (it != _body.end()) {
                 if (it->isString()) {
-                    std::cout << it.key() << ":" << it->asString() << std::endl;
+                    Logger::debug("{} : {}", it.key().asString(), it->asString());
                 }
                 ++it;
             }    // конец удаления
