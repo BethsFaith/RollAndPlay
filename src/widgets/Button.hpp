@@ -52,8 +52,8 @@ namespace Widgets {
         virtual void setLabelText(const std::u16string& text);
         virtual void setLabelPosition(glm::vec2 position);
         virtual void setLabelColor(Styles::Color color);
-
         virtual void setLabelTextSize(float size);
+
         virtual void setColor(Styles::Color color);
         virtual void setTraceColor(Styles::Color traceColor);
         virtual void setColor(glm::vec3 color);

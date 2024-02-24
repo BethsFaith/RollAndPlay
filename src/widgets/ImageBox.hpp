@@ -10,6 +10,8 @@
 
 #include "Widget.hpp"
 #include "graphic/Form.hpp"
+#include "styles/Color.hpp"
+#include "styles/TextParams.hpp"
 
 namespace Widgets {
     class ImageBox : public Widget {
@@ -29,6 +31,12 @@ namespace Widgets {
         void setTransform(glm::vec2 position, glm::vec2 scale) override;
         void setTransform(glm::vec2 position) override;
         void setScale(glm::vec2 scale) override;
+
+        void setLabelParams(const Styles::TextParams& text);
+        void setLabelText(const std::u16string& text);
+        void setLabelPosition(glm::vec2 position);
+        void setLabelColor(Styles::Color color);
+        void setLabelTextSize(float size);
 
         glm::vec2 getScale() override;
         glm::vec2 getPosition() override;

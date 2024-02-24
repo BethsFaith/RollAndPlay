@@ -62,7 +62,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     auto port = config.getNetValue("port");
     auto domain = config.getNetValue("domain");
     Pages::BasePage::setCommonData(
-        {.session = std::make_shared<Net::HttpSession>(host, port, domain, new Net::Route("../../paths.json"))});
+        {.clientSession = std::make_shared<Net::ApiClient>(host, port, domain, new Net::Route("../../paths.json"))});
 
     GraphicLib::Primitives::AbstractPrimitive::Ptr rectangle = std::make_shared<GraphicLib::Primitives::Rectangle>(
         GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
@@ -113,6 +113,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     imageBoxStyle->defaultTexturePath = config.getTexturePath("default");
     imageBoxStyle->defaultTextureIndex = 0;
     imageBoxStyle->figure = textureRectangle;
+    imageBoxStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
 
     Widgets::Styles::LayoutStyle::Ptr vertLayoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
     vertLayoutStyle->widgetOffset = 0.03f;

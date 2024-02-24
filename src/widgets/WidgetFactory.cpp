@@ -58,6 +58,7 @@ namespace Widgets {
 
                 if (imageBox != nullptr && imageBoxStyle != nullptr) {
                     imageBox->setImage(imageBoxStyle->defaultTexturePath, imageBoxStyle->defaultTextureIndex);
+                    imageBox->setLabelParams(imageBoxStyle->labelParams);
                 }
 
                 result = imageBox;

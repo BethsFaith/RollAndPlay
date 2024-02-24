@@ -17,9 +17,9 @@ namespace Widgets {
         ~Layout() = default;
 
         virtual void clear() = 0;
-        virtual void addLayout(Layout::Ptr layout) = 0;
+        virtual void putLayout(Layout::Ptr layout) = 0;
 
-        virtual void addWidget(const Widget::Ptr& widget);
+        virtual void putWidget(const Widget::Ptr& widget);
         virtual void removeWidget(const Widget::Ptr& widget);
 
         virtual glm::vec2 getScale();

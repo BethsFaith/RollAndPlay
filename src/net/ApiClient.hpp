@@ -1,39 +1,50 @@
 //
-// Created by VerOchka on 13.01.2024.
+// Created by VerOchka on 20.01.2024.
 //
 
-#ifndef ROLLANDPLAY_APICLIENT_HPP
-#define ROLLANDPLAY_APICLIENT_HPP
+#ifndef ROLLANDPLAY_HTTPSESSION_HPP
+#define ROLLANDPLAY_HTTPSESSION_HPP
 
-#include <asio.hpp>
-#include <iostream>
-#include <json/json.h>
-
-#include "HttpRequest.hpp"
-#include "HttpResponse.hpp"
-#include "../logger/Logger.hpp"
+#include "../data/DataFactory.hpp"
+#include "../data/User.hpp"
+#include "HttpSession.hpp"
+#include "Route.hpp"
 
 namespace Net {
     class ApiClient {
     public:
+        struct Result {
+            std::string statusMessage;
+            std::string errorMessage;
+
+            bool haveError = false;
+
+            std::vector<Data::AData::Ptr> data;
+        };
+
         using Ptr = std::shared_ptr<ApiClient>;
 
-        ApiClient() = default;
-        ApiClient(ApiClient& other);
-        ApiClient(std::string host, std::string service);
-        ~ApiClient() = default;
+        ApiClient(std::string host, std::string service, std::string domain, Route* route);
 
-        void connect();
-        HttpResponse send(HttpRequest& request);
+        Result createUser(Data::User& user);
+        Result getUser(unsigned int id);
+        Result getCurrentUser();
+        Result logIn(Data::User& user);
+        Result updateUserData(Data::User& user);
+
+        Result create(const Data::AData::Ptr& data);
+        Result getList(Data::Type type);
+        Result getListByRef(Data::Type type, const std::string& referenceParameterName, int referenceParameter);
+        Result get(Data::Type type, int id);
+        Result update(const Data::AData::Ptr& data);
 
     private:
-        std::string _host;
-        std::string _service;
+        HttpSession _session;
+        Route& _route;
 
-        asio::io_context _ioContext{};
-        asio::ip::tcp::resolver _resolver;
-        std::unique_ptr<asio::ip::tcp::socket> _socket;
+        std::string _domain;
+        std::string _cookie;
     };
 }    //namespace Net
 
-#endif    //ROLLANDPLAY_APICLIENT_HPP
+#endif    //ROLLANDPLAY_HTTPSESSION_HPP

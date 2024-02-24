@@ -7,10 +7,10 @@
 
 #include <GraphicLib/Primitives/Rectangle.hpp>
 
-#include "BasePage.hpp"
 #include "../data/User.hpp"
+#include "../net/HttpSession.hpp"
 #include "../widgets/VerticalLayout.hpp"
-#include "../net/ApiClient.hpp"
+#include "BasePage.hpp"
 
 namespace Pages {
     class RegistrationPage : public BasePage {
@@ -32,7 +32,7 @@ namespace Pages {
         void toCreate();
         void toView();
 
-        static Net::HttpSession::Result registerUser(const std::u16string& login,
+        static Net::ApiClient::Result registerUser(const std::u16string& login,
                                                      const std::u16string& password,
                                                      const std::u16string& nickname);
 
@@ -40,7 +40,7 @@ namespace Pages {
                       const std::u16string& password,
                       const std::u16string& repeatedPassword,
                       const std::u16string& nickname);
-        void showResultRegistrationError(Net::HttpSession::Result& result);
+        void showResultRegistrationError(Net::ApiClient::Result& result);
 
         StateTag _currentTag = CREATE;
 

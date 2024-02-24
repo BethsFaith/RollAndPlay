@@ -7,8 +7,8 @@
 namespace Widgets {
     VerticalLayout::VerticalLayout() : Layout(VERTICAL) {}
 
-    void VerticalLayout::addWidget(const Widget::Ptr& widget) {
-        Layout::addWidget(widget);
+    void VerticalLayout::putWidget(const Widget::Ptr& widget) {
+        Layout::putWidget(widget);
 
         glm::vec2 widgetScale;
 
@@ -32,7 +32,7 @@ namespace Widgets {
         position.y -= widgetScale.y + widgetOffset;
     }
 
-    void VerticalLayout::addLayout(Layout::Ptr layout) {
+    void VerticalLayout::putLayout(Layout::Ptr layout) {
         glm::vec2 layoutScale;
         if (elemScale.x == 0.0f && elemScale.y == 0.0f) {
             layoutScale = layout->getScale();
@@ -53,7 +53,7 @@ namespace Widgets {
         layout->setTransform({position.x + layoutScale.x/2, position.y});
 
         for (const auto& widget : layout->getWidgets()) {
-            Layout::addWidget(widget);
+            Layout::putWidget(widget);
         }
 
         position.y -= widgetOffset + layoutScale.y;

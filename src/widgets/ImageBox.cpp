@@ -17,6 +17,7 @@ namespace Widgets {
                         GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                         GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
         _form.renderForm(textureShader);
+        _form.renderText(textShader);
     }
 
     void ImageBox::setProjection(float minX, float maxX, float minY, float maxY) {
@@ -25,10 +26,14 @@ namespace Widgets {
 
     void ImageBox::setTransform(glm::vec2 position, glm::vec2 scale) {
         _form.setTransform(position, scale);
+        _form.setTextPosition({position.x - scale.x / 2 + 0.01f, position.y + scale.y * 0.7});
     }
 
     void ImageBox::setTransform(glm::vec2 position) {
+        auto scale = _form.getScale();
+
         _form.setTransform(position);
+        _form.setTextPosition({position.x - scale.x / 2 + 0.01f, position.y + scale.y * 0.7});
     }
 
     void ImageBox::setScale(glm::vec2 scale) {
@@ -49,8 +54,11 @@ namespace Widgets {
     }
 
     glm::vec2 ImageBox::getScale() {
-
-        return _form.getScale();
+        auto scale = _form.getScale();
+        if (!_form.getText().empty()) {
+            scale.y += 0.03;
+        }
+        return scale;
     }
 
     glm::vec2 ImageBox::getPosition() {
@@ -59,5 +67,27 @@ namespace Widgets {
 
     const GraphicLib::Textures::Texture::Ptr& ImageBox::getTexture() const {
         return _texture;
+    }
+
+    void ImageBox::setLabelParams(const Styles::TextParams& text) {
+        _form.setTextColor(getRGB(text.color));
+        _form.setTextPosition(text.position);
+        _form.setTextSize(text.size);
+    }
+
+    void ImageBox::setLabelText(const std::u16string& text) {\
+        _form.setText(text);
+    }
+
+    void ImageBox::setLabelPosition(glm::vec2 position) {
+        _form.setTextPosition(position);
+    }
+
+    void ImageBox::setLabelColor(Styles::Color color) {
+        _form.setTextColor(getRGB(color));
+    }
+
+    void ImageBox::setLabelTextSize(float size) {
+        _form.setTextSize(size);
     }
 }    //namespace Widgets

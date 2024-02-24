@@ -15,11 +15,11 @@ namespace Widgets {
         HorizontalLayout();
         ~HorizontalLayout() = default;
 
-        void addWidget(const Widget::Ptr& widget) override;
+        void putWidget(const Widget::Ptr& widget) override;
         void removeWidget(const Widget::Ptr& widget) override;
         void clear() override;
         glm::vec2 getScale() override;
-        void addLayout(Layout::Ptr layout) override;
+        void putLayout(Layout::Ptr layout) override;
     };
 }    //namespace Widgets
 

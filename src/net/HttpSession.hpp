@@ -1,49 +1,39 @@
 //
-// Created by VerOchka on 20.01.2024.
+// Created by VerOchka on 13.01.2024.
 //
 
-#ifndef ROLLANDPLAY_HTTPSESSION_HPP
-#define ROLLANDPLAY_HTTPSESSION_HPP
+#ifndef ROLLANDPLAY_APICLIENT_HPP
+#define ROLLANDPLAY_APICLIENT_HPP
 
-#include "ApiClient.hpp"
-#include "Route.hpp"
-#include "../data/User.hpp"
-#include "../data/DataFactory.hpp"
+#include <asio.hpp>
+#include <iostream>
+#include <json/json.h>
+
+#include "HttpRequest.hpp"
+#include "HttpResponse.hpp"
+#include "../logger/Logger.hpp"
 
 namespace Net {
     class HttpSession {
     public:
-        struct Result {
-            std::string statusMessage;
-            std::string errorMessage;
-
-            bool haveError = false;
-
-            std::vector<Data::AData::Ptr> data;
-        };
-
         using Ptr = std::shared_ptr<HttpSession>;
 
-        HttpSession(std::string host, std::string service, std::string domain, Route* route);
+        HttpSession() = default;
+        HttpSession(HttpSession& other);
+        HttpSession(std::string host, std::string service);
+        ~HttpSession() = default;
 
-        Result createUser(Data::User& user);
-        Result getUser(unsigned int id);
-        Result getCurrentUser();
-        Result logIn(Data::User& user);
-        Result updateUserData(Data::User& user);
-
-        Result create(const Data::AData::Ptr& data);
-        Result getList(Data::Type type);
-        Result get(Data::Type type, int id);
-        Result update(const Data::AData::Ptr& data);
+        void connect();
+        HttpResponse send(HttpRequest& request);
 
     private:
-        ApiClient _client;
-        Route& _route;
+        std::string _host;
+        std::string _service;
 
-        std::string _domain;
-        std::string _cookie;
+        asio::io_context _ioContext{};
+        asio::ip::tcp::resolver _resolver;
+        std::unique_ptr<asio::ip::tcp::socket> _socket;
     };
 }    //namespace Net
 
-#endif    //ROLLANDPLAY_HTTPSESSION_HPP
+#endif    //ROLLANDPLAY_APICLIENT_HPP

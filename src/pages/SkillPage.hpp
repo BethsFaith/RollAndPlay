@@ -24,6 +24,7 @@ namespace Pages {
             EDIT_CATEGORY,
             CATEGORY_CHOICE,
         };
+
         struct Buffer {
             Data::Skill::Ptr skill;
             Data::SkillCategory::Ptr category;
@@ -48,20 +49,21 @@ namespace Pages {
 
         void updateLists();
 
-        Net::HttpSession::Result postCategory();
-        Net::HttpSession::Result postSkills();
+        Net::ApiClient::Result postCategory();
+        Net::ApiClient::Result postSkills();
 
-        Net::HttpSession::Result pullCategories();
-        Net::HttpSession::Result pullSkills();
+        Net::ApiClient::Result pullAndUpdateCategoryList();
+        Net::ApiClient::Result pullAndUpdateSkillList();
 
-        static Net::HttpSession::Result pullCategory(int id);
-        static Net::HttpSession::Result pullSkill(int id);
+        static Net::ApiClient::Result pullCategory(int id);
+        static Net::ApiClient::Result pullSkill(int id);
+        static Net::ApiClient::Result pullSkills(int categoryId);
 
-        Net::HttpSession::Result updateCategory();
-        Net::HttpSession::Result updateSkill();
+        Net::ApiClient::Result updateCategory();
+        Net::ApiClient::Result updateSkill();
 
-        std::vector<Widgets::ImageButton::Ptr> createCategoryButtons();
-        std::vector<Widgets::ImageButton::Ptr> createSkillButtons();
+        std::vector<Widgets::ImageButton::Ptr> createCategoryButtons(const std::vector<Data::SkillCategory::Ptr>& categories);
+        std::vector<Widgets::ImageButton::Ptr> createSkillButtons(const std::vector<Data::Skill::Ptr>& skills);
 
         StateTag _currentTag = START;
 

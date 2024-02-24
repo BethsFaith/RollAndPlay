@@ -7,7 +7,7 @@
 namespace Widgets {
     Layout::Layout(LayoutType type) : _type(type) {}
 
-    void Layout::addWidget(const Widget::Ptr& widget) {
+    void Layout::putWidget(const Widget::Ptr& widget) {
         widgets.push_back(widget);
     }
 
@@ -35,7 +35,7 @@ namespace Widgets {
         auto elements = widgets;
         widgets.clear();
         for (auto& elem : elements) {
-            addWidget(elem);
+            putWidget(elem);
         }
     }
 
@@ -45,7 +45,7 @@ namespace Widgets {
         auto elements = widgets;
         widgets.clear();
         for (auto& elem : elements) {
-            addWidget(elem);
+            putWidget(elem);
         }
     }
 

@@ -69,10 +69,10 @@ add_executable(RollAndPlay
         src/data/DataStorage.cpp
         src/config/Parser.cpp
         src/config/Config.cpp
-        src/net/ApiClient.cpp
+        src/net/HttpSession.cpp
         src/net/HttpRequest.cpp
         src/net/HttpResponse.cpp
-        src/net/HttpSession.cpp
+        src/net/ApiClient.cpp
         src/net/Route.cpp
         )
 

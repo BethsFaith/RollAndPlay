@@ -37,12 +37,12 @@ namespace Pages {
 
         bool validate(const std::u16string& login, const std::u16string& password);
         bool validate(const std::u16string& login, const std::u16string& password, const std::u16string& nickname);
-        Net::HttpSession::Result logIn(const std::u16string& login, const std::u16string& password);
-        Net::HttpSession::Result pullUserData();
-        Net::HttpSession::Result changeUserData(const std::u16string& login,
+        Net::ApiClient::Result logIn(const std::u16string& login, const std::u16string& password);
+        Net::ApiClient::Result pullUserData();
+        Net::ApiClient::Result changeUserData(const std::u16string& login,
                                                 const std::u16string& password,
                                                 const std::u16string& nickname);
-        void showResultError(Net::HttpSession::Result& result);
+        void showResultError(Net::ApiClient::Result& result);
 
         StateTag _nextState = START;
 

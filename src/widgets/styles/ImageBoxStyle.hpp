@@ -16,7 +16,10 @@ namespace Widgets::Styles {
         ImageBoxStyle() = default;
         ~ImageBoxStyle() override = default;
 
+        TextParams labelParams;
+
         GraphicLib::Primitives::AbstractPrimitive::Ptr figure;
+
         std::string defaultTexturePath;
         int defaultTextureIndex = 0;
     };
