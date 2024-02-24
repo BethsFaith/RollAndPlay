@@ -134,6 +134,7 @@ namespace Widgets {
 
     void Button::setScale(glm::vec2 scale) {
         _form.setScale(scale);
+        _tracing.setScale({scale.x * 1.05f, scale.y * 1.1f});
 
         updateTextPosition(getPosition(), scale);
     }

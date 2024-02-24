@@ -49,6 +49,7 @@ namespace Widgets {
     }
 
     glm::vec2 ImageBox::getScale() {
+
         return _form.getScale();
     }
 

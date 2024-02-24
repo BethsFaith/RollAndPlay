@@ -211,10 +211,11 @@ namespace Net {
 
         auto paths = _route.getPaths();
         auto target = std::string(paths[type][Net::Http::MethodGet]);
-        Net::HttpRequest request(target,Net::Http::MethodPut, _domain);
+        Net::HttpRequest request(target,Net::Http::MethodGet, _domain);
 
         Json::Value body;
         body["id"] = id;
+        request.setBodyJson(body);
 
         request.setCookie(_cookie);
 

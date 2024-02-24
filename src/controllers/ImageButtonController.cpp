@@ -30,9 +30,8 @@ namespace Controllers {
                     if (_target != button && _target != nullptr) {
                         _target->release();
                     }
-                    button->press();
-
                     _target = button;
+                    button->press();
 
                     break;
                 }
@@ -73,7 +72,10 @@ namespace Controllers {
         }
     }
 
-    void ImageButtonController::clear() {}
+    void ImageButtonController::clear() {
+        _buttons.clear();
+        _target = nullptr;
+    }
 
     void ImageButtonController::addWidget(Widgets::Widget::Ptr widget) {
         _buttons.push_back(std::dynamic_pointer_cast<Widgets::ImageButton>(widget));

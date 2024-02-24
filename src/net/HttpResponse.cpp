@@ -13,9 +13,9 @@ namespace Net {
 
         responseStream >> _httpVersion;
 
-        unsigned int statusCode;
-        responseStream >> statusCode;
-        _statusCode = castToStatusCode(statusCode);
+        unsigned int code;
+        responseStream >> code;
+        _statusCode = castToStatusCode(code);
 
         std::getline(responseStream, _statusMessage);
 
@@ -135,6 +135,8 @@ namespace Net {
                 return BAD_GATEWAY;
             case SERVICE_UNAVAILABLE:
                 return SERVICE_UNAVAILABLE;
+            case  GATEWAY_TIMEOUT:
+                return GATEWAY_TIMEOUT;
             default:
                 return OTHER;
         };

@@ -74,7 +74,7 @@ add_executable(RollAndPlay
         src/net/HttpResponse.cpp
         src/net/HttpSession.cpp
         src/net/Route.cpp
-        src/widgets/LayoutType.hpp)
+        )
 
 
 target_link_libraries(RollAndPlay ${CONAN_LIBS} GraphicLib)

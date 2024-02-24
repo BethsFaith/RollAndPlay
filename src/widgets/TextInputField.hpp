@@ -57,6 +57,7 @@ namespace Widgets {
         [[nodiscard]] std::string getU8Buf() const;
         [[nodiscard]] const std::u16string& getBuf() const;
         void setScale(glm::vec2 scale) override;
+        glm::vec2 getScale() override;
 
     protected:
         void updateTextField();

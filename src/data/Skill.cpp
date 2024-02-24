@@ -22,7 +22,7 @@ namespace Data {
         jsonValue["icon"] = _iconPath;
 
         if (_categoryId != -1) {
-            jsonValue["category_index"] = _categoryId;
+            jsonValue["category_id"] = _categoryId;
         }
     }
 
@@ -33,8 +33,8 @@ namespace Data {
         _iconPath = jsonValue["icon"].asString();
         _userId = jsonValue["user_id"].asInt();
 
-        if (jsonValue.isMember("category_index")) {
-            _categoryId = jsonValue["category_index"].asInt();
+        if (jsonValue.isMember("category_id")) {
+            _categoryId = jsonValue["category_id"].asInt();
         }
     }
 
@@ -70,7 +70,7 @@ namespace Data {
         _iconPath = iconPath;
     }
 
-    void Skill::setCategory(const uint8_t& index) {
+    void Skill::setCategoryId(const uint8_t& index) {
         _categoryId = index;
     }
 
@@ -86,7 +86,7 @@ namespace Data {
         return _iconPath;
     }
 
-    int Skill::getCategoryIndex() const {
+    int Skill::getCategoryId() const {
         return _categoryId;
     }
 

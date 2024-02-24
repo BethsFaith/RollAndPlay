@@ -44,7 +44,6 @@ namespace Pages {
 
         StateTag _currentTag = CREATE;
 
-        Widgets::VerticalLayout::Ptr _inputFieldsLayout;
         Widgets::Button::Ptr _saveButton;
         Widgets::Button::Ptr _createButton;
         Widgets::TextInputField::Ptr _loginInputField;

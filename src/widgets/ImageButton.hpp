@@ -26,6 +26,7 @@ namespace Widgets {
         void setImage(const std::string& texturePath, int textureIndex);
 
         [[nodiscard]] const GraphicLib::Textures::Texture::Ptr& getTexture() const;
+        glm::vec2 getScale() override;
 
     protected:
         void updateTextPosition(glm::vec2 position, glm::vec2 scale) override;

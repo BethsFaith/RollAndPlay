@@ -13,37 +13,45 @@ namespace Widgets {
         glm::vec2 widgetScale;
         if (elemScale.x == 0.0f && elemScale.y == 0.0f) {
             widgetScale = widget->getScale();
-            widget->setTransform({position.x + widgetScale.x/2, position.y - widgetScale.y/2});
         } else {
             widgetScale = elemScale;
-            widget->setTransform({position.x + widgetScale.x/2, position.y - widgetScale.y/2}, elemScale);
+            widget->setScale(elemScale);
         }
 
-        position.x += widgetScale.x + widgetOffset;
-        scale.x += widgetScale.x/2;
+        if (widgets.size() == 1) {
+            position.y -= widgetScale.y/2;
+        } else {
+        }
+
+        scale.x += widgetScale.x;
         if (scale.y < widgetScale.y) {
             scale.y = widgetScale.y;
         }
+
+        widget->setTransform({position.x + widgetScale.x/2, position.y});
+
+        position.x += widgetScale.x + widgetOffset;
     }
 
     void HorizontalLayout::addLayout(Layout::Ptr layout) {
         glm::vec2 widgetScale;
         if (elemScale.x == 0.0f && elemScale.y == 0.0f) {
             widgetScale = layout->getScale();
-            layout->setTransform({position.x + widgetScale.x/2, position.y - widgetScale.y/2});
         } else {
             widgetScale = elemScale;
-            layout->setTransform({position.x + widgetScale.x/2, position.y - widgetScale.y/2}, elemScale);
-        }
-
-        for (const auto& widget : layout->getWidgets()) {
-            Layout::addWidget(widget);
+            layout->setScale(elemScale);
         }
 
         position.x += widgetScale.x + widgetOffset;
-        scale.x += widgetScale.x/2;
+        scale.x += widgetScale.x;
         if (scale.y < widgetScale.y) {
             scale.y = widgetScale.y;
+        }
+
+        layout->setTransform({position.x, position.y});
+
+        for (const auto& widget : layout->getWidgets()) {
+            Layout::addWidget(widget);
         }
     }
 

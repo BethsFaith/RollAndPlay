@@ -44,6 +44,8 @@ namespace Net {
         }
         catch (std::exception &e) {
             Logger::error("Error when request: {0}", e.what());
+            connect();
+            return send(request);
         }
 
         return response;

@@ -29,12 +29,22 @@ namespace Widgets {
     }
 
     void ImageButton::updateTextPosition(glm::vec2 position, glm::vec2 scale) {
-        _form.setTextPosition({position.x - scale.x / 2 + 0.01f, position.y + scale.y / 1.45});
+        _form.setTextPosition({position.x - scale.x / 2 + 0.01f, position.y + scale.y * 0.7});
     }
 
     void ImageButton::setColor(Styles::Color color) {}
 
     const GraphicLib::Textures::Texture::Ptr& ImageButton::getTexture() const {
         return _texture;
+    }
+
+    glm::vec2 ImageButton::getScale() {
+        auto scale = Button::getScale();
+        if (!getTextLabelContent().empty()) {
+            scale.y += 0.01f;
+        } else {
+            scale.y += 0.0;
+        }
+        return scale;
     }
 }    //namespace Forms
