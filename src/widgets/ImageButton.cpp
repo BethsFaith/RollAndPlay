@@ -21,6 +21,21 @@ namespace Widgets {
         _form.setTexture(_texture, textureIndex);
     }
 
+    void ImageButton::setDefaultImage(const std::string& texturePath, int textureIndex) {
+        _defaultTexture = std::make_shared<GraphicLib::Textures::Texture>("", texturePath);
+        GraphicLib::Textures::load2d(*_defaultTexture,
+                                     {{.name = GL_TEXTURE_MIN_FILTER, .value = GL_NEAREST},
+                                      {.name = GL_TEXTURE_MAG_FILTER, .value = GL_NEAREST},
+                                      {.name = GL_TEXTURE_WRAP_S, .value = GL_CLAMP_TO_EDGE},
+                                      {.name = GL_TEXTURE_WRAP_T, .value = GL_CLAMP_TO_EDGE},
+                                      {.name = GL_TEXTURE_WRAP_R, .value = GL_CLAMP_TO_EDGE}});
+        _defaultTexture->setPath(texturePath);
+
+        if (_texture == nullptr) {
+            _form.setTexture(_defaultTexture, textureIndex);
+        }
+    }
+
     void ImageButton::draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
                            GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                            GraphicLib::Shaders::ShaderProgram::Ptr textShader,
@@ -46,5 +61,11 @@ namespace Widgets {
             scale.y += 0.0;
         }
         return scale;
+    }
+
+    void ImageButton::resetImage(int defaultTextureIndex) {
+        _texture.reset();
+
+        _form.setTexture(_defaultTexture, defaultTextureIndex);
     }
 }    //namespace Forms

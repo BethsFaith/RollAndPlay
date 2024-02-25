@@ -31,7 +31,7 @@ namespace Widgets {
                 if (imageButton != nullptr && imageButtonStyle != nullptr) {
                     imageButton->setLabelParams(imageButtonStyle->labelParams);
                     imageButton->setTraceColor(imageButtonStyle->traceColor);
-                    imageButton->setImage(imageButtonStyle->defaultTexturePath,
+                    imageButton->setDefaultImage(imageButtonStyle->defaultTexturePath,
                                           imageButtonStyle->defaultTextureIndex);
                 }
 

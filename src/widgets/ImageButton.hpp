@@ -24,6 +24,9 @@ namespace Widgets {
 
         void setColor(Styles::Color color) override;
         void setImage(const std::string& texturePath, int textureIndex);
+        void setDefaultImage(const std::string& texturePath, int textureIndex);
+
+        void resetImage(int defaultTextureIndex);
 
         [[nodiscard]] const GraphicLib::Textures::Texture::Ptr& getTexture() const;
         glm::vec2 getScale() override;
@@ -33,6 +36,7 @@ namespace Widgets {
 
     private:
         GraphicLib::Textures::Texture::Ptr _texture;
+        GraphicLib::Textures::Texture::Ptr _defaultTexture;
     };
 }    //namespace Forms
 
