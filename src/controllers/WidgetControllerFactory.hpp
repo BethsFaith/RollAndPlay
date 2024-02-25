@@ -10,7 +10,6 @@
 #include "ImageButtonController.hpp"
 #include "MenuBarController.hpp"
 #include "TextInputFieldController.hpp"
-#include "LayoutController.hpp"
 
 namespace Controllers {
     class WidgetControllerFactory {

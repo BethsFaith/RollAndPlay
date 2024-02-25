@@ -35,6 +35,12 @@ namespace Controllers {
         }
     }
 
+    void CommonController::processDrop(GLFWwindow* window, int count, const char** paths) {
+        for (const auto& controller : _subControllers) {
+            controller->processDrop(window, count, paths);
+        }
+    }
+
     void CommonController::clear() {
         _subControllers.clear();
     }

@@ -22,9 +22,12 @@ namespace Pages {
 
         virtual ~APage() = default;
 
-        virtual void init(const glm::vec2& screenOffset) = 0;
+        virtual void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) = 0;
 
         virtual void draw() = 0;
+
+        virtual void start() = 0;
+        virtual void stop() = 0;
 
         virtual void update() = 0;
 

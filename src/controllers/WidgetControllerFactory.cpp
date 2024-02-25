@@ -15,9 +15,6 @@ namespace Controllers {
                 return std::make_shared<Controllers::ImageButtonController>();
             case Widgets::MENU_BAR:
                 return std::make_shared<Controllers::MenuBarController>();
-            case Widgets::VERTICAL_LAYOUT:
-            case Widgets::HORIZONTAL_LAYOUT:
-                return std::make_shared<Controllers::LayoutController>();
             default:
                 return nullptr;
         }

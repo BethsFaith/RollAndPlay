@@ -5,12 +5,6 @@
 #include "SkillCategory.hpp"
 
 namespace Data {
-    uint8_t SkillCategory::index = 0;
-
-    SkillCategory::SkillCategory() {
-        _index = index++;
-    }
-
     size_t SkillCategory::serialize(Storage::StreamWriter& writer) const {
         return 0;
     }
@@ -19,20 +13,41 @@ namespace Data {
         return 0;
     }
 
+    void SkillCategory::serialize(Json::Value& jsonValue) {
+        if (id != -1) {
+            jsonValue["id"] = id;
+        }
+
+        jsonValue["name"] = Convert::toUTF8(_name);
+        jsonValue["icon"] = _iconPath;
+    }
+
+    void SkillCategory::deserialize(const Json::Value& jsonValue) {
+        id = jsonValue["id"].asInt();
+
+        _name = Convert::toUTF16(jsonValue["name"].asString());
+        _iconPath = jsonValue["icon"].asString();
+        _userId = jsonValue["user_id"].asInt();
+    }
+
     size_t SkillCategory::serialized_size() const noexcept {
         return 0;
     }
 
-    [[maybe_unused]] uint8_t SkillCategory::getIndex() const {
-        return _index;
+    void SkillCategory::setId(unsigned int index) {
+        id = (int)index;
     }
 
-    const std::string& SkillCategory::getName() const {
-        return _name;
+    void SkillCategory::setName(const std::u16string& name) {
+        _name = name;
     }
 
     void SkillCategory::setName(const std::string& name) {
-        _name = name;
+        _name = std::u16string(name.begin(), name.end());
+    }
+
+    const std::u16string& SkillCategory::getName() const {
+        return _name;
     }
 
     const std::string& SkillCategory::getIconPath() const {
@@ -41,5 +56,29 @@ namespace Data {
 
     void SkillCategory::setIconPath(const std::string& iconPath) {
         _iconPath = iconPath;
+    }
+
+    int SkillCategory::getId() {
+        return id;
+    }
+
+    Type SkillCategory::getType() {
+        return SKILL_CATEGORY;
+    }
+
+    void SkillCategory::setUserId(unsigned int userId) {
+        _userId = userId;
+    }
+
+    const unsigned int& SkillCategory::getUserId() const {
+        return _userId;
+    }
+
+    const std::u16string& SkillCategory::getUserName() const {
+        return _userName;
+    }
+
+    void SkillCategory::setUserName(const std::u16string& userName) {
+        _userName = userName;
     }
 }    //namespace Data

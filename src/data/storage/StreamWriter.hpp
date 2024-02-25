@@ -23,6 +23,9 @@ namespace Data::Storage {
 
     private:
         std::string _fileName;
+
+    public:
+        const std::string& getFileName() const;
     };
 }    //namespace Data::Storage
 

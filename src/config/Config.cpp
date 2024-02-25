@@ -16,19 +16,13 @@ namespace Config {
         vertical = desktop.bottom;
     }
 
-    Config *Config::_instance = nullptr;
-
     Config::Config(const std::string &filePath) {
-        File file(filePath);
+        Parser file(filePath);
 
-        auto guiPaths = file.getPaths(File::Resource::SHADERS, "gui",
-                                         {"vertex", "fragment"});
-        auto selectablePaths = file.getPaths(File::Resource::SHADERS, "selectable",
-                                                {"vertex", "fragment"});
-        auto textPaths = file.getPaths(File::Resource::SHADERS, "text",
-                                          {"vertex", "fragment"});
-        auto texturePaths = file.getPaths(File::Resource::SHADERS, "texture_gui",
-                                             {"vertex", "fragment"});
+        auto guiPaths = file.getPaths(Parser::Resource::SHADERS, "gui", {"vertex", "fragment"});
+        auto selectablePaths = file.getPaths(Parser::Resource::SHADERS, "selectable", {"vertex", "fragment"});
+        auto textPaths = file.getPaths(Parser::Resource::SHADERS, "text", {"vertex", "fragment"});
+        auto texturePaths = file.getPaths(Parser::Resource::SHADERS, "texture_gui", {"vertex", "fragment"});
         auto net = file.getValues<std::string>({"net"}, {"host", "port", "domain"});
 
         _shadersPaths["gui"] = {.vertex = guiPaths.front(), .fragment = guiPaths.back()};
@@ -36,27 +30,15 @@ namespace Config {
         _shadersPaths["text"] = {.vertex = textPaths.front(), .fragment = textPaths.back()};
         _shadersPaths["texture"] = {.vertex = texturePaths.front(), .fragment = texturePaths.back()};
 
-        _texturesPaths["default"] = file.getPath(File::Resource::TEXTURES, "default");
+        _texturesPaths["default"] = file.getPath(Parser::Resource::TEXTURES, "default");
 
-        _fontPaths["gui"] = file.getPath(File::Resource::TEXT, "gui");
+        _fontPaths["gui"] = file.getPath(Parser::Resource::TEXT, "gui");
 
         if (net.size() >= 3) {
             _net["host"] = net[0];
             _net["port"] = net[1];
             _net["domain"] = net[2];
         }
-    }
-
-    Config* Config::get() {
-        return _instance;
-    }
-
-    void Config::init(const std::string& filePath) {
-        _instance = new Config(filePath);
-    }
-
-    void Config::free() {
-        delete _instance;
     }
 
     Config::ShaderPath Config::getShaderPath(const std::string &name) {

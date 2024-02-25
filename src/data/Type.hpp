@@ -10,9 +10,11 @@ namespace Data {
         SYSTEM,
         RACE,
         SKILL,
+        SKILL_CATEGORY,
         ACTION,
         CLASS,
         USER,
+        SESSION,
     };
 }    //namespace Data
 

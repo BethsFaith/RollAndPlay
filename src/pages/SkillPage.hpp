@@ -16,27 +16,68 @@ namespace Pages {
     public:
         enum StateTag {
             START,
-            VIEW
+            CREATE_SKILL,
+            CREATE_CATEGORY,
+            VIEW_SKILL,
+            VIEW_CATEGORY,
+            EDIT_SKILL,
+            EDIT_CATEGORY,
+            CATEGORY_CHOICE,
+        };
+
+        struct Buffer {
+            Data::Skill::Ptr skill;
+            Data::SkillCategory::Ptr category;
         };
 
         explicit SkillPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
-        ~SkillPage() override = default;
+        ~SkillPage() override;
 
-        void init(const glm::vec2& screenOffset) override;
+        void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) override;
 
     private:
         void update() override;
 
         void toStart();
-        void toView();
+        void toSkillCreate();
+        void toCategoryCreate();
+        void toSkillView();
+        void toCategoryView();
+        void toSkillEdit();
+        void toCategoryEdit();
+        void toCategoryChoice();
+
+        void updateLists();
+
+        Net::ApiClient::Result postCategory();
+        Net::ApiClient::Result postSkills();
+
+        Net::ApiClient::Result pullAndUpdateCategoryList();
+        Net::ApiClient::Result pullAndUpdateSkillList();
+
+        static Net::ApiClient::Result pullCategory(int id);
+        static Net::ApiClient::Result pullSkill(int id);
+        static Net::ApiClient::Result pullSkills(int categoryId);
+
+        Net::ApiClient::Result updateCategory();
+        Net::ApiClient::Result updateSkill();
+
+        std::vector<Widgets::ImageButton::Ptr> createCategoryButtons(const std::vector<Data::SkillCategory::Ptr>& categories);
+        std::vector<Widgets::ImageButton::Ptr> createSkillButtons(const std::vector<Data::Skill::Ptr>& skills);
 
         StateTag _currentTag = START;
 
-        Widgets::Button::Ptr _createButton;
-        Widgets::Button::Ptr _saveButton;
+        Widgets::HorizontalLayout::Ptr _viewCategoryLayout;
+        Widgets::HorizontalLayout::Ptr _viewSkillLayout;
+
         Widgets::TextInputField::Ptr _nameInputField;
         Widgets::ImageButton::Ptr _iconButton;
         Widgets::TextInputField::Ptr _iconPathInputField;
+
+        Buffer _buf;
+        std::vector<Data::SkillCategory::Ptr> _categoryList;
+        std::vector<Data::Skill::Ptr> _skillList;
+        std::unique_ptr<std::thread> _updateListsThread;
     };
 }    //namespace Pages
 

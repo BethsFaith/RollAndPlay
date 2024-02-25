@@ -20,10 +20,12 @@ namespace Widgets {
 
         virtual bool checkSelecting(unsigned int x, unsigned int y) = 0;
 
-        virtual void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+        virtual void draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                          GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                           GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                           GraphicLib::Shaders::ShaderProgram::Ptr pickShader) = 0;
 
+        virtual void setProjection(float minX, float maxX, float minY, float maxY) = 0;
         virtual void setTransform(glm::vec2 position, glm::vec2 scale) = 0;
         virtual void setTransform(glm::vec2 position) = 0;
         virtual void setScale(glm::vec2 scale) = 0;

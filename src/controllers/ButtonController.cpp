@@ -5,7 +5,6 @@
 #include "ButtonController.hpp"
 
 namespace Controllers {
-
     void ButtonController::processKeyboardInput(GLFWwindow* window) {}
 
     void ButtonController::processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods) {
@@ -18,7 +17,13 @@ namespace Controllers {
 
             for (auto& button : _buttons) {
                 if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
+                    if (_lastButton.lock() != nullptr) {
+                        _lastButton.lock()->release();
+                    }
+                    _lastButton = button;
+
                     button->press();
+
                     break;
                 }
             }
@@ -42,8 +47,15 @@ namespace Controllers {
 
     void ButtonController::processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) {}
 
+    void ButtonController::processDrop(GLFWwindow* window, int count, const char** paths) {}
+
     void ButtonController::addWidget(Widgets::Widget::Ptr widget) {
         _buttons.push_back(std::dynamic_pointer_cast<Widgets::Button>(widget));
+    }
+
+    void ButtonController::removeWidget(const Widgets::Widget::Ptr& widget) {
+        auto end = std::remove(_buttons.begin(), _buttons.end(), widget);
+        _buttons.erase(end, _buttons.end());
     }
 
     void ButtonController::clear() {

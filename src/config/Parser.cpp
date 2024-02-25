@@ -2,17 +2,17 @@
 // Created by VeraTag on 10.11.2023.
 //
 
-#include "File.hpp"
-
 #include <utility>
 
+#include "Parser.hpp"
+
 namespace Config {
-    File::File(const std::string& path) {
+    Parser::Parser(const std::string& path) {
         _filePath = path;
         _projectPath = getValue<std::string>("path");
     }
 
-    std::string File::getPath(Resource resource, const std::string& name) {
+    std::string Parser::getPath(Resource resource, const std::string& name) {
         std::string resourceKey;
 
         switch (resource) {
@@ -34,7 +34,7 @@ namespace Config {
         return splitToPath({_projectPath, getResourceDirectory(), directory, file});
     }
 
-    std::vector<std::string> File::getPaths(Resource resource, const std::string &parentKey,
+    std::vector<std::string> Parser::getPaths(Resource resource, const std::string &parentKey,
                                       const std::vector<std::string> &keys) {
         std::string resourceKey;
 
@@ -60,11 +60,11 @@ namespace Config {
         return files;
     }
 
-    std::string File::getResourceDirectory() {
+    std::string Parser::getResourceDirectory() {
         return getValue<std::string>(std::vector<std::string>{"resources", "directory"});
     }
 
-    std::string File::getDirectory(Resource resDirectory) {
+    std::string Parser::getDirectory(Resource resDirectory) {
         switch (resDirectory) {
             case SHADERS:
                 return getValue<std::string>(std::vector<std::string>{"resources", "shaders", "directory"});
@@ -75,7 +75,7 @@ namespace Config {
         }
     }
 
-    std::string File::splitToPath(std::vector<std::string> strings) const {
+    std::string Parser::splitToPath(std::vector<std::string> strings) const {
         if (strings.empty()) return "";
 
         std::string path = strings.at(0);

@@ -8,15 +8,8 @@
 #include <filesystem>
 #include <vector>
 
-#include "Action.hpp"
-#include "CharacterClass.hpp"
 #include "IBitwiseSerializable.hpp"
-#include "Race.hpp"
-#include "Skill.hpp"
-#include "SkillCategory.hpp"
-#include "System.hpp"
-#include "Type.hpp"
-#include "User.hpp"
+#include "DataFactory.hpp"
 
 namespace Data {
     class DataStorage {
@@ -24,10 +17,8 @@ namespace Data {
         static size_t save(const std::vector<IBitwiseSerializable::Ptr>& data, Type type);
         static size_t save(const IBitwiseSerializable::Ptr& data, Type type);
         static size_t load(std::vector<IBitwiseSerializable::Ptr>& container, Type type);
-
     private:
         static std::string getDirectory(Type type);
-        static IBitwiseSerializable::Ptr create(Type type);
     };
 }    //namespace Data
 

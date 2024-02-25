@@ -9,6 +9,7 @@
 #include <json/json.h>
 
 #include "HttpMethods.hpp"
+#include "../logger/Logger.hpp"
 
 namespace Net {
     class HttpRequest {
@@ -18,7 +19,7 @@ namespace Net {
         void setCookie(const std::string& cookie);
         void setBodyJson(Json::Value& body);
 
-        void write(asio::ip::tcp::socket& socket);
+        asio::error_code write(asio::ip::tcp::socket& socket);
 
     private:
         std::string _host;

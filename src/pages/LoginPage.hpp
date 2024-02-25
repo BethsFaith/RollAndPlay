@@ -27,7 +27,7 @@ namespace Pages {
         explicit LoginPage(GraphicLib::PickableTexture::Ptr canvas,  Widgets::WidgetBuilder::Ptr builder);
         ~LoginPage() override = default;
 
-        void init(const glm::vec2& screenOffset) override;
+        void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) override;
 
     private:
         void update() override;
@@ -37,12 +37,12 @@ namespace Pages {
 
         bool validate(const std::u16string& login, const std::u16string& password);
         bool validate(const std::u16string& login, const std::u16string& password, const std::u16string& nickname);
-        Net::HttpSession::Result logIn(const std::u16string& login, const std::u16string& password);
-        Net::HttpSession::Result pullUserData();
-        Net::HttpSession::Result changeUserData(const std::u16string& login,
+        Net::ApiClient::Result logIn(const std::u16string& login, const std::u16string& password);
+        Net::ApiClient::Result pullUserData();
+        Net::ApiClient::Result changeUserData(const std::u16string& login,
                                                 const std::u16string& password,
                                                 const std::u16string& nickname);
-        void showResultError(Net::HttpSession::Result& result);
+        void showResultError(Net::ApiClient::Result& result);
 
         StateTag _nextState = START;
 
@@ -60,6 +60,10 @@ namespace Pages {
 
         Widgets::Button::Ptr _saveButton;
         Widgets::TextInputField::Ptr _nicknameInputField;
+
+        Widgets::VerticalLayout::Ptr _startLayout;
+        Widgets::VerticalLayout::Ptr _viewLayout;
+        Widgets::VerticalLayout::Ptr _editLayout;
 
         Data::User _user{};
     };

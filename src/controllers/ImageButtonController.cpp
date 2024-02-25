@@ -6,15 +6,15 @@
 
 namespace Controllers {
     void ImageButtonController::processKeyboardInput(GLFWwindow* window) {
-        if (_target != nullptr) {
-            if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS
-                && glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) {
-                auto string = glfwGetClipboardString(window);
-                if (string != NULL) {
-                    _target->setImage(string, 0);
-                }
-            }
-        }
+//        if (_target != nullptr) {
+//            if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS
+//                && glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) {
+//                auto string = glfwGetClipboardString(window);
+//                if (string != NULL) {
+//                    _target->setImage(string, 0);
+//                }
+//            }
+//        }
     }
 
     void ImageButtonController::processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods) {
@@ -27,30 +27,62 @@ namespace Controllers {
 
             for (auto& button : _buttons) {
                 if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
-                    if (_target != button) {
-                        button->press();
-
-                        if (_target != nullptr) {
-                            _target->setUnderCursor(false);
-                        }
-                        _target = button;
-                        _target->setUnderCursor(true);
+                    if (_target != button && _target != nullptr) {
+                        _target->release();
                     }
+                    _target = button;
+                    button->press();
+
                     break;
                 }
             }
         }
     }
 
-    void ImageButtonController::processMouseCursor(GLFWwindow* window, double xPos, double yPos) {}
+    void ImageButtonController::processMouseCursor(GLFWwindow* window, double xPos, double yPos) {
+        glfwGetCursorPos(window, &xPos, &yPos);
+
+        int width, height;
+        glfwGetWindowSize(window, &width, &height);
+
+        for (auto& button : _buttons) {
+            if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
+                if (_target != button) {
+                    if (_target != nullptr) {
+                        _target->setUnderCursor(false);
+                    }
+                    _target = button;
+                    _target->setUnderCursor(true);
+                }
+                break;
+            }
+        }
+    }
 
     void ImageButtonController::processMouseScroll(double xOffset, double yOffset) {}
 
     void ImageButtonController::processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) {}
 
-    void ImageButtonController::clear() {}
+    void ImageButtonController::processDrop(GLFWwindow* window, int count, const char** paths) {
+        if (count == 1) {
+            if (_target != nullptr) {
+                _target->setImage(paths[0], 0);
+                _target->release();
+            }
+        }
+    }
+
+    void ImageButtonController::clear() {
+        _buttons.clear();
+        _target = nullptr;
+    }
 
     void ImageButtonController::addWidget(Widgets::Widget::Ptr widget) {
         _buttons.push_back(std::dynamic_pointer_cast<Widgets::ImageButton>(widget));
+    }
+
+    void ImageButtonController::removeWidget(const Widgets::Widget::Ptr& widget) {
+        auto end = std::remove(_buttons.begin(), _buttons.end(), widget);
+        _buttons.erase(end, _buttons.end());
     }
 }    //namespace Controllers

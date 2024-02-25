@@ -14,10 +14,13 @@ namespace Widgets {
         using Ptr = std::shared_ptr<WidgetBuilder>;
  
         void addWidgetStyle(WidgetType type, const Styles::WidgetStyle::Ptr& style);
+        void addLayoutStyle(LayoutType type, const Styles::LayoutStyle::Ptr& style);
         
         Widget::Ptr createWidget(WidgetType type);
+        Layout::Ptr createLayout(LayoutType type);
     private:
         std::map<WidgetType, Styles::WidgetStyle::Ptr> styles;
+        std::map<LayoutType, Styles::LayoutStyle::Ptr> layoutStyles;
     };
 }
 

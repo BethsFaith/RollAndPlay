@@ -6,10 +6,8 @@
 
 #include <utility>
 
-ViewDrawer::ViewDrawer(GraphicLib::PickableTexture::Ptr canvas, GraphicLib::Shaders::ShaderProgram::Ptr shader) :
-      _gui(std::move(canvas)), _shader(std::move(shader)) {}
-
-void ViewDrawer::init(int x, int y, Widgets::Styles::Color viewColor) {
+ViewDrawer::ViewDrawer(GraphicLib::PickableTexture::Ptr canvas) :
+      _gui(std::move(canvas)) {
     using namespace GraphicLib;
 
     auto rectangle = std::make_shared<Primitives::Rectangle>(
@@ -19,30 +17,45 @@ void ViewDrawer::init(int x, int y, Widgets::Styles::Color viewColor) {
                                         .with_bitangent = false});
     rectangle->bindData(GL_STATIC_DRAW);
 
-    _view.setPrimitive(rectangle);
-
-    auto colorTechnique = std::make_shared<Techniques::ColorTechnique>();
-    colorTechnique->setColor( Widgets::Styles::getRGB(viewColor));
-    _view.addTechnique(Techniques::COLOR, colorTechnique);
-
-    auto transformTechnique = std::make_shared<Techniques::TransformTechnique>();
-    transformTechnique->enableScale(glm::vec3(1.80, 1.65, 0.0f));
-    transformTechnique->enableTransform(glm::vec3(x, y, 0.0f));
-    _view.addTechnique(Techniques::TRANSFORM, transformTechnique);
-
-    _verticalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.95, 0.76},
+    _verticalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.95f, 0.77f},
                                                        glm::vec2{0.09f, 0.1f}, false);
+    _verticalMenu->setProjection(-1, 1, -1, 1);
     _horizontalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.8f, 0.9f},
                                                          glm::vec2{0.2f, 0.1f});
+    _horizontalMenu->setProjection(-1, 1, -1, 1);
+
+    _verticalMenu->setSelectedItemColor(Widgets::Styles::LIGHT_BLUE);
+    _horizontalMenu->setSelectedItemColor(Widgets::Styles::DARK_GRAY);
+
+    _gui.addWidget(_verticalMenu);
+    _gui.addWidget(_horizontalMenu);
 }
 
-void ViewDrawer::draw() {
-    _view.render(_shader);
-
+void ViewDrawer::draw(int windowWidth, int windowHeight) {
     _gui.draw();
-//    if (_page != nullptr) {
-//        _page->draw();
-//    }
+
+    auto w = (float)windowWidth/2;
+    auto h = (float)windowHeight/2;
+    auto xMinPos = w * (1+ _xLine.x);
+    auto xMaxPos = w * (1+_xLine.y);
+    auto width = xMaxPos - xMinPos;
+    auto yMinPos = h * (1+_yLine.x);
+    auto yMaxPos = h * (1+_yLine.y);
+    auto height = yMaxPos - yMinPos;
+
+    glScissor((int)xMinPos, (int)yMinPos, (int)width, (int)height);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_SCISSOR_TEST);
+
+    glClearColor(_viewBackgroundColor.x, _viewBackgroundColor.y, _viewBackgroundColor.z, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+    if (_page != nullptr) {
+        _page->draw();
+    }
+
+    glDisable(GL_SCISSOR_TEST);
+    glDisable(GL_DEPTH_TEST);
 }
 
 void ViewDrawer::createHorizontalMenu(int menuId, std::vector<std::u16string> names,
@@ -87,27 +100,35 @@ void ViewDrawer::createVerticalMenu(std::vector<std::u16string> names,
 
         _verticalMenu->addElement(button);
     }
-
-    _gui.addWidget(_verticalMenu);
 }
 
 void ViewDrawer::showHorizontalMenu(int menuId) {
-    _gui.clear();
+    _horizontalMenu->update();
     _horizontalMenu->clear();
 
     auto buttons = _horizontalMenuButtons[menuId];
     for (const auto& button : buttons) {
         _horizontalMenu->addElement(button);
     }
+}
 
-    _gui.addWidget(_horizontalMenu);
-    _gui.addWidget(_verticalMenu);
+void ViewDrawer::setPosition(glm::vec2 xLine, glm::vec2 yLine) {
+    _xLine = xLine;
+    _yLine = yLine;
+}
+
+void ViewDrawer::setPage(const Pages::APage::Ptr& page) {
+    _page = page;
 }
 
 Controllers::GuiController::Ptr ViewDrawer::getController() {
     return _gui.getController();
 }
 
-//void ViewDrawer::setPage(const Pages::APage::Ptr& page) {
-//    _page = page;
-//}
+const Pages::APage::Ptr& ViewDrawer::getPage() const {
+    return _page;
+}
+
+void ViewDrawer::setViewBackgroundColor(const glm::vec3& viewBackgroundColor) {
+    _viewBackgroundColor = viewBackgroundColor;
+}

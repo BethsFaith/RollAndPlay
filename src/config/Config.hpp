@@ -9,7 +9,7 @@
 #include <map>
 #include <wtypes.h>
 
-#include "File.hpp"
+#include "Parser.hpp"
 
 namespace Config {
     class Config {
@@ -19,10 +19,7 @@ namespace Config {
             std::string fragment;
         };
 
-        static Config* get();
-
-        static void init(const std::string& filePath);
-        static void free();
+        Config(const std::string &filePath);
 
         ShaderPath getShaderPath(const std::string& name);
         std::string getFontPath(const std::string& name);
@@ -30,10 +27,6 @@ namespace Config {
         std::string getNetValue(const std::string& name);
 
     private:
-        explicit Config(const std::string& filePath);
-
-        static Config* _instance;
-
         std::map<std::string, ShaderPath> _shadersPaths;
         std::map<std::string, std::string> _texturesPaths;
         std::map<std::string, std::string> _fontPaths;

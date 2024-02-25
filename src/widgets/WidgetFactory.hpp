@@ -11,9 +11,11 @@
 #include "MenuBar.hpp"
 #include "TextBox.hpp"
 #include "TextInputField.hpp"
+#include "ImageBox.hpp"
 #include "WidgetType.hpp"
 #include "styles/ButtonStyle.hpp"
 #include "styles/WidgetStyle.hpp"
+#include "styles/ImageBoxStyle.hpp"
 #include "styles/ImageButtonStyle.hpp"
 #include "styles/TextBoxStyle.hpp"
 #include "styles/TextInputFieldStyle.hpp"
@@ -24,6 +26,7 @@ namespace Widgets {
     class WidgetFactory {
     public:
         static Widget::Ptr create(WidgetType type, const Styles::WidgetStyle::Ptr&);
+        static Layout::Ptr create(LayoutType type, const Styles::LayoutStyle::Ptr&);
 
     private:
         WidgetFactory() = default;
