@@ -27,11 +27,13 @@ add_executable(RollAndPlay
         src/data/Skill.cpp
         src/data/Action.cpp
         src/data/CharacterClass.cpp
-        src/data/graphic/Model.cpp
-        src/data/Race.cpp
         src/data/System.cpp
         src/data/SkillCategory.cpp
         src/data/User.cpp
+        src/data/DataFactory.cpp
+        src/data/Race.cpp
+        src/data/convert/Convert.cpp
+        src/data/graphic/Model.cpp
         src/widgets/styles/Color.cpp
         src/widgets/Button.cpp
         src/widgets/graphic/Form.cpp
@@ -45,6 +47,7 @@ add_executable(RollAndPlay
         src/widgets/Layout.cpp
         src/widgets/HorizontalLayout.cpp
         src/widgets/VerticalLayout.cpp
+        src/widgets/ImageBox.cpp
         src/widgets/WidgetFactory.cpp
         src/widgets/WidgetBuilder.cpp
         src/pages/BasePage.cpp
@@ -53,6 +56,7 @@ add_executable(RollAndPlay
         src/pages/RacePage.cpp
         src/pages/LoginPage.cpp
         src/pages/RegistrationPage.cpp
+        src/pages/threads/Worker.cpp
         src/controllers/GuiController.cpp
         src/controllers/TextInputContoller.cpp
         src/controllers/CommonController.cpp
@@ -60,16 +64,16 @@ add_executable(RollAndPlay
         src/controllers/WidgetControllerFactory.cpp
         src/controllers/ImageButtonController.cpp
         src/controllers/MenuBarController.cpp
-        src/controllers/LayoutController.cpp
         src/data/storage/StreamWriter.cpp
         src/data/storage/StreamReader.cpp
         src/data/DataStorage.cpp
-        src/config/File.cpp
+        src/config/Parser.cpp
         src/config/Config.cpp
-        src/net/ApiClient.cpp
+        src/net/HttpSession.cpp
         src/net/HttpRequest.cpp
         src/net/HttpResponse.cpp
-        src/net/HttpSession.cpp
+        src/net/ApiClient.cpp
+        src/net/Route.cpp
         )
 
 

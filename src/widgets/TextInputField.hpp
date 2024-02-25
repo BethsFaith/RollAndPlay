@@ -28,7 +28,8 @@ namespace Widgets {
 
         ~TextInputField() override = default;
 
-        void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+        void draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 
@@ -56,6 +57,7 @@ namespace Widgets {
         [[nodiscard]] std::string getU8Buf() const;
         [[nodiscard]] const std::u16string& getBuf() const;
         void setScale(glm::vec2 scale) override;
+        glm::vec2 getScale() override;
 
     protected:
         void updateTextField();

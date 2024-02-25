@@ -27,6 +27,8 @@ namespace Controllers {
 
         virtual void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) = 0;
 
+        virtual void processDrop(GLFWwindow* window, int count, const char** paths) = 0;
+
         virtual void clear() = 0;
     };
 }    //namespace Controllers

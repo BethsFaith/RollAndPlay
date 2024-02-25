@@ -19,7 +19,8 @@ namespace Widgets {
         TextBox();
         ~TextBox() override = default;
 
-        void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+        void draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 
@@ -39,6 +40,7 @@ namespace Widgets {
         void setTextSize(float size);
         void setText(const std::u16string& content);
         void setColor(Styles::Color color);
+        void setProjection(float minX, float maxX, float minY, float maxY) override;
 
     private:
         std::unique_ptr<Graphic::Form> _form;

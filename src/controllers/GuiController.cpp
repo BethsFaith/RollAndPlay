@@ -12,8 +12,8 @@ namespace Controllers {
     }
 
     void GuiController::processMouseButton(GLFWwindow* window, int mouseButton, int action, int mods) {
-        for (const auto& controller : _widgetsControllers) {
-            controller.second->processMouseButton(window, mouseButton, action, mods);
+        for (const auto& pair : _widgetsControllers) {
+            pair.second->processMouseButton(window, mouseButton, action, mods);
         }
     }
 
@@ -35,6 +35,12 @@ namespace Controllers {
         }
     }
 
+    void GuiController::processDrop(GLFWwindow* window, int count, const char** paths) {
+        for (const auto& controller : _widgetsControllers) {
+            controller.second->processDrop(window, count, paths);
+        }
+    }
+
     void GuiController::addWidget(const Widgets::Widget::Ptr& widget){
         auto type = widget->getType();
 
@@ -46,6 +52,14 @@ namespace Controllers {
             _widgetsControllers[type] = controller;
         }
         _widgetsControllers[type]->addWidget(widget);
+    }
+
+    void GuiController::removeWidget(const Widgets::Widget::Ptr& widget) {
+        auto type = widget->getType();
+
+        if (_widgetsControllers.contains(type)) {
+            _widgetsControllers[type]->removeWidget(widget);
+        }
     }
 
     void GuiController::clear() {

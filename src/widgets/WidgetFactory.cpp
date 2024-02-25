@@ -8,30 +8,6 @@ namespace Widgets {
     Widget::Ptr WidgetFactory::create(WidgetType type, const Styles::WidgetStyle::Ptr& style) {
         Widget::Ptr result;
         switch (type) {
-            case VERTICAL_LAYOUT: {
-                auto layoutStyle = std::dynamic_pointer_cast<Styles::LayoutStyle>(style);
-                auto verticalLayout = std::make_shared<VerticalLayout>();
-
-                if (verticalLayout != nullptr && layoutStyle != nullptr) {
-                    verticalLayout->setWidgetOffset(layoutStyle->widgetOffset);
-                }
-
-                result = verticalLayout;
-
-                break;
-            }
-            case HORIZONTAL_LAYOUT: {
-                auto layoutStyle = std::dynamic_pointer_cast<Styles::LayoutStyle>(style);
-                auto horizontalLayout = std::make_shared<HorizontalLayout>();
-
-                if (horizontalLayout != nullptr && layoutStyle != nullptr) {
-                    horizontalLayout->setWidgetOffset(layoutStyle->widgetOffset);
-                }
-
-                result = horizontalLayout;
-
-                break;
-            }
             case TEXT_INPUT_FIELD:{
                 auto textInputFieldStyle = std::dynamic_pointer_cast<Styles::TextInputFieldStyle>(style);
                 auto textInputField = std::make_shared<TextInputField>
@@ -76,6 +52,19 @@ namespace Widgets {
 
                 break;
             }
+            case IMAGE_BOX: {
+                auto imageBoxStyle = std::dynamic_pointer_cast<Styles::ImageBoxStyle>(style);
+                auto imageBox = std::make_shared<ImageBox>(imageBoxStyle->figure);
+
+                if (imageBox != nullptr && imageBoxStyle != nullptr) {
+                    imageBox->setImage(imageBoxStyle->defaultTexturePath, imageBoxStyle->defaultTextureIndex);
+                    imageBox->setLabelParams(imageBoxStyle->labelParams);
+                }
+
+                result = imageBox;
+
+                break;
+            }
             case MENU_BAR: {
                 auto menuBarStyle = std::dynamic_pointer_cast<Styles::MenuBarStyle>(style);
                 auto menuBar = std::make_shared<MenuBar>(menuBarStyle->defaultPosition,
@@ -106,6 +95,39 @@ namespace Widgets {
 
         if (result != nullptr) {
             result->setScale(style->scale);
+        }
+
+        return result;
+    }
+
+    Layout::Ptr WidgetFactory::create(LayoutType type, const Styles::LayoutStyle::Ptr& style) {
+        Layout::Ptr result;
+
+        switch (type) {
+            case VERTICAL: {
+                auto layoutStyle = std::dynamic_pointer_cast<Styles::LayoutStyle>(style);
+                auto verticalLayout = std::make_shared<VerticalLayout>();
+
+                if (verticalLayout != nullptr && layoutStyle != nullptr) {
+                    verticalLayout->setWidgetOffset(layoutStyle->widgetOffset);
+                }
+
+                result = verticalLayout;
+
+                break;
+            }
+            case HORIZONTAL: {
+                auto layoutStyle = std::dynamic_pointer_cast<Styles::LayoutStyle>(style);
+                auto horizontalLayout = std::make_shared<HorizontalLayout>();
+
+                if (horizontalLayout != nullptr && layoutStyle != nullptr) {
+                    horizontalLayout->setWidgetOffset(layoutStyle->widgetOffset);
+                }
+
+                result = horizontalLayout;
+
+                break;
+            }
         }
 
         return result;

@@ -22,7 +22,9 @@ namespace Widgets::Styles {
         VIOLET,
         LIGHT_GRAY,
         LIGHT_BLUE,
+        LIGHT_VIOLET,
         DARK_GRAY,
+        DARK_BLUE,
     };
 
     [[maybe_unused]] glm::vec3 getRGB(Color color);

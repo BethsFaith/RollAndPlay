@@ -22,6 +22,10 @@ namespace Widgets {
         _form->setTextPosition({position.x - scale.x / 2.0f + 0.01f, position.y});
     }
 
+    void TextBox::setProjection(float minX, float maxX, float minY, float maxY) {
+        _form->setProjection(minX, maxX, minY, maxY);
+    }
+
     void TextBox::setTransform(glm::vec2 position) {
         _form->setTransform(position);
         _form->setTextPosition({position.x - _form->getScale().x / 2.0f + 0.01f, position.y});
@@ -55,10 +59,11 @@ namespace Widgets {
         _form->setTextSize(size);
     }
 
-    void TextBox::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+    void TextBox::draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                       GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                        GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                        GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
-        _form->renderForm(formShader);
+        _form->renderForm(colorShader);
         _form->renderText(textShader);
     }
 

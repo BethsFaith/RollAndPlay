@@ -10,9 +10,7 @@
 #include "IJsonSerializable.hpp"
 
 namespace Data {
-    class User : public AData,
-                 IBitwiseSerializable,
-                 IJsonSerializable {
+    class User : public AData {
     public:
         using Ptr = std::shared_ptr<User>;
 
@@ -20,38 +18,35 @@ namespace Data {
         ~User() override = default;
 
         size_t serialize(Storage::StreamWriter& writer) const override;
-
         size_t deserialize(Storage::StreamReader& reader) override;
 
         void serialize(Json::Value& jsonValue) override;
-
         void deserialize(const Json::Value& jsonValue) override;
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
-        unsigned int getIndex() override;
+        void setId(unsigned int index) override;
+
+        int getId() override;
 
         static bool validateEmail(const std::u16string& email);
-
         static bool validateName(const std::u16string& name);
-
         static bool validatePassword(const std::u16string& password);
 
         void setEmail(const std::u16string& email);
-
         void setPassword(const std::u16string& password);
+        void setNickname(const std::u16string& nickname);
+
         Type getType() override;
-        const std::u16string& getEmail() const;
-        const std::u16string& getPassword() const;
-        const std::u16string& getNickname() const;
+
+        [[nodiscard]] const std::u16string& getEmail() const;
+        [[nodiscard]] const std::u16string& getPassword() const;
+        [[nodiscard]] const std::u16string& getNickname() const;
 
     private:
         std::u16string _email;
         std::u16string _password;
         std::u16string _nickname;
-
-    public:
-        void setNickname(const std::u16string& nickname);
     };
 }    //namespace Data
 

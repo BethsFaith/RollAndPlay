@@ -22,6 +22,7 @@ namespace Widgets::Graphic {
 
         explicit Form(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive);
 
+        virtual void setProjection(float minX, float maxX, float minY, float maxY);
         virtual void setTransform(glm::vec2 position, glm::vec2 scale);
         virtual void setTransform(glm::vec2 position);
         virtual void setScale(glm::vec2 scale);

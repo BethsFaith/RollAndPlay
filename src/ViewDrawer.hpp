@@ -13,11 +13,9 @@
 
 class ViewDrawer {
 public:
-    ViewDrawer(GraphicLib::PickableTexture::Ptr canvas, GraphicLib::Shaders::ShaderProgram::Ptr shader);
+    explicit ViewDrawer(GraphicLib::PickableTexture::Ptr canvas);
 
-    void init(int x, int y, Widgets::Styles::Color viewColor);
-
-    void draw();
+    void draw(int windowWidth, int windowHeight);
 
     void createHorizontalMenu(int menuId, std::vector<std::u16string> names,
                        std::vector<std::function<void()>> funcs);
@@ -27,19 +25,25 @@ public:
     
     void showHorizontalMenu(int menuId);
 
-    Controllers::GuiController::Ptr getController();
+    void setPage(const Pages::APage::Ptr& page);
+    void setPosition(glm::vec2 xLine, glm::vec2 yLine);
+    void setViewBackgroundColor(const glm::vec3& viewBackgroundColor);
 
-    //    void setPage(const Pages::APage::Ptr& page);
+    [[nodiscard]] const Pages::APage::Ptr& getPage() const;
+    Controllers::GuiController::Ptr getController();
 private:
-    GraphicLib::Object _view;
-    //    Pages::APage::Ptr _page;
+    Pages::APage::Ptr _page;
     std::map<int, std::vector<Widgets::Button::Ptr>> _horizontalMenuButtons;
 
     Widgets::MenuBar::Ptr _horizontalMenu;
     Widgets::MenuBar::Ptr _verticalMenu;
 
-    GraphicLib::Shaders::ShaderProgram::Ptr _shader;
     Gui _gui;
+
+    glm::vec2 _xLine{-0.9f, 1.0f};
+    glm::vec2 _yLine{-0.9f, 1.0f};
+
+    glm::vec3 _viewBackgroundColor;
 };
 
 #endif    //ROLLANDPLAY_VIEWDRAWER_HPP

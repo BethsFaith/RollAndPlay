@@ -10,6 +10,8 @@
 #include <json/json.h>
 #include <json/reader.h>
 
+#include "../logger/Logger.hpp"
+
 namespace Net {
     class HttpResponse {
     public:
@@ -24,6 +26,7 @@ namespace Net {
             NOT_IMPLEMENTED = 501,
             BAD_GATEWAY = 502,
             SERVICE_UNAVAILABLE = 503,
+            GATEWAY_TIMEOUT = 504,
             OTHER,
         };
 
@@ -46,6 +49,9 @@ namespace Net {
         std::string _statusMessage;
         std::string _cookie;
         std::string _errorMessage;
+
+        std::map<std::string, std::string> _headers;
+
         Json::Value _body;
 
         StatusCode _statusCode{};

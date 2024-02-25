@@ -21,15 +21,30 @@ namespace Widgets {
         _form.setTexture(_texture, textureIndex);
     }
 
-    void ImageButton::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+    void ImageButton::draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                           GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                            GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                            GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
-        Button::draw(formShader, textShader, pickShader);
+        Button::draw(textureShader, textureShader, textShader, pickShader);
     }
 
     void ImageButton::updateTextPosition(glm::vec2 position, glm::vec2 scale) {
-        _form.setTextPosition({position.x - scale.x / 2 + 0.01f, position.y + scale.y / 1.45});
+        _form.setTextPosition({position.x - scale.x / 2 + 0.01f, position.y + scale.y * 0.7});
     }
 
     void ImageButton::setColor(Styles::Color color) {}
+
+    const GraphicLib::Textures::Texture::Ptr& ImageButton::getTexture() const {
+        return _texture;
+    }
+
+    glm::vec2 ImageButton::getScale() {
+        auto scale = Button::getScale();
+        if (!getTextLabelContent().empty()) {
+            scale.y += 0.01f;
+        } else {
+            scale.y += 0.0;
+        }
+        return scale;
+    }
 }    //namespace Forms

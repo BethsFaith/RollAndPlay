@@ -1,107 +1,53 @@
 //
-// Created by VerOchka on 20.01.2024.
+// Created by VerOchka on 13.01.2024.
 //
-
-#include "HttpSession.hpp"
 
 #include <utility>
 
+#include "HttpSession.hpp"
+
 namespace Net {
-    HttpSession::HttpSession(std::string host, std::string service, std::string domain)
-        : _client(std::move(host), std::move(service)),
-          _domain(std::move(domain)) {}
-
-    HttpSession::Result HttpSession::createUser(Data::User& user) {
-        Json::Value body;
-        user.serialize(body);
-        Net::HttpRequest request("/users", Net::Http::MethodPost, _domain);
-        request.setBodyJson(body);
-
-        auto response = _client.connect(request);
-
-        Result result;
-
-        if (response.getStatusCode() == HttpResponse::StatusCode::CREATED) {
-            Data::User::Ptr createdUser = std::make_shared<Data::User>();
-            createdUser->deserialize(response.getBody());
-
-            result.containData = true;
-            result.data = createdUser;
-        } else {
-            result.haveError = true;
-            result.errorMessage = response.getErrorMessage();
-        }
-
-        result.statusMessage = response.getStatusMessage();
-
-        return result;
+    HttpSession::HttpSession(HttpSession& other) : _resolver(_ioContext) {
+        _host = other._host;
+        _service = other._service;
     }
 
-    HttpSession::Result HttpSession::logIn(Data::User& user) {
-        Json::Value body;
-        user.serialize(body);
-        Net::HttpRequest request("/sessions", Net::Http::MethodPost, _domain);
-        request.setBodyJson(body);
+    HttpSession::HttpSession(std::string host, std::string service)
+        : _host(std::move(host)),
+          _service(std::move(service)), _resolver(_ioContext)  {}
 
-        auto response = _client.connect(request);
+    void HttpSession::connect() {
+        using asio::ip::tcp;
 
-        _cookie = response.getCookie();
+        tcp::resolver::query query(_host, _service);
+        tcp::resolver::results_type endpoints = _resolver.resolve(query);
 
-        Result result;
+        _socket = std::make_unique<tcp::socket>(_ioContext);
+        asio::error_code errorCode;
+        asio::connect(*_socket, endpoints, errorCode);
 
-        if (response.getStatusCode() != HttpResponse::StatusCode::OK) {
-            result.haveError = true;
-            result.errorMessage = response.getErrorMessage();
+        if (errorCode) {
+            Logger::error("Error {1} when connect: {0}", errorCode.message(), (int)errorCode.value());
         }
-
-        result.statusMessage = response.getStatusMessage();
-
-        return result;
     }
 
-    HttpSession::Result HttpSession::getCurrentUser() {
-        Net::HttpRequest request("/private/who-am-i", Net::Http::MethodGet, _domain);
-        request.setCookie(_cookie);
-
-        auto response = _client.connect(request);
-
-        Result result;
-
-        if (response.getStatusCode() == HttpResponse::StatusCode::OK) {
-            Data::User::Ptr user = std::make_shared<Data::User>();
-            user->deserialize(response.getBody());
-
-            result.containData = true;
-            result.data = user;
-        } else {
-            result.haveError = true;
-            result.errorMessage = response.getErrorMessage();
+    HttpResponse HttpSession::send(HttpRequest& request) {
+        auto code = request.write(*_socket);
+        if (code == asio::error::connection_aborted) {
+            connect();
+            code = request.write(*_socket);
         }
 
-        result.statusMessage = response.getStatusMessage();
-
-        return result;
-    }
-
-    HttpSession::Result HttpSession::updateUserData(Data::User& user) {
-        Net::HttpRequest request("/private/users", Net::Http::MethodPut, _domain);
-        request.setCookie(_cookie);
-
-        Json::Value body;
-        user.serialize(body);
-        request.setBodyJson(body);
-
-        auto response = _client.connect(request);
-
-        Result result;
-
-        if (response.getStatusCode() != HttpResponse::StatusCode::OK) {
-            result.haveError = true;
-            result.errorMessage = response.getErrorMessage();
+        HttpResponse response;
+        try {
+            response.read(*_socket);
+        }
+        catch (std::exception &e) {
+            Logger::error("Error when request: {0}", e.what());
+            connect();
+            return send(request);
         }
 
-        result.statusMessage = response.getStatusMessage();
-
-        return result;
+        return response;
     }
 }    //namespace Net

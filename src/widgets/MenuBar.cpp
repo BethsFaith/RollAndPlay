@@ -44,11 +44,12 @@ namespace Widgets {
         }
     }
 
-    void MenuBar::draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+    void MenuBar::draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                       GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                        GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                        GraphicLib::Shaders::ShaderProgram::Ptr pickShader) {
         for (auto& widget : _elements) {
-            widget->draw(formShader, textShader, pickShader);
+            widget->draw(colorShader, GraphicLib::Shaders::ShaderProgram::Ptr(), textShader, pickShader);
         }
     }
 
@@ -75,6 +76,7 @@ namespace Widgets {
         }
 
         element->setTransform(_position, _scale);
+        element->setProjection(_minX, _maxX, _minY, _maxY);
         if (_horizontal) {
             _position.x += _scale.x + _elemOffset;
         } else {
@@ -122,7 +124,27 @@ namespace Widgets {
         return _elements;
     }
 
+    void MenuBar::update() {
+        for (const auto& button : _elements) {
+            if (button->isPressed()) {
+                if (_activeElement.lock() != nullptr) {
+                    _activeElement.lock()->setColor(_color);
+                }
+
+                _color = button->getColor();
+
+                button->setColor(_selectedItemColor);
+
+                _activeElement = button;
+            }
+        }
+    }
+
     void MenuBar::clear() {
+        if (_activeElement.lock() != nullptr) {
+            _activeElement.lock()->setColor(_color);
+        }
+
         if (_horizontal) {
             _position.x -= (_scale.x + _elemOffset) * (float)_elements.size();
         } else {
@@ -132,11 +154,30 @@ namespace Widgets {
         _elements.clear();
     }
 
+    void MenuBar::setSelectedItemColor(const glm::vec3& color) {
+        _selectedItemColor = color;
+    }
+
+    void MenuBar::setSelectedItemColor(const Styles::Color& color) {
+        _selectedItemColor = Styles::getRGB(color);
+    }
+
     glm::vec2 MenuBar::getScale() {
         return _scale;
     }
 
     glm::vec2 MenuBar::getPosition() {
         return _position;
+    }
+
+    const glm::vec3& MenuBar::getSelectedItemColor() const {
+        return _selectedItemColor;
+    }
+
+    void MenuBar::setProjection(float minX, float maxX, float minY, float maxY) {
+        _minX = minX;
+        _maxX = maxX;
+        _minY = minY;
+        _maxY = maxY;
     }
 }    //namespace Widgets

@@ -22,6 +22,8 @@ public:
 
     void addWidget(const Widgets::Widget::Ptr& widget);
 
+    void removeWidget(const Widgets::Widget::Ptr& widget);
+
     void clear();
 
     [[nodiscard]] const Controllers::GuiController::Ptr& getController() const;
@@ -37,7 +39,7 @@ private:
     static GraphicLib::Shaders::ShaderProgram::Ptr selectableShader;
     static GraphicLib::Shaders::ShaderProgram::Ptr textShader;
 
-    std::vector<Widgets::Widget::Ptr> _widget;
+    std::vector<Widgets::Widget::Ptr> _widgets;
     GraphicLib::PickableTexture::Ptr _canvas;
     Controllers::GuiController::Ptr _controller;
 };

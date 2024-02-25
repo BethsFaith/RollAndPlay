@@ -22,12 +22,14 @@ namespace Widgets {
         explicit Button(GraphicLib::Primitives::AbstractPrimitive::Ptr graphicPrimitive);
         ~Button() override = default;
 
-        void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
-                   GraphicLib::Shaders::ShaderProgram::Ptr textShader,
-                   GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
+        void draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr textShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 
         bool checkSelecting(unsigned int x, unsigned int y) override;
 
+        void setProjection(float minX, float maxX, float minY, float maxY) override;
         void setTransform(glm::vec2 position, glm::vec2 scale) override;
         void setTransform(glm::vec2 position) override;
 
@@ -38,13 +40,14 @@ namespace Widgets {
         virtual void release();
 
         [[nodiscard]] bool isUnderCursor() const;
-        [[nodiscard]] bool checkId(int id_) const;
+        [[nodiscard]] bool isPressed() const;
 
+        [[nodiscard]] bool checkId(int id_) const;
         void setPressCallback(const std::function<void()>& function);
+
         void setReleaseCallback(const std::function<void()>& function);
 
         void setUnderCursor(bool isUnderCursor);
-
         virtual void setLabelParams(const Styles::TextParams& text);
         virtual void setLabelText(const std::u16string& text);
         virtual void setLabelPosition(glm::vec2 position);
@@ -53,18 +56,25 @@ namespace Widgets {
 
         virtual void setColor(Styles::Color color);
         virtual void setTraceColor(Styles::Color traceColor);
+        virtual void setColor(glm::vec3 color);
 
+        virtual void setTraceColor(glm::vec3 traceColor);
         std::u16string getTextLabelContent();
         glm::vec2 getTextLabelPosition();
+
+        glm::vec3 getColor();
         void setScale(glm::vec2 scale) override;
 
     protected:
-        virtual void updateTextPosition(glm::vec2 position, glm::vec2 scale);
         explicit Button(const GraphicLib::Primitives::AbstractPrimitive::Ptr& graphicPrimitive, WidgetType type);
 
-        int id;
+        virtual void updateTextPosition(glm::vec2 position, glm::vec2 scale);
+
         static int IdCounter;
+
+        int id;
         bool _isUnderCursor = false;
+        bool _isPressed = false;
 
         std::function<void()> _pressCallback{[]() {}};
         std::function<void()> _releaseCallback{[]() {}};

@@ -10,7 +10,7 @@ namespace Net {
     HttpRequest::HttpRequest(const std::string& target, const std::string& method, const std::string& host) {
         _headers.push_back(method + " " + target + " HTTP/1.1");
         _headers.emplace_back("Accept: */*");
-        _headers.emplace_back("Connection: close");
+        _headers.emplace_back("Connection: keep-alive");
 
         _host = host;
     }
@@ -27,13 +27,13 @@ namespace Net {
         _headers.emplace_back("Content-Type: application/json");
     }
 
-    void HttpRequest::write(asio::ip::tcp::socket& socket) {
+    asio::error_code HttpRequest::write(asio::ip::tcp::socket& socket) {
         asio::streambuf request;
         std::ostream request_stream(&request);
 
         for (const auto& header : _headers) {
-            std::cout << header << std::endl;
             request_stream << header << "\r\n";
+            Logger::debug(header);
         }
 
         request_stream << "Host: " << _host << "\r\n";
@@ -49,6 +49,9 @@ namespace Net {
             request_stream << "\r\n";
         }
 
-        asio::write(socket, request);
+        asio::error_code code;
+        asio::write(socket, request, code);
+
+        return code;
     }
 }    //namespace Net

@@ -1,39 +1,21 @@
 //
-// Created by VeraTag on 08.11.2023.
+// Created by BethsFaith on 09.02.2024.
 //
 
-#ifndef ROLLANDPLAY_FILE_HPP
-#define ROLLANDPLAY_FILE_HPP
+#ifndef INC_1_BIN_JSONPARSER_HPP
+#define INC_1_BIN_JSONPARSER_HPP
 
-#include <iostream>
 #include <fstream>
-
+#include <iostream>
 #include <json/reader.h>
 #include <json/value.h>
 
 namespace Config {
-    class File {
+    class JsonParser {
     public:
-        enum Resource {
-            SHADERS,
-            TEXTURES,
-            TEXT,
-        };
-
-        explicit File(const std::string& path);
-
-        std::string getPath(Resource resource, const std::string& name);
-
-        std::vector<std::string> getPaths(Resource resource, const std::string &parentKey,
-                                          const std::vector<std::string>& keys);
-
-        std::string getDirectory(Resource resDirectory);
-
-        std::string getResourceDirectory();
-
         template<typename T>
-        T getValue(const std::string& name) {
-            std::ifstream ifstream(_filePath, std::ifstream::binary);
+        static T getValue(const std::string& filePath, const std::string& name) {
+            std::ifstream ifstream(filePath, std::ifstream::binary);
 
             if (!ifstream.is_open()) {
                 throw Json::Exception("File can't be open");
@@ -41,7 +23,7 @@ namespace Config {
 
             Json::Reader reader;
             Json::Value obj;
-            reader.parse(ifstream, obj); // reader can also read strings
+            reader.parse(ifstream, obj);    // reader can also read strings
 
             ifstream.close();
 
@@ -49,8 +31,8 @@ namespace Config {
         }
 
         template<typename T>
-        T getValue(const std::vector<std::string>& path) {
-            std::ifstream ifstream(_filePath, std::ifstream::binary);
+        static T getValue(const std::string& filePath, const std::vector<std::string>& path) {
+            std::ifstream ifstream(filePath, std::ifstream::binary);
 
             if (!ifstream.is_open()) {
                 throw Json::Exception("File can't be open");
@@ -63,7 +45,7 @@ namespace Config {
             ifstream.close();
 
             Json::ValueIterator it = obj.begin();
-            for (int i{0}; i < (int)path.size()-1; ++i) {
+            for (int i{0}; i < (int)path.size() - 1; ++i) {
                 if (obj.isMember(path.at(i))) {
                     obj = obj[path.at(i)];
                 }
@@ -73,8 +55,10 @@ namespace Config {
         }
 
         template<typename T>
-        std::vector<T> getValues(const std::vector<std::string>& path, const std::vector<std::string>& keys) {
-            std::ifstream ifstream(_filePath, std::ifstream::binary);
+        static std::vector<T> getValues(const std::string& filePath,
+                                        const std::vector<std::string>& path,
+                                        const std::vector<std::string>& keys) {
+            std::ifstream ifstream(filePath, std::ifstream::binary);
 
             if (!ifstream.is_open()) {
                 throw Json::Exception("File can't be open");
@@ -102,13 +86,7 @@ namespace Config {
 
             return result;
         }
-    private:
-        [[nodiscard]] std::string splitToPath(std::vector<std::string> strings) const;
-
-        std::string _filePath;
-        std::string _projectPath;
-        const char _separator = '\\';
     };
-};
+}    //namespace Config
 
-#endif    //ROLLANDPLAY_FILE_HPP
+#endif    //INC_1_BIN_JSONPARSER_HPP

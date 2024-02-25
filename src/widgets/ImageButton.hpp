@@ -17,12 +17,16 @@ namespace Widgets {
 
         explicit ImageButton(GraphicLib::Primitives::AbstractPrimitive::Ptr graphicPrimitive);
 
-        void draw(GraphicLib::Shaders::ShaderProgram::Ptr formShader,
+        void draw(GraphicLib::Shaders::ShaderProgram::Ptr colorShader,
+                  GraphicLib::Shaders::ShaderProgram::Ptr textureShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr textShader,
                   GraphicLib::Shaders::ShaderProgram::Ptr pickShader) override;
 
         void setColor(Styles::Color color) override;
         void setImage(const std::string& texturePath, int textureIndex);
+
+        [[nodiscard]] const GraphicLib::Textures::Texture::Ptr& getTexture() const;
+        glm::vec2 getScale() override;
 
     protected:
         void updateTextPosition(glm::vec2 position, glm::vec2 scale) override;

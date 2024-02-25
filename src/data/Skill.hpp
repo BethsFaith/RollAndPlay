@@ -8,24 +8,48 @@
 #include <iostream>
 #include <utility>
 
-#include "IBitwiseSerializable.hpp"
+#include "AData.hpp"
+#include "convert/Convert.hpp"
 
 namespace Data {
-    class Skill : IBitwiseSerializable {
+    class Skill : public AData {
     public:
         using Ptr = std::shared_ptr<Skill>;
 
+        Skill() = default;
         ~Skill() override = default;
 
         size_t serialize(Storage::StreamWriter& writer) const override;
         size_t deserialize(Storage::StreamReader& reader) override;
 
+        void serialize(Json::Value& jsonValue) override;
+        void deserialize(const Json::Value& jsonValue) override;
+
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
+        void setId(unsigned int index) override;
+
+        Type getType() override;
+        int getId() override;
+
+        void setName(const std::u16string& name);
+        void setName(const std::string& name);
+        void setIconPath(const std::string& iconPath);
+        void setCategoryId(const uint8_t& index);
+        void setUserId(unsigned int userId);
+        void setUserName(const std::u16string& userName);
+
+        [[nodiscard]] const std::u16string& getName() const;
+        [[nodiscard]] const std::string& getIconPath() const;
+        [[nodiscard]] int getCategoryId() const;
+        [[nodiscard]] const unsigned int& getUserId() const;
+        [[nodiscard]] const std::u16string& getUserName() const;
     private:
-        std::string _name;
+        std::u16string _name;
         std::string _iconPath;
-        uint8_t _categoryIndex;
+        int _categoryId = -1;
+        unsigned int _userId;
+        std::u16string _userName;
     };
 }    //namespace Data
 

@@ -8,16 +8,24 @@
 #include <iostream>
 
 #include "Type.hpp"
+#include "IJsonSerializable.hpp"
+#include "IBitwiseSerializable.hpp"
 
 namespace Data {
-    class AData {
+    class AData : public IJsonSerializable, public IBitwiseSerializable {
     public:
         using Ptr = std::shared_ptr<AData>;
 
         AData() = default;
-        virtual ~AData() = default;
+        ~AData() override = default;
 
+        virtual void setId(unsigned int index) = 0;
+
+        virtual int getId() = 0;
         virtual Type getType() = 0;
+
+    protected:
+        int id = -1;
     };
 }    //namespace Data
 

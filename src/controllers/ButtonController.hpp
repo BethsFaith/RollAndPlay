@@ -5,12 +5,15 @@
 #ifndef ROLLANDPLAY_BUTTONCONTROLLER_HPP
 #define ROLLANDPLAY_BUTTONCONTROLLER_HPP
 
+#include <memory>
+
 #include "../widgets/Button.hpp"
 #include "WidgetController.hpp"
 
 namespace Controllers {
     class ButtonController : public WidgetController {
     public:
+        ButtonController() = default;
         ~ButtonController() override = default;
 
         void processKeyboardInput(GLFWwindow* window) override;
@@ -23,12 +26,15 @@ namespace Controllers {
 
         void processCharMods(GLFWwindow* window, unsigned int codepoint, int mods) override;
 
-        void clear() override;
+        void processDrop(GLFWwindow* window, int count, const char** paths) override;
 
+        void clear() override;
         void addWidget(Widgets::Widget::Ptr widget) override;
+        void removeWidget(const Widgets::Widget::Ptr& widget) override;
 
     private:
         std::vector<Widgets::Button::Ptr> _buttons;
+        std::weak_ptr<Widgets::Button> _lastButton;
     };
 }    //namespace Controllers
 
