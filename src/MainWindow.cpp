@@ -16,6 +16,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    //glfwWindowHint(GLFW_DECORATED, false);
 
     _window = glfwCreateWindow(width, height, title, nullptr, nullptr);
 
@@ -132,12 +133,14 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
 
     auto systemPage = std::make_shared<Pages::SystemPage>(_canvas, widgetBuilder);
     auto skillPage = std::make_shared<Pages::SkillPage>(_canvas, widgetBuilder);
+    auto actionPage = std::make_shared<Pages::ActionPage>(_canvas, widgetBuilder);
     auto racePage = std::make_shared<Pages::RacePage>(_canvas, widgetBuilder);
     auto loginPage = std::make_shared<Pages::LoginPage>(_canvas, widgetBuilder);
     auto registrationPage = std::make_shared<Pages::RegistrationPage>(_canvas, widgetBuilder);
 
     _view->addPage(View::PageTag::SYSTEM, systemPage);
     _view->addPage(View::PageTag::SKILL, skillPage);
+    _view->addPage(View::PageTag::ACTION, actionPage);
     _view->addPage(View::PageTag::RACE, racePage);
     _view->addPage(View::PageTag::AUTHORIZATION, loginPage);
     _view->addPage(View::PageTag::REGISTRATION, registrationPage);
@@ -217,7 +220,7 @@ void MainWindow::updateDeltaTime() {
 }
 
 bool MainWindow::shouldClose() {
-    return glfwWindowShouldClose(_window);
+    return _view->needToClose() || glfwWindowShouldClose(_window);
 }
 
 void MainWindow::mouseButtonCallback(GLFWwindow* window, int mouseButton, int action, int mods) {

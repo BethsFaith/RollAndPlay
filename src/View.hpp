@@ -57,19 +57,23 @@ public:
 
     void addPage(PageTag tag, Pages::APage::Ptr page);
 
+    bool needToClose() const;
 private:
     void initView(glm::vec2 minPos, glm::vec2 maxPos, Widgets::Styles::Color viewColor);
     void update();
+
     void switchPage(PageTag tag);
 
     ViewDrawer _view;
-
     const GraphicLib::PickableTexture::Ptr _canvas;
+
     Controllers::CommonController _controller;
 
     std::map<PageTag, Pages::APage::Ptr> _pages;
 
     std::unique_ptr<std::thread> _stopPageThread;
+
+    bool _needClose{false};
 };
 
 #endif    //ROLLANDPLAY_VIEW_HPP

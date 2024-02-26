@@ -21,6 +21,10 @@ namespace Net {
         request.setBodyJson(body);
 
         auto response = _session.send(request);
+        if (response.getStatusCode() == HttpResponse::StatusCode::INTERNAL_SERVER_ERROR) {
+            _session.connect();
+            response = _session.send(request);
+        }
 
         Result result;
 
@@ -46,6 +50,10 @@ namespace Net {
         request.setBodyJson(body);
 
         auto response = _session.send(request);
+        if (response.getStatusCode() == HttpResponse::StatusCode::INTERNAL_SERVER_ERROR) {
+            _session.connect();
+            response = _session.send(request);
+        }
 
         _cookie = response.getCookie();
 
@@ -70,6 +78,10 @@ namespace Net {
         request.setBodyJson(body);
 
         auto response = _session.send(request);
+        if (response.getStatusCode() == HttpResponse::StatusCode::INTERNAL_SERVER_ERROR) {
+            _session.connect();
+            response = _session.send(request);
+        }
 
         Result result;
 
@@ -93,6 +105,10 @@ namespace Net {
         request.setCookie(_cookie);
 
         auto response = _session.send(request);
+        if (response.getStatusCode() == HttpResponse::StatusCode::INTERNAL_SERVER_ERROR) {
+            _session.connect();
+            response = _session.send(request);
+        }
 
         Result result;
 
@@ -120,6 +136,10 @@ namespace Net {
         request.setBodyJson(body);
 
         auto response = _session.send(request);
+        if (response.getStatusCode() == HttpResponse::StatusCode::INTERNAL_SERVER_ERROR) {
+            _session.connect();
+            response = _session.send(request);
+        }
 
         Result result;
 
@@ -151,6 +171,10 @@ namespace Net {
         request.setCookie(_cookie);
 
         auto response = _session.send(request);
+        if (response.getStatusCode() == HttpResponse::StatusCode::INTERNAL_SERVER_ERROR) {
+            _session.connect();
+            response = _session.send(request);
+        }
 
         Result result;
 
@@ -179,6 +203,10 @@ namespace Net {
         request.setCookie(_cookie);
 
         auto response = _session.send(request);
+        if (response.getStatusCode() == HttpResponse::StatusCode::INTERNAL_SERVER_ERROR) {
+            _session.connect();
+            response = _session.send(request);
+        }
 
         Result result;
 
@@ -218,6 +246,10 @@ namespace Net {
         request.setCookie(_cookie);
 
         auto response = _session.send(request);
+        if (response.getStatusCode() == HttpResponse::StatusCode::INTERNAL_SERVER_ERROR) {
+            _session.connect();
+            response = _session.send(request);
+        }
 
         Result result;
 
@@ -259,6 +291,10 @@ namespace Net {
         request.setCookie(_cookie);
 
         auto response = _session.send(request);
+        if (response.getStatusCode() == HttpResponse::StatusCode::INTERNAL_SERVER_ERROR) {
+            _session.connect();
+            response = _session.send(request);
+        }
 
         Result result;
         if (response.getStatusCode() == HttpResponse::StatusCode::OK) {
@@ -294,6 +330,10 @@ namespace Net {
         request.setCookie(_cookie);
 
         auto response = _session.send(request);
+        if (response.getStatusCode() == HttpResponse::StatusCode::INTERNAL_SERVER_ERROR) {
+            _session.connect();
+            response = _session.send(request);
+        }
 
         Result result;
 

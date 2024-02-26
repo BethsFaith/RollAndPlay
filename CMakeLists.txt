@@ -53,6 +53,7 @@ add_executable(RollAndPlay
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
         src/pages/SkillPage.cpp
+        src/pages/ActionPage.cpp
         src/pages/RacePage.cpp
         src/pages/LoginPage.cpp
         src/pages/RegistrationPage.cpp
