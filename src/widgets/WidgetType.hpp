@@ -8,6 +8,7 @@
 namespace Widgets {
     enum WidgetType {
         TEXT_INPUT_FIELD,
+        NUM_INPUT_FIELD,
         IMAGE_BUTTON,
         TEXT_BOX,
         IMAGE_BOX,

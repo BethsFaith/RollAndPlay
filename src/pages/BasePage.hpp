@@ -41,6 +41,8 @@ namespace Pages {
         Widgets::Button::Ptr createStyledButton(glm::vec2 pos, glm::vec2 scale);
         Widgets::TextInputField::Ptr createStyledInputField(glm::vec2 pos);
         Widgets::TextInputField::Ptr createStyledInputField(glm::vec2 pos, glm::vec2 scale);
+        Widgets::NumericInputField::Ptr createStyledNumericInputField(glm::vec2 pos);
+        Widgets::NumericInputField::Ptr createStyledNumericInputField(glm::vec2 pos, glm::vec2 scale);
         Widgets::ImageButton::Ptr createStyledImageButton(glm::vec2 pos);
         Widgets::ImageButton::Ptr createStyledImageButton(glm::vec2 pos, glm::vec2 scale);
         Widgets::TextBox::Ptr createStyledTextBox(glm::vec2 pos);
@@ -53,6 +55,7 @@ namespace Pages {
         Widgets::Widget::Ptr createStyledWidget(Widgets::WidgetType type);
         Widgets::Button::Ptr createStyledButton();
         Widgets::TextInputField::Ptr createStyledInputField();
+        Widgets::NumericInputField::Ptr createStyledNumericInputField();
         Widgets::ImageButton::Ptr createStyledImageButton();
         Widgets::TextBox::Ptr createStyledTextBox();
         Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout();

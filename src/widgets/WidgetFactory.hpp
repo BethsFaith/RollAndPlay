@@ -11,6 +11,7 @@
 #include "MenuBar.hpp"
 #include "TextBox.hpp"
 #include "TextInputField.hpp"
+#include "NumericInputField.hpp"
 #include "ImageBox.hpp"
 #include "WidgetType.hpp"
 #include "styles/ButtonStyle.hpp"

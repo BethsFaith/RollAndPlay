@@ -17,8 +17,8 @@ namespace Controllers {
     public:
         using Ptr = std::shared_ptr<GuiController>;
 
-        GuiController() = default;
-        ~GuiController() override = default;
+        GuiController();
+        ~GuiController() override;
 
         void processKeyboardInput(GLFWwindow* window) override;
 
@@ -38,6 +38,8 @@ namespace Controllers {
 
     private:
         std::map<Widgets::WidgetType, WidgetController::Ptr> _widgetsControllers;
+
+        WidgetController::Target::Ptr target;
     };
 }    //namespace Controllers
 

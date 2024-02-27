@@ -23,7 +23,7 @@ namespace Widgets {
     public:
         using Ptr = std::shared_ptr<TextInputField>;
 
-        explicit TextInputField(GraphicLib::Primitives::Rectangle::Ptr graphicPrimitive,
+        explicit TextInputField(const GraphicLib::Primitives::Rectangle::Ptr& graphicPrimitive,
                                 Styles::TextParams inputParams);
 
         ~TextInputField() override = default;
@@ -35,32 +35,35 @@ namespace Widgets {
 
         void setTransform(glm::vec2 position, glm::vec2 scale) override;
         void setTransform(glm::vec2 position) override;
+        void setScale(glm::vec2 scale) override;
+
+        glm::vec2 getScale() override;
 
         void press() override;
         void release() override;
 
-        void putToBuffer(char16_t character);
-        void putToBuffer(const std::string& string);
+        virtual void putToBuffer(char16_t character);
+        virtual void putToBuffer(const std::string& string);
 
-        void putToBuffer(const std::u16string& string);
-        void popFromBuffer();
+        virtual void putToBuffer(const std::u16string& string);
+        virtual void popFromBuffer();
 
-        void popFromBuffer(unsigned int position);
+        virtual void popFromBuffer(unsigned int position);
 
         void hideContent(bool needHide);
 
         void clear();
+
         void moveCarriage(int offset);
-
         void moveCarriageToScreenPosition(float xPos);
-
         [[nodiscard]] std::string getU8Buf() const;
         [[nodiscard]] const std::u16string& getBuf() const;
-        void setScale(glm::vec2 scale) override;
-        glm::vec2 getScale() override;
 
     protected:
-        void updateTextField();
+        explicit TextInputField(const GraphicLib::Primitives::Rectangle::Ptr& graphicPrimitive,
+                                Styles::TextParams inputParams, WidgetType type);
+
+        void updateInputField();
 
         void putToBuffer(char16_t character, unsigned int position);
         void putToBuffer(const std::string& string, unsigned int position);
@@ -68,8 +71,9 @@ namespace Widgets {
         void updateTextPosition(glm::vec2 position, glm::vec2 scale) override;
 
         Graphic::Form _textField;
-    private:
+
         std::u16string _buf;
+    private:
         bool _needHide = false;
 
         Carriage _carriage{};

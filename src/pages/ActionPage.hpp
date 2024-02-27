@@ -48,6 +48,7 @@ namespace Pages {
 
         Widgets::TextInputField::Ptr _nameInputField;
         Widgets::ImageButton::Ptr _iconButton;
+        Widgets::NumericInputField::Ptr _pointsInputField;
         Widgets::TextInputField::Ptr _iconPathInputField;
         Widgets::TextBox::Ptr _messageBox;
     };

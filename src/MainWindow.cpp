@@ -125,6 +125,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     Widgets::WidgetBuilder::Ptr widgetBuilder = std::make_shared<Widgets::WidgetBuilder>();
     widgetBuilder->addWidgetStyle(Widgets::BUTTON, buttonStyle);
     widgetBuilder->addWidgetStyle(Widgets::TEXT_INPUT_FIELD, textInputFieldStyle);
+    widgetBuilder->addWidgetStyle(Widgets::NUM_INPUT_FIELD, textInputFieldStyle);
     widgetBuilder->addWidgetStyle(Widgets::IMAGE_BUTTON, imageButtonStyle);
     widgetBuilder->addWidgetStyle(Widgets::IMAGE_BOX, imageBoxStyle);
     widgetBuilder->addWidgetStyle(Widgets::TEXT_BOX, textBoxStyle);

@@ -27,10 +27,12 @@ namespace Controllers {
 
             for (auto& button : _buttons) {
                 if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
-                    if (_target != button && _target != nullptr) {
-                        _target->release();
+                    if (target->widget.lock() != button && target->widget.lock() != nullptr) {
+                        target->widget.lock()->release();
                     }
-                    _target = button;
+                    target->widget = button;
+                    target->owner = this;
+
                     button->press();
 
                     break;
@@ -47,14 +49,11 @@ namespace Controllers {
 
         for (auto& button : _buttons) {
             if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
-                if (_target != button) {
-                    if (_target != nullptr) {
-                        _target->setUnderCursor(false);
-                    }
-                    _target = button;
-                    _target->setUnderCursor(true);
+                if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
+                    button->setUnderCursor(true);
+                } else {
+                    button->setUnderCursor(false);
                 }
-                break;
             }
         }
     }
@@ -65,16 +64,21 @@ namespace Controllers {
 
     void ImageButtonController::processDrop(GLFWwindow* window, int count, const char** paths) {
         if (count == 1) {
-            if (_target != nullptr) {
-                _target->setImage(paths[0], 0);
-                _target->release();
+            if (target->owner == this && target->widget.lock() != nullptr) {
+                auto targetImageButton = std::dynamic_pointer_cast<Widgets::ImageButton>(target->widget.lock());
+                targetImageButton->setImage(paths[0], 0);
+                targetImageButton->release();
             }
         }
     }
 
     void ImageButtonController::clear() {
+        if (target->owner == this && target->widget.lock() != nullptr) {
+            target->widget.lock()->release();
+            target->widget.lock() = nullptr;
+        }
+
         _buttons.clear();
-        _target = nullptr;
     }
 
     void ImageButtonController::addWidget(Widgets::Widget::Ptr widget) {

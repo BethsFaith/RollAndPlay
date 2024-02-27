@@ -20,10 +20,11 @@ namespace Controllers {
                 auto elems = widget->getElements();
                 for (const auto& button : elems) {
                     if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
-                        if (_lastButton.lock() != nullptr) {
-                            _lastButton.lock()->release();
+                        if (target->widget.lock() != nullptr) {
+                            target->widget.lock()->release();
                         }
-                        _lastButton = button;
+                        target->widget = button;
+                        target->owner = this;
 
                         button->press();
 
@@ -63,6 +64,11 @@ namespace Controllers {
     void MenuBarController::processDrop(GLFWwindow* window, int count, const char** paths) {}
 
     void MenuBarController::clear() {
+        if (target->owner == this && target->widget.lock() != nullptr) {
+            target->widget.lock()->release();
+            target->widget.lock() = nullptr;
+        }
+
         _widgets.clear();
     }
 
