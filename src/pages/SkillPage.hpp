@@ -55,12 +55,12 @@ namespace Pages {
         Net::ApiClient::Result pullAndUpdateCategoryList();
         Net::ApiClient::Result pullAndUpdateSkillList();
 
+        Net::ApiClient::Result updateCategory();
+        Net::ApiClient::Result updateSkill();
+
         static Net::ApiClient::Result pullCategory(int id);
         static Net::ApiClient::Result pullSkill(int id);
         static Net::ApiClient::Result pullSkills(int categoryId);
-
-        Net::ApiClient::Result updateCategory();
-        Net::ApiClient::Result updateSkill();
 
         std::vector<Widgets::ImageButton::Ptr> createCategoryButtons(const std::vector<Data::SkillCategory::Ptr>& categories);
         std::vector<Widgets::ImageButton::Ptr> createSkillButtons(const std::vector<Data::Skill::Ptr>& skills);
@@ -77,7 +77,6 @@ namespace Pages {
         Buffer _buf;
         std::vector<Data::SkillCategory::Ptr> _categoryList;
         std::vector<Data::Skill::Ptr> _skillList;
-        std::unique_ptr<std::thread> _updateListsThread;
     };
 }    //namespace Pages
 

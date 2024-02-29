@@ -9,6 +9,7 @@ namespace Controllers {
         switch (type) {
             case Widgets::BUTTON:
                 return std::make_shared<Controllers::ButtonController>();
+            case Widgets::NUM_INPUT_FIELD:
             case Widgets::TEXT_INPUT_FIELD:
                 return std::make_shared<Controllers::TextInputFieldController>();
             case Widgets::IMAGE_BUTTON:

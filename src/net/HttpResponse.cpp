@@ -72,15 +72,6 @@ namespace Net {
                 Logger::error("Failed to parse response content : {}", reader.getFormattedErrorMessages());
             }
 
-            // удалить потом
-            Json::ValueIterator it = _body.begin();
-            while (it != _body.end()) {
-                if (it->isString()) {
-                    Logger::debug("{} : {}", it.key().asString(), it->asString());
-                }
-                ++it;
-            }    // конец удаления
-
             if (_body.isObject()) {
                 if (_body.isMember("error")) {
                     _errorMessage = _body["error"].asString();

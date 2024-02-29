@@ -17,6 +17,7 @@
 #include "pages/RegistrationPage.hpp"
 #include "pages/SkillPage.hpp"
 #include "pages/SystemPage.hpp"
+#include "pages/ActionPage.hpp"
 #include "widgets/Button.hpp"
 #include "Gui.hpp"
 #include "View.hpp"

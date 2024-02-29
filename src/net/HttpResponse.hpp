@@ -54,7 +54,7 @@ namespace Net {
 
         Json::Value _body;
 
-        StatusCode _statusCode{};
+        StatusCode _statusCode{INTERNAL_SERVER_ERROR};
     };
 }    //namespace Net
 

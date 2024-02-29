@@ -103,6 +103,16 @@ namespace Pages {
             createStyledWidget(Widgets::TEXT_INPUT_FIELD, pos, scale));
     }
 
+    Widgets::NumericInputField::Ptr BasePage::createStyledNumericInputField(glm::vec2 pos) {
+        return std::dynamic_pointer_cast<Widgets::NumericInputField>(
+            createStyledWidget(Widgets::NUM_INPUT_FIELD, pos));
+    }
+
+    Widgets::NumericInputField::Ptr BasePage::createStyledNumericInputField(glm::vec2 pos, glm::vec2 scale) {
+        return std::dynamic_pointer_cast<Widgets::NumericInputField>(
+            createStyledWidget(Widgets::NUM_INPUT_FIELD, pos, scale));
+    }
+
     Widgets::ImageButton::Ptr BasePage::createStyledImageButton(glm::vec2 pos) {
         return std::dynamic_pointer_cast<Widgets::ImageButton>(createStyledWidget(Widgets::IMAGE_BUTTON, pos));
     }
@@ -165,6 +175,10 @@ namespace Pages {
 
     Widgets::TextInputField::Ptr BasePage::createStyledInputField() {
         return std::dynamic_pointer_cast<Widgets::TextInputField>(createStyledWidget(Widgets::TEXT_INPUT_FIELD));
+    }
+
+    Widgets::NumericInputField::Ptr BasePage::createStyledNumericInputField() {
+        return std::dynamic_pointer_cast<Widgets::NumericInputField>(createStyledWidget(Widgets::NUM_INPUT_FIELD));
     }
 
     Widgets::ImageButton::Ptr BasePage::createStyledImageButton() {

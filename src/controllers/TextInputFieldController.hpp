@@ -33,7 +33,6 @@ namespace Controllers {
         void removeWidget(const Widgets::Widget::Ptr& widget) override;
 
     private:
-        Widgets::TextInputField::Ptr _target = nullptr;
         std::vector<Widgets::TextInputField::Ptr> _buttons;
     };
 }    //namespace Controllers
