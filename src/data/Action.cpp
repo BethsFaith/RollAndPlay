@@ -33,6 +33,7 @@ namespace Data {
         _name = Convert::toUTF16(jsonValue["name"].asString());
         _iconPath = jsonValue["icon"].asString();
         _userId = jsonValue["user_id"].asInt();
+        _pointsNumber = jsonValue["points"].asInt();
 
         if (jsonValue.isMember("skill_id")) {
             _skillId = jsonValue["skill_id"].asInt();

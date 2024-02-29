@@ -49,11 +49,9 @@ namespace Controllers {
 
         for (auto& button : _buttons) {
             if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
-                if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
-                    button->setUnderCursor(true);
-                } else {
-                    button->setUnderCursor(false);
-                }
+                button->setUnderCursor(true);
+            } else {
+                button->setUnderCursor(false);
             }
         }
     }
