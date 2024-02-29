@@ -24,6 +24,22 @@ namespace Widgets {
 
                 break;
             }
+            case NUM_INPUT_FIELD: {
+                auto inputFieldStyle = std::dynamic_pointer_cast<Styles::TextInputFieldStyle>(style);
+                auto numInputField = std::make_shared<NumericInputField>
+                    (std::dynamic_pointer_cast<GraphicLib::Primitives::Rectangle>(inputFieldStyle->figure),
+                    inputFieldStyle->inputParams);
+
+                if (numInputField != nullptr && inputFieldStyle != nullptr) {
+                    numInputField->setLabelParams(inputFieldStyle->labelParams);
+                    numInputField->setColor(inputFieldStyle->color);
+                    numInputField->setTraceColor(inputFieldStyle->traceColor);
+                }
+
+                result = numInputField;
+
+                break;
+            }
             case IMAGE_BUTTON: {
                 auto imageButtonStyle = std::dynamic_pointer_cast<Styles::ImageButtonStyle>(style);
                 auto imageButton = std::make_shared<ImageButton>(imageButtonStyle->figure);
@@ -31,7 +47,7 @@ namespace Widgets {
                 if (imageButton != nullptr && imageButtonStyle != nullptr) {
                     imageButton->setLabelParams(imageButtonStyle->labelParams);
                     imageButton->setTraceColor(imageButtonStyle->traceColor);
-                    imageButton->setImage(imageButtonStyle->defaultTexturePath,
+                    imageButton->setDefaultImage(imageButtonStyle->defaultTexturePath,
                                           imageButtonStyle->defaultTextureIndex);
                 }
 
@@ -91,6 +107,8 @@ namespace Widgets {
 
                 break;
             }
+            default:
+                break;
         }
 
         if (result != nullptr) {

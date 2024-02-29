@@ -40,6 +40,7 @@ add_executable(RollAndPlay
         src/widgets/graphic/PickableForm.cpp
         src/widgets/Widget.cpp
         src/widgets/TextInputField.cpp
+        src/widgets/NumericInputField.cpp
         src/widgets/ImageButton.cpp
         src/widgets/Carriage.cpp
         src/widgets/TextBox.cpp
@@ -53,6 +54,7 @@ add_executable(RollAndPlay
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
         src/pages/SkillPage.cpp
+        src/pages/ActionPage.cpp
         src/pages/RacePage.cpp
         src/pages/LoginPage.cpp
         src/pages/RegistrationPage.cpp

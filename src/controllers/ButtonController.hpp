@@ -34,7 +34,6 @@ namespace Controllers {
 
     private:
         std::vector<Widgets::Button::Ptr> _buttons;
-        std::weak_ptr<Widgets::Button> _lastButton;
     };
 }    //namespace Controllers
 

@@ -8,11 +8,11 @@
 #include <iostream>
 #include <utility>
 
-#include "IBitwiseSerializable.hpp"
-#include "Skill.hpp"
+#include "AData.hpp"
+#include "convert/Convert.hpp"
 
 namespace Data {
-    class Action : public IBitwiseSerializable {
+    class Action : public AData {
     public:
         using Ptr = std::shared_ptr<Action>;
 
@@ -20,26 +20,35 @@ namespace Data {
         ~Action() override = default;
 
         size_t serialize(Storage::StreamWriter& writer) const override;
-
         size_t deserialize(Storage::StreamReader& reader) override;
+
+        void serialize(Json::Value& jsonValue) override;
+        void deserialize(const Json::Value& jsonValue) override;
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
-        void setName(const std::string& name);
+        void setName(const std::u16string& name);
         void setPointsNumber(uint8_t pointsNumber);
-        void setLevel(uint8_t level);
-        void setSkill(Skill::Ptr skill);
+        void setIconPath(const std::string& iconPath);
+        void setSkillId(int skillId);
+        void setUserId(unsigned int userId);
 
-        [[nodiscard]] const std::string& getName() const;
+        [[nodiscard]] const std::u16string& getName() const;
         [[nodiscard]] uint8_t getPointsNumber() const;
-        [[nodiscard]] uint8_t getLevel() const;
-        [[nodiscard]] Skill::Ptr getSkill() const;
+        [[nodiscard]] const std::string& getIconPath() const;
+        [[nodiscard]] int getSkillId() const;
+        [[nodiscard]] unsigned int getUserId() const;
+        void setId(unsigned int index) override;
+        int getId() override;
+        Type getType() override;
 
     private:
-        std::string _name;
+        std::u16string _name;
+        std::string _iconPath;
+
         uint8_t _pointsNumber{};
-        uint8_t _level{};
-        Skill::Ptr _skill{};
+        unsigned int _userId{};
+        int _skillId{-1};
     };
 }    //namespace Data
 

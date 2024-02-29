@@ -17,10 +17,11 @@ namespace Controllers {
 
             for (auto& button : _buttons) {
                 if (button->checkSelecting((int)xPos, int(height - yPos - 1))) {
-                    if (_lastButton.lock() != nullptr) {
-                        _lastButton.lock()->release();
+                    if (target->widget.lock() != nullptr) {
+                        target->widget.lock()->release();
                     }
-                    _lastButton = button;
+                    target->widget = button;
+                    target->owner = this;
 
                     button->press();
 
@@ -59,6 +60,11 @@ namespace Controllers {
     }
 
     void ButtonController::clear() {
+        if (target->owner == this && target->widget.lock() != nullptr) {
+            target->widget.lock()->release();
+            target->widget.lock() = nullptr;
+        }
+
         _buttons.clear();
     }
 }    //namespace Controllers

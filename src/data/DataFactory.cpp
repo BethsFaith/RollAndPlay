@@ -19,6 +19,7 @@ Data::AData::Ptr Data::DataFactory::create(Data::Type type) {
             res = std::make_shared<SkillCategory>();
             break;
         case ACTION:
+            res = std::make_shared<Action>();
             break;
         case CLASS:
             break;

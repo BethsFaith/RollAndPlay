@@ -5,6 +5,16 @@
 #include "GuiController.hpp"
 
 namespace Controllers {
+    GuiController::GuiController() {
+        target = std::make_shared<WidgetController::Target>();
+        target->widget.lock() = nullptr;
+        target->owner = nullptr;
+    }
+
+    GuiController::~GuiController() {
+        GuiController::clear();
+    }
+
     void GuiController::processKeyboardInput(GLFWwindow* window) {
         for (const auto& controller : _widgetsControllers) {
             controller.second->processKeyboardInput(window);
@@ -49,6 +59,8 @@ namespace Controllers {
             if (controller == nullptr) {
                 return;
             }
+            controller->target = target;
+
             _widgetsControllers[type] = controller;
         }
         _widgetsControllers[type]->addWidget(widget);
