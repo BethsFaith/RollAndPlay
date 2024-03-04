@@ -5,6 +5,7 @@
 #ifndef INC_1_BIN_BASEDATA_HPP
 #define INC_1_BIN_BASEDATA_HPP
 
+#include "Constants.hpp"
 #include "AData.hpp"
 
 namespace Data {
@@ -21,7 +22,7 @@ namespace Data {
         size_t serialized_size() const noexcept override;
 
     private:
-        int id = -1;
+        unsigned int id = NULL_ID;
     };
 }
 

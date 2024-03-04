@@ -23,11 +23,13 @@ namespace Pages {
             EDIT_SKILL,
             EDIT_CATEGORY,
             CATEGORY_CHOICE,
+            CHARACTERISTIC_CHOICE,
         };
 
         struct Buffer {
             Data::Skill::Ptr skill;
             Data::SkillCategory::Ptr category;
+            Data::Characteristic::Ptr characteristic;
         };
 
         explicit SkillPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
@@ -46,8 +48,11 @@ namespace Pages {
         void toSkillEdit();
         void toCategoryEdit();
         void toCategoryChoice();
+        void toCharacteristicChoice();
 
         void updateLists();
+
+        bool checkInput();
 
         Net::ApiClient::Result postCategory();
         Net::ApiClient::Result postSkills();
@@ -59,6 +64,7 @@ namespace Pages {
         Net::ApiClient::Result updateSkill();
 
         static Net::ApiClient::Result pullCategory(int id);
+        static Net::ApiClient::Result pullCharacteristic(int id);
         static Net::ApiClient::Result pullSkill(int id);
         static Net::ApiClient::Result pullSkills(int categoryId);
 
@@ -67,6 +73,8 @@ namespace Pages {
 
         StateTag _currentTag = START;
 
+        Buffer _buf;
+
         Widgets::HorizontalLayout::Ptr _viewCategoryLayout;
         Widgets::HorizontalLayout::Ptr _viewSkillLayout;
 
@@ -74,7 +82,8 @@ namespace Pages {
         Widgets::ImageButton::Ptr _iconButton;
         Widgets::TextInputField::Ptr _iconPathInputField;
 
-        Buffer _buf;
+        Widgets::TextBox::Ptr _messageBox;
+
         std::vector<Data::SkillCategory::Ptr> _categoryList;
         std::vector<Data::Skill::Ptr> _skillList;
     };

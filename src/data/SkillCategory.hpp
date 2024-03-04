@@ -43,8 +43,9 @@ namespace Data {
     private:
         std::u16string _name;
         std::string _iconPath;
-        unsigned int _userId;
         std::u16string _userName;
+
+        unsigned int _userId = NULL_ID;
     };
 }    //namespace Data
 

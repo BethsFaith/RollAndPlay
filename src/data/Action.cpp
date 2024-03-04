@@ -20,7 +20,7 @@ namespace Data {
         jsonValue["icon"] = _iconPath;
         jsonValue["points"] = _pointsNumber;
 
-        if (_skillId != -1) {
+        if (_skillId != NULL_ID) {
             jsonValue["skill_id"] = _skillId;
         }
     }

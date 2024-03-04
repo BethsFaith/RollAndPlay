@@ -46,8 +46,9 @@ namespace Data {
         std::string _iconPath;
 
         uint8_t _pointsNumber{};
-        unsigned int _userId{};
-        int _skillId{-1};
+
+        unsigned int _userId = NULL_ID;
+        unsigned int _skillId = NULL_ID;
     };
 }    //namespace Data
 

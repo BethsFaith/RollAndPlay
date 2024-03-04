@@ -19,8 +19,11 @@ namespace Data {
         jsonValue["name"] = Convert::toUTF8(_name);
         jsonValue["icon"] = _iconPath;
 
-        if (_categoryId != -1) {
+        if (_categoryId != NULL_ID) {
             jsonValue["category_id"] = _categoryId;
+        }
+        if (_characteristicId != NULL_ID) {
+            jsonValue["characteristic_id"] = _characteristicId;
         }
     }
 
@@ -33,6 +36,9 @@ namespace Data {
 
         if (jsonValue.isMember("category_id")) {
             _categoryId = jsonValue["category_id"].asInt();
+        }
+        if (jsonValue.isMember("characteristic_id")) {
+            _characteristicId = jsonValue["characteristic_id"].asInt();
         }
     }
 
@@ -64,6 +70,10 @@ namespace Data {
         _categoryId = index;
     }
 
+    void Skill::setCharacteristicId(const uint8_t& index) {
+        _characteristicId = index;
+    }
+
     void Skill::setUserId(unsigned int userId) {
         _userId = userId;
     }
@@ -78,6 +88,10 @@ namespace Data {
 
     int Skill::getCategoryId() const {
         return _categoryId;
+    }
+
+    int Skill::getCharacteristicId() const {
+        return _characteristicId;
     }
 
     void Skill::setUserName(const std::u16string& userName) {

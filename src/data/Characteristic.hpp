@@ -32,7 +32,7 @@ namespace Data {
         std::u16string _name;
         std::string _iconPath;
 
-        unsigned int _userId;
+        unsigned int _userId = NULL_ID;
     };
 }
 
