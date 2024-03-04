@@ -22,6 +22,7 @@ namespace Net {
         pull(Data::ACTION, filePath, "action", methods);
         pull(Data::SKILL, filePath, "skill", methods);
         pull(Data::SESSION, filePath, "session", methods);
+        pull(Data::CHARACTERISTIC, filePath, "characteristic", methods);
     }
 
     void Route::pull(Data::Type type,

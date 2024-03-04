@@ -74,5 +74,20 @@
     "DELETE": {
       "private": true
     }
+  },
+  "characteristic": {
+    "path": "/characteristics",
+    "GET": {
+      "private": false
+    },
+    "POST": {
+      "private": true
+    },
+    "PUT": {
+      "private": true
+    },
+    "DELETE": {
+      "private": true
+    }
   }
 }
