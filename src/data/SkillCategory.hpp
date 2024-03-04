@@ -9,11 +9,11 @@
 #include <utility>
 #include <vector>
 
-#include "AData.hpp"
+#include "BaseData.hpp"
 #include "convert/Convert.hpp"
 
 namespace Data {
-    class SkillCategory : public AData {
+    class SkillCategory : public BaseData {
     public:
         using Ptr = std::shared_ptr<SkillCategory>;
 
@@ -28,10 +28,7 @@ namespace Data {
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
-        void setId(unsigned int index) override;
-
         Type getType() override;
-        int getId() override;
 
         void setName(const std::u16string& name);
         void setName(const std::string& name);

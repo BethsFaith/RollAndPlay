@@ -14,9 +14,7 @@ namespace Data {
     }
 
     void Action::serialize(Json::Value& jsonValue) {
-        if (id != -1) {
-            jsonValue["id"] = id;
-        }
+        BaseData::serialize(jsonValue);
 
         jsonValue["name"] = Convert::toUTF8(_name);
         jsonValue["icon"] = _iconPath;
@@ -28,7 +26,7 @@ namespace Data {
     }
 
     void Action::deserialize(const Json::Value& jsonValue) {
-        id = jsonValue["id"].asInt();
+        BaseData::deserialize(jsonValue);
 
         _name = Convert::toUTF16(jsonValue["name"].asString());
         _iconPath = jsonValue["icon"].asString();
@@ -42,10 +40,6 @@ namespace Data {
 
     size_t Action::serialized_size() const noexcept {
         return 0;
-    }
-
-    void Action::setId(unsigned int index) {
-        id = index;
     }
 
     void Action::setName(const std::u16string& name) {
@@ -86,10 +80,6 @@ namespace Data {
 
     int Action::getSkillId() const {
         return _skillId;
-    }
-
-    int Action::getId() {
-        return id;
     }
 
     Type Action::getType() {

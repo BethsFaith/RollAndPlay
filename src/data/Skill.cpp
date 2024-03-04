@@ -14,9 +14,7 @@ namespace Data {
     }
 
     void Skill::serialize(Json::Value& jsonValue) {
-        if (id != -1) {
-            jsonValue["id"] = id;
-        }
+        BaseData::serialize(jsonValue);
 
         jsonValue["name"] = Convert::toUTF8(_name);
         jsonValue["icon"] = _iconPath;
@@ -27,7 +25,7 @@ namespace Data {
     }
 
     void Skill::deserialize(const Json::Value& jsonValue) {
-        id = jsonValue["id"].asInt();
+        BaseData::deserialize(jsonValue);
 
         _name = Convert::toUTF16(jsonValue["name"].asString());
         _iconPath = jsonValue["icon"].asString();
@@ -46,16 +44,8 @@ namespace Data {
         return SKILL;
     }
 
-    int Skill::getId() {
-        return id;
-    }
-
     const unsigned int& Skill::getUserId() const {
         return _userId;
-    }
-
-    void Skill::setId(unsigned int index) {
-        id = index;
     }
 
     void Skill::setName(const std::u16string& name) {

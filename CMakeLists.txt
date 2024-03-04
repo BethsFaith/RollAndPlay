@@ -24,6 +24,8 @@ add_executable(RollAndPlay
         src/MainWindow.cpp
         src/View.cpp
         src/ViewDrawer.cpp
+        src/data/BaseData.cpp
+        src/data/Characteristic.cpp
         src/data/Skill.cpp
         src/data/Action.cpp
         src/data/CharacterClass.cpp

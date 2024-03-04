@@ -23,9 +23,6 @@ namespace Data {
 
         virtual int getId() = 0;
         virtual Type getType() = 0;
-
-    protected:
-        int id = -1;
     };
 }    //namespace Data
 

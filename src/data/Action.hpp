@@ -8,11 +8,11 @@
 #include <iostream>
 #include <utility>
 
-#include "AData.hpp"
+#include "BaseData.hpp"
 #include "convert/Convert.hpp"
 
 namespace Data {
-    class Action : public AData {
+    class Action : public BaseData {
     public:
         using Ptr = std::shared_ptr<Action>;
 
@@ -27,20 +27,19 @@ namespace Data {
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
+        Type getType() override;
+
         void setName(const std::u16string& name);
         void setPointsNumber(uint8_t pointsNumber);
         void setIconPath(const std::string& iconPath);
         void setSkillId(int skillId);
-        void setUserId(unsigned int userId);
 
+        void setUserId(unsigned int userId);
         [[nodiscard]] const std::u16string& getName() const;
         [[nodiscard]] uint8_t getPointsNumber() const;
         [[nodiscard]] const std::string& getIconPath() const;
         [[nodiscard]] int getSkillId() const;
         [[nodiscard]] unsigned int getUserId() const;
-        void setId(unsigned int index) override;
-        int getId() override;
-        Type getType() override;
 
     private:
         std::u16string _name;

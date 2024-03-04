@@ -8,11 +8,12 @@
 namespace Data {
     enum Type {
         SYSTEM,
-        RACE,
+        CHARACTERISTIC,
         SKILL,
         SKILL_CATEGORY,
         ACTION,
         CLASS,
+        RACE,
         USER,
         SESSION,
     };
