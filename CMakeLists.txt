@@ -55,6 +55,7 @@ add_executable(RollAndPlay
         src/widgets/WidgetBuilder.cpp
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
+        src/pages/CharacteristicPage.cpp
         src/pages/SkillPage.cpp
         src/pages/ActionPage.cpp
         src/pages/RacePage.cpp

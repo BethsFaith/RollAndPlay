@@ -133,6 +133,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     widgetBuilder->addLayoutStyle(Widgets::VERTICAL, vertLayoutStyle);
 
     auto systemPage = std::make_shared<Pages::SystemPage>(_canvas, widgetBuilder);
+    auto characteristicPage = std::make_shared<Pages::CharacteristicPage>(_canvas, widgetBuilder);
     auto skillPage = std::make_shared<Pages::SkillPage>(_canvas, widgetBuilder);
     auto actionPage = std::make_shared<Pages::ActionPage>(_canvas, widgetBuilder);
     auto racePage = std::make_shared<Pages::RacePage>(_canvas, widgetBuilder);
@@ -140,6 +141,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     auto registrationPage = std::make_shared<Pages::RegistrationPage>(_canvas, widgetBuilder);
 
     _view->addPage(View::PageTag::SYSTEM, systemPage);
+    _view->addPage(View::PageTag::CHARACTERISTIC, characteristicPage);
     _view->addPage(View::PageTag::SKILL, skillPage);
     _view->addPage(View::PageTag::ACTION, actionPage);
     _view->addPage(View::PageTag::RACE, racePage);

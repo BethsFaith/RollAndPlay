@@ -18,6 +18,7 @@
 #include "pages/SkillPage.hpp"
 #include "pages/SystemPage.hpp"
 #include "pages/ActionPage.hpp"
+#include "pages/CharacteristicPage.hpp"
 #include "widgets/Button.hpp"
 #include "Gui.hpp"
 #include "View.hpp"
