@@ -10,7 +10,8 @@ Data::AData::Ptr Data::DataFactory::create(Data::Type type) {
     switch (type) {
         case SYSTEM:
             break;
-        case RACE:
+        case CHARACTERISTIC:
+            res = std::make_shared<Characteristic>();
             break;
         case SKILL:
             res = std::make_shared<Skill>();
@@ -23,10 +24,10 @@ Data::AData::Ptr Data::DataFactory::create(Data::Type type) {
             break;
         case CLASS:
             break;
+        case RACE:
+            break;
         case USER:
             res = std::make_shared<User>();
-            break;
-        case SESSION:
             break;
     }
 

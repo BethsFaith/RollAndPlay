@@ -14,16 +14,14 @@ namespace Data {
     }
 
     void SkillCategory::serialize(Json::Value& jsonValue) {
-        if (id != -1) {
-            jsonValue["id"] = id;
-        }
+        BaseData::serialize(jsonValue);
 
         jsonValue["name"] = Convert::toUTF8(_name);
         jsonValue["icon"] = _iconPath;
     }
 
     void SkillCategory::deserialize(const Json::Value& jsonValue) {
-        id = jsonValue["id"].asInt();
+        BaseData::deserialize(jsonValue);
 
         _name = Convert::toUTF16(jsonValue["name"].asString());
         _iconPath = jsonValue["icon"].asString();
@@ -32,10 +30,6 @@ namespace Data {
 
     size_t SkillCategory::serialized_size() const noexcept {
         return 0;
-    }
-
-    void SkillCategory::setId(unsigned int index) {
-        id = (int)index;
     }
 
     void SkillCategory::setName(const std::u16string& name) {
@@ -56,10 +50,6 @@ namespace Data {
 
     void SkillCategory::setIconPath(const std::string& iconPath) {
         _iconPath = iconPath;
-    }
-
-    int SkillCategory::getId() {
-        return id;
     }
 
     Type SkillCategory::getType() {

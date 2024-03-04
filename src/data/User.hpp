@@ -5,12 +5,10 @@
 #ifndef ROLLANDPLAY_USER_HPP
 #define ROLLANDPLAY_USER_HPP
 
-#include "AData.hpp"
-#include "IBitwiseSerializable.hpp"
-#include "IJsonSerializable.hpp"
+#include "BaseData.hpp"
 
 namespace Data {
-    class User : public AData {
+    class User : public BaseData {
     public:
         using Ptr = std::shared_ptr<User>;
 
@@ -25,19 +23,16 @@ namespace Data {
 
         [[nodiscard]] size_t serialized_size() const noexcept override;
 
-        void setId(unsigned int index) override;
-
-        int getId() override;
+        Type getType() override;
 
         static bool validateEmail(const std::u16string& email);
         static bool validateName(const std::u16string& name);
-        static bool validatePassword(const std::u16string& password);
 
+        static bool validatePassword(const std::u16string& password);
         void setEmail(const std::u16string& email);
         void setPassword(const std::u16string& password);
-        void setNickname(const std::u16string& nickname);
 
-        Type getType() override;
+        void setNickname(const std::u16string& nickname);
 
         [[nodiscard]] const std::u16string& getEmail() const;
         [[nodiscard]] const std::u16string& getPassword() const;

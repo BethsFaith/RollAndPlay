@@ -14,20 +14,21 @@ namespace Data {
     }
 
     void Skill::serialize(Json::Value& jsonValue) {
-        if (id != -1) {
-            jsonValue["id"] = id;
-        }
+        BaseData::serialize(jsonValue);
 
         jsonValue["name"] = Convert::toUTF8(_name);
         jsonValue["icon"] = _iconPath;
 
-        if (_categoryId != -1) {
+        if (_categoryId != NULL_ID) {
             jsonValue["category_id"] = _categoryId;
+        }
+        if (_characteristicId != NULL_ID) {
+            jsonValue["characteristic_id"] = _characteristicId;
         }
     }
 
     void Skill::deserialize(const Json::Value& jsonValue) {
-        id = jsonValue["id"].asInt();
+        BaseData::deserialize(jsonValue);
 
         _name = Convert::toUTF16(jsonValue["name"].asString());
         _iconPath = jsonValue["icon"].asString();
@@ -35,6 +36,9 @@ namespace Data {
 
         if (jsonValue.isMember("category_id")) {
             _categoryId = jsonValue["category_id"].asInt();
+        }
+        if (jsonValue.isMember("characteristic_id")) {
+            _characteristicId = jsonValue["characteristic_id"].asInt();
         }
     }
 
@@ -46,16 +50,8 @@ namespace Data {
         return SKILL;
     }
 
-    int Skill::getId() {
-        return id;
-    }
-
     const unsigned int& Skill::getUserId() const {
         return _userId;
-    }
-
-    void Skill::setId(unsigned int index) {
-        id = index;
     }
 
     void Skill::setName(const std::u16string& name) {
@@ -74,6 +70,10 @@ namespace Data {
         _categoryId = index;
     }
 
+    void Skill::setCharacteristicId(const uint8_t& index) {
+        _characteristicId = index;
+    }
+
     void Skill::setUserId(unsigned int userId) {
         _userId = userId;
     }
@@ -88,6 +88,10 @@ namespace Data {
 
     int Skill::getCategoryId() const {
         return _categoryId;
+    }
+
+    int Skill::getCharacteristicId() const {
+        return _characteristicId;
     }
 
     void Skill::setUserName(const std::u16string& userName) {

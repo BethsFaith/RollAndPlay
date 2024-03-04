@@ -15,6 +15,7 @@
 #include "User.hpp"
 #include "Action.hpp"
 #include "CharacterClass.hpp"
+#include "Characteristic.hpp"
 
 namespace Data {
     class DataFactory {

@@ -18,11 +18,11 @@ public:
     enum PageTag {
         NULL_PAGE,
         SYSTEM,
+        CHARACTERISTIC,
         SKILL,
         ACTION,
         RACE,
         CLASS,
-        EXPORT,
         AUTHORIZATION,
         REGISTRATION
     };

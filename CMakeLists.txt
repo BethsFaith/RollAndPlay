@@ -24,6 +24,8 @@ add_executable(RollAndPlay
         src/MainWindow.cpp
         src/View.cpp
         src/ViewDrawer.cpp
+        src/data/BaseData.cpp
+        src/data/Characteristic.cpp
         src/data/Skill.cpp
         src/data/Action.cpp
         src/data/CharacterClass.cpp
@@ -53,6 +55,7 @@ add_executable(RollAndPlay
         src/widgets/WidgetBuilder.cpp
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
+        src/pages/CharacteristicPage.cpp
         src/pages/SkillPage.cpp
         src/pages/ActionPage.cpp
         src/pages/RacePage.cpp
