@@ -5,11 +5,7 @@
 #ifndef ROLLANDPLAY_SKILLPAGE_HPP
 #define ROLLANDPLAY_SKILLPAGE_HPP
 
-#include <GraphicLib/Primitives/Rectangle.hpp>
-
 #include "BasePage.hpp"
-#include "../widgets/ImageButton.hpp"
-#include "../widgets/TextInputField.hpp"
 
 namespace Pages {
     class SkillPage : public BasePage {
@@ -32,10 +28,10 @@ namespace Pages {
             Data::Characteristic::Ptr characteristic;
         };
 
-        explicit SkillPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
+        explicit SkillPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
         ~SkillPage() override;
 
-        void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) override;
+        void init(const glm::vec2& screenOffset) override;
 
     private:
         void update() override;
@@ -68,21 +64,21 @@ namespace Pages {
         static Net::ApiClient::Result pullSkill(int id);
         static Net::ApiClient::Result pullSkills(int categoryId);
 
-        std::vector<Widgets::ImageButton::Ptr> createCategoryButtons(const std::vector<Data::SkillCategory::Ptr>& categories);
-        std::vector<Widgets::ImageButton::Ptr> createSkillButtons(const std::vector<Data::Skill::Ptr>& skills);
+        std::vector<GraphicLib::Widgets::ImageButton::Ptr> createCategoryButtons(const std::vector<Data::SkillCategory::Ptr>& categories);
+        std::vector<GraphicLib::Widgets::ImageButton::Ptr> createSkillButtons(const std::vector<Data::Skill::Ptr>& skills);
 
         StateTag _currentTag = START;
 
         Buffer _buf;
 
-        Widgets::HorizontalLayout::Ptr _viewCategoryLayout;
-        Widgets::HorizontalLayout::Ptr _viewSkillLayout;
+        GraphicLib::Widgets::HorizontalLayout::Ptr _viewCategoryLayout;
+        GraphicLib::Widgets::HorizontalLayout::Ptr _viewSkillLayout;
 
-        Widgets::TextInputField::Ptr _nameInputField;
-        Widgets::ImageButton::Ptr _iconButton;
-        Widgets::TextInputField::Ptr _iconPathInputField;
+        GraphicLib::Widgets::TextInputField::Ptr _nameInputField;
+        GraphicLib::Widgets::ImageButton::Ptr _iconButton;
+        GraphicLib::Widgets::TextInputField::Ptr _iconPathInputField;
 
-        Widgets::TextBox::Ptr _messageBox;
+        GraphicLib::Widgets::TextBox::Ptr _messageBox;
 
         std::vector<Data::SkillCategory::Ptr> _categoryList;
         std::vector<Data::Skill::Ptr> _skillList;

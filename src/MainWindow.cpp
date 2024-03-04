@@ -33,13 +33,13 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
         throw std::runtime_error("Failed to initialize GLAD");
     }
 
-    GraphicLib::Techniques::TextTechnique::initTextRendering(width, height, config.getFontPath("gui"), 20);
+    GraphicLib::Objects::Techniques::TextTechnique::initTextRendering(width, height, config.getFontPath("gui"), 20);
 
-    _canvas = std::make_shared<GraphicLib::PickableTexture>();
+    _canvas = std::make_shared<GraphicLib::Objects::PickableTexture>();
     _canvas->init(width, height);
     _view = std::make_shared<View>(glm::vec2{-0.9f, -0.83f},
                                    glm::vec2{0.9f, 0.83f},
-                                   Widgets::Styles::Color::DARK_GRAY,
+                                   GraphicLib::Widgets::Styles::Color::DARK_GRAY,
                                    _canvas);
 
     auto guiShaderPath = config.getShaderPath("gui");
@@ -48,15 +48,15 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     auto textureShaderPath = config.getShaderPath("texture");
 
     auto guiShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>(guiShaderPath.vertex, guiShaderPath.fragment);
-    Gui::setColorShader(guiShader);
+    GraphicLib::Widgets::Gui::setColorShader(guiShader);
 
-    Gui::setSelectableShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>(selectableShaderPath.vertex,
+    GraphicLib::Widgets::Gui::setSelectableShader(std::make_shared<GraphicLib::Shaders::ShaderProgram>(selectableShaderPath.vertex,
                                                                                   selectableShaderPath.fragment));
 
-    Gui::setTextShader(
+    GraphicLib::Widgets::Gui::setTextShader(
         std::make_shared<GraphicLib::Shaders::ShaderProgram>(textShaderPath.vertex, textShaderPath.fragment));
 
-    Gui::setTextureShader(
+    GraphicLib::Widgets::Gui::setTextureShader(
         std::make_shared<GraphicLib::Shaders::ShaderProgram>(textureShaderPath.vertex, textureShaderPath.fragment));
 
     auto host = config.getNetValue("host");
@@ -65,72 +65,71 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     Pages::BasePage::setCommonData(
         {.clientSession = std::make_shared<Net::ApiClient>(host, port, domain, new Net::Route("../../paths.json"))});
 
-    GraphicLib::Primitives::AbstractPrimitive::Ptr rectangle = std::make_shared<GraphicLib::Primitives::Rectangle>(
-        GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
+    auto rectangle = std::make_shared<GraphicLib::Objects::Primitives::Rectangle>(
+        GraphicLib::Objects::Primitives::Primitive::Settings{.with_normals = false,
                                                     .with_texture_coords = false,
                                                     .with_tangent = false,
                                                     .with_bitangent = false});
     rectangle->bindData(GL_STATIC_DRAW);
 
-    auto textureRectangle = std::make_shared<GraphicLib::Primitives::Rectangle>(
-        GraphicLib::Primitives::Primitive::Settings{.with_normals = false,
+    auto textureRectangle = std::make_shared<GraphicLib::Objects::Primitives::Rectangle>(
+        GraphicLib::Objects::Primitives::Primitive::Settings{.with_normals = false,
                                                     .with_texture_coords = true,
                                                     .with_tangent = false,
                                                     .with_bitangent = false});
     textureRectangle->bindData(GL_STATIC_DRAW);
 
-    Widgets::Styles::ButtonStyle::Ptr buttonStyle = std::make_shared<Widgets::Styles::ButtonStyle>();
-    buttonStyle->color = Widgets::Styles::VIOLET;
-    buttonStyle->traceColor = Widgets::Styles::WHITE;
-    buttonStyle->pressColor = Widgets::Styles::BLUE;
-    buttonStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
+    auto buttonStyle = std::make_shared<GraphicLib::Widgets::Styles::ButtonStyle>();
+    buttonStyle->color = GraphicLib::Widgets::Styles::VIOLET;
+    buttonStyle->traceColor = GraphicLib::Widgets::Styles::WHITE;
+    buttonStyle->pressColor = GraphicLib::Widgets::Styles::BLUE;
+    buttonStyle->labelParams = {.color = GraphicLib::Widgets::Styles::WHITE, .size = 1.0f};
     buttonStyle->scale = {0.11f, 0.1f};
     buttonStyle->figure = rectangle;
 
-    Widgets::Styles::TextInputFieldStyle::Ptr textInputFieldStyle =
-        std::make_shared<Widgets::Styles::TextInputFieldStyle>();
-    textInputFieldStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
-    textInputFieldStyle->inputParams = {.color = Widgets::Styles::BLACK, .size = 1.4f};
-    textInputFieldStyle->color = Widgets::Styles::LIGHT_GRAY;
-    textInputFieldStyle->traceColor = Widgets::Styles::WHITE;
+    auto textInputFieldStyle = std::make_shared<GraphicLib::Widgets::Styles::TextInputFieldStyle>();
+    textInputFieldStyle->labelParams = {.color = GraphicLib::Widgets::Styles::WHITE, .size = 1.0f};
+    textInputFieldStyle->inputParams = {.color = GraphicLib::Widgets::Styles::BLACK, .size = 1.4f};
+    textInputFieldStyle->color = GraphicLib::Widgets::Styles::LIGHT_GRAY;
+    textInputFieldStyle->traceColor = GraphicLib::Widgets::Styles::WHITE;
     textInputFieldStyle->scale = {0.7f, 0.1f};
     textInputFieldStyle->figure = rectangle;
 
-    Widgets::Styles::TextBoxStyle::Ptr textBoxStyle = std::make_shared<Widgets::Styles::TextBoxStyle>();
-    textBoxStyle->color = Widgets::Styles::DARK_GRAY;
+    auto textBoxStyle = std::make_shared<GraphicLib::Widgets::Styles::TextBoxStyle>();
+    textBoxStyle->color = GraphicLib::Widgets::Styles::DARK_GRAY;
     textBoxStyle->scale = {0.7f, 0.1f};
-    textBoxStyle->textLabelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
+    textBoxStyle->textLabelParams = {.color = GraphicLib::Widgets::Styles::WHITE, .size = 1.0f};
 
-    Widgets::Styles::ImageButtonStyle::Ptr imageButtonStyle = std::make_shared<Widgets::Styles::ImageButtonStyle>();
+    auto imageButtonStyle = std::make_shared<GraphicLib::Widgets::Styles::ImageButtonStyle>();
     imageButtonStyle->scale = {0.1f, 0.2f};
     imageButtonStyle->defaultTexturePath = config.getTexturePath("default");
     imageButtonStyle->defaultTextureIndex = 0;
-    imageButtonStyle->traceColor = Widgets::Styles::WHITE;
-    imageButtonStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
+    imageButtonStyle->traceColor = GraphicLib::Widgets::Styles::WHITE;
+    imageButtonStyle->labelParams = {.color = GraphicLib::Widgets::Styles::WHITE, .size = 1.0f};
     imageButtonStyle->figure = textureRectangle;
 
-    auto imageBoxStyle = std::make_shared<Widgets::Styles::ImageBoxStyle>();
+    auto imageBoxStyle = std::make_shared<GraphicLib::Widgets::Styles::ImageBoxStyle>();
     imageBoxStyle->scale = {0.1f, 0.2f};
     imageBoxStyle->defaultTexturePath = config.getTexturePath("default");
     imageBoxStyle->defaultTextureIndex = 0;
     imageBoxStyle->figure = textureRectangle;
-    imageBoxStyle->labelParams = {.color = Widgets::Styles::WHITE, .size = 1.0f};
+    imageBoxStyle->labelParams = {.color = GraphicLib::Widgets::Styles::WHITE, .size = 1.0f};
 
-    Widgets::Styles::LayoutStyle::Ptr vertLayoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
+    auto vertLayoutStyle = std::make_shared<GraphicLib::Widgets::Styles::LayoutStyle>();
     vertLayoutStyle->widgetOffset = 0.03f;
 
-    Widgets::Styles::LayoutStyle::Ptr horizLayoutStyle = std::make_shared<Widgets::Styles::LayoutStyle>();
+    auto horizLayoutStyle = std::make_shared<GraphicLib::Widgets::Styles::LayoutStyle>();
     horizLayoutStyle->widgetOffset = 0.01f;
 
-    Widgets::WidgetBuilder::Ptr widgetBuilder = std::make_shared<Widgets::WidgetBuilder>();
-    widgetBuilder->addWidgetStyle(Widgets::BUTTON, buttonStyle);
-    widgetBuilder->addWidgetStyle(Widgets::TEXT_INPUT_FIELD, textInputFieldStyle);
-    widgetBuilder->addWidgetStyle(Widgets::NUM_INPUT_FIELD, textInputFieldStyle);
-    widgetBuilder->addWidgetStyle(Widgets::IMAGE_BUTTON, imageButtonStyle);
-    widgetBuilder->addWidgetStyle(Widgets::IMAGE_BOX, imageBoxStyle);
-    widgetBuilder->addWidgetStyle(Widgets::TEXT_BOX, textBoxStyle);
-    widgetBuilder->addLayoutStyle(Widgets::HORIZONTAL, horizLayoutStyle);
-    widgetBuilder->addLayoutStyle(Widgets::VERTICAL, vertLayoutStyle);
+    GraphicLib::Widgets::WidgetBuilder::Ptr widgetBuilder = std::make_shared<GraphicLib::Widgets::WidgetBuilder>();
+    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::BUTTON, buttonStyle);
+    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::TEXT_INPUT_FIELD, textInputFieldStyle);
+    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::NUM_INPUT_FIELD, textInputFieldStyle);
+    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::IMAGE_BUTTON, imageButtonStyle);
+    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::IMAGE_BOX, imageBoxStyle);
+    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::TEXT_BOX, textBoxStyle);
+    widgetBuilder->addLayoutStyle(GraphicLib::Widgets::HORIZONTAL, horizLayoutStyle);
+    widgetBuilder->addLayoutStyle(GraphicLib::Widgets::VERTICAL, vertLayoutStyle);
 
     auto systemPage = std::make_shared<Pages::SystemPage>(_canvas, widgetBuilder);
     auto characteristicPage = std::make_shared<Pages::CharacteristicPage>(_canvas, widgetBuilder);
@@ -153,7 +152,7 @@ MainWindow::~MainWindow() {
     _canvas.reset();
     _view.reset();
 
-    GraphicLib::Techniques::TextTechnique::freeTextRendering();
+    GraphicLib::Objects::Techniques::TextTechnique::freeTextRendering();
 
     if (_window != nullptr) {
         glfwDestroyWindow(_window);

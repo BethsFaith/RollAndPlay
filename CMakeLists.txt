@@ -20,7 +20,7 @@ conan_cmake_run(CONANFILE conanfile.txt
 
 add_executable(RollAndPlay
         src/main.cpp
-        src/Gui.cpp
+        ../GraphicLib/src/widgets/Gui.cpp
         src/MainWindow.cpp
         src/View.cpp
         src/ViewDrawer.cpp
@@ -36,23 +36,6 @@ add_executable(RollAndPlay
         src/data/Race.cpp
         src/data/convert/Convert.cpp
         src/data/graphic/Model.cpp
-        src/widgets/styles/Color.cpp
-        src/widgets/Button.cpp
-        src/widgets/graphic/Form.cpp
-        src/widgets/graphic/PickableForm.cpp
-        src/widgets/Widget.cpp
-        src/widgets/TextInputField.cpp
-        src/widgets/NumericInputField.cpp
-        src/widgets/ImageButton.cpp
-        src/widgets/Carriage.cpp
-        src/widgets/TextBox.cpp
-        src/widgets/MenuBar.cpp
-        src/widgets/Layout.cpp
-        src/widgets/HorizontalLayout.cpp
-        src/widgets/VerticalLayout.cpp
-        src/widgets/ImageBox.cpp
-        src/widgets/WidgetFactory.cpp
-        src/widgets/WidgetBuilder.cpp
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
         src/pages/CharacteristicPage.cpp
@@ -62,13 +45,6 @@ add_executable(RollAndPlay
         src/pages/LoginPage.cpp
         src/pages/RegistrationPage.cpp
         src/pages/threads/Worker.cpp
-        src/controllers/GuiController.cpp
-        src/controllers/TextInputContoller.cpp
-        src/controllers/CommonController.cpp
-        src/controllers/ButtonController.cpp
-        src/controllers/WidgetControllerFactory.cpp
-        src/controllers/ImageButtonController.cpp
-        src/controllers/MenuBarController.cpp
         src/data/storage/StreamWriter.cpp
         src/data/storage/StreamReader.cpp
         src/data/DataStorage.cpp

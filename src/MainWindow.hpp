@@ -6,8 +6,13 @@
 #define ROLLANDPLAY_MAINWINDOW_HPP
 
 #include <GraphicLib/GlagGlfw.hpp>
-#include <GraphicLib/Primitives/Rectangle.hpp>
+#include <GraphicLib/Objects/Primitives/Rectangle.hpp>
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
+#include <GraphicLib/Widgets/Gui.hpp>
+#include <GraphicLib/Widgets/WidgetBuilder.hpp>
+#include <GraphicLib/Widgets/Button.hpp>
+#include <GraphicLib/Controllers/GuiController.hpp>
+
 #include <glm/glm.hpp>
 #include <stdexcept>
 #include <vector>
@@ -19,11 +24,8 @@
 #include "pages/SystemPage.hpp"
 #include "pages/ActionPage.hpp"
 #include "pages/CharacteristicPage.hpp"
-#include "widgets/Button.hpp"
-#include "Gui.hpp"
 #include "View.hpp"
 #include "config/Config.hpp"
-#include "controllers/GuiController.hpp"
 
 class MainWindow {
 public:
@@ -76,7 +78,7 @@ private:
     float _delta_time = 0.0f;    // время между текущим и последним кадрами
     float _last_frame = 0.0f;    // время последнего кадра
 
-    GraphicLib::PickableTexture::Ptr _canvas;
+    GraphicLib::Objects::PickableTexture::Ptr _canvas;
 };
 
 #endif    //ROLLANDPLAY_MAINWINDOW_HPP

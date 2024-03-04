@@ -6,11 +6,11 @@
 #define ROLLANDPLAY_VIEW_HPP
 
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
+#include <GraphicLib/Controllers/CommonController.hpp>
 #include <utility>
 
 #include "ViewDrawer.hpp"
 #include "config/Config.hpp"
-#include "controllers/CommonController.hpp"
 #include "pages/APage.hpp"
 
 class View {
@@ -37,7 +37,7 @@ public:
 
     using Ptr = std::shared_ptr<View>;
 
-    View(glm::vec2 minPos, glm::vec2 maxPos, Widgets::Styles::Color viewColor, GraphicLib::PickableTexture::Ptr canvas);
+    View(glm::vec2 minPos, glm::vec2 maxPos, GraphicLib::Widgets::Styles::Color viewColor, GraphicLib::Objects::PickableTexture::Ptr canvas);
 
     ~View();
 
@@ -59,15 +59,15 @@ public:
 
     bool needToClose() const;
 private:
-    void initView(glm::vec2 minPos, glm::vec2 maxPos, Widgets::Styles::Color viewColor);
+    void initView(glm::vec2 minPos, glm::vec2 maxPos, GraphicLib::Widgets::Styles::Color viewColor);
     void update();
 
     void switchPage(PageTag tag);
 
     ViewDrawer _view;
-    const GraphicLib::PickableTexture::Ptr _canvas;
+    const GraphicLib::Objects::PickableTexture::Ptr _canvas;
 
-    Controllers::CommonController _controller;
+    GraphicLib::Controllers::CommonController _controller;
 
     std::map<PageTag, Pages::APage::Ptr> _pages;
 

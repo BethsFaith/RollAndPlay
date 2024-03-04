@@ -5,11 +5,7 @@
 #ifndef ROLLANDPLAY_RACEPAGE_HPP
 #define ROLLANDPLAY_RACEPAGE_HPP
 
-#include <GraphicLib/Primitives/Rectangle.hpp>
-
 #include "BasePage.hpp"
-#include "../widgets/ImageButton.hpp"
-#include "../widgets/TextInputField.hpp"
 
 namespace Pages {
     class RacePage : public BasePage {
@@ -21,10 +17,10 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<RacePage>;
 
-        explicit RacePage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
+        explicit RacePage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
         ~RacePage() override = default;
 
-        void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) override;
+        void init(const glm::vec2& screenOffset) override;
 
     private:
         void update() override;
@@ -35,11 +31,11 @@ namespace Pages {
 
         StateTag _currentTag = START;
 
-        Widgets::Button::Ptr _createButton;
-        Widgets::Button::Ptr _saveButton;
-        Widgets::TextInputField::Ptr _nameInput;
-        Widgets::ImageButton::Ptr _iconButton;
-        Widgets::TextInputField::Ptr _iconPathInput;
+        GraphicLib::Widgets::Button::Ptr _createButton;
+        GraphicLib::Widgets::Button::Ptr _saveButton;
+        GraphicLib::Widgets::TextInputField::Ptr _nameInput;
+        GraphicLib::Widgets::ImageButton::Ptr _iconButton;
+        GraphicLib::Widgets::TextInputField::Ptr _iconPathInput;
     };
 }    //namespace Pages
 
