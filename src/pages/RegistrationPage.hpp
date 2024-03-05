@@ -5,11 +5,8 @@
 #ifndef ROLLANDPLAY_REGISTRATIONPAGE_HPP
 #define ROLLANDPLAY_REGISTRATIONPAGE_HPP
 
-#include <GraphicLib/Primitives/Rectangle.hpp>
-
 #include "../data/User.hpp"
 #include "../net/HttpSession.hpp"
-#include "../widgets/VerticalLayout.hpp"
 #include "BasePage.hpp"
 
 namespace Pages {
@@ -22,10 +19,10 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<RegistrationPage>;
 
-        explicit RegistrationPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
+        explicit RegistrationPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
         ~RegistrationPage() override = default;
 
-        void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) override;
+        void init(const glm::vec2& screenOffset) override;
 
     private:
         void update() override;
@@ -44,14 +41,14 @@ namespace Pages {
 
         StateTag _currentTag = CREATE;
 
-        Widgets::Button::Ptr _saveButton;
-        Widgets::Button::Ptr _createButton;
-        Widgets::TextInputField::Ptr _loginInputField;
-        Widgets::TextInputField::Ptr _nicknameInputField;
-        Widgets::TextInputField::Ptr _passwordInputField;
-        Widgets::TextInputField::Ptr _repeatedPasswordInputField;
-        Widgets::TextBox::Ptr _creatingMessageBox;
-        Widgets::TextBox::Ptr _viewMessageBox;
+        GraphicLib::Widgets::Button::Ptr _saveButton;
+        GraphicLib::Widgets::Button::Ptr _createButton;
+        GraphicLib::Widgets::TextInputField::Ptr _loginInputField;
+        GraphicLib::Widgets::TextInputField::Ptr _nicknameInputField;
+        GraphicLib::Widgets::TextInputField::Ptr _passwordInputField;
+        GraphicLib::Widgets::TextInputField::Ptr _repeatedPasswordInputField;
+        GraphicLib::Widgets::TextBox::Ptr _creatingMessageBox;
+        GraphicLib::Widgets::TextBox::Ptr _viewMessageBox;
     };
 }    //namespace Pages
 

@@ -6,12 +6,12 @@
 
 #include <utility>
 
-ViewDrawer::ViewDrawer(GraphicLib::PickableTexture::Ptr canvas) :
+ViewDrawer::ViewDrawer(GraphicLib::Objects::PickableTexture::Ptr canvas) :
       _gui(std::move(canvas)) {
     using namespace GraphicLib;
 
-    auto rectangle = std::make_shared<Primitives::Rectangle>(
-        Primitives::Primitive::Settings{.with_normals = false,
+    auto rectangle = std::make_shared<GraphicLib::Objects::Primitives::Rectangle>(
+        GraphicLib::Objects::Primitives::Primitive::Settings{.with_normals = false,
                                         .with_texture_coords = false,
                                         .with_tangent = false,
                                         .with_bitangent = false});
@@ -19,10 +19,8 @@ ViewDrawer::ViewDrawer(GraphicLib::PickableTexture::Ptr canvas) :
 
     _verticalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.95f, 0.77f},
                                                        glm::vec2{0.09f, 0.1f}, false);
-    _verticalMenu->setProjection(-1, 1, -1, 1);
     _horizontalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.8f, 0.9f},
                                                          glm::vec2{0.2f, 0.1f});
-    _horizontalMenu->setProjection(-1, 1, -1, 1);
 
     _verticalMenu->setSelectedItemColor(Widgets::Styles::LIGHT_BLUE);
     _horizontalMenu->setSelectedItemColor(Widgets::Styles::DARK_GRAY);
@@ -60,7 +58,7 @@ void ViewDrawer::draw(int windowWidth, int windowHeight) {
 
 void ViewDrawer::createHorizontalMenu(int menuId, std::vector<std::u16string> names,
                                              std::vector<std::function<void()>> funcs) {
-    using namespace GraphicLib;
+    using namespace GraphicLib::Objects;
     Primitives::AbstractPrimitive::Ptr rectangle = std::make_shared<Primitives::Rectangle>(
         Primitives::Primitive::Settings{.with_normals = false,
                                         .with_texture_coords = false,
@@ -68,6 +66,7 @@ void ViewDrawer::createHorizontalMenu(int menuId, std::vector<std::u16string> na
                                         .with_bitangent = false});
     rectangle->bindData(GL_STATIC_DRAW);
 
+    using namespace GraphicLib;
     std::vector<Widgets::Button::Ptr> buttons;
     for (int i{}; i < names.size(); ++i) {
         auto button = std::make_shared<Widgets::Button>(rectangle);
@@ -83,7 +82,7 @@ void ViewDrawer::createHorizontalMenu(int menuId, std::vector<std::u16string> na
 
 void ViewDrawer::createVerticalMenu(std::vector<std::u16string> names,
                                            std::vector<std::function<void()>> funcs) {
-    using namespace GraphicLib;
+    using namespace GraphicLib::Objects;
     Primitives::AbstractPrimitive::Ptr rectangle = std::make_shared<Primitives::Rectangle>(
         Primitives::Primitive::Settings{.with_normals = false,
                                         .with_texture_coords = false,
@@ -91,6 +90,7 @@ void ViewDrawer::createVerticalMenu(std::vector<std::u16string> names,
                                         .with_bitangent = false});
     rectangle->bindData(GL_STATIC_DRAW);
 
+    using namespace GraphicLib;
     for (int i{}; i < names.size(); ++i) {
         auto button = std::make_shared<Widgets::Button>(rectangle);
 
@@ -121,7 +121,7 @@ void ViewDrawer::setPage(const Pages::APage::Ptr& page) {
     _page = page;
 }
 
-Controllers::GuiController::Ptr ViewDrawer::getController() {
+GraphicLib::Controllers::GuiController::Ptr ViewDrawer::getController() {
     return _gui.getController();
 }
 

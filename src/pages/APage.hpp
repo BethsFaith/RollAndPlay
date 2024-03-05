@@ -5,13 +5,13 @@
 #ifndef ROLLANDPLAY_APAGE_HPP
 #define ROLLANDPLAY_APAGE_HPP
 
-#include <GraphicLib/PickableTexture.hpp>
+#include <GraphicLib/Objects/PickableTexture.hpp>
+#include <GraphicLib/Controllers/GLController.hpp>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
-
-#include "../controllers/GLController.hpp"
 
 namespace Pages {
     class APage {
@@ -22,7 +22,7 @@ namespace Pages {
 
         virtual ~APage() = default;
 
-        virtual void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) = 0;
+        virtual void init(const glm::vec2& screenOffset) = 0;
 
         virtual void draw() = 0;
 
@@ -31,7 +31,7 @@ namespace Pages {
 
         virtual void update() = 0;
 
-        virtual Controllers::GLController::Ptr getController() = 0;
+        virtual GraphicLib::Controllers::GLController::Ptr getController() = 0;
     };
 }    //namespace Pages
 

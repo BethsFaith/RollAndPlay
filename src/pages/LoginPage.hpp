@@ -5,13 +5,8 @@
 #ifndef ROLLANDPLAY_LOGINPAGE_HPP
 #define ROLLANDPLAY_LOGINPAGE_HPP
 
-#include <GraphicLib/Primitives/Rectangle.hpp>
-
 #include "BasePage.hpp"
 #include "../data/User.hpp"
-#include "../widgets/ImageButton.hpp"
-#include "../widgets/TextInputField.hpp"
-#include "../widgets/TextBox.hpp"
 
 namespace Pages {
     class LoginPage : public BasePage {
@@ -24,10 +19,10 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<LoginPage>;
 
-        explicit LoginPage(GraphicLib::PickableTexture::Ptr canvas,  Widgets::WidgetBuilder::Ptr builder);
+        explicit LoginPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
         ~LoginPage() override = default;
 
-        void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) override;
+        void init(const glm::vec2& screenOffset) override;
 
     private:
         void update() override;
@@ -37,6 +32,7 @@ namespace Pages {
 
         bool validate(const std::u16string& login, const std::u16string& password);
         bool validate(const std::u16string& login, const std::u16string& password, const std::u16string& nickname);
+
         Net::ApiClient::Result logIn(const std::u16string& login, const std::u16string& password);
         Net::ApiClient::Result pullUserData();
         Net::ApiClient::Result changeUserData(const std::u16string& login,
@@ -46,24 +42,24 @@ namespace Pages {
 
         StateTag _nextState = START;
 
-        Widgets::Button::Ptr _logInButton;
-        Widgets::TextInputField::Ptr _loginInputField;
-        Widgets::TextInputField::Ptr _passwordInputField;
-        Widgets::TextBox::Ptr _messageBox{};
+        GraphicLib::Widgets::Button::Ptr _logInButton;
+        GraphicLib::Widgets::TextInputField::Ptr _loginInputField;
+        GraphicLib::Widgets::TextInputField::Ptr _passwordInputField;
+        GraphicLib::Widgets::TextBox::Ptr _messageBox{};
 
-        Widgets::Button::Ptr _editButton;
-        Widgets::Button::Ptr _exitButton;
-        Widgets::TextBox::Ptr _emailLabel{};
-        Widgets::TextBox::Ptr _nicknameLabel{};
-        Widgets::TextBox::Ptr _emailBox{};
-        Widgets::TextBox::Ptr _nicknameBox{};
+        GraphicLib::Widgets::Button::Ptr _editButton;
+        GraphicLib::Widgets::Button::Ptr _exitButton;
+        GraphicLib::Widgets::TextBox::Ptr _emailLabel{};
+        GraphicLib::Widgets::TextBox::Ptr _nicknameLabel{};
+        GraphicLib::Widgets::TextBox::Ptr _emailBox{};
+        GraphicLib::Widgets::TextBox::Ptr _nicknameBox{};
 
-        Widgets::Button::Ptr _saveButton;
-        Widgets::TextInputField::Ptr _nicknameInputField;
+        GraphicLib::Widgets::Button::Ptr _saveButton;
+        GraphicLib::Widgets::TextInputField::Ptr _nicknameInputField;
 
-        Widgets::VerticalLayout::Ptr _startLayout;
-        Widgets::VerticalLayout::Ptr _viewLayout;
-        Widgets::VerticalLayout::Ptr _editLayout;
+        GraphicLib::Widgets::VerticalLayout::Ptr _startLayout;
+        GraphicLib::Widgets::VerticalLayout::Ptr _viewLayout;
+        GraphicLib::Widgets::VerticalLayout::Ptr _editLayout;
 
         Data::User _user{};
     };

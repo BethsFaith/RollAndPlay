@@ -24,11 +24,11 @@ namespace Pages {
             Data::Skill::Ptr skill;
         };
 
-        explicit ActionPage(GraphicLib::PickableTexture::Ptr canvas, Widgets::WidgetBuilder::Ptr builder);
+        explicit ActionPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
         ~ActionPage() override = default;
 
         void update() override;
-        void init(const glm::vec2& screenOffset, const glm::vec2& min, const glm::vec2& max) override;
+        void init(const glm::vec2& screenOffset) override;
 
     private:
         void toStart();
@@ -46,11 +46,11 @@ namespace Pages {
 
         Buffer _buf;
 
-        Widgets::TextInputField::Ptr _nameInputField;
-        Widgets::ImageButton::Ptr _iconButton;
-        Widgets::NumericInputField::Ptr _pointsInputField;
-        Widgets::TextInputField::Ptr _iconPathInputField;
-        Widgets::TextBox::Ptr _messageBox;
+        GraphicLib::Widgets::TextInputField::Ptr _nameInputField;
+        GraphicLib::Widgets::ImageButton::Ptr _iconButton;
+        GraphicLib::Widgets::NumericInputField::Ptr _pointsInputField;
+        GraphicLib::Widgets::TextInputField::Ptr _iconPathInputField;
+        GraphicLib::Widgets::TextBox::Ptr _messageBox;
     };
 }    //namespace Pages
 
