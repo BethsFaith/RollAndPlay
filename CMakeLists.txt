@@ -55,6 +55,7 @@ add_executable(RollAndPlay
         src/net/HttpResponse.cpp
         src/net/ApiClient.cpp
         src/net/Route.cpp
+        src/pages/PageStyleParser.cpp
         )
 
 

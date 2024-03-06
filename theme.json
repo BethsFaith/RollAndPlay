@@ -1,0 +1,252 @@
+{
+  "default" : [
+    {
+      "type" : "button",
+      "color" : "violet",
+      "trace_color" : "white",
+      "press_color" : "blue",
+      "label" : {
+        "color" : "white",
+        "size" : 1.0
+      },
+      "scale" : {
+        "x" : 0.11,
+        "y" : 0.1
+      },
+      "figure" : {
+        "type" : "rectangle"
+      },
+      "classes" : [
+      ]
+    },
+    {
+      "type" : "text_input_field",
+      "color" : "light_gray",
+      "trace_color" : "white",
+      "label" : {
+        "color" : "white",
+        "size" : 1.0
+      },
+      "scale" : {
+        "x" : 0.7,
+        "y" : 0.1
+      },
+      "input" : {
+        "color" : "black",
+        "size" : 1.4
+      },
+      "figure" : {
+        "type" : "rectangle"
+      },
+      "carriage": {
+        "color" : "white"
+      },
+      "classes" : [
+        {
+          "class" : "image_button_path",
+          "scale" : {
+            "x" : 0.58,
+            "y" : 0.1
+          }
+        }
+      ]
+    },
+    {
+      "type" : "num_input_field",
+      "color" : "light_gray",
+      "trace_color" : "white",
+      "label" : {
+        "color" : "white",
+        "size" : 1.0
+      },
+      "scale" : {
+        "x" : 0.7,
+        "y" : 0.1
+      },
+      "input" : {
+        "color" : "light_gray",
+        "size" : 1.4
+      },
+      "figure" : {
+        "type" : "rectangle"
+      },
+      "carriage": {
+        "color" : "white"
+      },
+      "classes" : []
+    },
+    {
+      "type" : "text_box",
+      "color" : "dark_gray",
+      "trace_color" : "white",
+      "label" : {
+        "color" : "white",
+        "size" : 1.0
+      },
+      "scale" : {
+        "x" : 0.7,
+        "y" : 0.1
+      },
+      "classes" : [
+        {
+          "class" : "title",
+          "color" : "gray",
+          "scale" : {
+            "x" : 1.75,
+            "y" : 0.1
+          },
+          "label" : {
+            "color" : "white",
+            "size" : 1.3
+          }
+        },
+        {
+          "class": "view",
+          "color": "light_gray",
+          "scale": {
+            "x": 0.5,
+            "y": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "type" : "image_button",
+      "trace_color" : "white",
+      "press_color" : "blue",
+      "label" : {
+        "color" : "white",
+        "size" : 1.0
+      },
+      "scale" : {
+        "x" : 0.1,
+        "y" : 0.2
+      },
+      "figure" : {
+        "type" : "texture_rectangle",
+        "default_texture" : {
+          "config_path" : "default",
+          "index" : 0
+        }
+      },
+      "classes" : [
+      ]
+    },
+    {
+      "type" : "image_box",
+      "label" : {
+        "color" : "white",
+        "size" : 1.0
+      },
+      "scale" : {
+        "x" : 0.1,
+        "y" : 0.2
+      },
+      "figure" : {
+        "type" : "texture_rectangle",
+        "default_texture" : {
+          "config_path" : "default",
+          "index" : 0
+        }
+      },
+      "classes" : [
+      ]
+    },
+    {
+      "type" : "vertical_layout",
+      "widgets" : {
+        "offset" : 0.03
+      },
+      "classes" : [
+      ]
+    },
+    {
+      "type" : "horizontal_layout",
+      "widgets" : {
+        "offset" : 0.01
+      },
+      "classes" : [
+      ]
+    }
+  ],
+  "pages" : [
+    {
+      "page": "skill",
+      "theme": [
+        {
+          "type": "text_box",
+          "classes": [
+            {
+              "class": "view",
+              "color": "light_violet"
+            }
+          ]
+        },
+        {
+          "type": "image_box",
+          "classes": [
+            {
+              "class": "dependency_icon",
+              "scale": {
+                "x": 0.05,
+                "y": 0.1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page" : "action",
+      "theme": [
+        {
+          "type": "button",
+          "color" : "dark_green",
+          "classes" : [
+          ]
+        },
+        {
+          "type" : "text_input_field",
+          "color" : "light_green",
+          "classes" : [
+          ]
+        },
+        {
+          "type": "text_box",
+          "classes": [
+            {
+              "class": "view",
+              "color": "light_green"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page" : "characteristic",
+      "theme": [
+        {
+          "type": "button",
+          "color" : "dark_blue",
+          "classes" : [
+          ]
+        },
+        {
+          "type" : "text_input_field",
+          "color" : "light_blue",
+          "classes" : [
+          ]
+        },
+        {
+          "type": "text_box",
+          "classes": [
+            {
+              "class": "view",
+              "color": "light_blue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
