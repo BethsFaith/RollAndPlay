@@ -224,12 +224,12 @@ namespace Pages {
                 auto page = pages[pageIndex]["page"].asString();
                 auto pageTheme = pages[pageIndex]["theme"];
 
+                auto pageWidgetBuilder = std::make_shared<GraphicLib::Widgets::WidgetBuilder>(
+                    *defaultWidgetBuilder);
+
                 for (int styleIndex{}; styleIndex < pageTheme.size(); ++styleIndex) {
                     auto style = pageTheme[styleIndex];
                     auto type = getType(style["type"].asString());
-
-                    auto pageWidgetBuilder = std::make_shared<GraphicLib::Widgets::WidgetBuilder>(
-                        *defaultWidgetBuilder);
 
                     if (!type.error) {
                         if (type.isWidgetType) {
@@ -371,8 +371,6 @@ namespace Pages {
                                                                   classElem["class"].asString(),
                                                                   subStyle);
                             }
-
-                            break;
                         } else {
                             switch (type.layoutType) {
                                 case GraphicLib::Widgets::HORIZONTAL:
@@ -388,8 +386,8 @@ namespace Pages {
                             }
                         }
                     }
-                    _pageWidgetBuilders[page] = pageWidgetBuilder;
                 }
+                _pageWidgetBuilders[page] = pageWidgetBuilder;
             }
         }
     }

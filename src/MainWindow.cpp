@@ -83,71 +83,19 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     GraphicLib::Widgets::Carriage::WindowWidth = width;
     GraphicLib::Widgets::Carriage::WindowHeight = height;
 
-    //    auto buttonStyle = std::make_shared<GraphicLib::Widgets::Styles::ButtonStyle>();
-    //    buttonStyle->color = GraphicLib::Widgets::Styles::VIOLET;
-    //    buttonStyle->traceColor = GraphicLib::Widgets::Styles::WHITE;
-    //    buttonStyle->pressColor = GraphicLib::Widgets::Styles::BLUE;
-    //    buttonStyle->labelParams = {.color = GraphicLib::Widgets::Styles::WHITE, .size = 1.0f};
-    //    buttonStyle->scale = {0.11f, 0.1f};
-    //    buttonStyle->figure = rectangle;
-    //
-    //    auto textInputFieldStyle = std::make_shared<GraphicLib::Widgets::Styles::TextInputFieldStyle>();
-    //    textInputFieldStyle->traceColor = GraphicLib::Widgets::Styles::WHITE;
-    //    textInputFieldStyle->labelParams = {.color = GraphicLib::Widgets::Styles::WHITE, .size = 1.0f};
-    //    textInputFieldStyle->inputParams = {.color = GraphicLib::Widgets::Styles::BLACK, .size = 1.4f};
-    //    textInputFieldStyle->color = GraphicLib::Widgets::Styles::LIGHT_GRAY;
-    //    textInputFieldStyle->scale = {0.7f, 0.1f};
-    //    textInputFieldStyle->figure = rectangle;
-    //
-    //    auto textBoxStyle = std::make_shared<GraphicLib::Widgets::Styles::TextBoxStyle>();
-    //    textBoxStyle->color = GraphicLib::Widgets::Styles::DARK_GRAY;
-    //    textBoxStyle->scale = {0.7f, 0.1f};
-    //    textBoxStyle->textLabelParams = {.color = GraphicLib::Widgets::Styles::WHITE, .size = 1.0f};
-    //
-    //    auto imageButtonStyle = std::make_shared<GraphicLib::Widgets::Styles::ImageButtonStyle>();
-    //    imageButtonStyle->scale = {0.1f, 0.2f};
-    //    imageButtonStyle->defaultTexturePath = config.getTexturePath("default");
-    //    imageButtonStyle->defaultTextureIndex = 0;
-    //    imageButtonStyle->traceColor = GraphicLib::Widgets::Styles::WHITE;
-    //    imageButtonStyle->labelParams = {.color = GraphicLib::Widgets::Styles::WHITE, .size = 1.0f};
-    //    imageButtonStyle->figure = textureRectangle;
-    //
-    //    auto imageBoxStyle = std::make_shared<GraphicLib::Widgets::Styles::ImageBoxStyle>();
-    //    imageBoxStyle->scale = {0.1f, 0.2f};
-    //    imageBoxStyle->defaultTexturePath = config.getTexturePath("default");
-    //    imageBoxStyle->defaultTextureIndex = 0;
-    //    imageBoxStyle->figure = textureRectangle;
-    //    imageBoxStyle->labelParams = {.color = GraphicLib::Widgets::Styles::WHITE, .size = 1.0f};
-    //
-    //    auto vertLayoutStyle = std::make_shared<GraphicLib::Widgets::Styles::LayoutStyle>();
-    //    vertLayoutStyle->widgetOffset = 0.03f;
-    //
-    //    auto horizLayoutStyle = std::make_shared<GraphicLib::Widgets::Styles::LayoutStyle>();
-    //    horizLayoutStyle->widgetOffset = 0.01f;
-    //
-    //    GraphicLib::Widgets::WidgetBuilder::Ptr widgetBuilder = std::make_shared<GraphicLib::Widgets::WidgetBuilder>();
-    //    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::BUTTON, buttonStyle);
-    //    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::TEXT_INPUT_FIELD, textInputFieldStyle);
-    //    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::NUM_INPUT_FIELD, textInputFieldStyle);
-    //    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::IMAGE_BUTTON, imageButtonStyle);
-    //    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::IMAGE_BOX, imageBoxStyle);
-    //    widgetBuilder->addWidgetStyle(GraphicLib::Widgets::TEXT_BOX, textBoxStyle);
-    //    widgetBuilder->addLayoutStyle(GraphicLib::Widgets::HORIZONTAL, horizLayoutStyle);
-    //    widgetBuilder->addLayoutStyle(GraphicLib::Widgets::VERTICAL, vertLayoutStyle);
+    Pages::PageStyleParser styleParser(config);
+    styleParser.parse("../../style.json");
 
-    Pages::PageStyleParser pageStyleParser(config);
-    pageStyleParser.parse("../../theme.json");
-
-    auto systemPage = std::make_shared<Pages::SystemPage>(_canvas, pageStyleParser.getWidgetBuilder("system"));
+    auto systemPage = std::make_shared<Pages::SystemPage>(_canvas, styleParser.getWidgetBuilder("system"));
     auto characteristicPage = std::make_shared<Pages::CharacteristicPage>(
         _canvas,
-        pageStyleParser.getWidgetBuilder("characteristic"));
-    auto skillPage = std::make_shared<Pages::SkillPage>(_canvas, pageStyleParser.getWidgetBuilder("skill"));
-    auto actionPage = std::make_shared<Pages::ActionPage>(_canvas, pageStyleParser.getWidgetBuilder("action"));
-    auto racePage = std::make_shared<Pages::RacePage>(_canvas, pageStyleParser.getWidgetBuilder("race"));
-    auto loginPage = std::make_shared<Pages::LoginPage>(_canvas, pageStyleParser.getWidgetBuilder("login"));
+        styleParser.getWidgetBuilder("characteristic"));
+    auto skillPage = std::make_shared<Pages::SkillPage>(_canvas, styleParser.getWidgetBuilder("skill"));
+    auto actionPage = std::make_shared<Pages::ActionPage>(_canvas, styleParser.getWidgetBuilder("action"));
+    auto racePage = std::make_shared<Pages::RacePage>(_canvas, styleParser.getWidgetBuilder("race"));
+    auto loginPage = std::make_shared<Pages::LoginPage>(_canvas, styleParser.getWidgetBuilder("login"));
     auto registrationPage = std::make_shared<Pages::RegistrationPage>(_canvas,
-                                                                      pageStyleParser.getWidgetBuilder("registration"));
+                                                                      styleParser.getWidgetBuilder("registration"));
 
     _view->addPage(View::PageTag::SYSTEM, systemPage);
     _view->addPage(View::PageTag::CHARACTERISTIC, characteristicPage);

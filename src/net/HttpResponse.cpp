@@ -64,6 +64,9 @@ namespace Net {
 
                 body += end;
             }
+            if (body == "null") {
+                Logger::debug("What?");
+            }
             Logger::debug(body);
 
             Json::Reader reader;
