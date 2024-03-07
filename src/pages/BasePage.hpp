@@ -36,21 +36,40 @@ namespace Pages {
 
     protected:
         GraphicLib::Widgets::Widget::Ptr createStyledWidget(GraphicLib::Widgets::WidgetType type, glm::vec2 pos);
-        GraphicLib::Widgets::Widget::Ptr createStyledWidget(GraphicLib::Widgets::WidgetType type, glm::vec2 pos, glm::vec2 scale);
         GraphicLib::Widgets::Button::Ptr createStyledButton(glm::vec2 pos);
-        GraphicLib::Widgets::Button::Ptr createStyledButton(glm::vec2 pos, glm::vec2 scale);
         GraphicLib::Widgets::TextInputField::Ptr createStyledInputField(glm::vec2 pos);
-        GraphicLib::Widgets::TextInputField::Ptr createStyledInputField(glm::vec2 pos, glm::vec2 scale);
         GraphicLib::Widgets::NumericInputField::Ptr createStyledNumericInputField(glm::vec2 pos);
-        GraphicLib::Widgets::NumericInputField::Ptr createStyledNumericInputField(glm::vec2 pos, glm::vec2 scale);
         GraphicLib::Widgets::ImageButton::Ptr createStyledImageButton(glm::vec2 pos);
-        GraphicLib::Widgets::ImageButton::Ptr createStyledImageButton(glm::vec2 pos, glm::vec2 scale);
         GraphicLib::Widgets::TextBox::Ptr createStyledTextBox(glm::vec2 pos);
-        GraphicLib::Widgets::TextBox::Ptr createStyledTextBox(glm::vec2 pos, glm::vec2 scale);
         GraphicLib::Widgets::ImageBox::Ptr createStyledImageBox(glm::vec2 pos);
-        GraphicLib::Widgets::ImageBox::Ptr createStyledImageBox(glm::vec2 pos, glm::vec2 scale);
         GraphicLib::Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout(glm::vec2 pos);
         GraphicLib::Widgets::VerticalLayout::Ptr createStyledVerticalLayout(glm::vec2 pos);
+
+        GraphicLib::Widgets::Widget::Ptr createStyledWidget(GraphicLib::Widgets::WidgetType type, const std::string& className, glm::vec2 pos);
+        GraphicLib::Widgets::Button::Ptr createStyledButton(const std::string& className, glm::vec2 pos);
+        GraphicLib::Widgets::TextInputField::Ptr createStyledInputField(const std::string& className, glm::vec2 pos);
+        GraphicLib::Widgets::NumericInputField::Ptr createStyledNumericInputField(const std::string& className, glm::vec2 pos);
+        GraphicLib::Widgets::ImageButton::Ptr createStyledImageButton(const std::string& className, glm::vec2 pos);
+        GraphicLib::Widgets::TextBox::Ptr createStyledTextBox(const std::string& className, glm::vec2 pos);
+        GraphicLib::Widgets::ImageBox::Ptr createStyledImageBox(const std::string& className, glm::vec2 pos);
+//        GraphicLib::Widgets::HorizontalLayout::Ptr createStyledHorizontalLayout(const std::string& className, glm::vec2 pos);
+//        GraphicLib::Widgets::VerticalLayout::Ptr createStyledVerticalLayout(const std::string& className, glm::vec2 pos);
+
+        GraphicLib::Widgets::Widget::Ptr createStyledWidget(GraphicLib::Widgets::WidgetType type, glm::vec2 pos, glm::vec2 scale);
+        GraphicLib::Widgets::Button::Ptr createStyledButton(glm::vec2 pos, glm::vec2 scale);
+        GraphicLib::Widgets::TextInputField::Ptr createStyledInputField(glm::vec2 pos, glm::vec2 scale);
+        GraphicLib::Widgets::NumericInputField::Ptr createStyledNumericInputField(glm::vec2 pos, glm::vec2 scale);
+        GraphicLib::Widgets::ImageButton::Ptr createStyledImageButton(glm::vec2 pos, glm::vec2 scale);
+        GraphicLib::Widgets::TextBox::Ptr createStyledTextBox(glm::vec2 pos, glm::vec2 scale);
+        GraphicLib::Widgets::ImageBox::Ptr createStyledImageBox(glm::vec2 pos, glm::vec2 scale);
+
+        GraphicLib::Widgets::Widget::Ptr createStyledWidget(GraphicLib::Widgets::WidgetType type, const std::string& className);
+        GraphicLib::Widgets::Button::Ptr createStyledButton(const std::string& className);
+        GraphicLib::Widgets::TextInputField::Ptr createStyledInputField(const std::string& className);
+        GraphicLib::Widgets::NumericInputField::Ptr createStyledNumericInputField(const std::string& className);
+        GraphicLib::Widgets::ImageButton::Ptr createStyledImageButton(const std::string& className);
+        GraphicLib::Widgets::TextBox::Ptr createStyledTextBox(const std::string& className);
+        GraphicLib::Widgets::ImageBox::Ptr createStyledImageBox(const std::string& className);
 
         GraphicLib::Widgets::Widget::Ptr createStyledWidget(GraphicLib::Widgets::WidgetType type);
         GraphicLib::Widgets::Button::Ptr createStyledButton();

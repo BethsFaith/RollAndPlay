@@ -36,6 +36,7 @@ add_executable(RollAndPlay
         src/data/Race.cpp
         src/data/convert/Convert.cpp
         src/data/graphic/Model.cpp
+        src/pages/PageStyleParser.cpp
         src/pages/BasePage.cpp
         src/pages/SystemPage.cpp
         src/pages/CharacteristicPage.cpp

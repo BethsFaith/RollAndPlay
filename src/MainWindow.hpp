@@ -9,8 +9,6 @@
 #include <GraphicLib/Objects/Primitives/Rectangle.hpp>
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
 #include <GraphicLib/Widgets/Gui.hpp>
-#include <GraphicLib/Widgets/WidgetBuilder.hpp>
-#include <GraphicLib/Widgets/Button.hpp>
 #include <GraphicLib/Controllers/GuiController.hpp>
 
 #include <glm/glm.hpp>
@@ -24,6 +22,7 @@
 #include "pages/SystemPage.hpp"
 #include "pages/ActionPage.hpp"
 #include "pages/CharacteristicPage.hpp"
+#include "pages/PageStyleParser.hpp"
 #include "View.hpp"
 #include "config/Config.hpp"
 

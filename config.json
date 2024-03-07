@@ -39,8 +39,13 @@
     }
   },
   "net" : {
-    "host" : "localhost",
+    "host": "localhost",
     "port": "8080",
-    "domain":"localhost:8080"
+    "domain": "localhost:8080",
+    "paths" : "paths.json"
+  },
+  "theme" : {
+    "directory": "",
+    "file" : "theme.json"
   }
 }
