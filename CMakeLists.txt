@@ -28,6 +28,8 @@ add_executable(RollAndPlay
         src/data/Characteristic.cpp
         src/data/Skill.cpp
         src/data/Action.cpp
+        src/data/Item.cpp
+        src/data/ItemType.cpp
         src/data/CharacterClass.cpp
         src/data/System.cpp
         src/data/SkillCategory.cpp
