@@ -68,11 +68,15 @@ namespace Pages {
             {"violet", GraphicLib::Widgets::Styles::VIOLET},
             {"light_gray", GraphicLib::Widgets::Styles::LIGHT_GRAY},
             {"light_blue", GraphicLib::Widgets::Styles::LIGHT_BLUE},
+            {"light_red", GraphicLib::Widgets::Styles::LIGHT_RED},
             {"light_violet", GraphicLib::Widgets::Styles::LIGHT_VIOLET},
             {"light_green", GraphicLib::Widgets::Styles::LIGHT_GREEN},
+            {"light_orange", GraphicLib::Widgets::Styles::LIGHT_ORANGE},
             {"dark_gray", GraphicLib::Widgets::Styles::DARK_GRAY},
             {"dark_blue", GraphicLib::Widgets::Styles::DARK_BLUE},
             {"dark_green", GraphicLib::Widgets::Styles::DARK_GREEN},
+            {"dark_red", GraphicLib::Widgets::Styles::DARK_RED},
+            {"dark_orange", GraphicLib::Widgets::Styles::DARK_ORANGE},
         };
 
         GraphicLib::Objects::Primitives::Rectangle::Ptr _rectangle;

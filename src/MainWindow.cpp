@@ -66,20 +66,6 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     Pages::BasePage::setCommonData(
         {.clientSession = std::make_shared<Net::ApiClient>(host, port, domain, new Net::Route("../../paths.json"))});
 
-    auto rectangle = std::make_shared<GraphicLib::Objects::Primitives::Rectangle>(
-        GraphicLib::Objects::Primitives::Primitive::Settings{.with_normals = false,
-                                                             .with_texture_coords = false,
-                                                             .with_tangent = false,
-                                                             .with_bitangent = false});
-    rectangle->bindData(GL_STATIC_DRAW);
-
-    auto textureRectangle = std::make_shared<GraphicLib::Objects::Primitives::Rectangle>(
-        GraphicLib::Objects::Primitives::Primitive::Settings{.with_normals = false,
-                                                             .with_texture_coords = true,
-                                                             .with_tangent = false,
-                                                             .with_bitangent = false});
-    textureRectangle->bindData(GL_STATIC_DRAW);
-
     GraphicLib::Widgets::Carriage::WindowWidth = width;
     GraphicLib::Widgets::Carriage::WindowHeight = height;
 
@@ -92,6 +78,9 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
         styleParser.getWidgetBuilder("characteristic"));
     auto skillPage = std::make_shared<Pages::SkillPage>(_canvas, styleParser.getWidgetBuilder("skill"));
     auto actionPage = std::make_shared<Pages::ActionPage>(_canvas, styleParser.getWidgetBuilder("action"));
+    auto itemPage = std::make_shared<Pages::ItemPage>(
+        _canvas,
+        styleParser.getWidgetBuilder("item"));
     auto racePage = std::make_shared<Pages::RacePage>(_canvas, styleParser.getWidgetBuilder("race"));
     auto loginPage = std::make_shared<Pages::LoginPage>(_canvas, styleParser.getWidgetBuilder("login"));
     auto registrationPage = std::make_shared<Pages::RegistrationPage>(_canvas,
@@ -101,6 +90,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     _view->addPage(View::PageTag::CHARACTERISTIC, characteristicPage);
     _view->addPage(View::PageTag::SKILL, skillPage);
     _view->addPage(View::PageTag::ACTION, actionPage);
+    _view->addPage(View::PageTag::ITEM, itemPage);
     _view->addPage(View::PageTag::RACE, racePage);
     _view->addPage(View::PageTag::AUTHORIZATION, loginPage);
     _view->addPage(View::PageTag::REGISTRATION, registrationPage);

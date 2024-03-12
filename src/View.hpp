@@ -24,7 +24,8 @@ public:
         RACE,
         CLASS,
         AUTHORIZATION,
-        REGISTRATION
+        REGISTRATION,
+        ITEM,
     };
 
     enum ViewTag {

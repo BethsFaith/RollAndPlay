@@ -23,6 +23,7 @@ Data::AData::Ptr Data::DataFactory::create(Data::Type type) {
             res = std::make_shared<Action>();
             break;
         case ITEM:
+            res = std::make_shared<Item>();
             break;
         case ITEM_TYPE:
             res = std::make_shared<ItemType>();

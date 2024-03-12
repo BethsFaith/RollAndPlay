@@ -20,6 +20,8 @@ namespace Data {
 
         Type getType() override;
 
+        void clear();
+
         void setName(const std::u16string& name);
         void setDescription(const std::u16string& description);
         void setIconPath(const std::string& iconPath);

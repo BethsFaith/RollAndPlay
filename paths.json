@@ -89,5 +89,35 @@
     "DELETE": {
       "private": true
     }
+  },
+  "item": {
+    "path": "/items",
+    "GET": {
+      "private": false
+    },
+    "POST": {
+      "private": true
+    },
+    "PUT": {
+      "private": true
+    },
+    "DELETE": {
+      "private": true
+    }
+  },
+  "itemType": {
+    "path": "/item-types",
+    "GET": {
+      "private": false
+    },
+    "POST": {
+      "private": true
+    },
+    "PUT": {
+      "private": true
+    },
+    "DELETE": {
+      "private": true
+    }
   }
 }
