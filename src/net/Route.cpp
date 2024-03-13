@@ -23,6 +23,8 @@ namespace Net {
         pull(Data::SKILL, filePath, "skill", methods);
         pull(Data::SESSION, filePath, "session", methods);
         pull(Data::CHARACTERISTIC, filePath, "characteristic", methods);
+        pull(Data::ITEM, filePath, "item", methods);
+        pull(Data::ITEM_TYPE, filePath, "itemType", methods);
     }
 
     void Route::pull(Data::Type type,

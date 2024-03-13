@@ -12,6 +12,8 @@ namespace Data {
         SKILL,
         SKILL_CATEGORY,
         ACTION,
+        ITEM,
+        ITEM_TYPE,
         CLASS,
         RACE,
         USER,

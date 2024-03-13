@@ -22,6 +22,7 @@
 #include "pages/SystemPage.hpp"
 #include "pages/ActionPage.hpp"
 #include "pages/CharacteristicPage.hpp"
+#include "pages/ItemPage.hpp"
 #include "pages/PageStyleParser.hpp"
 #include "View.hpp"
 #include "config/Config.hpp"

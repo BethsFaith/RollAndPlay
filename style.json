@@ -206,17 +206,11 @@
           ]
         },
         {
-          "type" : "text_input_field",
-          "color" : "light_green",
-          "classes" : [
-          ]
-        },
-        {
           "type": "text_box",
           "classes": [
             {
               "class": "view",
-              "color": "light_green"
+              "color": "dark_green"
             }
           ]
         }
@@ -232,8 +226,22 @@
           ]
         },
         {
-          "type" : "text_input_field",
-          "color" : "light_blue",
+          "type": "text_box",
+          "classes": [
+            {
+              "class": "view",
+              "color": "light_blue"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page" : "item",
+      "theme": [
+        {
+          "type": "button",
+          "color" : "dark_orange",
           "classes" : [
           ]
         },
@@ -242,7 +250,7 @@
           "classes": [
             {
               "class": "view",
-              "color": "light_blue"
+              "color": "light_orange"
             }
           ]
         }

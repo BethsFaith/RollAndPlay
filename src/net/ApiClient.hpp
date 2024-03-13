@@ -37,6 +37,7 @@ namespace Net {
         Result getListByRef(Data::Type type, const std::string& referenceParameterName, int referenceParameter);
         Result get(Data::Type type, int id);
         Result update(const Data::AData::Ptr& data);
+        Result deleteById(Data::Type type, int id);
 
     private:
         HttpSession _session;

@@ -14,6 +14,8 @@
 #include "Type.hpp"
 #include "User.hpp"
 #include "Action.hpp"
+#include "Item.hpp"
+#include "ItemType.hpp"
 #include "CharacterClass.hpp"
 #include "Characteristic.hpp"
 

@@ -22,12 +22,20 @@ Data::AData::Ptr Data::DataFactory::create(Data::Type type) {
         case ACTION:
             res = std::make_shared<Action>();
             break;
+        case ITEM:
+            res = std::make_shared<Item>();
+            break;
+        case ITEM_TYPE:
+            res = std::make_shared<ItemType>();
+            break;
         case CLASS:
             break;
         case RACE:
             break;
         case USER:
             res = std::make_shared<User>();
+            break;
+        case SESSION:
             break;
     }
 

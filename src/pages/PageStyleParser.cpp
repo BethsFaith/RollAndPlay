@@ -213,6 +213,7 @@ namespace Pages {
             _pageWidgetBuilders["race"] = defaultWidgetBuilder;
             _pageWidgetBuilders["characteristic"] = defaultWidgetBuilder;
             _pageWidgetBuilders["characterClass"] = defaultWidgetBuilder;
+            _pageWidgetBuilders["item"] = defaultWidgetBuilder;
         }
 
         if (obj.isMember("pages")) {
