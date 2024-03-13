@@ -353,4 +353,30 @@ namespace Net {
 
         return result;
     }
+
+    ApiClient::Result ApiClient::deleteById(Data::Type type, int id) {
+        auto paths = _route.getPaths();
+        auto target = std::string(paths[type][Net::Http::MethodDelete]);
+        Net::HttpRequest request(target,Net::Http::MethodDelete, _domain);
+
+        Json::Value body;
+        body["id"] = id;
+        request.setBodyJson(body);
+
+        request.setCookie(_cookie);
+
+        auto response = _session.send(request);
+        if (response.getStatusCode() == HttpResponse::StatusCode::INTERNAL_SERVER_ERROR) {
+            _session.connect();
+            response = _session.send(request);
+        }
+
+        Result result;
+        if (response.getStatusCode() != HttpResponse::StatusCode::OK) {
+            result.haveError = true;
+            result.errorMessage = response.getErrorMessage();
+        }
+
+        return result;
+    }
 }    //namespace Net

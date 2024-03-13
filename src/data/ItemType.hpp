@@ -19,6 +19,9 @@ namespace Data {
         void deserialize(const Json::Value& jsonValue) override;
 
         Type getType() override;
+
+        void clear();
+
         void setName(const std::u16string& name);
         void setIconPath(const std::string& iconPath);
         void setUserId(unsigned int userId);

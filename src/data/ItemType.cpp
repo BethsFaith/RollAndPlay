@@ -47,4 +47,11 @@ namespace Data {
     unsigned int ItemType::getUserId() const {
         return _userId;
     }
+
+    void ItemType::clear() {
+        _userId = NULL_ID;
+
+        _name.clear();
+        _iconPath.clear();
+    }
 }    //namespace Data
