@@ -22,8 +22,8 @@ ViewDrawer::ViewDrawer(GraphicLib::Objects::PickableTexture::Ptr canvas) :
     _horizontalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.8f, 0.9f},
                                                          glm::vec2{0.2f, 0.1f});
 
-    _verticalMenu->setSelectedItemColor(Widgets::Styles::LIGHT_BLUE);
-    _horizontalMenu->setSelectedItemColor(Widgets::Styles::DARK_GRAY);
+    _verticalMenu->setSelectedItemColor(Pages::Style::getRGB(Pages::Style::LIGHT_BLUE));
+    _horizontalMenu->setSelectedItemColor(Pages::Style::getRGB(Pages::Style::DARK_GRAY));
 
     _gui.addWidget(_verticalMenu);
     _gui.addWidget(_horizontalMenu);
@@ -71,7 +71,7 @@ void ViewDrawer::createHorizontalMenu(int menuId, std::vector<std::u16string> na
     for (int i{}; i < names.size(); ++i) {
         auto button = std::make_shared<Widgets::Button>(rectangle);
 
-        button->setColor(Widgets::Styles::Color::LIGHT_BLUE);
+        button->setColor(Pages::Style::getRGB(Pages::Style::LIGHT_BLUE));
         button->setLabelText(names.at(i));
         button->setPressCallback(funcs[i]);
 
@@ -94,7 +94,7 @@ void ViewDrawer::createVerticalMenu(std::vector<std::u16string> names,
     for (int i{}; i < names.size(); ++i) {
         auto button = std::make_shared<Widgets::Button>(rectangle);
 
-        button->setColor(Widgets::Styles::Color::GRAY);
+        button->setColor(Pages::Style::getRGB(Pages::Style::GRAY));
         button->setLabelText(names.at(i));
         button->setPressCallback(funcs[i]);
 

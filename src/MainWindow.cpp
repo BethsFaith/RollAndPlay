@@ -39,7 +39,7 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     _canvas->init(width, height);
     _view = std::make_shared<View>(glm::vec2{-0.9f, -0.83f},
                                    glm::vec2{0.9f, 0.83f},
-                                   GraphicLib::Widgets::Styles::Color::DARK_GRAY,
+                                   Pages::Style::DARK_GRAY,
                                    _canvas);
 
     auto guiShaderPath = config.getShaderPath("gui");

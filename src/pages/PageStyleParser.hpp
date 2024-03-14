@@ -14,6 +14,7 @@
 #include <GraphicLib/Widgets/WidgetBuilder.hpp>
 
 #include "../config/Config.hpp"
+#include "style/Color.hpp"
 
 namespace Pages {
     class PageStyleParser {
@@ -32,7 +33,7 @@ namespace Pages {
         };
 
         ResultType getType(std::string type);
-        GraphicLib::Widgets::Styles::Color getColor(std::string color);
+        Style::Color getColor(std::string color);
 
         void (PageStyleParser::*pullStyle)(Json::Value&, const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&);
         void pullButtonStyle(Json::Value& object, const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&);
@@ -56,27 +57,27 @@ namespace Pages {
             {"horizontal_layout", GraphicLib::Widgets::HORIZONTAL},
             {"vertical_layout", GraphicLib::Widgets::VERTICAL}
         };
-        std::unordered_map<std::string, GraphicLib::Widgets::Styles::Color> colors = {
-            {"white", GraphicLib::Widgets::Styles::WHITE},
-            {"gray", GraphicLib::Widgets::Styles::GRAY},
-            {"black", GraphicLib::Widgets::Styles::BLACK},
-            {"red", GraphicLib::Widgets::Styles::RED},
-            {"green",GraphicLib::Widgets::Styles::GREEN},
-            {"blue",GraphicLib::Widgets::Styles::BLUE},
-            {"yellow",GraphicLib::Widgets::Styles::YELLOW},
-            {"orange",GraphicLib::Widgets::Styles::ORANGE},
-            {"violet", GraphicLib::Widgets::Styles::VIOLET},
-            {"light_gray", GraphicLib::Widgets::Styles::LIGHT_GRAY},
-            {"light_blue", GraphicLib::Widgets::Styles::LIGHT_BLUE},
-            {"light_red", GraphicLib::Widgets::Styles::LIGHT_RED},
-            {"light_violet", GraphicLib::Widgets::Styles::LIGHT_VIOLET},
-            {"light_green", GraphicLib::Widgets::Styles::LIGHT_GREEN},
-            {"light_orange", GraphicLib::Widgets::Styles::LIGHT_ORANGE},
-            {"dark_gray", GraphicLib::Widgets::Styles::DARK_GRAY},
-            {"dark_blue", GraphicLib::Widgets::Styles::DARK_BLUE},
-            {"dark_green", GraphicLib::Widgets::Styles::DARK_GREEN},
-            {"dark_red", GraphicLib::Widgets::Styles::DARK_RED},
-            {"dark_orange", GraphicLib::Widgets::Styles::DARK_ORANGE},
+        std::unordered_map<std::string, Style::Color> colors = {
+            {"white",Style::Color::WHITE},
+            {"gray", Style::Color::GRAY},
+            {"black",Style::Color::BLACK},
+            {"red", Style::Color::RED},
+            {"green",Style::Color::GREEN},
+            {"blue",Style::Color::BLUE},
+            {"yellow",Style::Color::YELLOW},
+            {"orange",Style::Color::ORANGE},
+            {"violet", Style::Color::VIOLET},
+            {"light_gray", Style::Color::LIGHT_GRAY},
+            {"light_blue", Style::Color::LIGHT_BLUE},
+            {"light_red", Style::Color::LIGHT_RED},
+            {"light_violet", Style::Color::LIGHT_VIOLET},
+            {"light_green", Style::Color::LIGHT_GREEN},
+            {"light_orange", Style::Color::LIGHT_ORANGE},
+            {"dark_gray", Style::Color::DARK_GRAY},
+            {"dark_blue", Style::Color::DARK_BLUE},
+            {"dark_green", Style::Color::DARK_GREEN},
+            {"dark_red", Style::Color::DARK_RED},
+            {"dark_orange", Style::Color::DARK_ORANGE},
         };
 
         GraphicLib::Objects::Primitives::Rectangle::Ptr _rectangle;

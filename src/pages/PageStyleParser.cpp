@@ -225,8 +225,7 @@ namespace Pages {
                 auto page = pages[pageIndex]["page"].asString();
                 auto pageTheme = pages[pageIndex]["theme"];
 
-                auto pageWidgetBuilder = std::make_shared<GraphicLib::Widgets::WidgetBuilder>(
-                    *defaultWidgetBuilder);
+                auto pageWidgetBuilder = std::make_shared<GraphicLib::Widgets::WidgetBuilder>(*defaultWidgetBuilder);
 
                 for (int styleIndex{}; styleIndex < pageTheme.size(); ++styleIndex) {
                     auto style = pageTheme[styleIndex];
@@ -234,7 +233,6 @@ namespace Pages {
 
                     if (!type.error) {
                         if (type.isWidgetType) {
-
                             std::function<void(GraphicLib::Widgets::Styles::WidgetStyle::Ptr&,
                                                const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&)>
                                 styleInitialization;
@@ -243,37 +241,38 @@ namespace Pages {
                             switch (type.widgetType) {
                                 case GraphicLib::Widgets::NUM_INPUT_FIELD:
                                 case GraphicLib::Widgets::TEXT_INPUT_FIELD: {
-                                    styleInitialization =
-                                        [](GraphicLib::Widgets::Styles::WidgetStyle::Ptr& widgetStyle,
-                                           const GraphicLib::Widgets::Styles::WidgetStyle::Ptr& copyStyle) {
-                                            if (copyStyle == nullptr) {
-                                                widgetStyle =
-                                                    std::make_shared<GraphicLib::Widgets::Styles::TextInputFieldStyle>();
-                                            } else {
-                                                widgetStyle =
-                                                    std::make_shared<GraphicLib::Widgets::Styles::TextInputFieldStyle>(
-                                                        *std::dynamic_pointer_cast<
-                                                            GraphicLib::Widgets::Styles::TextInputFieldStyle>(copyStyle));
-                                            }
-                                        };
+                                    styleInitialization = [](GraphicLib::Widgets::Styles::WidgetStyle::Ptr& widgetStyle,
+                                                             const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&
+                                                                 copyStyle) {
+                                        if (copyStyle == nullptr) {
+                                            widgetStyle =
+                                                std::make_shared<GraphicLib::Widgets::Styles::TextInputFieldStyle>();
+                                        } else {
+                                            widgetStyle =
+                                                std::make_shared<GraphicLib::Widgets::Styles::TextInputFieldStyle>(
+                                                    *std::dynamic_pointer_cast<
+                                                        GraphicLib::Widgets::Styles::TextInputFieldStyle>(copyStyle));
+                                        }
+                                    };
 
                                     pullStyle = &PageStyleParser::pullTextInputFieldStyle;
 
                                     break;
                                 }
                                 case GraphicLib::Widgets::IMAGE_BUTTON: {
-                                    styleInitialization = [](GraphicLib::Widgets::Styles::WidgetStyle::Ptr& widgetStyle,
-                                                             const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&
-                                                                 copyStyle) {
-                                        if (copyStyle == nullptr) {
-                                            widgetStyle = std::make_shared<GraphicLib::Widgets::Styles::ImageButtonStyle>();
-                                        } else {
-                                            widgetStyle = widgetStyle = std::make_shared<
-                                                GraphicLib::Widgets::Styles::ImageButtonStyle>(
-                                                *std::dynamic_pointer_cast<GraphicLib::Widgets::Styles::ImageButtonStyle>(
-                                                    copyStyle));
-                                        }
-                                    };
+                                    styleInitialization =
+                                        [](GraphicLib::Widgets::Styles::WidgetStyle::Ptr& widgetStyle,
+                                           const GraphicLib::Widgets::Styles::WidgetStyle::Ptr& copyStyle) {
+                                            if (copyStyle == nullptr) {
+                                                widgetStyle =
+                                                    std::make_shared<GraphicLib::Widgets::Styles::ImageButtonStyle>();
+                                            } else {
+                                                widgetStyle = widgetStyle =
+                                                    std::make_shared<GraphicLib::Widgets::Styles::ImageButtonStyle>(
+                                                        *std::dynamic_pointer_cast<
+                                                            GraphicLib::Widgets::Styles::ImageButtonStyle>(copyStyle));
+                                            }
+                                        };
 
                                     pullStyle = &PageStyleParser::pullImageButtonStyle;
 
@@ -286,10 +285,10 @@ namespace Pages {
                                         if (copyStyle == nullptr) {
                                             widgetStyle = std::make_shared<GraphicLib::Widgets::Styles::TextBoxStyle>();
                                         } else {
-                                            widgetStyle = widgetStyle =
-                                                std::make_shared<GraphicLib::Widgets::Styles::TextBoxStyle>(
-                                                    *std::dynamic_pointer_cast<GraphicLib::Widgets::Styles::TextBoxStyle>(
-                                                        copyStyle));
+                                            widgetStyle = widgetStyle = std::make_shared<
+                                                GraphicLib::Widgets::Styles::TextBoxStyle>(
+                                                *std::dynamic_pointer_cast<GraphicLib::Widgets::Styles::TextBoxStyle>(
+                                                    copyStyle));
                                         }
                                     };
 
@@ -298,18 +297,19 @@ namespace Pages {
                                     break;
                                 }
                                 case GraphicLib::Widgets::IMAGE_BOX: {
-                                    styleInitialization = [](GraphicLib::Widgets::Styles::WidgetStyle::Ptr& widgetStyle,
-                                                             const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&
-                                                                 copyStyle) {
-                                        if (copyStyle == nullptr) {
-                                            widgetStyle = std::make_shared<GraphicLib::Widgets::Styles::ImageBoxStyle>();
-                                        } else {
-                                            widgetStyle = widgetStyle =
-                                                std::make_shared<GraphicLib::Widgets::Styles::ImageBoxStyle>(
-                                                    *std::dynamic_pointer_cast<GraphicLib::Widgets::Styles::ImageBoxStyle>(
-                                                        copyStyle));
-                                        }
-                                    };
+                                    styleInitialization =
+                                        [](GraphicLib::Widgets::Styles::WidgetStyle::Ptr& widgetStyle,
+                                           const GraphicLib::Widgets::Styles::WidgetStyle::Ptr& copyStyle) {
+                                            if (copyStyle == nullptr) {
+                                                widgetStyle =
+                                                    std::make_shared<GraphicLib::Widgets::Styles::ImageBoxStyle>();
+                                            } else {
+                                                widgetStyle = widgetStyle =
+                                                    std::make_shared<GraphicLib::Widgets::Styles::ImageBoxStyle>(
+                                                        *std::dynamic_pointer_cast<
+                                                            GraphicLib::Widgets::Styles::ImageBoxStyle>(copyStyle));
+                                            }
+                                        };
 
                                     pullStyle = &PageStyleParser::pullImageBoxStyle;
 
@@ -322,10 +322,10 @@ namespace Pages {
                                         if (copyStyle == nullptr) {
                                             widgetStyle = std::make_shared<GraphicLib::Widgets::Styles::MenuBarStyle>();
                                         } else {
-                                            widgetStyle = widgetStyle =
-                                                std::make_shared<GraphicLib::Widgets::Styles::MenuBarStyle>(
-                                                    *std::dynamic_pointer_cast<GraphicLib::Widgets::Styles::MenuBarStyle>(
-                                                        copyStyle));
+                                            widgetStyle = widgetStyle = std::make_shared<
+                                                GraphicLib::Widgets::Styles::MenuBarStyle>(
+                                                *std::dynamic_pointer_cast<GraphicLib::Widgets::Styles::MenuBarStyle>(
+                                                    copyStyle));
                                         }
                                     };
                                     pullStyle = &PageStyleParser::pullMenuBarStyle;
@@ -339,10 +339,10 @@ namespace Pages {
                                         if (copyStyle == nullptr) {
                                             widgetStyle = std::make_shared<GraphicLib::Widgets::Styles::ButtonStyle>();
                                         } else {
-                                            widgetStyle = widgetStyle =
-                                                std::make_shared<GraphicLib::Widgets::Styles::ButtonStyle>(
-                                                    *std::dynamic_pointer_cast<GraphicLib::Widgets::Styles::ButtonStyle>(
-                                                        copyStyle));
+                                            widgetStyle = widgetStyle = std::make_shared<
+                                                GraphicLib::Widgets::Styles::ButtonStyle>(
+                                                *std::dynamic_pointer_cast<GraphicLib::Widgets::Styles::ButtonStyle>(
+                                                    copyStyle));
                                         }
                                     };
 
@@ -418,7 +418,7 @@ namespace Pages {
         return res;
     }
 
-    GraphicLib::Widgets::Styles::Color PageStyleParser::getColor(std::string color) {
+    Style::Color PageStyleParser::getColor(std::string color) {
         std::transform(color.begin(), color.end(), color.begin(), [](unsigned char c) {
             return std::tolower(c);
         });
@@ -427,7 +427,7 @@ namespace Pages {
         if (it != colors.end()) {
             return it->second;
         } else {
-            return GraphicLib::Widgets::Styles::WHITE;
+            return Style::Color::WHITE;
         }
     }
 
@@ -435,17 +435,18 @@ namespace Pages {
                                           const GraphicLib::Widgets::Styles::WidgetStyle::Ptr& widgetStyle) {
         auto style = std::dynamic_pointer_cast<GraphicLib::Widgets::Styles::ButtonStyle>(widgetStyle);
         if (object.isMember("color")) {
-            style->color = getColor(object["color"].asString());
+            style->color = Style::getRGB(getColor(object["color"].asString()));
         }
         if (object.isMember("trace_color")) {
-            style->traceColor = getColor(object["trace_color"].asString());
+            style->traceColor = Style::getRGB(getColor(object["trace_color"].asString()));
         }
         if (object.isMember("press_color")) {
-            style->pressColor = getColor(object["press_color"].asString());
+            style->pressColor = Style::getRGB(getColor(object["press_color"].asString()));
         }
         if (object.isMember("label")) {
             auto label = object["label"];
-            style->labelParams = {.color = getColor(label["color"].asString()), .size = label["size"].asFloat()};
+            style->labelParams = {.color = Style::getRGB(getColor(label["color"].asString())),
+                                  .size = label["size"].asFloat()};
         }
         if (object.isMember("scale")) {
             auto scale = object["scale"];
@@ -490,7 +491,7 @@ namespace Pages {
 
         if (object.isMember("input")) {
             auto input = object["input"];
-            style->inputParams = {.color = getColor(input["color"].asString()), .size = input["size"].asFloat()};
+            style->inputParams = {.color =  Style::getRGB(getColor(input["color"].asString())), .size = input["size"].asFloat()};
         }
     }
 
@@ -500,7 +501,7 @@ namespace Pages {
 
         if (object.isMember("label")) {
             auto label = object["label"];
-            style->labelParams = {.color = getColor(label["color"].asString()), .size = label["size"].asFloat()};
+            style->labelParams = {.color =  Style::getRGB(getColor(label["color"].asString())), .size = label["size"].asFloat()};
         }
         if (object.isMember("scale")) {
             auto scale = object["scale"];
@@ -526,11 +527,12 @@ namespace Pages {
         auto style = std::dynamic_pointer_cast<GraphicLib::Widgets::Styles::TextBoxStyle>(widgetStyle);
 
         if (object.isMember("color")) {
-            style->color = getColor(object["color"].asString());
+            style->color = Style::getRGB(getColor(object["color"].asString()));
         }
         if (object.isMember("label")) {
             auto label = object["label"];
-            style->textLabelParams = {.color = getColor(label["color"].asString()), .size = label["size"].asFloat()};
+            style->textLabelParams = {.color = Style::getRGB(getColor(label["color"].asString())),
+                                      .size = label["size"].asFloat()};
         }
         if (object.isMember("scale")) {
             auto scale = object["scale"];

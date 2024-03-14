@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-namespace Pages::Classes {
+namespace Pages::Style {
     namespace TextBox {
         const std::string TITLE = "title";
         const std::string VIEW = "view";
