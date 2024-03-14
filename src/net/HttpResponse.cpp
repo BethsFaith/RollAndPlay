@@ -52,7 +52,7 @@ namespace Net {
 
             delete[] content;
 
-            if (contentSize > body.size() + 1) {
+            while (contentSize > body.size() + 1) {
                 asio::error_code errorCode;
 
                 asio::streambuf endBuf;
