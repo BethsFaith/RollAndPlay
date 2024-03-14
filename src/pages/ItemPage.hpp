@@ -5,6 +5,8 @@
 #ifndef INC_1_BIN_ITEMPAGE_HPP
 #define INC_1_BIN_ITEMPAGE_HPP
 
+#include <stack>
+
 #include "BasePage.hpp"
 #include "style/Constants.hpp"
 
@@ -25,6 +27,7 @@ namespace Pages {
         struct Buffer {
             Data::Item::Ptr item;
             Data::ItemType::Ptr itemType;
+            std::multimap<int, Data::Item::Ptr> itemsByTypeId;
         };
 
         explicit ItemPage(const GraphicLib::Objects::PickableTexture::Ptr& canvas,
@@ -53,7 +56,7 @@ namespace Pages {
                                    const std::string& path,
                                    const GraphicLib::Widgets::TextBox::Ptr& errorBox);
 
-        StateTag _tag = START;
+        std::stack<StateTag> _tags;
         Buffer _buffer;
     };
 }
