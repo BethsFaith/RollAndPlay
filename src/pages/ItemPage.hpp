@@ -6,7 +6,7 @@
 #define INC_1_BIN_ITEMPAGE_HPP
 
 #include "BasePage.hpp"
-#include "Constants.hpp"
+#include "style/Constants.hpp"
 
 namespace Pages {
     class ItemPage : public BasePage {

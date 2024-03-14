@@ -9,6 +9,7 @@
 #include <GraphicLib/Widgets/Gui.hpp>
 
 #include "pages/APage.hpp"
+#include "pages/style/Color.hpp"
 
 class ViewDrawer {
 public:

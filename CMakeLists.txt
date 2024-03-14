@@ -48,6 +48,7 @@ add_executable(RollAndPlay
         src/pages/LoginPage.cpp
         src/pages/RegistrationPage.cpp
         src/pages/threads/Worker.cpp
+        src/pages/style/Color.cpp
         src/data/storage/StreamWriter.cpp
         src/data/storage/StreamReader.cpp
         src/data/DataStorage.cpp

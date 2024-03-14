@@ -5,8 +5,8 @@
 #ifndef ROLLANDPLAY_VIEW_HPP
 #define ROLLANDPLAY_VIEW_HPP
 
-#include <GraphicLib/Shaders/ShaderProgram.hpp>
 #include <GraphicLib/Controllers/CommonController.hpp>
+#include <GraphicLib/Shaders/ShaderProgram.hpp>
 #include <utility>
 
 #include "ViewDrawer.hpp"
@@ -38,7 +38,10 @@ public:
 
     using Ptr = std::shared_ptr<View>;
 
-    View(glm::vec2 minPos, glm::vec2 maxPos, GraphicLib::Widgets::Styles::Color viewColor, GraphicLib::Objects::PickableTexture::Ptr canvas);
+    View(glm::vec2 minPos,
+         glm::vec2 maxPos,
+         Pages::Style::Color viewColor,
+         GraphicLib::Objects::PickableTexture::Ptr canvas);
 
     ~View();
 
@@ -59,8 +62,9 @@ public:
     void addPage(PageTag tag, Pages::APage::Ptr page);
 
     bool needToClose() const;
+
 private:
-    void initView(glm::vec2 minPos, glm::vec2 maxPos, GraphicLib::Widgets::Styles::Color viewColor);
+    void initView(glm::vec2 minPos, glm::vec2 maxPos, Pages::Style::Color viewColor);
     void update();
 
     void switchPage(PageTag tag);
