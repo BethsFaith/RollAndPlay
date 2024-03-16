@@ -45,7 +45,7 @@
         {
           "class" : "image_button_path",
           "scale" : {
-            "x" : 0.58,
+            "x" : 0.59,
             "y" : 0.1
           }
         }
@@ -165,6 +165,13 @@
       "widgets" : {
         "offset" : 0.01
       },
+      "classes" : [
+      ]
+    },
+    {
+      "type" : "scroll_box",
+      "color" : "gray",
+      "speed" : 0.01,
       "classes" : [
       ]
     }

@@ -17,9 +17,9 @@ ViewDrawer::ViewDrawer(GraphicLib::Objects::PickableTexture::Ptr canvas) :
                                         .with_bitangent = false});
     rectangle->bindData(GL_STATIC_DRAW);
 
-    _verticalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.95f, 0.77f},
+    _verticalMenu = std::make_shared<GuiObjects::MenuBar>(glm::vec2{-0.95f, 0.77f},
                                                        glm::vec2{0.09f, 0.1f}, false);
-    _horizontalMenu = std::make_shared<Widgets::MenuBar>(glm::vec2{-0.8f, 0.9f},
+    _horizontalMenu = std::make_shared<GuiObjects::MenuBar>(glm::vec2{-0.8f, 0.9f},
                                                          glm::vec2{0.2f, 0.1f});
 
     _verticalMenu->setSelectedItemColor(Pages::Style::getRGB(Pages::Style::LIGHT_BLUE));
@@ -34,11 +34,11 @@ void ViewDrawer::draw(int windowWidth, int windowHeight) {
 
     auto w = (float)windowWidth/2;
     auto h = (float)windowHeight/2;
-    auto xMinPos = w * (1+ _xLine.x);
-    auto xMaxPos = w * (1+_xLine.y);
+    auto xMinPos = w * (1+ _start.x);
+    auto xMaxPos = w * (1+ _end.x);
     auto width = xMaxPos - xMinPos;
-    auto yMinPos = h * (1+_yLine.x);
-    auto yMaxPos = h * (1+_yLine.y);
+    auto yMinPos = h * (1+ _start.y);
+    auto yMaxPos = h * (1+ _end.y);
     auto height = yMaxPos - yMinPos;
 
     glScissor((int)xMinPos, (int)yMinPos, (int)width, (int)height);
@@ -67,9 +67,9 @@ void ViewDrawer::createHorizontalMenu(int menuId, std::vector<std::u16string> na
     rectangle->bindData(GL_STATIC_DRAW);
 
     using namespace GraphicLib;
-    std::vector<Widgets::Button::Ptr> buttons;
+    std::vector<GuiObjects::Button::Ptr> buttons;
     for (int i{}; i < names.size(); ++i) {
-        auto button = std::make_shared<Widgets::Button>(rectangle);
+        auto button = std::make_shared<GuiObjects::Button>(rectangle);
 
         button->setColor(Pages::Style::getRGB(Pages::Style::LIGHT_BLUE));
         button->setLabelText(names.at(i));
@@ -92,7 +92,7 @@ void ViewDrawer::createVerticalMenu(std::vector<std::u16string> names,
 
     using namespace GraphicLib;
     for (int i{}; i < names.size(); ++i) {
-        auto button = std::make_shared<Widgets::Button>(rectangle);
+        auto button = std::make_shared<GuiObjects::Button>(rectangle);
 
         button->setColor(Pages::Style::getRGB(Pages::Style::GRAY));
         button->setLabelText(names.at(i));
@@ -113,8 +113,8 @@ void ViewDrawer::showHorizontalMenu(int menuId) {
 }
 
 void ViewDrawer::setPosition(glm::vec2 xLine, glm::vec2 yLine) {
-    _xLine = xLine;
-    _yLine = yLine;
+    _start = xLine;
+    _end = yLine;
 }
 
 void ViewDrawer::setPage(const Pages::APage::Ptr& page) {

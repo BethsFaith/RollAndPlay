@@ -6,7 +6,7 @@
 #define ROLLANDPLAY_VIEWDRAWER_HPP
 
 #include <GraphicLib/Objects/Primitives/Rectangle.hpp>
-#include <GraphicLib/Widgets/Gui.hpp>
+#include <GraphicLib/GuiObjects/Gui.hpp>
 
 #include "pages/APage.hpp"
 #include "pages/style/Color.hpp"
@@ -33,15 +33,15 @@ public:
     GraphicLib::Controllers::GuiController::Ptr getController();
 private:
     Pages::APage::Ptr _page;
-    std::map<int, std::vector<GraphicLib::Widgets::Button::Ptr>> _horizontalMenuButtons;
+    std::map<int, std::vector<GraphicLib::GuiObjects::Button::Ptr>> _horizontalMenuButtons;
 
-    GraphicLib::Widgets::MenuBar::Ptr _horizontalMenu;
-    GraphicLib::Widgets::MenuBar::Ptr _verticalMenu;
+    GraphicLib::GuiObjects::MenuBar::Ptr _horizontalMenu;
+    GraphicLib::GuiObjects::MenuBar::Ptr _verticalMenu;
 
-    GraphicLib::Widgets::Gui _gui;
+    GraphicLib::GuiObjects::Gui _gui;
 
-    glm::vec2 _xLine{-0.9f, 1.0f};
-    glm::vec2 _yLine{-0.9f, 1.0f};
+    glm::vec2 _start{-0.9f, -0.9f};
+    glm::vec2 _end{1.0f, 1.0f};
 
     glm::vec3 _viewBackgroundColor;
 };

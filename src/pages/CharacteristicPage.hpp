@@ -21,7 +21,7 @@ namespace Pages {
             EDIT,
         };
 
-        explicit CharacteristicPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
+        explicit CharacteristicPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::GuiObjects::WidgetBuilder::Ptr builder);
         ~CharacteristicPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;
@@ -43,10 +43,10 @@ namespace Pages {
 
         Data::Characteristic::Ptr _bufCharacteristic;
 
-        GraphicLib::Widgets::TextInputField::Ptr _nameInputField;
-        GraphicLib::Widgets::ImageButton::Ptr _iconButton;
-        GraphicLib::Widgets::TextInputField::Ptr _iconPathInputField;
-        GraphicLib::Widgets::TextBox::Ptr _messageBox;
+        GraphicLib::GuiObjects::TextInputField::Ptr _nameInputField;
+        GraphicLib::GuiObjects::ImageButton::Ptr _iconButton;
+        GraphicLib::GuiObjects::TextInputField::Ptr _iconPathInputField;
+        GraphicLib::GuiObjects::TextBox::Ptr _messageBox;
     };
 }
 #endif    //INC_1_BIN_CHARACTERISTICPAGE_HPP

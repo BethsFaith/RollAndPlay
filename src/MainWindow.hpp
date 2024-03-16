@@ -8,7 +8,7 @@
 #include <GraphicLib/GlagGlfw.hpp>
 #include <GraphicLib/Objects/Primitives/Rectangle.hpp>
 #include <GraphicLib/Shaders/ShaderProgram.hpp>
-#include <GraphicLib/Widgets/Gui.hpp>
+#include <GraphicLib/GuiObjects/Gui.hpp>
 #include <GraphicLib/Controllers/GuiController.hpp>
 
 #include <glm/glm.hpp>

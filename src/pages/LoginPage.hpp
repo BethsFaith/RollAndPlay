@@ -19,7 +19,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<LoginPage>;
 
-        explicit LoginPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
+        explicit LoginPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::GuiObjects::WidgetBuilder::Ptr builder);
         ~LoginPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;
@@ -42,24 +42,24 @@ namespace Pages {
 
         StateTag _nextState = START;
 
-        GraphicLib::Widgets::Button::Ptr _logInButton;
-        GraphicLib::Widgets::TextInputField::Ptr _loginInputField;
-        GraphicLib::Widgets::TextInputField::Ptr _passwordInputField;
-        GraphicLib::Widgets::TextBox::Ptr _messageBox{};
+        GraphicLib::GuiObjects::Button::Ptr _logInButton;
+        GraphicLib::GuiObjects::TextInputField::Ptr _loginInputField;
+        GraphicLib::GuiObjects::TextInputField::Ptr _passwordInputField;
+        GraphicLib::GuiObjects::TextBox::Ptr _messageBox{};
 
-        GraphicLib::Widgets::Button::Ptr _editButton;
-        GraphicLib::Widgets::Button::Ptr _exitButton;
-        GraphicLib::Widgets::TextBox::Ptr _emailLabel{};
-        GraphicLib::Widgets::TextBox::Ptr _nicknameLabel{};
-        GraphicLib::Widgets::TextBox::Ptr _emailBox{};
-        GraphicLib::Widgets::TextBox::Ptr _nicknameBox{};
+        GraphicLib::GuiObjects::Button::Ptr _editButton;
+        GraphicLib::GuiObjects::Button::Ptr _exitButton;
+        GraphicLib::GuiObjects::TextBox::Ptr _emailLabel{};
+        GraphicLib::GuiObjects::TextBox::Ptr _nicknameLabel{};
+        GraphicLib::GuiObjects::TextBox::Ptr _emailBox{};
+        GraphicLib::GuiObjects::TextBox::Ptr _nicknameBox{};
 
-        GraphicLib::Widgets::Button::Ptr _saveButton;
-        GraphicLib::Widgets::TextInputField::Ptr _nicknameInputField;
+        GraphicLib::GuiObjects::Button::Ptr _saveButton;
+        GraphicLib::GuiObjects::TextInputField::Ptr _nicknameInputField;
 
-        GraphicLib::Widgets::VerticalLayout::Ptr _startLayout;
-        GraphicLib::Widgets::VerticalLayout::Ptr _viewLayout;
-        GraphicLib::Widgets::VerticalLayout::Ptr _editLayout;
+        GraphicLib::GuiObjects::VerticalLayout::Ptr _startLayout;
+        GraphicLib::GuiObjects::VerticalLayout::Ptr _viewLayout;
+        GraphicLib::GuiObjects::VerticalLayout::Ptr _editLayout;
 
         Data::User _user{};
     };

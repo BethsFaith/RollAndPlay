@@ -24,7 +24,7 @@ namespace Pages {
             Data::Skill::Ptr skill;
         };
 
-        explicit ActionPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
+        explicit ActionPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::GuiObjects::WidgetBuilder::Ptr builder);
         ~ActionPage() override = default;
 
         void update() override;
@@ -46,11 +46,11 @@ namespace Pages {
 
         Buffer _buf;
 
-        GraphicLib::Widgets::TextInputField::Ptr _nameInputField;
-        GraphicLib::Widgets::ImageButton::Ptr _iconButton;
-        GraphicLib::Widgets::NumericInputField::Ptr _pointsInputField;
-        GraphicLib::Widgets::TextInputField::Ptr _iconPathInputField;
-        GraphicLib::Widgets::TextBox::Ptr _messageBox;
+        GraphicLib::GuiObjects::TextInputField::Ptr _nameInputField;
+        GraphicLib::GuiObjects::ImageButton::Ptr _iconButton;
+        GraphicLib::GuiObjects::NumericInputField::Ptr _pointsInputField;
+        GraphicLib::GuiObjects::TextInputField::Ptr _iconPathInputField;
+        GraphicLib::GuiObjects::TextBox::Ptr _messageBox;
     };
 }    //namespace Pages
 

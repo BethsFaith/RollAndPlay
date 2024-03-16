@@ -17,7 +17,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<RacePage>;
 
-        explicit RacePage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
+        explicit RacePage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::GuiObjects::WidgetBuilder::Ptr builder);
         ~RacePage() override = default;
 
         void init(const glm::vec2& screenOffset) override;
@@ -31,11 +31,11 @@ namespace Pages {
 
         StateTag _currentTag = START;
 
-        GraphicLib::Widgets::Button::Ptr _createButton;
-        GraphicLib::Widgets::Button::Ptr _saveButton;
-        GraphicLib::Widgets::TextInputField::Ptr _nameInput;
-        GraphicLib::Widgets::ImageButton::Ptr _iconButton;
-        GraphicLib::Widgets::TextInputField::Ptr _iconPathInput;
+        GraphicLib::GuiObjects::Button::Ptr _createButton;
+        GraphicLib::GuiObjects::Button::Ptr _saveButton;
+        GraphicLib::GuiObjects::TextInputField::Ptr _nameInput;
+        GraphicLib::GuiObjects::ImageButton::Ptr _iconButton;
+        GraphicLib::GuiObjects::TextInputField::Ptr _iconPathInput;
     };
 }    //namespace Pages
 

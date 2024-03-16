@@ -22,7 +22,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<SystemPage>;
 
-        explicit SystemPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
+        explicit SystemPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::GuiObjects::WidgetBuilder::Ptr builder);
         ~SystemPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;
@@ -37,11 +37,11 @@ namespace Pages {
 
         Data::System::Ptr _system;
 
-        GraphicLib::Widgets::Button::Ptr _createButton;
-        GraphicLib::Widgets::Button::Ptr _saveButton;
-        GraphicLib::Widgets::TextInputField::Ptr _nameInputField;
-        GraphicLib::Widgets::ImageButton::Ptr _iconButton;
-        GraphicLib::Widgets::TextInputField::Ptr _iconPathInputField;
+        GraphicLib::GuiObjects::Button::Ptr _createButton;
+        GraphicLib::GuiObjects::Button::Ptr _saveButton;
+        GraphicLib::GuiObjects::TextInputField::Ptr _nameInputField;
+        GraphicLib::GuiObjects::ImageButton::Ptr _iconButton;
+        GraphicLib::GuiObjects::TextInputField::Ptr _iconPathInputField;
     };
 }    //namespace Pages
 

@@ -1,4 +1,4 @@
 [submodule "libs/GraphicLib"]
 	path = libs/GraphicLib
 	url = git@github.com:BethsFaith/GraphicLib.git
-	branch = dev
+	branch = Feature/scroll-box

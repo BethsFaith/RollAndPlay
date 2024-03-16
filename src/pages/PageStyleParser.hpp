@@ -8,10 +8,9 @@
 #include <algorithm>
 #include <unordered_map>
 
-#include <GraphicLib/Widgets/WidgetType.hpp>
-#include <GraphicLib/Widgets/LayoutType.hpp>
-#include <GraphicLib/Widgets/Styles/Color.hpp>
-#include <GraphicLib/Widgets/WidgetBuilder.hpp>
+#include <GraphicLib/GuiObjects/WidgetType.hpp>
+#include <GraphicLib/GuiObjects/LayoutType.hpp>
+#include <GraphicLib/GuiObjects/WidgetBuilder.hpp>
 
 #include "../config/Config.hpp"
 #include "style/Color.hpp"
@@ -23,11 +22,11 @@ namespace Pages {
 
         bool parse(const std::string& filePath);
 
-        GraphicLib::Widgets::WidgetBuilder::Ptr getWidgetBuilder(const std::string& page);
+        GraphicLib::GuiObjects::WidgetBuilder::Ptr getWidgetBuilder(const std::string& page);
     protected:
         struct ResultType {
-            GraphicLib::Widgets::WidgetType widgetType;
-            GraphicLib::Widgets::LayoutType layoutType;
+            GraphicLib::GuiObjects::WidgetType widgetType;
+            GraphicLib::GuiObjects::LayoutType layoutType;
             bool error;
             bool isWidgetType;
         };
@@ -35,27 +34,29 @@ namespace Pages {
         ResultType getType(std::string type);
         Style::Color getColor(std::string color);
 
-        void (PageStyleParser::*pullStyle)(Json::Value&, const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&);
-        void pullButtonStyle(Json::Value& object, const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&);
-        void pullImageButtonStyle(Json::Value& object, const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&);
-        void pullTextInputFieldStyle(Json::Value& object, const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&);
-        void pullImageBoxStyle(Json::Value& object, const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&);
-        void pullTextBoxStyle(Json::Value& object, const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&);
-        void pullMenuBarStyle(Json::Value& object, const GraphicLib::Widgets::Styles::WidgetStyle::Ptr&);
+        void (PageStyleParser::*pullStyle)(Json::Value&, const GraphicLib::GuiObjects::Styles::WidgetStyle::Ptr&);
+        void pullButtonStyle(Json::Value& object, const GraphicLib::GuiObjects::Styles::WidgetStyle::Ptr&);
+        void pullImageButtonStyle(Json::Value& object, const GraphicLib::GuiObjects::Styles::WidgetStyle::Ptr&);
+        void pullTextInputFieldStyle(Json::Value& object, const GraphicLib::GuiObjects::Styles::WidgetStyle::Ptr&);
+        void pullImageBoxStyle(Json::Value& object, const GraphicLib::GuiObjects::Styles::WidgetStyle::Ptr&);
+        void pullTextBoxStyle(Json::Value& object, const GraphicLib::GuiObjects::Styles::WidgetStyle::Ptr&);
+        void pullMenuBarStyle(Json::Value& object, const GraphicLib::GuiObjects::Styles::WidgetStyle::Ptr&);
+        void pullScrollBoxStyle(Json::Value& object, const GraphicLib::GuiObjects::Styles::WidgetStyle::Ptr&);
 
-        static void pullLayoutStyle(Json::Value& object, const GraphicLib::Widgets::Styles::LayoutStyle::Ptr&);
+        static void pullLayoutStyle(Json::Value& object, const GraphicLib::GuiObjects::Styles::LayoutStyle::Ptr&);
 
-        std::unordered_map<std::string, GraphicLib::Widgets::WidgetType> widgetTypes = {
-            {"button", GraphicLib::Widgets::BUTTON},
-            {"image_button", GraphicLib::Widgets::IMAGE_BUTTON},
-            {"text_input_field", GraphicLib::Widgets::TEXT_INPUT_FIELD},
-            {"num_input_field", GraphicLib::Widgets::NUM_INPUT_FIELD},
-            {"text_box", GraphicLib::Widgets::TEXT_BOX},
-            {"image_box", GraphicLib::Widgets::IMAGE_BOX},
+        std::unordered_map<std::string, GraphicLib::GuiObjects::WidgetType> widgetTypes = {
+            {"button", GraphicLib::GuiObjects::BUTTON},
+            {"image_button", GraphicLib::GuiObjects::IMAGE_BUTTON},
+            {"text_input_field", GraphicLib::GuiObjects::TEXT_INPUT_FIELD},
+            {"num_input_field", GraphicLib::GuiObjects::NUM_INPUT_FIELD},
+            {"text_box", GraphicLib::GuiObjects::TEXT_BOX},
+            {"image_box", GraphicLib::GuiObjects::IMAGE_BOX},
+            {"scroll_box", GraphicLib::GuiObjects::SCROLL_BOX},
         };
-        std::unordered_map<std::string, GraphicLib::Widgets::LayoutType> layoutTypes = {
-            {"horizontal_layout", GraphicLib::Widgets::HORIZONTAL},
-            {"vertical_layout", GraphicLib::Widgets::VERTICAL}
+        std::unordered_map<std::string, GraphicLib::GuiObjects::LayoutType> layoutTypes = {
+            {"horizontal_layout", GraphicLib::GuiObjects::HORIZONTAL},
+            {"vertical_layout", GraphicLib::GuiObjects::VERTICAL}
         };
         std::unordered_map<std::string, Style::Color> colors = {
             {"white",Style::Color::WHITE},
@@ -85,7 +86,7 @@ namespace Pages {
 
         Config::Config& _config;
 
-        std::map<std::string, GraphicLib::Widgets::WidgetBuilder::Ptr> _pageWidgetBuilders;
+        std::map<std::string, GraphicLib::GuiObjects::WidgetBuilder::Ptr> _pageWidgetBuilders;
     };
 }    //namespace Pages
 

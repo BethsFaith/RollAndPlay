@@ -48,16 +48,16 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     auto textureShaderPath = config.getShaderPath("texture");
 
     auto guiShader = std::make_shared<GraphicLib::Shaders::ShaderProgram>(guiShaderPath.vertex, guiShaderPath.fragment);
-    GraphicLib::Widgets::Gui::setColorShader(guiShader);
+    GraphicLib::GuiObjects::Gui::setColorShader(guiShader);
 
-    GraphicLib::Widgets::Gui::setSelectableShader(
+    GraphicLib::GuiObjects::Gui::setSelectableShader(
         std::make_shared<GraphicLib::Shaders::ShaderProgram>(selectableShaderPath.vertex,
                                                              selectableShaderPath.fragment));
 
-    GraphicLib::Widgets::Gui::setTextShader(
+    GraphicLib::GuiObjects::Gui::setTextShader(
         std::make_shared<GraphicLib::Shaders::ShaderProgram>(textShaderPath.vertex, textShaderPath.fragment));
 
-    GraphicLib::Widgets::Gui::setTextureShader(
+    GraphicLib::GuiObjects::Gui::setTextureShader(
         std::make_shared<GraphicLib::Shaders::ShaderProgram>(textureShaderPath.vertex, textureShaderPath.fragment));
 
     auto host = config.getNetValue("host");
@@ -66,8 +66,10 @@ MainWindow::MainWindow(const char* title, const std::string& configFilePath) {
     Pages::BasePage::setCommonData(
         {.clientSession = std::make_shared<Net::ApiClient>(host, port, domain, new Net::Route("../../paths.json"))});
 
-    GraphicLib::Widgets::Carriage::WindowWidth = width;
-    GraphicLib::Widgets::Carriage::WindowHeight = height;
+    GraphicLib::GuiObjects::Carriage::WindowWidth = width;
+    GraphicLib::GuiObjects::Carriage::WindowHeight = height;
+    GraphicLib::GuiObjects::ScrollBox::windowHeight = height;
+    GraphicLib::GuiObjects::ScrollBox::windowWidth = width;
 
     Pages::PageStyleParser styleParser(config);
     styleParser.parse("../../style.json");
@@ -182,7 +184,7 @@ void MainWindow::mouseInputCallback(GLFWwindow* window, double xPos, double yPos
 }
 
 void MainWindow::mouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
-    instance->_view->processMouseCursor(window, xOffset, yOffset);
+    instance->_view->processMouseScroll(window, xOffset, yOffset);
 }
 
 void MainWindow::charModsCallback(GLFWwindow* window, unsigned int codepoint, int mods) {

@@ -19,7 +19,7 @@ namespace Pages {
 
         using Ptr = std::shared_ptr<RegistrationPage>;
 
-        explicit RegistrationPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
+        explicit RegistrationPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::GuiObjects::WidgetBuilder::Ptr builder);
         ~RegistrationPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;
@@ -41,14 +41,14 @@ namespace Pages {
 
         StateTag _currentTag = CREATE;
 
-        GraphicLib::Widgets::Button::Ptr _saveButton;
-        GraphicLib::Widgets::Button::Ptr _createButton;
-        GraphicLib::Widgets::TextInputField::Ptr _loginInputField;
-        GraphicLib::Widgets::TextInputField::Ptr _nicknameInputField;
-        GraphicLib::Widgets::TextInputField::Ptr _passwordInputField;
-        GraphicLib::Widgets::TextInputField::Ptr _repeatedPasswordInputField;
-        GraphicLib::Widgets::TextBox::Ptr _creatingMessageBox;
-        GraphicLib::Widgets::TextBox::Ptr _viewMessageBox;
+        GraphicLib::GuiObjects::Button::Ptr _saveButton;
+        GraphicLib::GuiObjects::Button::Ptr _createButton;
+        GraphicLib::GuiObjects::TextInputField::Ptr _loginInputField;
+        GraphicLib::GuiObjects::TextInputField::Ptr _nicknameInputField;
+        GraphicLib::GuiObjects::TextInputField::Ptr _passwordInputField;
+        GraphicLib::GuiObjects::TextInputField::Ptr _repeatedPasswordInputField;
+        GraphicLib::GuiObjects::TextBox::Ptr _creatingMessageBox;
+        GraphicLib::GuiObjects::TextBox::Ptr _viewMessageBox;
     };
 }    //namespace Pages
 

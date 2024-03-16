@@ -31,7 +31,7 @@ namespace Pages {
         };
 
         explicit ItemPage(const GraphicLib::Objects::PickableTexture::Ptr& canvas,
-                          const GraphicLib::Widgets::WidgetBuilder::Ptr& builder);
+                          const GraphicLib::GuiObjects::WidgetBuilder::Ptr& builder);
         ~ItemPage() override = default;
 
         void init(const glm::vec2& screenOffset) override;
@@ -51,10 +51,10 @@ namespace Pages {
         static bool checkItemInput(const std::u16string& name,
                             const std::u16string& description,
                             const std::string& path,
-                            const GraphicLib::Widgets::TextBox::Ptr& errorBox);
+                            const GraphicLib::GuiObjects::TextBox::Ptr& errorBox);
         static bool checkTypeInput(const std::u16string& name,
                                    const std::string& path,
-                                   const GraphicLib::Widgets::TextBox::Ptr& errorBox);
+                                   const GraphicLib::GuiObjects::TextBox::Ptr& errorBox);
 
         std::stack<StateTag> _tags;
         Buffer _buffer;

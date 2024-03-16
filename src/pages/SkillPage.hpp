@@ -28,7 +28,7 @@ namespace Pages {
             Data::Characteristic::Ptr characteristic;
         };
 
-        explicit SkillPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::Widgets::WidgetBuilder::Ptr builder);
+        explicit SkillPage(GraphicLib::Objects::PickableTexture::Ptr canvas, GraphicLib::GuiObjects::WidgetBuilder::Ptr builder);
         ~SkillPage() override;
 
         void init(const glm::vec2& screenOffset) override;
@@ -64,21 +64,21 @@ namespace Pages {
         static Net::ApiClient::Result pullSkill(int id);
         static Net::ApiClient::Result pullSkills(int categoryId);
 
-        std::vector<GraphicLib::Widgets::ImageButton::Ptr> createCategoryButtons(const std::vector<Data::SkillCategory::Ptr>& categories);
-        std::vector<GraphicLib::Widgets::ImageButton::Ptr> createSkillButtons(const std::vector<Data::Skill::Ptr>& skills);
+        std::vector<GraphicLib::GuiObjects::ImageButton::Ptr> createCategoryButtons(const std::vector<Data::SkillCategory::Ptr>& categories);
+        std::vector<GraphicLib::GuiObjects::ImageButton::Ptr> createSkillButtons(const std::vector<Data::Skill::Ptr>& skills);
 
         StateTag _currentTag = START;
 
         Buffer _buf;
 
-        GraphicLib::Widgets::HorizontalLayout::Ptr _viewCategoryLayout;
-        GraphicLib::Widgets::HorizontalLayout::Ptr _viewSkillLayout;
+        GraphicLib::GuiObjects::HorizontalLayout::Ptr _viewCategoryLayout;
+        GraphicLib::GuiObjects::HorizontalLayout::Ptr _viewSkillLayout;
 
-        GraphicLib::Widgets::TextInputField::Ptr _nameInputField;
-        GraphicLib::Widgets::ImageButton::Ptr _iconButton;
-        GraphicLib::Widgets::TextInputField::Ptr _iconPathInputField;
+        GraphicLib::GuiObjects::TextInputField::Ptr _nameInputField;
+        GraphicLib::GuiObjects::ImageButton::Ptr _iconButton;
+        GraphicLib::GuiObjects::TextInputField::Ptr _iconPathInputField;
 
-        GraphicLib::Widgets::TextBox::Ptr _messageBox;
+        GraphicLib::GuiObjects::TextBox::Ptr _messageBox;
 
         std::vector<Data::SkillCategory::Ptr> _categoryList;
         std::vector<Data::Skill::Ptr> _skillList;
