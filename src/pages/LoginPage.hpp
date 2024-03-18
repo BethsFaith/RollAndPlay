@@ -7,6 +7,7 @@
 
 #include "BasePage.hpp"
 #include "../data/User.hpp"
+#include "style/Constants.hpp"
 
 namespace Pages {
     class LoginPage : public BasePage {
@@ -30,38 +31,26 @@ namespace Pages {
         void toView();
         void toEdit();
 
-        bool validate(const std::u16string& login, const std::u16string& password);
-        bool validate(const std::u16string& login, const std::u16string& password, const std::u16string& nickname);
+        static bool validate(const std::u16string& login,
+                      const std::u16string& password,
+                      const GraphicLib::GuiObjects::TextBox::Ptr& errorBox);
+        static bool validate(const std::u16string& login,
+                      const std::u16string& password,
+                      const std::u16string& nickname,
+                      const GraphicLib::GuiObjects::TextBox::Ptr& errorBox);
 
         Net::ApiClient::Result logIn(const std::u16string& login, const std::u16string& password);
         Net::ApiClient::Result pullUserData();
         Net::ApiClient::Result changeUserData(const std::u16string& login,
                                                 const std::u16string& password,
                                                 const std::u16string& nickname);
-        void showResultError(Net::ApiClient::Result& result);
+
+        static void showResultError(Net::ApiClient::Result& result, const GraphicLib::GuiObjects::TextBox::Ptr& errorBox);
 
         StateTag _nextState = START;
 
-        GraphicLib::GuiObjects::Button::Ptr _logInButton;
-        GraphicLib::GuiObjects::TextInputField::Ptr _loginInputField;
-        GraphicLib::GuiObjects::TextInputField::Ptr _passwordInputField;
-        GraphicLib::GuiObjects::TextBox::Ptr _messageBox{};
-
-        GraphicLib::GuiObjects::Button::Ptr _editButton;
-        GraphicLib::GuiObjects::Button::Ptr _exitButton;
-        GraphicLib::GuiObjects::TextBox::Ptr _emailLabel{};
-        GraphicLib::GuiObjects::TextBox::Ptr _nicknameLabel{};
-        GraphicLib::GuiObjects::TextBox::Ptr _emailBox{};
-        GraphicLib::GuiObjects::TextBox::Ptr _nicknameBox{};
-
-        GraphicLib::GuiObjects::Button::Ptr _saveButton;
-        GraphicLib::GuiObjects::TextInputField::Ptr _nicknameInputField;
-
-        GraphicLib::GuiObjects::VerticalLayout::Ptr _startLayout;
-        GraphicLib::GuiObjects::VerticalLayout::Ptr _viewLayout;
-        GraphicLib::GuiObjects::VerticalLayout::Ptr _editLayout;
-
         Data::User _user{};
+        std::u16string _loginMessage;
     };
 }    //namespace Pages
 

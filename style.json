@@ -170,7 +170,7 @@
     },
     {
       "type" : "scroll_box",
-      "color" : "gray",
+      "color" : "dark_gray",
       "speed" : 0.01,
       "classes" : [
       ]
